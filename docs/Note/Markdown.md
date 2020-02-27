@@ -137,13 +137,14 @@ Markdown 段首缩进：
 + 9.转义字符：
 ---
 ```markdown
-\```
+\`
 \>
 \<br>
 ```
-\```<br>
-\>  
-\<br>
+>\`
+<br>
+>\>  
+>\<br>
 ---
 + 10.脚注：
 ---
@@ -183,7 +184,7 @@ Win10：Acrylic Markdown、MarkdownPad、MarkPad、Vscode
 如何在Markdown中画流程图呢？当然是用mermaid了，mermaid支持三种图形的绘制, 分别是流程图, 时序图和甘特图。
 
 ---
-流程图方向有下面几个值
+### 流程图方向有下面几个值
 ------
 >TB 从上到下<br>
 BT 从下到上<br>

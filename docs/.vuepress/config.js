@@ -8,14 +8,17 @@ module.exports = {
     themeConfig: {
       nav: [
         { text: '首页', link: '/' },
-        { text: 'Note', link: '/Note/Markdown.md' },
+        { text: 'Note', link: '/Note/markdown.md' },
         { text: 'Python', link: '/Python/' },
         { text: 'ML', link:'/ML/'},
         { text: 'Phil', link:'/Phil/'},
         { text: 'Java', link: '/Java/' },
         { text: 'Meme', link: '/Meme/meme.md' },
         { text: 'Github', link: 'https://github.com/shane-1' },
-      ]
+      ],
+      sidebar: 'auto'
+        
+      
     }
     //google-analytics
     // ,
