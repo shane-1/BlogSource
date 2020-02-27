@@ -195,12 +195,12 @@ mermaid
 graph TD
    A --> B
 ```
-![](/.vuepress/public/2020-02-27-15-05-13.png)
+![](/images/2020-02-27-15-05-13.png)
 ```
 graph LR
    A --> B 
 ```
-![](2020-02-27-15-07-12.png)
+![](/images/2020-02-27-15-07-12.png)
 + 基本图形
 ---
 >id + [文字描述]矩形<br>
@@ -217,7 +217,7 @@ graph TD
     id1{带文本的菱形}
     id2((带文本的圆形))
 ```
-![](2020-02-27-15-08-09.png)
+![](/images/2020-02-27-15-08-09.png)
 + 节点之间的连接
 ---
 A --> B A带箭头指向B<br>
@@ -242,7 +242,7 @@ graph LR
     A6[A] -. 描述 .-> B6[B] 
     A8[A] == 描述 ==> B8[B] 
 ```
-![](2020-02-27-15-09-15.png)
+![](/images/2020-02-27-15-09-15.png)
 + 子流程图
 ---
 ```
@@ -260,7 +260,7 @@ graph TB
     c1-->c2
     end
 ```
-![](2020-02-27-15-10-33.png)
+![](/images/2020-02-27-15-10-33.png)
 + 自定义样式
 ---
 语法：style id 具体样式
@@ -271,7 +271,7 @@ graph LR
     style id1 fill:#f9f,stroke:#333,stroke-width:4px,fill-opacity:0.5
     style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 10,5
 ```
-![](2020-02-27-15-12-11.png)
+![](/images/2020-02-27-15-12-11.png)
 + demo
 ---
 绘制一个流程图,找出 A、 B、 C 三个数中最大的一个数。
@@ -291,4 +291,4 @@ graph LR
     printC --> stop
     printB --> stop
 ```
-![](2020-02-27-15-12-30.png)
+![](/images/2020-02-27-15-12-30.png)
