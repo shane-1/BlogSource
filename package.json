@@ -1,0 +1,16 @@
+{
+  "name": "Blog",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs",
+    "test": "echo\"Error:no test specifed\" && exit 1",
+    "deploy": "bash deploy.sh"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-google-analytics": "^1.3.1"
+  },
+  "dependencies": {}
+}
