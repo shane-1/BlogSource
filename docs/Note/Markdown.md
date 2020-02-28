@@ -181,10 +181,8 @@ Mac：MacDown<br>
 Win10：Acrylic Markdown、MarkdownPad、MarkPad、Vscode
 
 ## 流程图
-如何在Markdown中画流程图呢？当然是用mermaid了，mermaid支持三种图形的绘制, 分别是流程图, 时序图和甘特图。
-
----
-### 流程图方向有下面几个值
+>如何在Markdown中画流程图呢？当然是用mermaid了，mermaid支持三种图形的绘制, 分别是流程图, 时序图和甘特图。<br>
+>>流程图方向有下面几个值
 ------
 >TB 从上到下<br>
 BT 从下到上<br>
