@@ -3,7 +3,7 @@ home: true
 heroImage: rick.png
 heroText: To see the world as it is and to love it. 
 actionText: 动态
-actionLink: /Meme/meme.md
+actionLink: /Meme/Meme.md
 
 features:
 - title: 学习笔记

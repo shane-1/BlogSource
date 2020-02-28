@@ -12,25 +12,25 @@ module.exports = {
         {
            text: 'Note', 
            items  :[
-             {text:'Markdown',link:'/Note/markdown.md'},
+             {text:'Markdown',link:'/Note/Markdown.md'},
                        ]},
         { text: 'Python', link: '/Python/' },
         { text: 'ML', link:'/ML/'},
         { text: 'Phil', link:'/Phil/'},
         { text: 'Java', link: '/Java/' },
-        { text: 'Meme', link: '/Meme/meme.md' },
+        { text: 'Meme', link: '/Meme/Meme.md' },
         { text: 'Github', link: 'https://github.com/shane-1' },
       ],
       sidebar: 'auto',
 
     // 假如你的文档仓库和项目本身不在一个仓库：
-    docsRepo: 'https://github.com/shane-1/BlogSource/',
+    docsRepo: 'https://github.com/shane-1/',
     // 假如文档不是放在仓库的根目录下：
     docsDir: 'docs',
     // 假如文档放在一个特定的分支下：
-    docsBranch: 'edit',
+    docsBranch: "blob/Guest",
     // 默认是 false, 设置为 true 来启用
-    editLinks: false,
+    editLinks: true,
     // 默认为 "Edit this page"
     editLinkText: '帮助我改善此页面！'
         
