@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Octave与MatLab的区别 | Viva la Vida</title>
+    <meta name="description" content="Romain Rolland">
+    <meta name="generator" content="VuePress 1.3.1">
+    <link rel="icon" href="/logo.png">
+    
+    <link rel="preload" href="/assets/css/0.styles.bf74aeb6.css" as="style"><link rel="preload" href="/assets/js/app.5107f395.js" as="script"><link rel="preload" href="/assets/js/2.86cd792b.js" as="script"><link rel="preload" href="/assets/js/7.a76d0042.js" as="script"><link rel="prefetch" href="/assets/js/10.d129fa0a.js"><link rel="prefetch" href="/assets/js/11.8ce84722.js"><link rel="prefetch" href="/assets/js/12.52c7cffb.js"><link rel="prefetch" href="/assets/js/3.ff86c153.js"><link rel="prefetch" href="/assets/js/4.796fa3d0.js"><link rel="prefetch" href="/assets/js/5.5f6b827a.js"><link rel="prefetch" href="/assets/js/6.c3b91908.js"><link rel="prefetch" href="/assets/js/8.74dace14.js"><link rel="prefetch" href="/assets/js/9.7af6adc9.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.bf74aeb6.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Viva la Vida</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Note" class="dropdown-title"><span class="title">Note</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Note/Markdown.html" class="nav-link">
+  Markdown
+</a></li><li class="dropdown-item"><!----> <a href="/Note/DBOM.html" class="nav-link router-link-exact-active router-link-active">
+  Octave与Matlab的区别
+</a></li><li class="dropdown-item"><!----> <a href="/Note/Cmd.html" class="nav-link">
+  CMD Manual
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Python" class="dropdown-title"><span class="title">Python</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Python/ZenOfPython.html" class="nav-link">
+  The Zen of Python
+</a></li></ul></div></div><div class="nav-item"><a href="/ML/" class="nav-link">
+  ML
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Phil" class="dropdown-title"><span class="title">Phil</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Phil/WCHNS.html" class="nav-link">
+  中国为什么没有科学精神
+</a></li></ul></div></div><div class="nav-item"><a href="/Java/" class="nav-link">
+  Java
+</a></div><div class="nav-item"><a href="/Meme/Meme.html" class="nav-link">
+  Meme
+</a></div><div class="nav-item"><a href="https://github.com/shane-1" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Note" class="dropdown-title"><span class="title">Note</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Note/Markdown.html" class="nav-link">
+  Markdown
+</a></li><li class="dropdown-item"><!----> <a href="/Note/DBOM.html" class="nav-link router-link-exact-active router-link-active">
+  Octave与Matlab的区别
+</a></li><li class="dropdown-item"><!----> <a href="/Note/Cmd.html" class="nav-link">
+  CMD Manual
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Python" class="dropdown-title"><span class="title">Python</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Python/ZenOfPython.html" class="nav-link">
+  The Zen of Python
+</a></li></ul></div></div><div class="nav-item"><a href="/ML/" class="nav-link">
+  ML
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Phil" class="dropdown-title"><span class="title">Phil</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Phil/WCHNS.html" class="nav-link">
+  中国为什么没有科学精神
+</a></li></ul></div></div><div class="nav-item"><a href="/Java/" class="nav-link">
+  Java
+</a></div><div class="nav-item"><a href="/Meme/Meme.html" class="nav-link">
+  Meme
+</a></div><div class="nav-item"><a href="https://github.com/shane-1" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Octave与MatLab的区别</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Note/DBOM.html#布尔值的乘积" class="sidebar-link">布尔值的乘积</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Note/DBOM.html#逻辑运算符、算术运算符" class="sidebar-link">逻辑运算符、算术运算符</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Note/DBOM.html#c-风格的自动增量、赋值、屏幕打印" class="sidebar-link">C-风格的自动增量、赋值、屏幕打印</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Note/DBOM.html#注意空格" class="sidebar-link">注意空格</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Note/DBOM.html#直方图内置函数hist" class="sidebar-link">直方图内置函数hist</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Note/DBOM.html#导入空文件" class="sidebar-link">导入空文件</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Note/DBOM.html#行续符" class="sidebar-link">行续符</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Note/DBOM.html#if、for等环境的结束符" class="sidebar-link">if、for等环境的结束符</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="octave与matlab的区别"><a href="#octave与matlab的区别" class="header-anchor">#</a> Octave与MatLab的区别</h1> <hr> <p>MatLab用户转而使用octave几乎不需要什么培训，只是要一些小细节上注意一下。下面我们罗列一些octave和MatLab的区别。</p> <h2 id="布尔值的乘积"><a href="#布尔值的乘积" class="header-anchor">#</a> 布尔值的乘积</h2> <div class="language-matlab extra-class"><pre class="language-matlab"><code>X <span class="token operator">=</span> <span class="token function">ones</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token function">prod</span><span class="token punctuation">(</span><span class="token function">size</span><span class="token punctuation">(</span>X<span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">1</span><span class="token punctuation">)</span>
+</code></pre></div><p>MatLab和octave的输出是不同的：<br></p> <div class="language- extra-class"><pre class="language-text"><code>Matlab: ??? Function 'prod' is not defined for values of class 'logical'.
+Octave: ans = 0
+</code></pre></div><blockquote><p>octave输出为0的原因是 size(X) 为
+ans =
+2   2</p></blockquote> <h2 id="逻辑运算符、算术运算符"><a href="#逻辑运算符、算术运算符" class="header-anchor">#</a> 逻辑运算符、算术运算符</h2> <p>Octave与MatLab兼容，甚至更为宽松。
+<img src="/images/2020-02-28-16-40-17.png" alt=""><br></p> <div class="language- extra-class"><pre class="language-text"><code>MatLab用 x^2，octave用 x^2 或者 x**2 表示 “x的平方”。Octave用 x**2 是为了照顾GnuPlot的用户。
+</code></pre></div><p>总而言之，octave在运算符方面彻底兼容MatLab，MatLab用户放心大胆地用octave吧，但octave用户用MatLab的时候就要小心了。</p> <h2 id="c-风格的自动增量、赋值、屏幕打印"><a href="#c-风格的自动增量、赋值、屏幕打印" class="header-anchor">#</a> C-风格的自动增量、赋值、屏幕打印</h2> <p>Octave允许C-风格的</p> <div class="language-c extra-class"><pre class="language-c"><code>i<span class="token operator">++</span> <span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">;</span> i<span class="token operator">+=</span><span class="token number">1</span> <span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">'My result is: %d\n'</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>
+</code></pre></div><p>而MatLab不认它们。MatLab打印至屏幕和文件都用 <code>fprintf</code> 函数。</p> <h2 id="注意空格"><a href="#注意空格" class="header-anchor">#</a> 注意空格</h2> <p>octave对空格是作为一个符号识别的，在列合并中短的列自然扩充，例如</p> <div class="language- extra-class"><pre class="language-text"><code>A = ['123 ';'123'] ;
+size(A)
+</code></pre></div><p>结果是 2 4，<br>
+而MatLab则返回列合并有问题：<br>
+?? Error using ==&gt; vertcat</p> <blockquote><p>另外，转置符号与矩阵之间如果有空格
+[0 1] '
+在MatLab里不允许，octave则允许，且与 [0 1]' 的结果是一样的。<br></p></blockquote> <h2 id="直方图内置函数hist"><a href="#直方图内置函数hist" class="header-anchor">#</a> 直方图内置函数hist</h2> <p>octave的hist为<br> <code>hist (Y, X, NORM)</code><br>
+其中NORM为所有柱高之和。</p> <h2 id="导入空文件"><a href="#导入空文件" class="header-anchor">#</a> 导入空文件</h2> <p>MatLab允许导入空文件，老版本的octave不允许，新版本的octave-3.0.3则允许。</p> <h2 id="行续符"><a href="#行续符" class="header-anchor">#</a> 行续符</h2> <p>MatLab中用 `...' 做行续符，如用</p> <div class="language- extra-class"><pre class="language-text"><code>A = rand (1, ...
+         2) ;
+</code></pre></div><p>表达</p> <div class="language- extra-class"><pre class="language-text"><code>A = rand (1,2) ;
+</code></pre></div><h6 id="octave与matlab兼容，除此之外，octave还允许如下两种表示方法。"><a href="#octave与matlab兼容，除此之外，octave还允许如下两种表示方法。" class="header-anchor">#</a> Octave与MatLab兼容，除此之外，octave还允许如下两种表示方法。</h6> <hr> <div class="language- extra-class"><pre class="language-text"><code>A = rand (1,
+        2) ;
+</code></pre></div><p>和</p> <div class="language- extra-class"><pre class="language-text"><code>A = rand (1, \
+        2) ;
+</code></pre></div><h2 id="if、for等环境的结束符"><a href="#if、for等环境的结束符" class="header-anchor">#</a> if、for等环境的结束符</h2> <p>Octave用
+<code>end{if,for, ...}</code><br>
+而MatLab则统一用 <code>end</code>。</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/shane-1/edit/blob/master/docs/Note/DBOM.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <!----> </main></div><div class="global-ui"><div></div></div></div>
+    <script src="/assets/js/app.5107f395.js" defer></script><script src="/assets/js/2.86cd792b.js" defer></script><script src="/assets/js/7.a76d0042.js" defer></script>
+  </body>
+</html>
