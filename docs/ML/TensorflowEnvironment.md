@@ -177,7 +177,7 @@ rm -rf ~/anaconda3
 接下来pychram配置Anaconda<br>
 在界面中选择：`File->Default settings->Default project->project interpreter`，如图中所示
 ![](/images/2020-03-01-15-46-29.png)<br>
-接着点击 project interpreter 的右边的小齿轮，选择 add local ，选择anaconda文件路径下的python.exe。接着pycharm会更新解释器，导入模块等，要稍等一点时间。
+接着点击 project interpreter 的右边的小齿轮，选择 add local ，选择anaconda文件路径下的python.exe。接着pycharm会更新解释器，导入模块等，要稍等一点时间。<br>
 好了，到目前为止，anaconda在pycharm中的配置就基本完成了。
 ![](/images/2020-03-01-15-48-11.png)<br>
 配置好的界面如下：<br>
@@ -185,11 +185,11 @@ rm -rf ~/anaconda3
 ## tensorboard
 最后讲一讲tensorboard使用<br>
 先写代码<br>
-![](/images/2020-03-01-15-49-08.png)
+![](/images/2020-03-01-15-49-08.png)<br>
 运行生成logs  <br>
 ![](/images/2020-03-01-15-49-27.png)<br>
 然后打开anaconda里cmd <br>
-![](/images/2020-03-01-15-49-46.png)
+![](/images/2020-03-01-15-49-46.png)<br>
 执行`tensorboard --logdir=      file/logs`
 >（这里logs目录）<br>
 结果：
