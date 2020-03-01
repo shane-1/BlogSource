@@ -1,4 +1,3 @@
-![](/images/2020-03-01-14-58-29.png)
 # 关于Tensorflow环境搭建指南
 ## 前言
 >推荐 Anaconda Navigator +  pycharm`其他ide自行选择`
@@ -161,32 +160,32 @@ rm -rf ~/anaconda3
 
 ## Tensorflow环境搭建
 打开Anaconda<br>
-![](/images/2020-03-01-15-45-01.png)
+![](/images/2020-03-01-15-45-01.png)<br>
 进入环境<br>
-![](/images/2020-03-01-15-45-17.png)
+![](/images/2020-03-01-15-45-17.png)<br>
 新建环境<br>
-![](/images/2020-03-01-15-45-28.png)
+![](/images/2020-03-01-15-45-28.png)<br>
 选择python版本（自己取名）<br>
-![](/images/2020-03-01-15-45-44.png)
+![](/images/2020-03-01-15-45-44.png)<br>
 然后安装要用的包，tensorflow和numpy必装，其他随意，用时安装也行<br>
-![](/images/2020-03-01-15-45-56.png)
+![](/images/2020-03-01-15-45-56.png)<br>
 选择all或者没安装的，在搜索栏找要安装的包
 勾选要的包，然后apply<br>
-![](/images/2020-03-01-15-46-10.png)
+![](/images/2020-03-01-15-46-10.png)<br>
 接下来pychram配置Anaconda<br>
 在界面中选择：`File->Default settings->Default project->project interpreter`，如图中所示
-![](/images/2020-03-01-15-46-29.png)
+![](/images/2020-03-01-15-46-29.png)<br>
 接着点击 project interpreter 的右边的小齿轮，选择 add local ，选择anaconda文件路径下的python.exe。接着pycharm会更新解释器，导入模块等，要稍等一点时间。
 好了，到目前为止，anaconda在pycharm中的配置就基本完成了。
-![](/images/2020-03-01-15-48-11.png)
-配置好的界面如下：
-![](/images/2020-03-01-15-48-31.png)
+![](/images/2020-03-01-15-48-11.png)<br>
+配置好的界面如下：<br>
+![](/images/2020-03-01-15-48-31.png)<br>
 ## tensorboard
 最后讲一讲tensorboard使用<br>
 先写代码<br>
 ![](/images/2020-03-01-15-49-08.png)
 运行生成logs  <br>
-![](/images/2020-03-01-15-49-27.png)
+![](/images/2020-03-01-15-49-27.png)<br>
 然后打开anaconda里cmd <br>
 ![](/images/2020-03-01-15-49-46.png)
 执行`tensorboard --logdir=      file/logs`
