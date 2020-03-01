@@ -1,6 +1,6 @@
 # 关于Tensorflow环境搭建指南
 ## 前言
->推荐 Anaconda Navigator +  pycharm`其他ide自行选择`
+>推荐 Anaconda Navigator +  pycharm`其他ide自行选择`<br>
 首先安装python，推荐新版本64位，我以3.7为例。因为现在python可以自己配置环境变量，安装直接官网下载。
 
 ## Anaconda的适用平台及安装条件
@@ -156,7 +156,7 @@ rm -rf ~/anaconda3
 ② Windows 10的删除有所不同。
 ## Pycharm
 然后安装pycharm专业版（社区版应该也行）
-安装过程比较简单不深入讲。专业版激活的话，学生可以去官网申请免费账户，其他人自己花钱或百度。
+安装过程比较简单不深入讲。专业版激活的话，学生可以去官网申请免费账户，其他人直接购买。
 
 ## Tensorflow环境搭建
 打开Anaconda<br>
@@ -173,7 +173,8 @@ rm -rf ~/anaconda3
 勾选要的包，然后apply<br>
 ![](/images/2020-03-01-15-46-10.png)<br>
 接下来pychram配置Anaconda<br>
-在界面中选择：`File->Default settings->Default project->project interpreter`，如图中所示
+在界面中选择：<br>
+`File->Default settings->Default project->project interpreter`，如图中所示
 ![](/images/2020-03-01-15-46-29.png)<br>
 接着点击 project interpreter 的右边的小齿轮，选择 add local ，选择anaconda文件路径下的python.exe。接着pycharm会更新解释器，导入模块等，要稍等一点时间。<br>
 好了，到目前为止，anaconda在pycharm中的配置就基本完成了。
@@ -189,7 +190,7 @@ rm -rf ~/anaconda3
 然后打开anaconda里cmd <br>
 ![](/images/2020-03-01-15-49-46.png)<br>
 执行`tensorboard --logdir=      file/logs`
->（这里logs目录）<br>
+>logs为logs目录<br>
 结果：
 ![](/images/2020-03-01-15-50-32.png)
 ![](/images/2020-03-01-15-50-43.png)
