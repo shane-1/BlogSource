@@ -21,7 +21,11 @@ module.exports = {
            items :[
              {text:'The Zen of Python',link:'/Python/ZenOfPython.md'}
            ]},
-        { text: 'ML', link:'/ML/'},
+        { text: 'ML', 
+          items :[
+            {text:'Tensorflow环境搭建指南',link:'/ML/TensorflowEnvironment.md'},
+            {text:'Tensorflow常见报错解决',link:'/ML/TensorflowError.md'}
+          ]},
         { text: 'Phil', items :[
           {text:'中国为什么没有科学精神', link:'/Phil/WCHNS.md'}
         ]},
