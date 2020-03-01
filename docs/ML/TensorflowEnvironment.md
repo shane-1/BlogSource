@@ -1,4 +1,5 @@
 # 关于Tensorflow环境搭建指南
+>2020年3月1日精校
 ## 前言
 >推荐 Anaconda Navigator +  pycharm`其他ide自行选择`<br>
 首先安装python，推荐新版本64位，我以3.7为例。因为现在python可以自己配置环境变量，安装直接官网下载。
@@ -191,6 +192,9 @@ rm -rf ~/anaconda3
 ![](/images/2020-03-01-15-49-46.png)<br>
 执行`tensorboard --logdir=      file/logs`
 >logs为logs目录<br>
+
 结果：
 ![](/images/2020-03-01-15-50-32.png)
 ![](/images/2020-03-01-15-50-43.png)
+---
+整理不易，转载请注明出处。

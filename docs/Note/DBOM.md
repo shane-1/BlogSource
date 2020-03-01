@@ -72,3 +72,5 @@ A = rand (1, \
 Octave用
 `end{if,for, ...}`<br>
 而MatLab则统一用 `end`。
+---
+整理不易，转载请注明出处。
