@@ -31,7 +31,9 @@ Anaconda可以在以下系统平台中安装和使用：<br>
 7. 在mac的Launchpad中可以找到名为“Anaconda-Navigator”的图标，点击打开。
 ![](/images/2020-03-01-15-10-57.png)
 7. 若“Anaconda-Navigator”成功启动，则说明真正成功地安装了Anaconda；如果未成功，请务必仔细检查以上安装步骤。
+>
 •	提示：“Anaconda-Navigator”中已经包含“Jupyter Notebook”、“Jupyterlab”、“Qtconsole”和“Spyder”。（图中的“Rstudio”是我后来安装的，但它默认出现在“Anaconda-Navigator”的启动界面，只需要点击“Install”便可安装。）
+>
 •	Jupyter Notebook有助于我们编写代码、运行代码以及获取代码的运行结果，特点是可以令我们便捷地为代码及其运行结果添加文档的描述、解释和说明。无论是学习还是工作，Jupyter Notebook都是提高效率和学习、工作质量的利器。
 ![](/images/2020-03-01-15-11-28.png)
 8. 完成安装
