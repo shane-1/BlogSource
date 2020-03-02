@@ -193,7 +193,7 @@ rm -rf ~/anaconda3
 执行`tensorboard --logdir=      file/logs`
 >logs为logs目录<br>
 
-结果：
+>结果：
 ![](/images/2020-03-01-15-50-32.png)
 ![](/images/2020-03-01-15-50-43.png)
 ---

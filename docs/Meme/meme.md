@@ -2,6 +2,9 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br><br>
 ---------------------------
+## 2020.3.2
+>&emsp;英国维多利亚时期、美国上个世纪19年代和当今中国，在对待性这个话题上竟出奇的一致。<br>
+The victorians, the americans of the 19th century and the Chinese of today are surprisingly consistent on the subject of sex.
 ## 2020.3.1
 >&emsp; “太敏感的人会体谅到他人的痛苦，自然就无法轻易做到坦率。所谓的坦率，其实就是暴力。”
 敏感的人会被动性的洞穿对方的难处，就不能无动于衷，总想着为对方分担一些，就算是要委屈自己。往往敏感的人在事情未发生前就提前自我创造了痛苦
