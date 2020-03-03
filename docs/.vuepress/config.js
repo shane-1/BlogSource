@@ -29,7 +29,7 @@ module.exports = {
         { text: 'Phil', items :[
           {text:'中国为什么没有科学精神', link:'/Phil/WCHNS.md'}
         ]},
-        { text: 'Java', link: '/Java/' },
+        { text: 'Java', link: '/Java/Java.md' },
         { text: 'Meme', link: '/Meme/Meme.md' },
         { text: 'Github', link: 'https://github.com/shane-1' },
       ],
