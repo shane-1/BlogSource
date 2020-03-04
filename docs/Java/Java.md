@@ -159,10 +159,80 @@ default       //默认,不写.不同包不能继承<br>
 `jar cvf xxx.jar -C xxx/.`//指定目录
 3. 查看jar文件<br>
 `jar -tf xxx.jar`
-4. 运行jard中的类<br>
+4. 运行jar中的类<br>
 `java -cp xxx.jar xx.xx.xx;`//后面跟完整类名
 5. 指定清单文件(xxx.jar/META-INF/MENIFEST.MF)的入口类<br>
 `jar {ctxui}[vfmn0PMe] [jar-file] [manifest-file] [entry-point] [-C dir] files ...`<br>
 `jar -cvfe classes.jar com.day01.java.PagDemo classes/ .`
 6. 如果jar中的清单文件含有入口点(Main-Class),''可以直接使用以下命令执行<br>
 `java -jar classes.jar`
+## 多线程
+进程:运行的应用程序<br>
+线程:应用程序内部并发执行的代码段<br>
+### Thread
+并发是主栈(主函数)同时开辟多个分栈实现<br>
+yield:放弃CPU抢占权,谦让<br>
+sleep:让线程休眠毫米数<br>
+join:等待指定线程执行完后继续运行
+```java
+public class ThreaDemo{
+    public static void main(String[] args) {
+        Player p1 = new Player("jack", 3000);
+        Player p2 = new Player("luke",200);
+
+        p1.start();
+        p2.start();
+        try{
+            p1.join();
+            p2.join();
+        }
+        catch (Exception e){
+
+        }
+         System.out.println("都到了~");
+    }
+}
+
+class Player extends Thread{
+    private String name;
+    private int time;
+    public Player(String name,int time){
+        this.name = name;
+        this.time = time;
+    }
+
+    public void run(){
+        System.out.println("玩家:"+name+"出发了~");
+        try{
+            Thread.sleep(time);
+        }
+        catch (Exception e){
+
+        }
+        System.out.println("玩家:"+name+"到了~");
+    }
+
+}
+
+```
+daemon :守护线程,如果应用程序剩余的线程都是守护线程,则程序结束<br>
+守护线程守护所有的非守护线程<br>
+## 锁
+任何一个对象都可以是锁.信号灯\参照物<br>
+`static Object lock = new Object();`
+```java
+   public int getTickets() {     //对票加锁
+   //同步代码块
+        synchronized (lock) {
+            tickets--;
+            return tickets;
+        }
+```
+```java
+//同步方法
+   public static synchronized int getTickets() {     //对票加锁
+            tickets--;
+            return tickets;
+        }
+```
+>同步方法最好加static,只和方法有关(否则出现多个对象多把锁)
