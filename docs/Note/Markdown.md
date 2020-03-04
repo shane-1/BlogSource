@@ -201,7 +201,6 @@ mermaid
 graph TD
    A --> B
 ``` 
-
 ![](/images/2020-02-27-15-05-13.png)
 ```
 graph LR
@@ -298,6 +297,6 @@ graph LR
     printC --> stop
     printB --> stop
 ```
-![](/images/2020-02-27-15-12-30.png)
+>![](/images/2020-02-27-15-12-30.png)
 ---
 整理不易，转载请注明出处。
