@@ -16,7 +16,7 @@ Markdown可以使用普通文本编辑器编写，通过简单的标记语法，
 + 导出方便，支持导出为 HTML，PDF等常见格式
 
 ## 如何使用 Markdown
-### 1.标题：
+### 1.标题
 ---
 
 Markdown支持6种级别的标题，对应html标签 h1 ~ h6
@@ -28,7 +28,7 @@ Markdown支持6种级别的标题，对应html标签 h1 ~ h6
 ##### h5
 ###### h6
 ```
-### 2.段落及区块引用：
+### 2.段落及区块引用
 ---
 ```markdown
 Markdown 引用：
@@ -50,7 +50,7 @@ Markdown 段首缩进：
 ```
 
 
-### 3.字体样式：
+### 3.字体样式
 ----
 
 |序号|源代码|效果|
@@ -62,7 +62,7 @@ Markdown 段首缩进：
 |5	|`上标：O<sup>2`|O<sup>2|
 |6	|`下标：H<sub>2</sub>O`|H<sub>2</sub>O|
 ---	
-### 4.图片和链接：
+### 4.图片和链接
 ---
 ```markdown
 [普通链接](https://shane-1.github.io)
@@ -82,7 +82,7 @@ Markdown 段首缩进：
 ![图片链接，可以添加备注](https://shane-1.github.io/rick.png "rick")
 ###### 注：可以用非url的本地路径
 ---
-### 5.代码高亮：
+### 5.代码高亮
 ---
 ```markdown
 行内高亮 ： `npm install marked `
@@ -100,7 +100,7 @@ Markdown 段首缩进：
 ---
 ###### 支持的语言： bash, basic,cmake, css, delphi, django, dockerfile, go, http,,ini, java, javascript, json, leaf, less, matlab, perl, php, python, ruby, rust, scss, sql, stylus, swift, typescript, vbscript, xml, yaml等
 ---
-### 6.表格：
+### 6.表格
 ---
 ```markdown
 |:在左靠左 |:在两端居中|:在右靠右|
@@ -116,7 +116,7 @@ Markdown 段首缩进：
 | C | C | C |
 ##### :在左靠左	:在两端居中	:在右靠右
 ---
-### 7.无序列表：
+### 7.无序列表
 ---
 */-/+/>/#通用，后面跟空格即可，另外再输入1个TAB或2 ~ 4个空格可实现层级关系
 
@@ -129,7 +129,7 @@ Markdown 段首缩进：
    + 二级列表
         + 三级列表
 ---
-### 8.有序列表：
+### 8.有序列表
 ---
 注意数字后面有空格，序号递增排列，即便输错也会自动纠正
 ```markdown
@@ -141,7 +141,7 @@ Markdown 段首缩进：
 2. 第二行
 5. 第三行
 ---
-### 9.转义字符：
+### 9.转义字符
 ---
 ```markdown
 \`
@@ -153,7 +153,7 @@ Markdown 段首缩进：
 >\>  
 >\<br>
 ---
-### 10.脚注：
+### 10.脚注
 ---
 ```
 生成一个脚注[^footnote].
@@ -161,14 +161,14 @@ Markdown 段首缩进：
 ```
 ##### 注：某些版本不支持
 ---
-### 11.特殊符号 文本通用，非MD独有：
+### 11.特殊符号 [文本通用，非MD独有]
 
 >常用排版 : ▌▍◆★☆☁➤➜❤➊➋➌<br>
 TodoList : ✅☑✓✔√☓☒✘ㄨ✕✖✗❌❎<br>
 emoji : 🌹🍀🌙🍂🍃🌷💎🔥⭐🍄🏆<br>
 ---
 
-### 12.Markdown编辑器：
+### 12.Markdown编辑器
 ---
 
 + 在线版:
@@ -201,7 +201,7 @@ mermaid
 graph TD
    A --> B
 ```
->![](/images/2020-02-27-15-05-13.png)
+![](/images/2020-02-27-15-05-13.png)
 ```
 graph LR
    A --> B 
