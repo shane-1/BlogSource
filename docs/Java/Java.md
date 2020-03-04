@@ -21,7 +21,7 @@ static成员，跟对象无关，访问方式是`Class.XXX()`<br>
 4. 可以直接被类名调用
 >
 1. 静态方法只能访问静态成员<br>
-2. 静态方法不能出现this，super等对象关键字<br>
+2. 静态方法不能出现this，super等对象关键字<br> 
 3. 主函数是静态的
 ## javaBean
 bean.
@@ -87,7 +87,7 @@ interface Xxx extends Xx,Xx{
 ## 多态
 指向同一个对象,但某种状态下只能访问该状态下的属性和方法<br>
 接口同样具有多态<br>
-范围变小`父类=子类`可以直接赋值,但范围变大`子类=父类`需要强制转换<br>
+更加抽象`父类=子类`可以直接赋值,更加具体`子类=父类`需要强制转换<br>
 接口 = 类`隐式转换`,类 = 接口`强制转换`
 ```java
 //Animal < Dog < Husky
@@ -118,3 +118,51 @@ throw用于抛出异常对象
 throws用在函数上,后面跟异常类名<br>
 throw用在函数内,后面跟异常对象
 ---
+异常的子类catch应在异常父类catch之前<br>
+CheckedException   //待检异常,非运行时异常,必须声明抛出语句<br>
+RuntimeException   //运行异常,不需要在方法声明抛出语句,也不需要必须使用try/catch语句处理<br>
+一个方法被覆盖是,覆盖它的方法必须抛出相同的异常或异常的子类,范围可以缩小,不能放大<br>
+## package
+完整类名:包名.类名(全限定名 full qualified name)<br>
+命名规则:com
+```
+jar  //java archive
+ear  //enterprise archive
+war  //web
+har  //hadoop 
+tar  
+```
+相对路径
+---
+>.   //当前目录<br>
+..  // 上级目录<br>
+
+绝对路径
+---
+C:\xx\xx
+## 权限访问
+private     //私有,不能继承<br>
+public      //公有<br>
+protected   //受保护,针对其他包中的子类<br>
+default       //默认,不写.不同包不能继承<br>
+一个java源文件只能有一个public类<br>
+|范围|public|protected|default|private|
+|:---:|:---:|:---:|:---:|:---:|
+|同类|✓|✓|✓|✓|
+|同包|✓|✓|✓| |
+|子类|✓|✓| | |
+|不同包|✓| | | |
+## jar
+1. 打包方式一<br>
+`jar cvf  xxx.jar Xxx.class Yyy.class` //指定class
+2. 打包方式二<br>
+`jar cvf xxx.jar -C xxx/.`//指定目录
+3. 查看jar文件<br>
+`jar -tf xxx.jar`
+4. 运行jard中的类<br>
+`java -cp xxx.jar xx.xx.xx;`//后面跟完整类名
+5. 指定清单文件(xxx.jar/META-INF/MENIFEST.MF)的入口类<br>
+`jar {ctxui}[vfmn0PMe] [jar-file] [manifest-file] [entry-point] [-C dir] files ...`<br>
+`jar -cvfe classes.jar com.day01.java.PagDemo classes/ .`
+6. 如果jar中的清单文件含有入口点(Main-Class),''可以直接使用以下命令执行<br>
+`java -jar classes.jar`
