@@ -201,7 +201,7 @@ mermaid
 graph TD
    A --> B
 ```
-![](/images/2020-02-27-15-05-13.png)
+>![](/images/2020-02-27-15-05-13.png)
 ```
 graph LR
    A --> B 
