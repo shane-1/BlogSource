@@ -234,8 +234,18 @@ ENFPs are not great fans of heavy hierarchy and bureaucracy, and this is most ev
 Unfortunately, not everyone buys into this philosophy – challenges arise when faced with subordinates who actually prefer to be closely directed, with clearly defined objectives and timetables, people who are just doing their jobs. More challenging still are those rare moments when a reprimand is simply necessary – while ENFPs prefer to meet dissent with an open ear, and to use their excellent capacity for sensing mood and morale to preempt such an act to begin with, sometimes the carrot and the stick are necessary, and using them is the biggest challenge for the ENFP personality type. But ENFPs’ capacity for adjusting their communication to most any style will always shine through, helping to smooth things over and adapt to the needs of their team.
 >然而不幸的是，并不是每个人都认同这一理念——有一些下属反而更喜欢被直接领导，有明确的目标和时间表，他们只需要完成自己分内的工作。对ENFPer来说，更具挑战性的时刻是那些必须要谴责下属的时候——由于ENFPer更喜欢敞开怀抱、直面异议，用他们杰出的感应能力去鼓舞士气，但有时候，胡萝卜和大棒都是必要的，如何使用好它们是ENFP人格型最大的挑战。但是，ENFPer能与各种人格型顺利沟通的能力总会使他们光芒闪耀，帮助他们度过难关，适应团队的需要。
 
-【编者注：最近在工作和阅读的时候，发现自己还是很容易distract，很有一些沮丧，于是又翻出了之前那篇MBTI人格系列翻译整理③—— ENFP记者型反复看，想确认一下自己到底还要花多少时间、培养起哪些功能才能克服掉目前身上有的这些缺陷。于是顺便也把这篇相对来说比较入门的文章给翻译了一下。哎，ENFP的成长之路确实是任重而道远啊。
+## Tip
+Campaigners are known for their big dreams. And that makes sense, right? You’ve got art to make, people to uplift, and a great big world to explore. A comfortable but boring life – well, that just isn’t for you.
+Learning about your personality type, you might feel the thrill of finally seeing yourself clearly. Maybe now you understand why the life that everyone else seems to be chasing – big salary, shiny car, social media likes – seems a bit empty to you. Sure, those things are nice, but they’re just things. Not to get grim, but as a Campaigner, your deathbed regret probably won’t be, “Darn, I really wish I’d bought a superyacht.”
+So why are you here? What is it you plan to do, to quote the great Mary Oliver, with your one wild and precious life?
+85% of Campaigners say that if they had more self-discipline, they would have achieved more of their goals by now.
+Here’s the thing: self-discipline is overrated. There, we said it. Pursuing your goals doesn’t have to be all about ticking off boxes or rigidly adhering to plans – and thank goodness. To steer yourself toward the life you were meant for, you really only need three things:
 
-希望接下来自己可以更好地发展起自己的Fi功能，有更加稳定而坚固的价值观；更好的发展起自己的Te功能，敢于坚定地“自我声张”，而不是一味的避免冲突，或者采取“消极攻击行为”，能通过更真诚、更直接的表达自己来达到更深层次的亲密感和自尊感；同时还要更好的发展自己的Si功能，通过冥想、禅修等方式与自己的身体产生更纯粹的联结，更和谐地与自我相处，在追求自由与享受安全、畅想未来与依靠过去之间找到微妙的平衡点，不再把精力耗费在无尽的Ne的寻找上，学会接受“就是什么”的确定认知。
+1. clarity about what you want,
 
-总之，一定要常常复盘这几个点，努力让自己的功能类型发展地更均衡一些。希望终有一天自己可以get rid of distractions，翻白眼。】
+2. insight on how to get there, and
+
+3. accountability to keep you on track.
+
+That isn’t to say it’s effortless. Chances are you’re already dealing with school or work deadlines, family pressures, relationship issues, and an ever-pinging phone. That’s more than enough to keep you busy, if not stressed out and sleep-deprived. Add in a few stacks of clutter or a lost set of keys (no seriously, where are they?) and it’s easy to forget how much more to life there can be.
+And that, dear Campaigner, is where we come in.
