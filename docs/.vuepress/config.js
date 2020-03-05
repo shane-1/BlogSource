@@ -27,7 +27,8 @@ module.exports = {
             {text:'Tensorflow常见报错解决',link:'/ML/TensorflowError.md'}
           ]},
         { text: 'Phil', items :[
-          {text:'中国为什么没有科学精神', link:'/Phil/WCHNS.md'}
+          {text:'中国为什么没有科学精神', link:'/Phil/WCHNS.md'},
+          {text:'ENFP',link:'/Phil/ENFP.md'}
         ]},
         { text: 'Java', link: '/Java/Java.md' },
         { text: 'Meme', link: '/Meme/Meme.md' },
