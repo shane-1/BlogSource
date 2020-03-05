@@ -14,3 +14,5 @@ features:
   details: 个人的一点思考，涉及宗教、西方哲学、个人经历、意识形态、形而上学等。
 footer: Veupress | Created by Shane
 ---
+优秀主页链接：<br>
+[算法小抄](https://labuladong.gitbook.io/algo/)
