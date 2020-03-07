@@ -2,6 +2,9 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br><br>
 ---------------------------
+## 2020.3.7
+我对自己的要求很低，我活在世上，无非想要明白些道路，遇见一些有趣的人，发生一些有趣的事。倘若如我所愿，还能遇见ta，我的一生就算十分成功。
+---
 ## 2020.3.6
 >What is it plan to do with your one wild and precious life? ----Mary Oliver
 ---

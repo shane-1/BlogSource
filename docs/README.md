@@ -16,3 +16,4 @@ footer: Veupress | Created by Shane
 ---
 优秀主页链接：<br>
 [算法小抄](https://labuladong.gitbook.io/algo/)
+[宝可梦大师](http://speech.ee.ntu.edu.tw/~tlkagk/)
