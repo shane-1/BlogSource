@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /rick.png
+heroImage: /rick.gif
 heroText: To see the world as it is and to love it. 
 actionText: 动态
 actionLink: /Meme/Meme.md
