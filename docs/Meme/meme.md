@@ -2,12 +2,16 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br><br>
 ---------------------------
+## 2020.3.14
+>One tends to twist facts to suit theories instead of theories to suit facts.
+## 2020.3.13
+>警惕那些说自己中立的人，中立代表着他们永远的多数者的附属品，正确与否从就和人数无关。
 ## 2020.3.12
->The rainbow has many colors,but it whiter than you think.
+>The rainbow has many colors,but it is whiter than you think.
 ## 2020.3.11
 >你迷茫的原因是懂了太少，想得太多，试着focus on youself.
 ## 2020.3.10
->想活得用力一些，when my moment comes，I swear. 
+>想活得用力一些，when my moment comes，I swear,
 I lived.
 ## 2020.3.9
 >人性中有好多好多恶，令人炫目；人性中有好多好多善，令人炫目。
