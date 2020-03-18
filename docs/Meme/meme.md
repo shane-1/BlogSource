@@ -3,7 +3,7 @@
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
 ## 2020.3.18
-#### Don't let anything or anyone stand the way of sun sheding light on you.
+#### Don't let anything or anyone stand in the way where light sheds on you.
 ## 2020.3.17
 #### 如果每个人都能理解你，那你得普通成什么样子
 ## 2020.3.16
