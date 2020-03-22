@@ -10,7 +10,6 @@ module.exports = {
       lastUpdated:'Last Updated',
       nav: [
         { text: '首页', link: '/' },
-        { text: 'ForYou', link: '/ForYou/HappyBrithday.md' },
         {
            text: 'Note', 
            items  :[
