@@ -2,6 +2,8 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.3.25
+
 ## 2020.3.24
 >Most people die in their 20s or 30s because after that they are just a shadow of themselves and spend the rest of their lives imitating them. Day after day, more mechanically, more ostentatiously, they repeat what they have done, thought, loved and hated in their lifetime.<br>
 —— romain rolland <Jean-Christophe>

@@ -2,7 +2,7 @@
 
 >ENFP：活动家人格 
 
-It doesn’t interest me what you do for a living. I want to know what you ache for – and if you dare to dream of meeting your heart’s longing. It doesn’t interest me how old you are. I want to know if you will risk looking like a fool – for love – for your dreams – for the adventure of being alive.——Oriah Mountain Dreamer
+It doesn’t interest what you do for a living. I want to know what you ache for – and if you dare to dream of meeting your heart’s longing. It doesn’t interest me how old you are. I want to know if you will risk looking like a fool – for love – for your dreams – for the adventure of being alive.——Oriah Mountain Dreamer
 >我不感兴趣你靠什么为生，我只想知道你内心渴望什么——你是否还敢于去梦想实现内心的渴望。我不感兴趣你有多大了，我只想知道你是否还敢像个傻瓜一样去冒险——为了所爱——为了梦想——为了活着本身。——梦想家
 
 The ENFP personality is a true free spirit. They are often the life of the party, but unlike Explorers, they are less interested in the sheer excitement and pleasure of the moment that they are in enjoying the social and emotional connections they make with others. Charming, independent, energetic and compassionate, the 7% of the population that they comprise can certainly be felt in any crowd.
