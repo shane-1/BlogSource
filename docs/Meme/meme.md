@@ -2,6 +2,9 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.3.27
+>你想知道我对你的爱情是什么吗？就是从心底里喜欢你，觉得你的一举一动都很亲切，不高兴你比喜欢我更喜欢别人。你要是喜欢了别人我会哭，但是还是喜欢你。<br>
+——王小波.<爱你就像爱生命>
 ## 2020.3.26
 #### I always want shed some light on others,not because I am so arrogant that I consider myself as sun.I more like a small candle,I can give others wisp even that means I need burn myself a little .And I do that just because someone lights me up before.
 >我总是想去照亮别人,不是因为我自大到自以为是太阳,更像是小小的蜡烛,即使会燃烧自己仍想带给你一点微光,因为我曾被别人点燃.
