@@ -2,8 +2,13 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.3.26
+#### I always want shed some light on others,not because I am so arrogant that I consider myself as sun.I more like a small candle,I can give others wisp even that means I need burn myself a little .And I do that just because someone lights me up before.
+>我总是想去照亮别人,不是因为我自大到自以为是太阳,更像是小小的蜡烛,即使会燃烧自己仍想带给你一点微光,因为我曾被别人点燃.
 ## 2020.3.25
-
+>那一天我二十一岁,在我一生的黄金时代,我有好多奢望.我想爱,想吃,还想在一瞬间变成天上半明半暗的云.后来我才知道,生活就是一个缓慢受锤的过程,人一天天老下去,奢望也一天天消失,最后变得像挨了锤的牛一样.可是我过二十一岁生日时没有预见这一点.我以为自己会永远生猛下去,什么也锤不了我.<br>
+——王小波.<黄金时代>
+#### 现在的我也以为什么都锤不了我,不知以后在看这段会不会心情复杂
 ## 2020.3.24
 >Most people die in their 20s or 30s because after that they are just a shadow of themselves and spend the rest of their lives imitating them. Day after day, more mechanically, more ostentatiously, they repeat what they have done, thought, loved and hated in their lifetime.<br>
 —— romain rolland <Jean-Christophe>
