@@ -2,6 +2,12 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.3.29
+#### No one loves you when you don't love yourself. I know its sounds cliche,but cliche become cliche for reason. If nothing is left underneath your appearance, how could  you expect someone to love you just who you are. If you  are boring one, how could you expect someone to be interested in you. If you don't have soul, how could you expect magically meet your soulmate. 
+[music](https://music.163.com/#/song?id=1475363)
+## 2020.3.28
+>我是爱你的，看见就爱上了。我爱你爱到不自私的地步，就像一个人手中一直鸽子飞走了，他从心里祝福了鸽子的飞翔。你也飞吧。我会难过，也会高兴，到底怎么样我也不知道。<br>
+——王小波.<爱你就像爱生命>
 ## 2020.3.27
 >你想知道我对你的爱情是什么吗？就是从心底里喜欢你，觉得你的一举一动都很亲切，不高兴你比喜欢我更喜欢别人。你要是喜欢了别人我会哭，但是还是喜欢你。<br>
 ——王小波.<爱你就像爱生命>
@@ -24,7 +30,7 @@
 >彼此人身攻击，完全不站在对等角度将对方当作一个具有独立思想的个体给予基本尊重，这连争论都算不上，两边都是键盘侠罢了，纯粹宣泄愤怒，恶心局外人。不是所有人都应该同意你的观点，如果你觉得自己懂的多，就站在对等角度解释，还有别自以为看穿一切。<br>
 —— 给t平台的双方愤青
 ## 2020.3.20
-#### I want give you a try,in case you are love of my heart.
+#### I want give you a try,in case you are love of my love.
 ## 2020.3.19
 >`我不歧视XX群体,只要XX群体别在我面前出现恶心我就行`<br>
 `又是政治正确,我反对政治正确,要喷一波`
