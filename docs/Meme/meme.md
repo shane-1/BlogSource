@@ -2,6 +2,15 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.4.1
+>我的灵魂里有很多地方玩世不恭。对人傲慢无礼。但是它有一个核心，这个核心害怕黑暗，柔弱得像绵羊一样。只有顶平等的有爱才能使它得到安慰，你对我是属于这个核心的。<br>
+——王小波.<爱你就像爱生命>
+## 2020.3.31
+>人之所以言之凿凿，是因为知道的太少。<br>
+——弗朗索瓦·佐基
+## 2020.3.30
+>所有的生活都是合理的，我们没必要相互理解。<br>
+——刘慈欣
 ## 2020.3.29
 #### No one loves you when you don't love yourself. I know its sounds cliche,but cliche become cliche for reason. If nothing is left underneath your appearance, how could  you expect someone to love you just who you are. If you  are boring one, how could you expect someone to be interested in you. If you don't have soul, how could you expect magically meet your soulmate. 
 [music](https://music.163.com/#/song?id=1475363)
