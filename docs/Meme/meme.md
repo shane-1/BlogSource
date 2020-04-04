@@ -2,6 +2,14 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.4.4
+>Life is hard.For those who are not content with mediocrity, it is a never-ending struggle, often tragic, without brilliance, without happiness, waged in solitude and silence....They can only rely on their own, but sometimes even the strongest people can not avoid in the hardship of wasting.<br>
+—— romain rolland
+## 2020.4.3
+#### 如果你不会尊重每一个独立的个体，你也不配得到尊重。
+## 2020.4.2
+>生活也许在沸腾着,翻着泡沫，但我却忽然觉得我完全在它之外。我真羡慕那些无忧无虑的从不停歇地干下去的人。这个时候,谁也不能安慰我，也许连你也不能.就像那首诗说的,像在雾里一样.我可能有一个致命的缺点，生命力还不够强.我的灵魂缺燃料,它有时虽然能迸出火花,但是不能总是熊熊的燃烧.你的生命力比我强，我觉得你总是那么兴致勃勃的，就像居里说的,像一个飞旋的陀螺.你该用你的速度来带动我,用你的火来燃烧我，用你欢快的浪花把我从死水潭里带走.<br>
+——李银河
 ## 2020.4.1
 >我的灵魂里有很多地方玩世不恭。对人傲慢无礼。但是它有一个核心，这个核心害怕黑暗，柔弱得像绵羊一样。只有顶平等的有爱才能使它得到安慰，你对我是属于这个核心的。<br>
 ——王小波.<爱你就像爱生命>
