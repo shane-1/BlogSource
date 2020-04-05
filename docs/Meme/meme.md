@@ -2,6 +2,8 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.4.5
+#### 在这个信息爆炸，人们在随意发表自己看法，但看法的立足点往往不够，别人简单一个观点就成为其的核心价值。王小波写过沉默的大多数，但因为互联网平台的出现，沉默的大多数好似突然有其用武之地一般，成为了吃瓜的大多数。哪里有瓜哪里凑，争先恐后先吐为快。这种现象的弊端在于，稍微加以引导，似乎就能统一战线、同仇敌忾。就拿冠状疫情下的美帝举例，精英阶层为自身利益，以稳住经济为目的宣传稳定民众，最终导致错过最佳防控时机。时代的一粒灰，落在个人面前就是一座山，而时代的灰是不会落在社会上层的。人类从未剥离过物竞天择的自然选择，无论时代如何，做炮灰的都只会是下层。而理想主义的存在，又使得人类文明存在着些不一样的东西。这部分人性中善的存在使得无论社会再黑暗，总会给绝望者以希望。文明的存在本就是违背自然规律的熵减。“人往高处走，水往低处流”这里的高处我不愿按传统的社会上层理解，我更愿意把其作为理想主义理解。任何文明中存在的一点善，都是推动整个文明进步的力量。
 ## 2020.4.4
 >Life is hard.For those who are not content with mediocrity, it is a never-ending struggle, often tragic, without brilliance, without happiness, waged in solitude and silence....They can only rely on their own, but sometimes even the strongest people can not avoid in the hardship of wasting.<br>
 —— romain rolland
