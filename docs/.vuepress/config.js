@@ -30,7 +30,11 @@ module.exports = {
           {text:'中国为什么没有科学精神', link:'/Phil/WCHNS.md'},
           {text:'ENFP',link:'/Phil/ENFP.md'}
         ]},
-        { text: 'Java', link: '/Java/Java.md' },
+        { text: 'Java', 
+        items :[
+          {text:'Java基础',link:'/Java/Java.md'},
+          {text:'Spring',link:'/Java/Spring.md'}
+        ]},
         { text: 'Meme', link: '/Meme/Meme.md' },
         { text: 'Github', link: 'https://github.com/shane-1' },
       ],
