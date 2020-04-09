@@ -2,6 +2,8 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.4.9
+![](/images/2020-04-09-08-46-34.png)
 ## 2020.4.8
 >Stifle thinking people, it is the biggest murderer.<br>
 —— romain rolland
