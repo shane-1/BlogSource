@@ -82,7 +82,7 @@ System.out.println(student);
 #### 2.1.6 WebApplicationContext
 1.	专门为WEB应用而准备的，它允许从相对于WEB根目录的路径中完成初始化工作
 
-2.2 通过类型获取bean
+### 2.2 通过类型获取bean
 1.	从IOC容器中获取bean时，除了通过id值获取，还可以通过bean的类型获取。但如果同一个类型的bean在XML文件中配置了多个，则获取时会抛出异常，所以同一个类型的bean在容器中必须是唯一的。
 `HelloWorld helloWorld = cxt.getBean(HelloWorld. class);`
 
@@ -435,7 +435,7 @@ prop.driverClass=com.mysql.jdbc.Driver
 		●component-scan下可以拥有若干个include-filter和exclude-filter子节点<br>
 		●过滤表达式
 |类别|  示例|说明|     
-|:--|:--:|--:|		
+|:--:|:--:|:--:|		
 |annotation|	com.atguigu.XxxAnnotation|过滤所有标注了XxxAnnotation的类。这个规则根据目标组件是否标注了指定类型的注解进行过滤。|
 |assignable|com.atguigu.BaseXxx|过滤所有BaseXxx类的子类。这个规则根据目标组件是否是指定类型的子类的方式进行过滤。|
 |aspectj|com.atguigu.*Service+|所有类名是以Service结束的，或这样的类的子类。这个规则根据AspectJ表达式进行过滤。|
