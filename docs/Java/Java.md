@@ -243,4 +243,21 @@ int _对象_>>Integer<br>
 sleep();    //放弃CPU抢占权,与锁旗标无关
 wait();     //当前对象加入锁等待队列,同时释放锁旗标,唤醒后继续执行
 notify
-## 字符级字符串数据常用方法
+## eclipse快捷键
+```java
+    alt + / //内容辅助
+    ctl + alt + down //向下复制一行
+    ctl + alt + up //向上复制一行
+
+    alt + down //向下移动一行
+    alt + up //向上移动一行
+    ctl + d //删除一整行
+    ctl + shift + f //代码格式化
+
+    shift + enter //中途回车,不换行
+    ctrl + / //切换注释
+    ctrl + shift + / //块注释
+    ctrl + shift + \ //解除块注释 
+```
+## java单元测试
+
