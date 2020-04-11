@@ -260,4 +260,77 @@ notify
     ctrl + shift + \ //解除块注释 
 ```
 ## java单元测试
+```java
+import org.junit.Test; //rember to import related jar
+@Test
+public void test1 (){
+
+}
+```
+只能加到非静态方法上 
+```jave
+@Before
+//非静态方法前
+
+@Before Class
+//静态方法前
+```
+## String类
+1. 字符串类
+final类,无法继承
+2. 内部采用char[]数组存储
+3. 内部不能改变,属于常量
+4. 常见方法
+str.length(); //长度<br>
+str.trim();   //删除头尾空白符的字符串<br>
+srt.split("x");//按照x规则进行切割<br>
+## 字符集
+ascii :     美国国家标准交换码,使用一个字节的7
+位表示.<br>
+iso-8859-1:     欧洲码表,使用8位表示,无法存储汉字.<br>
+gb2312:     中文码表,简体中文.两个字节存储.<br>
+gbk:    gb2312升级版<br>
+big-5:      繁体中文<br
+utf-8:     变长支付表示法,最多使用三个字节表示.<br>
+unicode:      两个字节表示字符,java中使用该码
+---
+Charset.defaultCharset();
+### 编码
+encode<br>
+String --> byte[]<br>
+String.getBytes("gbk"); //编码格式
+### 解码
+decode<br>
+byte[] --> String<br>
+new String(arr,"gbk")//解码格式
+## StringBuffer
+线程安全
+## StringBuilder
+非线程安全
+## 包装类
+```java
+//自动装箱-基本数据类型->包装类对象
+Integer i = 1000; 
+//自动拆箱-包装类对象->直接提取基本数据类型
+System.out.println(i + ii);
+```
+>基本数据类型没有null的概念<br>
+数值类型基本数据类型(成员变量)默认值是0.<br>
+----
+>包装类的默认是null.<br>
+有NullPointerException.注意初始化
+## 容器
+### 数组
+1. 类型相同
+2. 长度固定
+3. 可以存放基本类型
+### 集合类
+1. 长度不固定
+2. 类型可以不同
+3. 不能存放基本类型
+4. List: 有序,可重复
+5. Set:无序,不能重复
+6. Map:key-value,key有set的特点.
+![](/images/2020-04-11-08-55-07.png)
+
 

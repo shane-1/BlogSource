@@ -28,7 +28,8 @@ module.exports = {
           ]},
         { text: 'Phil', items :[
           {text:'中国为什么没有科学精神', link:'/Phil/WCHNS.md'},
-          {text:'ENFP',link:'/Phil/ENFP.md'}
+          {text:'ENFP',link:'/Phil/ENFP.md'},
+          {text:'从Internet说起',link:'/Phil/Internet.md'}
         ]},
         { text: 'Java', 
         items :[
