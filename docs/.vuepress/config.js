@@ -15,7 +15,8 @@ module.exports = {
            items  :[
              {text:'Markdown',link:'/Note/Markdown.md'},
              {text:'Octave与Matlab的区别',link:'/Note/DBOM.md'},
-             {text:'CMD Manual',link:'/Note/Cmd.md'}
+             {text:'CMD Manual',link:'/Note/Cmd.md'},
+             {text:'KMP',link:'/Note/KMP.md'}
                        ]},
         {  text: 'Python', 
            items :[
