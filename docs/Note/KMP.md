@@ -60,8 +60,9 @@ int[] calculateMaxMatchLengths(String pattern) {
 }
 ```
 &emsp;&emsp;有了代码后，容易证明它的复杂度是线性的（即运算时间与模式串 pattern 的长度是线性关系）：由 ② 可以看出 maxLength 在整个 for 循环中最多增加 pattern.length() - 1 次，所以让 maxLength 减少的 ① 在整个 for 循环中最多会执行 pattern.length() - 1 次，从而 calculateMaxMatchLengths 的复杂度是线性的。<br><br>
-&emsp;&emsp;KMP 匹配的过程和求最大匹配数的过程类似，从 count 值的增减容易看出它也是线性复杂度的：// 在文本 text 中寻找模式串 pattern，返回所有匹配的位置开头
-```java
+&emsp;&emsp;KMP 匹配的过程和求最大匹配数的过程类似，从 count 值的增减容易看出它也是线性复杂度的：
+``` java
+// 在文本 text 中寻找模式串 pattern，返回所有匹配的位置开头
 List<Integer> search(String text, String pattern) {
     List<Integer> positions = new ArrayList<>();
     int[] maxMatchLengths = calculateMaxMatchLengths(pattern);
