@@ -441,4 +441,154 @@ TreeSet同样通过TreeMap实现<br>
 2. 将运行期遇到的问题转移到编码期
 3. 省去了类型强转的麻烦
 4. 泛型类的出现优化了程序设计
+## 遍历方式
+1. for
+```java
+for(int i = 0; i < list.size(); i++){
 
+}
+```
+2. iteterator
+```java
+Iterator<String> it = list.iterator();
+while(it.hasNext()){
+    it.next();
+}
+```
+3. for+
+```java
+//for(数据类型 变量名:数组或Collection集合)
+for(String s : list){
+
+}
+```
+>增强for循环可用于多种迭代过程,类似Python的for each in.<br>例:
+```java
+Map<String, String> map = new HashMap<String, String>();
+Set<Entry<String, String>> set = map.entrySet();
+for(Entry<String, String> e: set){
+    String key = e.getKey();
+    String value = e.getValue();
+}
+
+//可变参数-可允许出现一个且必须为最后一个参数
+//不会产生空指针异常,默认为空数组
+private void add(List list, String...x){
+    for(String s:x){
+        list.add(s);
+    }
+    }
+```
+## IO
+Stream -> byte[]
+1. 数据类<br>
+>字节流<br>
+字符流<br>
+>>处理文本,防止乱码
+2. 流向<br>
+>输入流<br>
+输出流<br>
+### 流的超类
+InputStream<br>
+OutputStream
+### 字符流
+Reader<br>
+Writer<br>
+文本首选
+### 字节流
+```java
+FileInputStream fis = newFileInputStream("d:/xx/x.txt");
+byte[] buf = new byte[fis.available()];
+fis.read(buf);
+fis.close();
+```
+```java
+//编码
+FileInputStream fis = new FileInputStream("d:/xx/x.txt");
+InputStreamReader isr = new InputStreamReader(fis, "utf-8");
+char[] buf = new char[5];
+int len = 0;
+while((len = isr.read(buf) )!= -1){
+    System.out.println(new String(buf, 0, len));
+}
+isr.close();
+```
+## 缓冲区字符流
+默认缓冲区:8K<br>
+## 文件归档
+1. 文件名字节数 
+2. 文件名
+3. 文件字节数
+4. 文件
+## 设计模式
+### 单例模式 singleton
+类有且只有一个对象<br>
+1.  懒汉式
+```java
+//单例模式,垃圾桶
+public class GarbageBox{
+    //实例
+    private static GarbageBox  instance;
+    /**
+    *构造私有
+    */
+    private GarbageBox(){
+    }
+
+    public static GarbageBox  getInstance(){
+        if(intsant  ==  null){
+            instance  = new GarbageBox();   
+        }
+        return  instance;
+    }
+}
+```
+多线程优化
+```java
+//单例模式,垃圾桶
+public class GarbageBox{
+    //实例
+    private static GarbageBox  instance;
+    private static Object lock = new Obeject();//锁
+    /**
+    *构造私有
+    */
+    private GarbageBox(){
+    }
+    if
+    public static GarbageBox  getInstance(){
+        //为空情况下才锁住
+        if(intsant  ==  null){
+            Synchronized (lock){
+                if(instance == null){
+                    instance  = new GarbageBox();   
+                }
+                return instance;
+            }
+        }
+        return  instance;
+}
+```
+
+2.  饿汉式                              
+```java
+//单例模式,垃圾桶
+public class GarbageBox{
+    //实例
+    private static GarbageBox  instance = new GarbageBox();
+    /**
+    *构造私有
+    */
+    private GarbageBox(){
+    }
+
+    public static GarbageBox  getInstance(){
+        return  instance;
+    }
+}
+```
+### 适配器 Adapter
+&emsp;&emsp;将一个接口转换成客户希望的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。<br>
+&emsp;&emsp;在适配器模式中，我们通过增加一个新的适配器类来解决接口不兼容的问题，使得原本没有任何关系的类可以协同工作。<br>
+&emsp;&emsp;根据适配器类与适配者类的关系不同，适配器模式可分为**对象适配器**和**类适配器**两种，在**对象适配器**模式中，适配器与适配者之间是**关联关系**；在**类适配器**模式中，适配器与适配者之间是**继承**（或实现）关系。
+### 装饰模式
