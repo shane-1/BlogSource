@@ -5,9 +5,9 @@
 ## 2020.4.17
 + Zwei Dinge erfullen das Gemit mit immer neuer und zunehmender Bewunderung und Ehrfurcht, je ofter und anhaltender sich das Nachdenken damit beschäftigt: Der bestirnte Himmel über mirund das moralische Gesetz in mir.<br>Kritik der praktischen Vernunft
 + Two things fill me with constantly increasing admiration and awe, the longer and more earnestly I reflect on them: the starry heavens without and the moral law within.<br>
-++ <Encyclopaedia Britannica> translate
+>《Encyclopaedia Britannica》 translate
 ++ 两样东西,人们越是经常持久对之凝神思索,它们就越是使内心充满常新而日增的惊奇和敬畏:我头上的星空和我心中的道德律
-++ 邓晓芒译,杨祖陶校 《实践理性批判》
+>《实践理性批判》 邓晓芒译,杨祖陶校 
 ![](/images/2020-04-16-16-16-16.png)
 
 ## 2020.4.16
