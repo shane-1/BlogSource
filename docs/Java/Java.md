@@ -481,13 +481,18 @@ private void add(List list, String...x){
 ```
 ## IO
 Stream -> byte[]
-1. 数据类<br>
+1. 数据类型<br>
 >字节流<br>
 字符流<br>
 >>处理文本,防止乱码
 2. 流向<br>
 >输入流<br>
 输出流<br>
+3. 性能<br>
+>缓冲区流<br>
+4. 性能<br>
+>转换流<br>
+>>InputStream/OutputStream -> Reader/Writer
 ### 流的超类
 InputStream<br>
 OutputStream
@@ -515,13 +520,103 @@ isr.close();
 ```
 ## 缓冲区字符流
 默认缓冲区:8K<br>
+*先关缓冲区，后关文件流*
+## 输入输出流
+改变System.out.print到文件
+```java
+System.setOut(new PrintStream(new FileOutputStream("x:/xx/x.txt")));
+System.out.println("XXXXXXX");
+```
+读取控制台输入
+```java
+InputStream in = System.in;
+BufferedReader br = new BufferedReader(new InputStreamReader(in));//转换流
+String line  = null;
+while((line = br.readLine()) != null){
+    if(line.equals("quit")){
+            System.exit(-1);        //退出
+    }
+    System.out.println(line);
+}
+```
 ## 文件归档
 1. 文件名字节数 
 2. 文件名
 3. 文件字节数
 4. 文件
+## 文件
+包名:java.io.File<br>
+类名:File<br>
+方法:<br>
++ File.exists(); 
++ File.isDirectory(); 
++ File.isFile();
++ File.mkdirs(); //创建目录
++ File.createNewFile();
++ File.listFiles();
++ File.getAbsolutePath();
++ File.getName();
++ File.getCanonicalPath(); //得到正规路径名<br>
+
+打印输出目录结构:
+```java
+private void printDir(String file){
+    File f = new File(file);
+    if(f.exists()){
+        System.out.println(f.getAbsolutePath());
+        is(f.isDirectory()){
+            File[] fileList = f.listFiles();
+            if(fileList != null && fileList.length > 0){
+                for(File singelFile : fileList){
+                    printDir(singelFile.getAbsolutePath());
+                }
+            }
+        }
+    }
+}
+```
+递归复制到指定文件夹:
+```java
+public void copyDir(String file,String destDir){
+    File f = new File(file);
+    if(f.exists()){
+        is(f.isDirectory()){
+            //创建目录
+            File newFile = new File(destDir,f.getName());
+            newFile.mkdirs();
+
+            File[] fileList = f.listFiles();
+            if(fileList != null && fileList.length > 0){
+                for(File singelFile : fileList){
+                    copyDir(singleFile.getAbsolutePath(), newFile.getAbsolutePath());
+                }
+            }
+        }
+        else{
+            copyFile(file,destDir);
+        }
+}
+public void copyFile(String srcFile,String destDir){
+    try{
+        File file = new File(srcFile);
+        File newFile = new File(destDir,file.getName());
+        FileInputStream fis = new FileInputStream(file);
+        FileOutputStream fos = new FileOutputStream(newFile);
+        int len = 0;
+        byte[] buf = new byte[1024];
+        while((len = fis.read(buf) != -1){
+            fos.write(buf, 0, len);
+        }
+        fos.close();
+        fis.close();
+    }
+    catch(Exception e){     //不推荐捕获类型,这里旨在简化代码
+        e.printStackTrace();
+    }
+}
+```
 ## 设计模式
-### 单例模式 singleton
+### 单例模式 Singleton
 类有且只有一个对象<br>
 1.  懒汉式
 ```java
@@ -591,4 +686,32 @@ public class GarbageBox{
 &emsp;&emsp;将一个接口转换成客户希望的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。<br>
 &emsp;&emsp;在适配器模式中，我们通过增加一个新的适配器类来解决接口不兼容的问题，使得原本没有任何关系的类可以协同工作。<br>
 &emsp;&emsp;根据适配器类与适配者类的关系不同，适配器模式可分为**对象适配器**和**类适配器**两种，在**对象适配器**模式中，适配器与适配者之间是**关联关系**；在**类适配器**模式中，适配器与适配者之间是**继承**（或实现）关系。
-### 装饰模式
+### 装饰模式  Decorate
+```java
+class A{
+    public void aa(){
+        ...
+    }
+}
+
+class B extends A{
+    private A a;
+
+    publlic B(A a){
+        this.a = a;
+    }
+
+    public void aa(){
+        ...
+        a.aa();
+        ...
+    }
+}
+```
+### 工厂模式 Factory
+通过静态方法创建完整对象 
+### 构建器模式 Builder
+setXx()返回对象自身
+### 观察者模式 Observer
+Observers<br>
+Observable<br>
