@@ -35,7 +35,8 @@ module.exports = {
         { text: 'Java', 
         items :[
           {text:'Java基础',link:'/Java/Java.md'},
-          {text:'Spring',link:'/Java/Spring.md'}
+          {text:'Spring',link:'/Java/Spring.md'},
+          {text:'深入解析Java反射',link:'/Java/Reflection.md'}
         ]},
         { text: 'Meme', link: '/Meme/Meme.md' },
         { text: 'Github', link: 'https://github.com/shane-1' },
