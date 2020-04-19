@@ -14,7 +14,7 @@
 5. 一站式：在IOC和AOP的基础上可以整合各种企业应用的开源框架和优秀的第三方类库（实际上Spring 自身也提供了表述层的SpringMVC和持久层的Spring JDBC）。<br>
 
 6. Spring模块
-![](/images/2020-04-09-16-55-24.png)
+![](/images/2020-04-09-16-55-24.png)<br>
 ### 1.2 安装Spring插件
 1. 插件包：springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip
 2. 操作步骤：参照《[尚硅谷]_参考资料：安装Springtools插件.doc
@@ -34,7 +34,7 @@ spring-expression-4.0.0.RELEASE.jar
 ### 1.4 HelloWorld
 1. 目标：使用Spring创建对象，为属性赋值
 2. 创建Student类
-![](/images/2020-04-09-18-40-10.png)
+![](/images/2020-04-09-18-40-10.png)<br>
 3. 创建Spring配置文件
 ```XML
 <!-- 使用bean元素定义一个由IOC容器创建的对象 -->
@@ -70,7 +70,7 @@ System.out.println(student);
 2. Spring提供了IOC容器的两种实现方式<br>
 ① BeanFactory：IOC容器的基本实现，是Spring内部的基础设施，是面向Spring本身的，不是提供给开发人员使用的。<br>
 ② ApplicationContext：BeanFactory的子接口，提供了更多高级特性。面向Spring的使用者，几乎所有场合都使用ApplicationContext而不是底层的BeanFactory
-![](/images/2020-04-09-18-49-39.png)
+![](/images/2020-04-09-18-49-39.png)<br>
 #### 2.1.4 ApplicationContext的主要实现类
 1.	ClassPathXmlApplicationContext：对应类路径下的XML格式的配置文件
 2.	FileSystemXmlApplicationContext：对应文件系统中的XML格式的配置文件
@@ -93,7 +93,7 @@ System.out.println(student);
 #### 2.3.1 依赖注入的方式
 1. 通过bean的setXxx()方法赋值
 Hello World中使用的就是这种方式
-![](/images/2020-04-09-18-52-12.png)
+![](/images/2020-04-09-18-52-12.png)<br>
 2. 通过bean的构造器赋值<br>
 1)	Spring自动匹配合适的构造器<br>
 ```XML
@@ -254,7 +254,7 @@ Hello World中使用的就是这种方式
 &emsp;&emsp;工厂bean跟普通bean不同，其返回的对象不是指定类的一个实例，其返回的是该工厂bean的getObject方法所返回的对象。<br>
 &emsp;&emsp;工厂bean必须实现org.springframework.beans.factory.
 ```xml
-![](/images/2020-04-09-19-01-05.png)
+![](/images/2020-04-09-19-01-05.png)<br>
 <bean id="product" class="com.atguigu.spring.bean.ProductFactory">
 	<property name="productName" value="Mp3" />
 </bean>
@@ -320,7 +320,7 @@ Hello World中使用的就是这种方式
 ### 2.7  bean的作用域★
 &emsp;&emsp;在Spring中，可以在<bean>元素的scope属性里设置bean的作用域，以决定这个bean是单实例的还是多实例的。<br>
 &emsp;&emsp;默认情况下，Spring只为每个在IOC容器里声明的bean创建唯一一个实例，整个IOC容器范围内都能共享该实例：所有后续的getBean()调用和bean引用都将返回这个唯一的bean实例。该作用域被称为singleton，它是所有bean的默认作用域。
-![](/images/2020-04-09-19-04-25.png)
+![](/images/2020-04-09-19-04-25.png)<br>
 &emsp;&emsp;当bean的作用域为单例时，Spring会在IOC容器对象创建时就创建bean的对象实例。而当bean的作用域为prototype时，IOC容器在获取bean的实例时创建bean的实例对象。
 ### 2.8  bean的生命周期
 1.	Spring IOC容器可以管理bean的生命周期，Spring允许在bean生命周期内特定的时间点执行指定的任务。
@@ -367,8 +367,7 @@ prop.url=jdbc:mysql:///test
 prop.driverClass=com.mysql.jdbc.Driver
 ```
 2. 引入context名称空间
-![](/images/2020-04-09-19-11-34.png)	 
-
+![](/images/2020-04-09-19-11-34.png)<br> 
 3. 指定properties属性文件的位置
 ```xml
 <!-- 指定properties属性文件的位置 -->
