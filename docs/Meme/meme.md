@@ -2,17 +2,20 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.4.20
+
 ## 2020.4.19
 有时觉得存在即合理是个流氓说法，太多的丑恶绝不合理的存在着。如康德所说，人可以为自己立法，决定什么样的生活不值得一过。
 ## 2020.4.18
 >除了手头的青春你一无所有，但就是你这手头为数不多的东西，决定你是一个怎么样的人。<br>
 ——J.M.库切
 ## 2020.4.17
-+ Zwei Dinge erfullen das Gemit mit immer neuer und zunehmender Bewunderung und Ehrfurcht, je ofter und anhaltender sich das Nachdenken damit beschäftigt: Der bestirnte Himmel über mirund das moralische Gesetz in mir.<br>Kritik der praktischen Vernunft
++ Zwei Dinge erfullen das Gemit mit immer neuer und zunehmender Bewunderung und Ehrfurcht, je ofter und anhaltender sich das Nachdenken damit beschäftigt: Der bestirnte Himmel über mirund das moralische Gesetz in mir.
+    + Kritik der praktischen Vernunft
 + Two things fill me with constantly increasing admiration and awe, the longer and more earnestly I reflect on them: the starry heavens without and the moral law within.<br>
->《Encyclopaedia Britannica》 Translate
+    + 《Encyclopaedia Britannica》 Translate
 + 两样东西,人们越是经常持久对之凝神思索,它们就越是使内心充满常新而日增的惊奇和敬畏:我头上的星空和我心中的道德律
->《实践理性批判》 邓晓芒译,杨祖陶校 
+    + 《实践理性批判》 邓晓芒译,杨祖陶校 
 
 ![](/images/2020-04-16-16-16-16.png)
 

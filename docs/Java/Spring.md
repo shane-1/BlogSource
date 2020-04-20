@@ -1,4 +1,4 @@
-#Spring框架
+# Spring框架
 >4.0
 ## 第1章  Spring概述 
 ### 1.1 Spring概述
@@ -12,8 +12,8 @@
  ④  容器：Spring是一个容器，因为它包含并且管理应用对象的生命周期<br>
  ⑤  组件化：Spring实现了使用简单的组件配置组合成一个复杂的应用。在 Spring 中可以使用XML和Java注解组合这些对象。<br>
 5. 一站式：在IOC和AOP的基础上可以整合各种企业应用的开源框架和优秀的第三方类库（实际上Spring 自身也提供了表述层的SpringMVC和持久层的Spring JDBC）。<br>
-
 6. Spring模块
+
 ![](/images/2020-04-09-16-55-24.png)<br>
 ### 1.2 安装Spring插件
 1. 插件包：springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip

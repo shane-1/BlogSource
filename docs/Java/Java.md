@@ -238,7 +238,6 @@ daemon :守护线程,如果应用程序剩余的线程都是守护线程,则程�
 >同步方法最好加static,只和方法有关(否则出现多个对象多把锁)<br>
 注意：静态方法只有有静态变量，因为静态变量和类绑定，而变量和对象绑定。
 ## 生产消费
-&emsp;&emsp;int _对象_>>Integer<br>
 &emsp;&emsp;每个锁都有一个等待队列(每个对象都可以是锁)<br>
 ```java
 sleep();    //放弃CPU抢占权,与锁旗标无关
@@ -269,7 +268,8 @@ public void test1 (){
 
 }
 ```
-只能加到非静态方法上 
+>@Test只能加到非静态方法上
+
 ```jave
 @Before
 //非静态方法前
@@ -282,7 +282,7 @@ public void test1 (){
 final类,无法继承
 2. 内部采用char[]数组存储
 3. 内部不能改变,属于常量
-4. 常见方法
+4. 常见方法<br>
 str.length(); //长度<br>
 str.trim();   //删除头尾空白符的字符串<br>
 srt.split("x");//按照x规则进行切割<br>
@@ -293,7 +293,7 @@ iso-8859-1:     欧洲码表,使用8位表示,无法存储汉字.<br>
 gb2312:     中文码表,简体中文.两个字节存储.<br>
 gbk:    gb2312升级版<br>
 big-5:      繁体中文<br>
-utf-8:     变长支付表示法,最多使用三个字节表示.<br>
+utf-8:     变长字符表示法,最多使用三个字节表示.<br>
 unicode:      两个字节表示字符,java中使用该码
 ---
 Charset.defaultCharset();
@@ -311,16 +311,16 @@ new String(arr,"gbk")//解码格式
 非线程安全
 ## 包装类
 ```java
-//自动装箱-基本数据类型->包装类对象
+//自动装箱=基本数据类型->包装类对象
 Integer i = 1000; 
-//自动拆箱-包装类对象->直接提取基本数据类型
+//自动拆箱=包装类对象->直接提取基本数据类型
 System.out.println(i + ii);
 ```
 >基本数据类型没有null的概念<br>
 数值类型基本数据类型(成员变量)默认值是0.<br>
 ----
 >包装类的默认是null.<br>
-有NullPointerException.注意初始化
+有NullPointerException.*注意初始化*
 ## 容器
 ### 数组
 1. 类型相同
@@ -330,12 +330,12 @@ System.out.println(i + ii);
 1. 长度不固定
 2. 类型可以不同
 3. 不能存放基本类型
-4. List: 有序,可重复
+4. List: 有序,可重复<br>
 ArrayList<br>
 LinkedList
-5. Set:无序,不能重复
-存取无序,判断hashcode是否相同,如果不同,可以存放,相同则判断是很欧为同一对象,同样则重复,否则再使用equals方法判断是否相同
-6. Map:key-value,key有set的特点.
+5. Set:无序,不能重复<br>
+&emsp;&emsp;存取无序,判断hash code是否相同,如果不同,可以存放,相同则判断是否为同一对象,同样则重复,否则再使用equals方法判断是否相同
+6. Map:key-value,**key有set的特点**.
 ![](/images/2020-04-11-08-55-07.png)
 ```java
 //迭代器访问,list为ArrayList
@@ -344,9 +344,10 @@ while(it.hasNext()){
     Cat cat1 = it.next();
 }
 ```
- ==判断内存地址<br>
- equals默认只判断内存地址,需要进行重写
+ `==`判断内存地址<br>
+ `equals`默认只判断内存地址,需要进行重写
  ```java
+ //equals 重写实例:
  public boolean equals(Object obj){
      //poj为null
      if(obj == null){
@@ -388,7 +389,7 @@ index + offset<br>
 clear方法会移除元素,降低容量,与arraylist不变容量不同.<br>
 链表优缺点
 ## Vector
-类似于ArrayList,x通过对象数组实现<br>
+类似于ArrayList,通过对象数组实现<br>
 线程安全的<br>
 迭代器在Collection接口中是通用的,它替代了vector的Enumeration(枚举)
 ## Set
