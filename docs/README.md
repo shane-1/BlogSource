@@ -12,7 +12,7 @@ features:
   details: 互联网技术性文章分享、哲学思考性文献分享。
 - title: 个人思考
   details: 个人的一点思考，涉及宗教、西方哲学、个人经历、意识形态、形而上学等。
-footer: Powered by Veupress | Created by Shane
+footer: Powered.Veupress | Created.Shane
 ---
 优秀主页链接：<br>
 [算法小抄](https://labuladong.gitbook.io/algo/)
