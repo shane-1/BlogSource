@@ -2,6 +2,9 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.4.21
+>The genius of apartheid was convincing people who were the overwhelming majority to turn on each other. Apart hate, is what it was. You separate people into groups and make them hate one another so you can run them all.<br>
+——Trevor Noah 《Born A Crime》
 ## 2020.4.20
 别把自己太当回事，也别把自己太不当回事，其中这度的把握就是人生智慧。
 ## 2020.4.19
