@@ -2,6 +2,12 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.4.23
+If you think too much about the ass-kicking your mom gave you, or the ass-kicking that life gave you, you’ll stop pushing the boundaries and breaking the rules. It’s better to take it, spend some time crying, then wake up the next day and move on. You’ll have a few bruises and they’ll remind you of what happened and that’s okay. But after a while the bruises fade, and they fade for a reason—because now it’s time to get up to some shit again.<br>
+——Trevor Noah 《Born A Crime》
+## 2020.4.22
+>Apartheid was a police state, a system of surveillance and laws designed to keep black people under total control. A full compendium of those laws would run more than three thousand pages and weigh approximately ten pounds, but the general thrust of it should be easy enough for any American to understand. **In America you had the forced removal of the native onto reservations coupled with slavery followed by segregation. Imagine all three of those things happening to the same group of people at the same time. That was apartheid.**<br>
+——Trevor Noah 《Born A Crime》
 ## 2020.4.21
 >The genius of apartheid was convincing people who were the overwhelming majority to turn on each other. Apart hate, is what it was. You separate people into groups and make them hate one another so you can run them all.<br>
 ——Trevor Noah 《Born A Crime》
