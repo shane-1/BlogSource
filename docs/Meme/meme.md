@@ -2,8 +2,10 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.4.24
+“人类的悲欢并不相通”，但我觉得大抵相似，你愿你放下你的优越感和骄傲去感受他人悲欢，你也许会试着理解，不再只有主观的吵闹。同理心是人类为数不多美好的品质，让我们能以一个群体生活和处理问题。但别把同理心的主客体颠倒，别用你的位置去批判别人。世上大有想给他人立法之人，却少有给自己立法之人。
 ## 2020.4.23
-If you think too much about the ass-kicking your mom gave you, or the ass-kicking that life gave you, you’ll stop pushing the boundaries and breaking the rules. It’s better to take it, spend some time crying, then wake up the next day and move on. You’ll have a few bruises and they’ll remind you of what happened and that’s okay. But after a while the bruises fade, and they fade for a reason—because now it’s time to get up to some shit again.<br>
+>If you think too much about the ass-kicking your mom gave you, or the ass-kicking that life gave you, you’ll stop pushing the boundaries and breaking the rules. It’s better to take it, spend some time crying, then wake up the next day and move on. You’ll have a few bruises and they’ll remind you of what happened and that’s okay. But after a while the bruises fade, and they fade for a reason—because now it’s time to get up to some shit again.<br>
 ——Trevor Noah 《Born A Crime》
 ## 2020.4.22
 >Apartheid was a police state, a system of surveillance and laws designed to keep black people under total control. A full compendium of those laws would run more than three thousand pages and weigh approximately ten pounds, but the general thrust of it should be easy enough for any American to understand. **In America you had the forced removal of the native onto reservations coupled with slavery followed by segregation. Imagine all three of those things happening to the same group of people at the same time. That was apartheid.**<br>
