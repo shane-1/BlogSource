@@ -4,29 +4,50 @@
 ---------------------------
 ## 2020.4.27
 
+>I have spent my entire life putting off things that I thought there’d be time for later. 
+
 ## 2020.4.26
-Don't take democracy for granted,dictator becomes dictator not for a day. Don't think democracy is illusion , it's foundation for so many good things.Don't  consider democracy far away from us ,become it's not a law or a order even not based on constitution, it's some equal thoughts in all of private individual.
+
++ Don't take democracy for granted,dictator becomes dictator not for a day. 
++ Don't think democracy is illusion , it's foundation for so many good things.
++ Don't  consider democracy far away from us ,become it's not a law or a order even not based on constitution, it's some equal thoughts in all of private individual.
+
 ## 2020.4.25
+
 >In society, we do horrible things to one another because we don’t see the person it affects. We don’t see their face. We don’t see them as people. Which was the whole reason the hood was built in the first place, to keep the victims of apartheid out of sight and out of mind. Because if white people ever saw black people as human, they would see that slavery is unconscionable. We live in a world where we don’t see the ramifications of what we do to others, because we don’t live with them. It would be a whole lot harder for an investment banker to rip off people with subprime mortgages if he actually had tolive with the people he was ripping off. If we could see one another’s pain and empathize with one another, it would never be worth it to us to commit the crimes in the first place.<br>
 ——Trevor Noah 《Born A Crime》
 
 缺少"个人"的社会人与人之间的关系是可怕的,而个人尊重却缺失于中国文化中.
+
 ## 2020.4.24
+
 “人类的悲欢并不相通”，但我觉得大抵相似，你愿你放下你的优越感和骄傲去感受他人悲欢，你也许会试着理解，不再只有主观的吵闹。同理心是人类为数不多美好的品质，让我们能以一个群体生活和处理问题。但别把同理心的主客体颠倒，别用你的位置去批判别人。世上大有想给他人立法之人，却少有给自己立法之人。
+
 ## 2020.4.23
+
 >If you think too much about the ass-kicking your mom gave you, or the ass-kicking that life gave you, you’ll stop pushing the boundaries and breaking the rules. It’s better to take it, spend some time crying, then wake up the next day and move on. You’ll have a few bruises and they’ll remind you of what happened and that’s okay. But after a while the bruises fade, and they fade for a reason—because now it’s time to get up to some shit again.<br>
 ——Trevor Noah 《Born A Crime》
+
 ## 2020.4.22
+
 >Apartheid was a police state, a system of surveillance and laws designed to keep black people under total control. A full compendium of those laws would run more than three thousand pages and weigh approximately ten pounds, but the general thrust of it should be easy enough for any American to understand. **In America you had the forced removal of the native onto reservations coupled with slavery followed by segregation. Imagine all three of those things happening to the same group of people at the same time. That was apartheid.**<br>
 ——Trevor Noah 《Born A Crime》
+
 ## 2020.4.21
+
 >The genius of apartheid was convincing people who were the overwhelming majority to turn on each other. Apart hate, is what it was. You separate people into groups and make them hate one another so you can run them all.<br>
 ——Trevor Noah 《Born A Crime》
+
 ## 2020.4.20
+
 别把自己太当回事，也别把自己太不当回事，其中这度的把握就是人生智慧。
+
 ## 2020.4.19
+
 有时觉得存在即合理是个流氓说法，太多的丑恶绝不合理的存在着。如康德所说，人可以为自己立法，决定什么样的生活不值得一过。
+
 ## 2020.4.18
+
 >除了手头的青春你一无所有，但就是你这手头为数不多的东西，决定你是一个怎么样的人。<br>
 ——J.M.库切
 ## 2020.4.17
