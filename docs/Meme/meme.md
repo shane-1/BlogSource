@@ -2,6 +2,15 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.4.27
+
+## 2020.4.26
+Don't take democracy for granted,dictator becomes dictator not for a day. Don't think democracy is illusion , it's foundation for so many good things.Don't  consider democracy far away from us ,become it's not a law or a order even not based on constitution, it's some equal thoughts in all of private individual.
+## 2020.4.25
+>In society, we do horrible things to one another because we don’t see the person it affects. We don’t see their face. We don’t see them as people. Which was the whole reason the hood was built in the first place, to keep the victims of apartheid out of sight and out of mind. Because if white people ever saw black people as human, they would see that slavery is unconscionable. We live in a world where we don’t see the ramifications of what we do to others, because we don’t live with them. It would be a whole lot harder for an investment banker to rip off people with subprime mortgages if he actually had tolive with the people he was ripping off. If we could see one another’s pain and empathize with one another, it would never be worth it to us to commit the crimes in the first place.<br>
+——Trevor Noah 《Born A Crime》
+
+缺少"个人"的社会人与人之间的关系是可怕的,而个人尊重却缺失于中国文化中.
 ## 2020.4.24
 “人类的悲欢并不相通”，但我觉得大抵相似，你愿你放下你的优越感和骄傲去感受他人悲欢，你也许会试着理解，不再只有主观的吵闹。同理心是人类为数不多美好的品质，让我们能以一个群体生活和处理问题。但别把同理心的主客体颠倒，别用你的位置去批判别人。世上大有想给他人立法之人，却少有给自己立法之人。
 ## 2020.4.23
