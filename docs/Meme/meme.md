@@ -2,14 +2,22 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.5.7
+
+Arguing is not about winning, it's about getting closer to the truth.
+
+## 2020.5.6
+
+>“Learn from your past and be better because of your past,” she would say, “but don’t cry about your past. Life is full of pain. Let the pain sharpen you, but don’t hold on to it. Don’t be bitter.”<br>
+
 ## 2020.5.1
 
 我们总是喜欢拿“顺其自然” 来敷衍人生道路上的荆棘坎坷, 却很少承认，真正的顺其自然, 其实是竭尽所能之后的不强求，而非两手一摊的不作为。
 
 ## 2020.4.30
 
->人之所以言之凿凿，是因为知道的太少。<br>
-——弗朗索瓦·佐基
+>今天不想跑，所以才去跑，这才是长距离跑者的思维方式。<br>
+——村上春树
 
 ## 2020.4.29
 
