@@ -2,6 +2,11 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.5.8
+
+Know thyself，Nothing in excess.<br>
+——Plato
+
 ## 2020.5.7
 
 Arguing is not about winning, it's about getting closer to the truth.
