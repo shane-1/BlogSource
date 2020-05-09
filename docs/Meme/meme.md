@@ -2,6 +2,10 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.5.9
+
+After the COVID-19, I always feared that the world would become Mired in racism and populism, and later realised this was a good filter and some Narrowly nationalistic people were not worth meeting.
+
 ## 2020.5.8
 
 Know thyself，Nothing in excess.<br>
