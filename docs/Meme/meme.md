@@ -2,6 +2,11 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.5.10
+
+你选择歧视和偏见吧，那也不是什么你口中的选择，那4%~8%也不会神奇的消失，只会因为偏见而隐藏和压抑自己。也许你也会因此受害，谁又说得清呀？毕竟我们是一个整体。而互联网是个大粪坑，什么垃圾情绪都丢弃到之中，我不知道善良的感染力如何，反正仇恨感染力挺强的。
+>You choose discrimination and prejudice, it is not what you say the choice, the 4%~8% will not magically disappear, will only because of prejudice choose to hide or suppress themselves.Perhaps it will hurt you too, who knows?After all, we are one.The Internet is a big cesspool where garbage mood all throw into. I don't know kind's infectious, anyway the hatred infectious pretty strong.
+
 ## 2020.5.9
 
 After the COVID-19, I always feared that the world would become Mired in racism and populism, and later realised this was a good filter and some Narrowly nationalistic people were not worth meeting.
