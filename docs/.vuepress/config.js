@@ -9,7 +9,7 @@ module.exports = {
     themeConfig: {
       lastUpdated:'Last Updated',
       nav: [
-        { text: '首页', link: '/' },
+        { text: 'Home', link: '/' },
         {
            text: 'Note', 
            items  :[
