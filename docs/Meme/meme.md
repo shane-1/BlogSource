@@ -2,6 +2,14 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.6.11
+
+>O beauty ,find thyself in love ,not in the flattery of thy mirror.
+
+## 2020.6.10
+
+>The light that plays ,like a naked child ,among the green leaves happily knows not that man can lie.
+
 ## 2020.6.9
 
 Every life matters.
