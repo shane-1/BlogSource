@@ -4,11 +4,12 @@
 ---------------------------
 ## 2020.6.11
 
->O beauty ,find thyself in love ,not in the flattery of thy mirror.
-
+>O beauty ,find thyself in love ,not in the flattery of thy mirror.<br>
+——Rabindranath Tagore 《Stray Birds》
 ## 2020.6.10
 
->The light that plays ,like a naked child ,among the green leaves happily knows not that man can lie.
+>The light that plays ,like a naked child ,among the green leaves happily knows not that man can lie.<br>
+——Rabindranath Tagore 《Stray Birds》
 
 ## 2020.6.9
 
