@@ -2,6 +2,10 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.6.30
+
+有点自己的追求、自己的底线，不盲从、不轻信、不狂热、不傲慢，总归是想活出自己的那点颜色。
+
 ## 2020.6.29
 
 Things I desire are love. But most people thought that equals marriage. As Chinese, we love too late, know too few.
