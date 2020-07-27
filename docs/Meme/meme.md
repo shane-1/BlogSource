@@ -2,6 +2,21 @@
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
 >—— Richard Dawkins《The Selfish Gene》<br>
 ---------------------------
+## 2020.7.27
+
++ Earl Russell:<br> 
+&emsp;&emsp;I should like to say two things, one intellectual and one moral. The intellectual thing I should want to say to them is this, when you are studying any matter, or considering any philosophy, ask yourself only, what are the facts, and what is the truth to the facts bear out. Never let yourself be diverted, either by what you wish to believe, or what you think would have beneficent social effects if it were believed. But look only and solely at what are the fact. That is the intellectual thing I should wish to say.<br>
+&emsp;&emsp;The moral thing I should wish to say to them is very simple. I should say **love is wish, hatred is foolish.** In this world which is getting more closely and closely interconnected. We have to learn to tolerate each other. We have to learn to put up with the fact that some people say things we don’t like. We can only live together in that way. If we are to live together, not die together. We must learn a kind of charity and a kind of tolerance which is absolutely vital to the continuation of human life on this planet.<br>
+
++ 罗素：<br>
+&emsp;&emsp;我想要说的有两点，其一关乎智慧，其二关乎道德。有关智慧，我想对他们说的是：不管你是在研究什么事物，还是在思考任何观点，只问你自己，事实是什么，以及这些事实所证实的真理是什么。永远不要让自己被自己所更愿意相信的，或者认为人们相信了，会对社会更加有益的东西所影响，只是单单地去审视，什么才是事实，这是我想说的关乎智慧的一点。<br>
+&emsp;&emsp;我想对他们说的有关道德的一点，十分简单。我要说： **爱是明智的，恨是愚蠢的。** 在这个日益紧密相连的世界，我们必须学会容忍彼此，我们必须学会接受这样一个事实：总会有人说出我们不想听的话。只有这样，我们才有可能共同生存，而假如我们想要共存，而非共亡，我们就必须学会这种宽容与忍让。因为它们对于人类在这个星球上的存续，是至关重要的。
+
+## 2020.7.26
+
++ 人生而自由,却无往不在枷锁中
++ Man is born free,but everywhere he is in chains.
+
 ## 2020.6.30
 
 有点自己的追求、自己的底线，不盲从、不轻信、不狂热、不傲慢，总归是想活出自己的那点颜色。
