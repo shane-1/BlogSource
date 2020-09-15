@@ -166,84 +166,7 @@ default       //默认,不写.不同包不能继承<br>
 `jar -cvfe classes.jar com.day01.java.PagDemo classes/ .`
 6. 如果jar中的清单文件含有入口点(Main-Class),''可以直接使用以下命令执行<br>
 `java -jar classes.jar`
-## 多线程
-进程:运行的应用程序<br>
-线程:应用程序内部并发执行的代码段<br> 
-### Thread
-并发是主栈(主函数)同时开辟多个分栈实现<br>
-yield:放弃CPU抢占权,谦让<br>
-sleep:让线程休眠毫米数<br>
-join:等待指定线程执行完后继续运行
-```java
-public class ThreaDemo{
-    public static void main(String[] args) {
-        Player p1 = new Player("jack", 3000);
-        Player p2 = new Player("luke",200);
 
-        p1.start();
-        p2.start();
-        try{
-            p1.join();
-            p2.join();
-        }
-        catch (Exception e){
-
-        }
-         System.out.println("都到了~");
-    }
-}
-
-class Player extends Thread{
-    private String name;
-    private int time;
-    public Player(String name,int time){
-        this.name = name;
-        this.time = time;
-    }
-
-    public void run(){
-        System.out.println("玩家:"+name+"出发了~");
-        try{
-            Thread.sleep(time);
-        }
-        catch (Exception e){
-
-        }
-        System.out.println("玩家:"+name+"到了~");
-    }
-
-}
-
-```
-daemon :守护线程,如果应用程序剩余的线程都是守护线程,则程序结束<br>
-守护线程守护所有的非守护线程<br>
-## 锁
-任何一个对象都可以是锁.信号灯\参照物<br>
-`static Object lock = new Object();`
-```java
-   public int getTickets() {     //对票加锁
-   //同步代码块
-        synchronized (lock) {
-            tickets--;
-            return tickets;
-        }
-```
-```java
-//同步方法
-   public static synchronized int getTickets() {     //对票加锁
-            tickets--;
-            return tickets;
-        }
-```
->同步方法最好加static,只和方法有关(否则出现多个对象多把锁)<br>
-注意：静态方法只有有静态变量，因为静态变量和类绑定，而变量和对象绑定。
-## 生产消费
-&emsp;&emsp;每个锁都有一个等待队列(每个对象都可以是锁)<br>
-```java
-sleep();    //放弃CPU抢占权,与锁旗标无关
-wait();     //当前对象加入锁等待队列,同时释放锁旗标,唤醒后继续执行
-notify();   //通知等待队列对象
-```
 ## eclipse快捷键
 ```java
     alt + / //内容辅助
@@ -277,6 +200,11 @@ public void test1 (){
 @Before Class
 //静态方法前
 ```
+## lambda表达式
+
++ lambda表达式只能有一行代码的情况下才能简化成为一行,如果有多行,那么就用代码块包裹
++ 前提是接口为函数式接口
++ 多个参数也可以去掉参数类型,要去的就都去掉,必须加上括号.
 ## String类
 1. 字符串类
 final类,无法继承
@@ -616,103 +544,3 @@ public void copyFile(String srcFile,String destDir){
     }
 }
 ```
-## 设计模式
-### 单例模式 Singleton
-类有且只有一个对象<br>
-1.  懒汉式
-```java
-//单例模式,垃圾桶
-public class GarbageBox{
-    //实例
-    private static GarbageBox  instance;
-    /**
-    *构造私有
-    */
-    private GarbageBox(){
-    }
-
-    public static GarbageBox  getInstance(){
-        if(intsant  ==  null){
-            instance  = new GarbageBox();   
-        }
-        return  instance;
-    }
-}
-```
-多线程优化
-```java
-//单例模式,垃圾桶
-public class GarbageBox{
-    //实例
-    private static GarbageBox  instance;
-    private static Object lock = new Obeject();//锁
-    /**
-    *构造私有
-    */
-    private GarbageBox(){
-    }
-    if
-    public static GarbageBox  getInstance(){
-        //为空情况下才锁住
-        if(intsant  ==  null){
-            Synchronized (lock){
-                if(instance == null){
-                    instance  = new GarbageBox();   
-                }
-                return instance;
-            }
-        }
-        return  instance;
-}
-```
-
-2.  饿汉式                              
-```java
-//单例模式,垃圾桶
-public class GarbageBox{
-    //实例
-    private static GarbageBox  instance = new GarbageBox();
-    /**
-    *构造私有
-    */
-    private GarbageBox(){
-    }
-
-    public static GarbageBox  getInstance(){
-        return  instance;
-    }
-}
-```
-### 适配器 Adapter
-&emsp;&emsp;将一个接口转换成客户希望的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。<br>
-&emsp;&emsp;在适配器模式中，我们通过增加一个新的适配器类来解决接口不兼容的问题，使得原本没有任何关系的类可以协同工作。<br>
-&emsp;&emsp;根据适配器类与适配者类的关系不同，适配器模式可分为**对象适配器**和**类适配器**两种，在**对象适配器**模式中，适配器与适配者之间是**关联关系**；在**类适配器**模式中，适配器与适配者之间是**继承**（或实现）关系。
-### 装饰模式  Decorate
-```java
-class A{
-    public void aa(){
-        ...
-    }
-}
-
-class B extends A{
-    private A a;
-
-    publlic B(A a){
-        this.a = a;
-    }
-
-    public void aa(){
-        ...
-        a.aa();
-        ...
-    }
-}
-```
-### 工厂模式 Factory
-通过静态方法创建完整对象 
-### 构建器模式 Builder
-setXx()返回对象自身
-### 观察者模式 Observer
-Observers<br>
-Observable<br>
