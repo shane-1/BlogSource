@@ -22,9 +22,9 @@ module.exports = {
           items :[
             {text:'Java基础',link:'/Java/Java.md'},
             {text:'Spring',link:'/Java/Spring.md'},
-            {text:'深入解析Java反射',link:'/Java/Reflection.md'},
-            {text:'DesignPattern',link:'/Java/DesignPattern.md'},
-            {text:'Multithread',link:'/Java/Multithread.md'}
+            {text:'框架基础-注解和反射',link:'/Java/AnnotationReflection.md'},
+            {text:'设计模式 DesignPattern',link:'/Java/DesignPattern.md'},
+            {text:'多线程 Multithread',link:'/Java/Multithread.md'}
         ]},
         {
             text: 'ALGO', 

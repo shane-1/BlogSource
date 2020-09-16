@@ -1,6 +1,7 @@
 # My Meme
->“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。
->—— Richard Dawkins《The Selfish Gene》<br>
+>“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。<br>—— Richard Dawkins《The Selfish Gene》<br>
+>> Something similar to the role of genes in biological evolution is involved in the transmission of language, ideas, beliefs, behaviors, etc.<br>
+
 ---------------------------
 ## 2020.8.2
 
