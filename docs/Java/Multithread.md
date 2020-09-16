@@ -265,3 +265,223 @@ sleep();    //放弃CPU抢占权,与锁旗标无关
 wait();     //当前对象加入锁等待队列,同时释放锁旗标,唤醒后继续执行
 notify();   //通知等待队列对象
 ```
+### 管程法
+```java
+//测试：生产者消费者模型--》利用缓冲区解决：管程法
+
+//生产者,消费者,产品,缓冲区
+public class TestPC{
+    public static void main(String[] args){
+        SynContainer container = new SynContainer();
+
+        new Productor(container).start();
+        new Consumer(container).start();
+    }
+}
+//生产者
+class Productor extends Thread{
+    SynContainer container;
+
+    public Productor(SynContainer container){
+        this.container = container;
+    }
+
+    //生产
+    @Override
+    public void run(){
+        for(int i = 0; i < 100; i++){
+            System.out.println("生产了"+i+"只鸡");
+            container.push(new Chicken(i));
+        }
+    }
+
+}
+//消费者
+class Consumer extends Thread{
+
+    SynContainer container;
+
+    public Consumer(SynContainer container){
+        this.container = container;
+    }
+
+    //消费
+    @Override
+    public void run(){
+        for(int i = 0; i < 100; i++){
+            System.out.println("消费了"+container.pop().id+"鸡");
+        }
+    }
+}
+//产品
+class Chicken{
+    int id;
+
+    public Chicken(int id){
+        this.id = id;
+    }
+}
+//缓冲区
+class SynContainer{
+    //需要一个容器大小
+    Chicken[] chickens = new Chicken[10];
+    //容器计数器
+    int count = 0;
+
+    //生产者放入产品
+    public synchronized void push(Chicken chicken){
+        //如果容器满了,就需要等待消费者消费
+        if(count == chickens.length){
+            //通知消费者消费,生产等待
+
+        }
+        //如果没有满,我们就需要丢入产品
+        chickens[count] = chicken;
+        count++;
+        //通知消费者消费
+    }
+    //消费者消费产品
+    public synchronized Chicken pop(){
+        //判断能否消费
+        if(count == 0){
+            //等待生产者生产,消费者等待
+        }
+
+        //如果可以消费
+        count--;
+        Chicken chicken = chicken[count];
+        //吃完了,通知生产者生产
+
+        return chicken;
+    }
+}
+```
+### 信号灯法
+```java
+public class TestPC{
+    public static void main(String[] args){
+    TVShow tvshow = new TVShow();
+    new Actor(tvshow).start();
+    new Audience(tvshow).start();
+
+}
+//生产者->演员
+class Actor extends Thread{
+    TVShow tvshow；
+    Public Actor(TVShow tvshow){
+        this.tvshow = tvshow;
+    }
+
+    @Override
+    public void run(){
+        for(int i = 0; i < 10;i++){
+            if(i%2 == 0){
+                this.tvshow.act("frozen");
+            }else{
+                this.tvshow.act("Gone girl");
+            }
+        }
+    }
+}
+//消费者->观众
+class Audience extends Thread{
+    TVShow tvshow；
+    public Audience(TVShow tvshow){
+        this.tvshow = tvshow;
+    @Override
+    public void run(){
+        for(int i = 0; i < 10;i++){
+            tvshow.watch();
+        }
+    }
+
+}
+//产品-->节目
+class TVShow{
+    String showname;
+    boolean flag = True;
+
+    //表演
+    public synchronized void act(String showname){
+       
+       if(!flag){
+           try{
+                this.wait();
+            } catch(InterruptedException e){
+                e.peintStackTrace();
+            }
+       } System.out.println("演员表演了:"+showname);
+        this.notifyAll();
+        this.showname = showname;
+        this.flag = !this.flag;
+    }
+
+    public synchronized void watch(){
+        if(flag){
+            try{
+                this.wait();
+            } catch(InterruptedException e){
+                e.peintStackTrace();
+            }
+        }
+        System.out.println("观看了:"+showname);
+        this.notifyAll();
+        this.flag = !this.flag;
+
+    }
+
+}
+```
+![](/images/2020-09-15-16-53-34.png)
+
+##  线程池
+
+### 背景
+经常创建和销毁、使用量特别大的资源,比如并发情况下的线程,对性能影响很大。
+
+### 思路
+提前创建好多个线程,放入线程池中，使用时直接获取,使用完放回池中。可以避免频繁创建销毁、实现重复利用。类似生活中的公共交通工具
+### 好处
++ 提高响应速度(减少了创建新线程的时间）
++ 降低资源消耗(重复利用线程池中线程,不需要每次都创建）
++ 便于线程管理
+>`corePoolSize:` 核心池的大小
+>`maximumPoolSize` 最大线程数
+>`keepAliveTime` 线程没有任务时最多保持多长时间后会终止
+
+### 使用
+
++ JDK5.0起提供了线程池相关API:`ExecutorService`和`Executor`
++ ExecutorService
+真正的线程池接口.<br>常见子类ThreadPoolExecutor
+  + `void execute(Runnable command)`:执行任务/命令,没有返回值,一般用来执行Runnable<br>
+  + `<T>Future<T> submit(Callable<T> task)`:执行任务,有返回值,一般用来执行Callable
+  + `void shutdown()`:关闭连接池
++ Executors<br>
+工具类、线程池的工厂类,用于创建并返回不同类型的线程池.
+
+```java
+import jave.util.concurrent.ExecutorService;
+import java.ytil.concurrent.Executors;
+
+public class TestPool{
+
+    public static void main(String[] args){
+        //1.创建服务，创建线程池
+        ExecutorService service = Executors.newFixedThreadPool(nThread:10);
+
+        service.execute(new Mythread());  
+        service.execute(new Mythread());
+        service.execute(new Mythread()); 
+        //2.关闭链接
+        service.shutdown();
+    }
+}
+
+class Mythread implements Runnable{
+    @Override
+    public void run(){
+            System.out.println(Thread.currentThread().getName());
+    }
+}
+```

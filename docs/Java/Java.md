@@ -200,8 +200,50 @@ public void test1 (){
 @Before Class
 //静态方法前
 ```
+
 ## lambda表达式
 
++ 避免匿名内部类定义过多
++ 实质属于函数式编程的概念
+> (params)->expression[表达式]<br>(params)->statement[语句]<br>(params)->{statements}
+
+`a-> System.out.println("Test lambda");`<br>
+`new Thread (()->System.out.println("new thread")).start();`<br>
+```java
+//推导lambda
+
+//1.函数式接口
+interface ILike{
+    void lambda();
+}
+//2.实现
+class Like implements ILike{
+    @Override
+    public void lambda(){
+        System.out.println("Lambda~");
+    }
+}
+
+public class test{
+    public static void main(String[] args){
+        ILike like = new Like();
+        //匿名内部类,没有类名，借助接口或父类
+        like = new ILike() {
+            @Override
+            public void lambda(){
+                System.out.println("Lambda~~");
+            }
+        };
+        like.lambda();
+
+        // >>>>>>>>lambda简化
+        like = ()->{
+            System.out.println("Lambda~~~");
+        };
+        like.lambda();
+    }
+}
+```
 + lambda表达式只能有一行代码的情况下才能简化成为一行,如果有多行,那么就用代码块包裹
 + 前提是接口为函数式接口
 + 多个参数也可以去掉参数类型,要去的就都去掉,必须加上括号.

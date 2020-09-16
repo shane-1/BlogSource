@@ -11,39 +11,42 @@ module.exports = {
       nav: [
         { text: 'Home', link: '/' },
         {
-           text: 'Note', 
-           items  :[
-             {text:'Markdown',link:'/Note/Markdown.md'},
-             {text:'Octave与Matlab的区别',link:'/Note/DBOM.md'},
-             {text:'CMD Manual',link:'/Note/Cmd.md'}
-                       ]},
-         {
+          text: 'Note', 
+          items  :[
+          {text:'Markdown',link:'/Note/Markdown.md'},
+          {text:'Octave与Matlab的区别',link:'/Note/DBOM.md'},
+          {text:'CMD Manual',link:'/Note/Cmd.md'}
+        ]},
+        { 
+          text: 'Java', 
+          items :[
+            {text:'Java基础',link:'/Java/Java.md'},
+            {text:'Spring',link:'/Java/Spring.md'},
+            {text:'深入解析Java反射',link:'/Java/Reflection.md'},
+            {text:'DesignPattern',link:'/Java/DesignPattern.md'},
+            {text:'Multithread',link:'/Java/Multithread.md'}
+        ]},
+        {
             text: 'ALGO', 
             items  :[
               {text:'KMP',link:'/ALGO/KMP.md'}
                                     ]},
         {  text: 'Python', 
-           items :[
-             {text:'The Zen of Python',link:'/Python/ZenOfPython.md'}
-           ]},
+          items :[
+            {text:'The Zen of Python',link:'/Python/ZenOfPython.md'}
+          ]},
+        
         { text: 'ML', 
           items :[
             {text:'Tensorflow环境搭建指南',link:'/ML/TensorflowEnvironment.md'},
             {text:'Tensorflow常见报错解决',link:'/ML/TensorflowError.md'}
           ]},
-        { text: 'Phil', items :[
-          {text:'中国为什么没有科学精神', link:'/Phil/WCHNS.md'},
-          {text:'ENFP',link:'/Phil/ENFP.md'},
-          {text:'从Internet说起',link:'/Phil/Internet.md'}
-        ]},
-        { text: 'Java', 
-        items :[
-          {text:'Java基础',link:'/Java/Java.md'},
-          {text:'Spring',link:'/Java/Spring.md'},
-          {text:'深入解析Java反射',link:'/Java/Reflection.md'},
-          {text:'DesignPattern',link:'/Java/DesignPattern.md'},
-          {text:'Multithread',link:'/Java/Multithread.md'}
-        ]},
+        { text: 'Phil',
+          items :[
+            {text:'中国为什么没有科学精神', link:'/Phil/WCHNS.md'},
+            {text:'ENFP',link:'/Phil/ENFP.md'},
+            {text:'从Internet说起',link:'/Phil/Internet.md'}
+          ]},
         { text: 'Meme', link: '/Meme/Meme.md' },
         { text: 'Github', link: 'https://github.com/shane-1' },
       ],
