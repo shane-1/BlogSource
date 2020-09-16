@@ -199,6 +199,7 @@ class Student extends Person{}
 class Teacher extends Person{}
 ```
 > 只要元素类型和维度一样,就是同一个class
+![](/images/2020-09-16-16-26-06.png)
 #### 2、判断是否为某个类的实例
 &emsp;&emsp;一般地，我们用 instanceof 关键字来判断是否为某个类的实例。同时我们也可以借助反射中 Class 对象的 isInstance() 方法来判断是否为某个类的实例，它是一个 native 方法：
 ```java
