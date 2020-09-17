@@ -1,15 +1,24 @@
 # 注解和反射 
+
 # Annotation and Reflection
+
 > 框架实现基础
+
 ## 注解
 
 > Annotation是从JDK5.0开始引入的新技术
+
 ### 作用:
+
   + 不是程序本身,可以对程序作出解释.(这一点和注释(comment)没什么区别)
   + 可以被其他程序(比如:编译器等)读取.
+
 ### 格式:
+
   + 注解是以"@注释名"在代码中存在的,还可以添加一些参数值,例如:@SuppressWarnings(value="unchecked").
+
 ### Annotation在哪里使用?
+
   + 可以附加在package , class , method , field等上面,相当于给他们添加了额外的辅助信息,我们可以通过反射机制编程实现对这些元数据的访问
 
 >注解可以检查和约束<br>
@@ -152,7 +161,84 @@ Java 反射主要提供以下功能：
 + 通过Class可以完整地得到一个类中的所有被加载的结构
 + Class类是Reflection的根源,针对任何你想动态加载、运行的类,唯有先获得相应的Class对象
 
-#### 1、获得 Class 对象
+### 类加载内存分享
+
+![](/images/2020-09-16-16-26-06.png)
+
+初始化过程：
+![](/images/2020-09-17-09-15-19.png)
+
++ 加载:将class文件字节码内容加载到内存中,并将这些静态数据转换成方法区的运行时数据结构,然后生成一个代表这个类的java.lang.Class对象。
++ 链接:将Java类的二进制代码合并到JVM的运行状态之中的过程。
+  + 验证:确保加载的类信息符合JVM规范,没有安全方面的问题。
+  + 准备:正式为类变量(static)分配内存并设置类变量默认初始值的阶段,这些内存都将在方法区中进行分配。
+  + 解析:虚拟机常量池内的符号引用(常量名)替换为直接引用(地址)的过程。
++ 初始化:
+  + 执行类构造器<clinit> ()方法的过程。类构造器<clinit> ()方法是由编译期自动收集类中所有类变量的赋值动作和静态代码块中的语句合并产生的。(类构造器是构造类信息的,不是构造该类对象的构造器)。
+  + 当初始化一个类的时候,如果发现其父类还没有进行初始化,则需要先触发其父类的初始化。
+  + 虚拟机会保证一个类的<clinit> ()方法在多线程环境中被正确加锁和同步。
+
+### 分析类初始化
+
++ 类的主动引用(一定会发生类的初始化)
+  + 当虚拟机启动, 初始化main方法所在的类
+  + new一个类的对象
+  + 调用类的静态成员(除了final常量)和静态方法
+  + 使用java.lang.reflect包的方法对类进行反射调用
+  + 当初始化一个类,如果其父类没有被初始化,则先会初始化它的父类
++ 类的被动引用(不会发生类的初始化)
+  + 当访问一个静态域时,只有真正声明这个域的类才会被初始化。如:当通过子类引用父类的静态变量,不会导致子类初始
+  + 通过数组定义类引用,不会触发此类的初始化
+  + 引用常量不会触发此类的初始化(常量在链接阶段就存入调用类的常量池中了)
+
+### 类加载器
+
++ 类加载的作用:将class文件字节码内容加载到内存中,并将这些静态数据转换成方法区的运行时数据结构,然后在堆中生成一个代表这个类的java.lang.Class对象,作为方法区中类数据的访问入口。
++ 类缓存:标准的JavaSE类加载器可以按要求查找类,但一旦某个类被加载到类加载器中,它将维持加载(缓存)一段时间。不过JVM垃圾回收机制可以回收这些Class对象
+
+#### 加载器分类
+
++ 引导类加载器:用C++编写的,是JVM自带的类加载器,负责Java平台核心库,用来装载核心类库。该加载器无法直接获取
++ 扩展类加载器:负责jrelib/ext目录下的jar包或D java.ext.dirs指定目录下的jar包装入工作库
++ 系统类加载器:负责java-classpath或-Djava.class.path所指的目录下的类与jar包装入工作,是最常用的加载器
+
+```java
+public class Test{
+  public static void main(String[] args) throws ClassNotFoundException{ //使用了forName();
+
+    //获取系统类的加载器
+    ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
+    System.out.println(systemClassLoader);
+
+    //获取系统类加载器父类->扩展类加载器
+    ClassLoader parent = systemClassLoader.getParent();
+    System.out.println(parent);
+
+    //获取扩展类加载器的父类加载器->根加载器(c/c++)
+    ClassLoader grandParent = parent.getParent();
+    System.out.println(grandParent)
+
+    //测试当前类是哪个加载器加载
+    ClassLoader classLoader = Class.forName("com.shane.reflection.test").getClassLoader();
+    System.out.println(classLoader);
+
+    classLoader = Class.forName("java.lang.Object").getClassLoader();
+    System.out.println(classLoader);
+
+    //获取系统类加载器可以加载的路径
+    System.out.println(System.getProperty("java.class.path));
+  }
+}
+```
+结果:
+> sun.misc. Launcher$App lassLoader@18b4aac2<br>
+sun.misc. Launcher$ExtclassLoader@4554617c <br>
+null<br>
+sun.misc. LauncherşAppClassLoadera18b4aac2 <br>
+null<br><br>
+Process finished with exit code o
+
+### 获得 Class 对象
 
 + 若已知具体的类,通过类的class属性获取,该方法最为安全可靠,程序性能最高。<br>
 `Class clazz = Person.class;`
@@ -199,13 +285,13 @@ class Student extends Person{}
 class Teacher extends Person{}
 ```
 > 只要元素类型和维度一样,就是同一个class
-![](/images/2020-09-16-16-26-06.png)
-#### 2、判断是否为某个类的实例
+
+### 判断是否为某个类的实例
 &emsp;&emsp;一般地，我们用 instanceof 关键字来判断是否为某个类的实例。同时我们也可以借助反射中 Class 对象的 isInstance() 方法来判断是否为某个类的实例，它是一个 native 方法：
 ```java
 public native boolean isInstance(Object obj);
 ```
-#### 3、创建实例
+### 创建实例
 通过反射来生成对象主要有两种方式。
 
 + 使用Class对象的newInstance()方法来创建Class对象对应类的实例。
@@ -223,18 +309,18 @@ Constructor constructor = c.getConstructor(String.class);
 Object obj = constructor.newInstance("23333");
 System.out.println(obj);
 ```
-#### 4、获取方法
+### 获取方法
 获取某个Class对象的方法集合，主要有以下几个方法：
 
-&emsp;&emsp;getDeclaredMethods 方法返回类或接口声明的所有方法，包括公共、保护、默认（包）访问和私有方法，但不包括继承的方法。
+&emsp;&emsp;getDeclaredMethods 方法返回类或接口声明的所有方法，包括公共、保护、默认（包）访问和私有方法，但*不包括继承的方法*。
 ```java
 public Method[] getDeclaredMethods() throws SecurityException
 ```
-&emsp;&emsp;getMethods 方法返回某个类的所有公用（public）方法，包括其继承类的公用方法。
+&emsp;&emsp;getMethods 方法返回某个类的所有公用（public）方法，*包括其继承类的公用方法*。
 ```java
 public Method[] getMethods() throws SecurityException
 ```
-&emsp;&emsp;getMethod 方法返回一个特定的方法，其中第一个参数为方法名称，后面的参数为方法的参数对应Class的对象。
+&emsp;&emsp;getMethod 方法返回一个特定的方法，其中第一个参数为方法名称，后面的参数为方法的参数*对应Class的对象*。(因为重载需要定位)
 ```java
 public Method getMethod(String name, Class<?>... parameterTypes)
 ```
@@ -291,20 +377,21 @@ public int org.ScZyhSoft.common.methodClass.sub(int,int)
 ```
 &emsp;&emsp;可以看到，通过 getMethods() 获取的方法可以获取到父类的方法,比如 java.lang.Object 下定义的各个方法。
 
-#### 5、获取构造器信息
+### 获取构造器信息
 &emsp;&emsp;获取类构造器的用法与上述获取方法的用法类似。主要是通过Class类的getConstructor方法得到Constructor类的一个实例，而Constructor类有一个newInstance方法可以创建一个对象实例:
+>使用getDeclaredConstructors可以获得所有构造器
 ```java
 public T newInstance(Object ... initargs)
 ```
 此方法可以根据传入的参数来调用对应的Constructor创建对象实例。
 
-#### 6、获取类的成员变量（字段）信息
+### 获取类的成员变量（字段）信息
 主要是这几个方法，在此不再赘述：<br>
-+ `getFiled：`访问公有的成员变量
++ `getFiled：`访问*公有*的成员变量
 + `getDeclaredField：`所有已声明的成员变量，但不能得到其父类的成员变量
 >`getFileds` 和 `getDeclaredFields` 方法用法同上（参照 Method）。
 
-#### 7、调用方法
+### 调用方法
 &emsp;&emsp;当我们从类中获取了一个方法后，我们就可以用 invoke() 方法来调用这个方法。invoke 方法的原型为:
 ```java
 public Object invoke(Object obj, Object... args)
@@ -321,7 +408,7 @@ public class test1 {
         //获取methodClass类的add方法
         Method method = klass.getMethod("add",int.class,int.class);
         //调用method对应的方法 => add(1,4)
-        Object result = method.invoke(obj,1,4);
+        Object result = method.invoke(obj,1,4); //方法激活(对象,参数)
         System.out.println(result);
     }
 }
@@ -336,7 +423,60 @@ class methodClass {
 }
 ```
 
-#### 8、利用反射创建数组
+`Object invoke (Object obj, Object ... args)`
++ Object对应原方法的返回值,若原方法无返回值,此时返回null
++ 若原方法若为静态方法,此时形参Object obj可为null
++ 若原方法形参列表为空,则ObjectI] args为null
++ 若原方法声明为private,则需要在调用此invoke()方法前,显式调用方法对象的setAccessible(true)方法,将可访问private的方法。
+
+### 动态创建对象
+
+```java
+public class dynamicObjects{
+  public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantionException{
+    //获取Class对象
+    Class c1 = Class.forName("com.shane.reflection.User");
+    //构造一个对象
+    User user = (User)c1.newInstance(); //调用了无参构造器
+    /*class.newInstance();
+    *1.需要有无参构造器
+    *2.构造器的访问权限足够
+    */
+    //使用构造器创建对象
+    Constructor constructor = c1.getDeclaredConstructor(String.class, int.class, int.class)
+    User shane = constructor.newInstance("shane",001,18);
+
+    //通过反射调用普通方法
+    User user3 = (User)cl.newInstance();
+    //通过反射获取一个方法
+    Method setName = c1.getDeclaredMethod ( name: "setName", string.class);
+    //invoke :激活的意思
+    // (对象, "方法的值")
+    setName . invoke (user3, .args: "1shane"); 
+    System.out.println(user3. getName());
+    //通过反射操作属性
+    User user4 = (User)c1.newInstance();
+    Field name = cl.getDeclaredField( name: "name");
+    
+    //不能直接操作私有属性,我们需要关闭程序的安全检测,属性或者方法的setAccessible(true)
+    name.setAccessible(true); 
+    name.set(user4,"2shane");
+    System.out.println(user4. getName());
+  }
+}
+
+```
+
+### setAccessible
+
++ Method和Field,Constructor对象都有setAccessible()方法。
++ setAccessible作用是启动和禁用访问安全检查的开关。
++ 参数值为true则指杀反射的对象在使用时应该取消Java语言访问检查。
+  + *提高反射的效率。*如果代码中必须用反射,而该句代码需要频繁的被调用,那么请设置为true
+  + 使得原本无法访问的私有成员也可以访问
++ 参数值为false则指示反射的对象应该实施Java语言访问检查
+
+### 利用反射创建数组
 &emsp;&emsp;数组在Java里是比较特殊的一种类型，它可以赋值给一个Object Reference。下面我们看一看利用反射创建数组的例子：
 ```java
 public static void testArray() throws ClassNotFoundException {
@@ -387,12 +527,174 @@ arrayOop Reflection::reflect_new_array(oop element_mirror, jint length, TRAPS) {
 ```
 &emsp;&emsp;另外，Array 类的 `set` 和 `get `方法都为 native 方法，在 HotSpot JVM 里分别对应` Reflection::array_set` 和 `Reflection::array_get` 方法，这里就不详细解析了。
 
-### 反射的一些注意事项
+### 性能分析
+
+```java
+//分析性能问题
+public class BenchMark{
+  //普通方式调用
+  public static void testl(){
+    User user = new User():
+    long startTime = System.currentTimeMillis();
+    for(int i =0; i < 1000000000; i++) {
+      user . getName ();}
+    Long endTime = system.currentTimeMillis();
+    System.out.println("普通方式执行10亿次:" + (endTime-startTime  +"ms");
+    
+  //反射方式调用
+  public static void test2() throws NoSuchMethodException, InvocationTargetException, IllegalAccessExcept {
+    User user =new User();
+    Class cl = user.getclass();
+
+    Method getName = cl.getDeclaredMethod( name: "getName",null);Long startTime = system.currentTimeMillis();
+
+    for (int i=o; i< 1000000000; i++) {
+    getName. invoke (user, args: null);}
+    long endTime =System.currentTimeMillis();
+    System.out.println("反射方式执行10亿次:"+ (endTime-startTime)+"ms");
+
+    //反射方式调用 关闭检测
+    public static void test3() throws NoSuchMethodException, InvocationTargetException, IllegalAccessExcept {
+    User user =new User();
+    Class cl = user.getclass();
+
+    Method getName = cl.getDeclaredMethod( name: "getName",null);
+    getName.setAccessible(true);
+    Long startTime = system.currentTimeMillis();
+
+    for (int i=o; i< 1000000000; i++) {
+    getName. invoke (user, args: null);}
+    long endTime =System.currentTimeMillis();
+    System.out.println("关闭检测执行10亿次:"+ (endTime-startTime)+"ms");
+```
+结果:
+>普通方式执行10亿次:9ms<br>反射方式执行10亿次:5699ms<br>关闭检测执行10亿次: 1959ms
+
+### 反射与泛型
+
++ 反射操作泛型Java采用泛型擦除的机制来引入泛型, Java中的泛型仅仅是给编译器javac使用的,确保数据的安全性和免去强制类型转换问题,但是,一旦编译完成,所有和泛型有关的类型全部擦除
++ 为了通过反射操作这些类型, Java新增了ParameterizedType , GenericArrayTypeTypeVariable和WildcardType几种类型来代表不能被归一到Class类中的类型但是又和原始类型齐名的类型.
+    + ParameterizedType :表示一种参数化类型,比如`Collection<String>`
+    + GenericArrayType :表示一种元素类型是参数化类型或者类型变量的数组类型
+    + TypeVariable :是各种类型变量的公共父接口
+    + WildcardType :代表一种通配符类型表达式
+
+```java
+public class Test11 {
+  public void test01(Map<string,User> map, List<User> list){
+    System.out.printIn("test0l");}
+
+    public Map<string, User> test02() {
+    system.out.printIn("test02");
+    return null;}
+
+    public statis void main(string[] args) throws NoSuchMethodException {
+      Method method = Test11.class.getMethod( name: "test01", Map.class, List.class);
+      
+      Type[] genericParameterTypes = method.getGenericParameterTypes();
+      for (Type genericParameterType : genericParameterTypes){
+        //取出真实参数信息
+        if (genericParameterType instanceof ParameterizedType){
+          Type[] actualTypeArguments = ((ParameterizedType) genericParameterType).getActualTypeArguments();
+          for (Type actualTypeArgument : actualTypeArguments) { System.out.printIn(actualTypeArgument);}
+        }}
+
+      method = Test11.class.getMethod( name: "test02", null);
+      Type genericParameterType = method.getGenericParameterType();
+        
+      if (genericParameterType instanceof ParameterizedType){
+          Type[] actualTypeArguments = ((ParameterizedType) genericParameterType).getActualTypeArguments();
+          for (Type actualTypeArgument : actualTypeArguments) { System.out.printIn(actualTypeArgument);}
+        }}}
+```
+
+### 反射与注解
+
+```java
+public class reflectionAnnotation{
+
+public static void main(String[] args) throws ClassNotFoundException{
+  Class c1 = Class.forName("com.shane.reflection.Student");
+
+   //通过反射获得注解
+   Annotation[] annotations = c1.getAnnotations();
+   for(Annotation annotation : annotations){
+     System.out.println(annotation);
+   }
+
+   //获得注解value的值
+   TableShane tableShane = (TableShane)c1.getAnnotation(TableShane.class);
+   String value = tableShane.value();
+   System.out.println(value);
+
+   //获得类指定的注解
+   Field f = c1.getDeclaredField("name");
+   FiledShane annotation = f.getAnnotation(FiledShane.class);
+   System.out.println(annotation.columnName());
+   System.out.println(annotation.type());
+   System.out.println(annotation.length());
+}
+}
+
+@TableShane("db_students")
+class Student{
+
+  @FieldShane(columnName = "db_id",type = "int",length = 10)
+  private int id;
+  @FieldShane(columnName = "db_age",type = "int",length = 10)
+  private int age;
+  @FieldShane(columnName = "db_name",type = "varchar",length = 3)
+  private String name;
+
+  public Student(){
+  }
+
+  public Student(int id, int age, String name){
+    this.id = id;
+    this.age = age;
+    this.name = name;
+  }
+  public int getId(){return id;}
+  public void setId(int id){this.id = id;}
+
+  public int getAge(){return age;}
+  public void setAge(int age){this age = age;}
+
+  public String getName(){return name;}
+  public void setName(String name){this.name = name;}
+  @Override
+  public String toString(){
+    return "Student{"+"id="+id+",age="+age+",name='"+name+'\''+'}';
+  }
+}
+
+  //类名的注解
+  @Target(ElementType.TYPE)
+  @Retention(RetentionPolicy.RUNTIME)
+  @interface TableShane{
+    String value();
+  }
+
+  //属性的注解
+  @Target(ElementType.FIELD)
+  @Retention(RetentionPolicy.RUNTIME)
+  @interface FiledShane{
+    String columnName();
+    String type();
+    int length();
+  }
+
+
+```
+
+### 注意事项
+
 &emsp;&emsp;由于反射会额外消耗一定的系统资源，因此如果不需要动态地创建一个对象，那么就不需要用反射。
 
 &emsp;&emsp;另外，反射调用方法时可以忽略权限检查，因此可能会破坏封装性而导致安全问题。
 
-### 部分转载自
+### 部分反射内容转载自
+
 >本文标题:深入解析Java反射（1） - 基础<br>
 文章作者:sczyh30<br>
 发布时间:2015年06月24日<br>
