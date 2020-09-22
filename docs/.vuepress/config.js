@@ -24,7 +24,8 @@ module.exports = {
             {text:'Spring',link:'/Java/Spring.md'},
             {text:'框架基础-注解和反射',link:'/Java/AnnotationReflection.md'},
             {text:'设计模式 DesignPattern',link:'/Java/DesignPattern.md'},
-            {text:'多线程 Multithread',link:'/Java/Multithread.md'}
+            {text:'多线程 Multithread',link:'/Java/Multithread.md'},
+            {text:'DevOps 思想',link:'/Java/DevOpsThinking.md'}
         ]},
         {
             text: 'ALGO', 
