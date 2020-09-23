@@ -26,7 +26,7 @@ module.exports = {
             {text:'设计模式 DesignPattern',link:'/Java/DesignPattern.md'},
             {text:'多线程 Multithread',link:'/Java/Multithread.md'},
             {text:'DevOps 思想',link:'/Java/DevOpsThinking.md'},
-            {text:'DockerBase',link:'/Java/DockerBase.md'},
+            {text:'Docker基础',link:'/Java/DockerBase.md'},
         ]},
         {
             text: 'ALGO', 

@@ -211,14 +211,18 @@ docker help  查看docker命令
 
 ## 学习资料
 
-[阿里云云原生技术公开课](https:/ledu aliyun.com/roadmap/cloudnative)
+[阿里云云原生技术公开课](https://edu.aliyun.com/roadmap/cloudnative)
 
-[阿里巴巴lava学习公开课](https://developer.aliyun.com/learning/roadmap/ava?spm 5176.12257455.189254.14d2uzfacxfoasc)
+[阿里巴巴lava学习公开课](https://developer.aliyun.com/learning/roadmap/java?spm5176.13257455.1389354.1.4d347facxfoasc)
 
-[阿里系电子书](https://developer.aliyun.com/topic/ebook?spm-a2c6h.14946804J 2600602170.1.dscosodsEsBach)
+[阿里系电子书](https://developer.aliyun.com/topic/ebook?spm-a2c6h.14946804J2600602170.1.d5co5od5E5Bqch)
 
 >强烈推荐: 《深入浅出Kubernetes》 、《阿里巴巴经济体云原生实践》 、《阿里巴巴云原生实践15讲》
 
-[Info0迷你书](https://wwwwinfog.cn/topic/cloud-computing)
+[Info0迷你书](https://www.infog.cn/topic/cloud-computing)
+
 >强烈推荐: 《架构师特刊: Kubernetes Paas冲击波》 、《架构师(2020年4月) 》
 
+
+
+**特别提醒:文章已做脱敏处理,部分代码可能无法正常运行**

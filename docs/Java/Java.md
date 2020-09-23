@@ -1,4 +1,7 @@
-# Java基础
+# Java基础 Plus
+
+> 基于2020.6月提交更新
+
 ## 类成员
 1. 成员变量<br>
 *注:生命周期仅在大括号*
@@ -10,23 +13,39 @@
 6. 内部类
 ## 对象创建过程
 1. 在内存分配内存空间
+
 2. 对成员变量赋默认值
+
 3. 执行构造代码块或赋值语句，如果多个，从上到下按序执行
+
 4. 构造函数
+
+   **如果有有参构造,建议写上无参构造供框架反射调用.**
 ## static成员
-static成员，跟对象无关，访问方式是`Class.XXX()`<br>
+static成员，跟对象无关，访问方式是`Class.XXX()`<br> 
 1. 随着类的加载而加载
+
 2. 先优于对象存在
+
 3. 被所有对象共享
+
 4. 可以直接被类名调用
->
-1. 静态方法只能访问静态成员<br>
-2. 静态方法不能出现this，super等对象关键字<br> 
-3. 主函数是静态的
-## javaBean
+
+5. 静态的只能访问静态的,非静态的可以访问全部
+
+   > 因为静态对象随类先加载,不能让其访问不存在的东西(例某个对象的属性方法)
+- 静态方法只能访问静态成员
+- 静态方法不能出现this，super等对象关键字
+- 主函数是静态的
+## JavaBean
 bean.
 getter/setter
+## 封装
+
+将相应属性隐藏,使用方法访问,可以**自定义**重写对应的get\set方法
+
 ## 继承
+
 1. 抽象共享
 2. 多个类是子类，抽象的类是父类（超类）
 3. 子类可以访问父类的非private成员
@@ -34,6 +53,30 @@ getter/setter
 5. 类只支持单重继承 + 多层继承
 >不要为了获取其他类的某种功能去继承<br>
 类与类之间要有所属（“is a”）关系，xx1是xx2的一种
+
+- OOP面向对象编程 重要的一点是继承复用
+- AOP面向切面编程 也是为了复用
+
+## 多态
+
+> 子类和父类重写的方法实现规则不一样
+
+1. 父类引用指向子类对象
+
+2. 父类.方法()执行的是子类的实现
+
+3. 只能调用父类中声明的方法
+
+   > 编译时
+   >
+   > overload
+   >
+   > > xxx.java ---> xxx.class
+   >
+   > 运行时
+   >
+   > override
+
 ## super | this
 &emsp;&emsp;类内置的成员变量，指向的是父类（自己）对象的引用。只能在类的内部使用，类似于this。<br>
 &emsp;&emsp;如果当前类有和父类相同的成员，若访问父类成员，需要用到`super.`
@@ -54,8 +97,8 @@ getter/setter
 final class Dog    //不能继承.终态类
 3. 修饰方法<br>
 不能重写,是否被继承取决于方法private与否
-4. 修饰字段<br>
-不能修改
+4. 修饰变量<br>
+不能修改,常量
 ## 内部类
 1. 定义在class内部的类
 2. 编译产生OuterClass$Innerc.class
@@ -209,6 +252,7 @@ public void test1 (){
 
 `a-> System.out.println("Test lambda");`<br>
 `new Thread (()->System.out.println("new thread")).start();`<br>
+
 ```java
 //推导lambda
 
@@ -454,7 +498,8 @@ private void add(List list, String...x){
 Stream -> byte[]
 1. 数据类型<br>
 >字节流<br>
-字符流<br>
+>字符流<br>
+>
 >>处理文本,防止乱码
 2. 流向<br>
 >输入流<br>
@@ -463,6 +508,7 @@ Stream -> byte[]
 >缓冲区流<br>
 4. 性能<br>
 >转换流<br>
+>
 >>InputStream/OutputStream -> Reader/Writer
 ### 流的超类
 InputStream<br>
