@@ -97,7 +97,9 @@
 
 Harbor 镜像仓库
 
-`10.160.3.152/harbor/projects/1/repositories`
+`10.160.3.152/harbor/projects/1/repositories `
+
+###### #9.6
 
 ### Docker images 
 
@@ -183,6 +185,8 @@ https://docs.docker.com/install/linux/docker-ce/centos/
 
 `yum install-y docker-ce`
 
+###### # 6.9
+
 2. `docker version #查看docker版本,验证安装是否成功`
 3. `systemctl status docker #查看docker服务端是否启动`
 4. ` systemctl start docker && systemctl enable docker #启动docker并加入开机启动`
@@ -225,4 +229,6 @@ docker help  查看docker命令
 
 
 
-**特别提醒:文章已做脱敏处理,部分代码可能无法正常运行**
+## **特别提醒**
+
+**文章已做脱敏处理,部分代码可能无法正常运行**
