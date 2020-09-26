@@ -100,6 +100,77 @@ class B extends A{
 
 通过静态方法创建完整对象 
 
+### 简单工厂
+
+```java
+public class CarFactory{
+   public staitic car createCar(String type){
+      if("audi".equals(type)){
+         return new Audi();
+      }
+      else if("BYD".equals(type)){
+         return new BYD();
+      }
+      else{
+         return null;
+      }
+   }
+}
+```
+
+### 工厂模式
+
+```java
+public interface CarFactory{
+	public Car createCar(){}
+}
+
+public class AudiFactory implements CarFactory{
+   @Override
+   public Car createCar(){
+      return new Audi();
+   }
+}
+
+```
+
+## 代理模式
+
+角色:
+
+1. 真实角色
+2. 代理角色
+3. 抽象角色(前两者需要有共同的方法,由该部分完成)
+
+- 真正做事情的是真实角色
+- 对于外界来说一定是代理角色,真实角色被隐藏
+- 代理要有真实角色的引用
+- 代理角色可以附加自己的功能
+
+### 静态代理
+
+```java
+public class Proxyee implements share{
+   XXXX;
+}
+public class Proxy implements share{
+   private Share share = new Proxyee;
+   XXXX;
+   share.XXXX;
+}
+public interface Share{
+   XXXX
+}
+```
+
+### 动态代理
+
+> 解决静态代理带来的高消耗,重复创建不同的代理
+
+通过反射实现,具体实现可参考文章:
+
+[反射和注解](https://shane-1.io/java/AnnotationReflection.html#反射)
+
 ## 构建器模式 Builder
 
 setXx()返回对象自身

@@ -1,6 +1,8 @@
 # Spring框架
 >4.0
+
 ## 第1章  Spring概述 
+
 ### 1.1 Spring概述
 1. Spring是一个开源框架 
 2. Spring为简化企业级开发而生，使用Spring，JavaBean就可以实现很多以前要靠EJB才能实现的功能。同样的功能，在EJB中要通过繁琐的配置和复杂的代码才能够实现，而在Spring中却非常的优雅和简洁。 
@@ -456,7 +458,7 @@ prop.driverClass=com.mysql.jdbc.Driver
     ⑥@Autowired注解也可以应用在数组类型的属性上，此时Spring将会把所有匹配的bean进行自动装配。<br>
 	⑦@Autowired注解也可以应用在集合属性上，此时Spring读取该集合的类型信息，然后自动装配所有与之兼容的bean。<br>
 	⑧@Autowired注解用在java.util.Map上时，若该Map的键值为String，那么 Spring将自动装配与值类型兼容的bean作为值，并以bean的id值作为键。
-		
+	
 4.	@Resource
 	@Resource注解要求提供一个bean名称的属性，若该属性为空，则自动采用标注处的变量或方法名作为bean的名称。
 5.	@Inject

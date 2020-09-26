@@ -127,11 +127,19 @@ interface Xxx extends Xx,Xx{
 //
 }
 ```
+### 面向接口的编程
+
++ 开闭原则
+  + 对扩展开放
+  + 对修改关闭
+
 ## 多态
+
 &emsp;&emsp;指向同一个对象,但某种状态下只能访问该状态下的属性和方法<br>
 &emsp;&emsp;接口同样具有多态<br>
 &emsp;&emsp;更加抽象`父类=子类`可以直接赋值,更加具体`子类=父类`需要强制转换<br>
 &emsp;&emsp;接口 = 类`隐式转换`,类 = 接口`强制转换`
+
 ```java
 //Animal < Dog < Husky
 Husty hope = new Husty();

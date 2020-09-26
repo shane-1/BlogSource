@@ -3,6 +3,21 @@
 >> Something similar to the role of genes in biological evolution is involved in the transmission of language, ideas, beliefs, behaviors, etc.<br>
 
 ---------------------------
+
+## 2020.9.26
+
+总幻想自己要成为怎样的人,计划要做的事?**现在去做吧!**<br>
+Always fantase people you want to be, things about to do? **Do it! Now!**
+
+## 2020.9.20
+
+>如果天空是黑暗的，那就摸黑过生活；<br>如果发出声音是危险的，那就保持沉默；<br>如果自觉无力发光，那就别去照亮别人。<br>**但是——但是：**<br>
+**不要习惯了黑暗就为黑暗辩护；<br>不要为自己的苟且而得意洋洋；<br>不要嘲讽那些比自己更勇敢、更有热量的人们。<br>可以卑微如尘土，不可扭曲如蛆虫。**
+
+## 2020.9.14
+
+To live fruitfully, to live colorfully, to live freely!   (*^▽^*)
+
 ## 2020.8.2
 
 人太容易沉溺于过去，因为我们总是更擅长于遗忘不好的。这是福，也是祸吧。
