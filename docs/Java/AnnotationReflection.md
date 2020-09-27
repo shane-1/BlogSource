@@ -193,14 +193,29 @@ Java 反射主要提供以下功能：
 
 ### 类加载器
 
-+ 类加载的作用:将class文件字节码内容加载到内存中,并将这些静态数据转换成方法区的运行时数据结构,然后在堆中生成一个代表这个类的java.lang.Class对象,作为方法区中类数据的访问入口。
-+ 类缓存:标准的JavaSE类加载器可以按要求查找类,但一旦某个类被加载到类加载器中,它将维持加载(缓存)一段时间。不过JVM垃圾回收机制可以回收这些Class对象
++ 类加载的作用:
+
+  &emsp;&emsp;将class文件字节码内容加载到内存中,并将这些静态数据转换成方法区的运行时数据结构,然后在堆中生成一个代表这个类的java.lang.Class对象,作为方法区中类数据的访问入口。
+
++ 类缓存:
+
+  &emsp;&emsp;标准的JavaSE类加载器可以按要求查找类,但一旦某个类被加载到类加载器中,它将维持加载(缓存)一段时间。不过JVM垃圾回收机制可以回收这些Class对象
 
 #### 加载器分类
 
-+ 引导类加载器:用C++编写的,是JVM自带的类加载器,负责Java平台核心库,用来装载核心类库。该加载器无法直接获取
-+ 扩展类加载器:负责jrelib/ext目录下的jar包或D java.ext.dirs指定目录下的jar包装入工作库
-+ 系统类加载器:负责java-classpath或-Djava.class.path所指的目录下的类与jar包装入工作,是最常用的加载器
+> 引导类>扩展类>系统类
+
++ 引导类加载器 Bootstap ClassLoader:
+
+&emsp;&emsp;用C++编写的,是JVM自带的类加载器,负责Java平台核心库,用来装载核心类库。该加载器无法直接获取
+
++ 扩展类加载器 Extension Classloader:
+
+&emsp;&emsp;负责jrelib/ext目录下的jar包或D java.ext.dirs指定目录下的jar包装入工作库
+
++ 系统类加载器 System Classloader:
+
+&emsp;&emsp;负责java-classpath或-Djava.class.path所指的目录下的类与jar包装入工作,是最常用的加载器
 
 ```java
 public class Test{
@@ -260,7 +275,7 @@ public class test{
     System.out.println(c1.hashCode());
 
     //2.forname获得
-    class c2 = class.forName("com.kuang.refelection.Student");
+    class c2 = class.forName("com.shane.refelection.Student");
     System.out.println(c2.hashCode());
 
     //3.通过类名.class获得
@@ -270,6 +285,12 @@ public class test{
     //4.内置包装类Type属性
     Class c4 = Integer.TYPE;
     System.out.println(c4.hashCode());
+     
+     //5.类加载器
+     ClassLoader classLoader = this.get.Class().getClassLoader();
+     Class c5 = classLoader.loadClass("com.shane.refelection.Student");
+     System.out.println(c5.hashCode());
+     
     //获得父类类型
     Class c5 = c1.getSuperclass();
     System.out.println(c5);
@@ -526,6 +547,18 @@ arrayOop Reflection::reflect_new_array(oop element_mirror, jint length, TRAPS) {
 }
 ```
 &emsp;&emsp;另外，Array 类的 `set` 和 `get `方法都为 native 方法，在 HotSpot JVM 里分别对应` Reflection::array_set` 和 `Reflection::array_get` 方法，这里就不详细解析了。
+
+### 反射过程
+
+java.lang.Class是反射的源头
+
+1. 我们创建了一个类,通过编译(javac.exe)生成了字节码文件.class文件.
+2. 此.class文件加载到内存中去以后,就是一个运行时类,存在缓存区,那么这个运行时类本身就是Class的实例.
+3. 每个运行时类只加载一次
+4. 有了Class的实例后,我们可以做如下操作:
+   - 创建对应的**运行时**类的对象
+   - 获取对应的**运行时**类的属性,方法,构造方法,父类,所在的包,异常,接口等
+   - 调用对应的**运行时**类的属性,方法,构造方法等
 
 ### 性能分析
 
