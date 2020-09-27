@@ -10,7 +10,7 @@
     "deploy": "bash deploy.sh"
   },
   "devDependencies": {
-    "@vuepress/plugin-google-analytics": "^1.5.4"
+    "@vuepress/plugin-google-analytics": "^1.6.0"
   },
   "dependencies": {
     "vuepress-plugin-mygitalk": "^1.0.5"
