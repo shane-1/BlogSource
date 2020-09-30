@@ -95,7 +95,9 @@ port=3306
 skip-grant-tables
 ```
 
-5、启动管理员模式下的CMD，并将路径切换至mysql下的bin目录，然后输入`mysqld –install `(安装mysql)
+5、启动管理员模式下的CMD，并将路径切换
+
+至mysql下的bin目录，然后输入`mysqld –install `(安装mysql)
 
 6、再输入  `mysqld --initialize-insecure --user=mysql` 初始化数据文件
 
@@ -1025,13 +1027,13 @@ WHERE Address='' OR Address IS NULL;
 | 操作符名称 |                   描述                    |
 | :--------: | :---------------------------------------: |
 | INNER JOIN |      如果表中有至少一个匹配,则返回行      |
-| LEFT JOIN  | 即使右表中没有匹配,也从右表中返回所有的行 |
-| RIGHT JOIN | 即使左表中没有匹配,也从左表中返回所有的行 |
+| LEFT JOIN  | 即使右表中没有匹配,也从左表中返回所有的行 |
+| RIGHT JOIN | 即使左表中没有匹配,也从右表中返回所有的行 |
 
-#### 七种Join：
+#### 七种Join
 
 ![](/images/2020-09-28-16-25-46.png)
-![img](https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7LwfjFbCQXic0pcE21lUFGvDw5aZLehIYzwLprCfqdxSjsm2wficHrSEzJiaJBGaKWpatQ7sISib9MgCQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+
 
 #### 测试
 
@@ -1063,9 +1065,9 @@ SELECT * FROM result;
 判断的条件: 学生表中的studentNo = 成绩表 studentNo
 */
 SELECT s.studentno,studentname,subjectno,StudentResult
-FROM student s
+FROM student s  -- 省略了取别名关键词as
 INNER JOIN result r
-ON r.studentno = s.studentno
+ON r.studentno = s.studentno 
 
 -- 右连接(也可实现)
 SELECT s.studentno,studentname,subjectno,StudentResult
@@ -1073,7 +1075,7 @@ FROM student s
 RIGHT JOIN result r
 ON r.studentno = s.studentno
 
--- 等值连接
+-- 等值连接(使用where)
 SELECT s.studentno,studentname,subjectno,StudentResult
 FROM student s , result r
 WHERE r.studentno = s.studentno
@@ -1100,7 +1102,14 @@ INNER JOIN `subject` sub
 ON sub.subjectno = r.subjectno
 ```
 
-
+>-- join (连接的表) on (判断条件)	连接查询
+>
+>-- where 等值查询
+>
+>在左连接分别使用on和where时:
+>
+>-  **on** 条件是在生成临时表时使用的条件，它不管 **on** 中的条件是否为真，都会返回左边表中的记录。
+>- **where** 条件是在临时表生成好后，再对临时表进行过滤的条件。这时已经没有 **left join** 的含义（必须返回左边表的记录）了，条件不为真的就全部过滤掉。
 
 ### 自连接
 
@@ -1134,7 +1143,7 @@ VALUES('2','1','信息技术'),
 -- 编写SQL语句,将栏目的父子关系呈现出来 (父栏目名称,子栏目名称)
 -- 核心思想:把一张表看成两张一模一样的表,然后将这两张表连接查询(自连接)
 SELECT a.categoryName AS '父栏目',b.categoryName AS '子栏目'
-FROM category AS a,category AS b
+FROM category AS a,category AS b --自连接处
 WHERE a.`categoryid`=b.`pid`
 
 -- 思考题:查询参加了考试的同学信息(学号,学生姓名,科目名,分数)
@@ -1171,17 +1180,19 @@ WHERE subjectname='数据库结构-1'
 
 ### 排序和分页
 
-#### 测试
+#### 排序
+
+##### 语法
+
++ ORDER BY
+     ORDER BY 语句用于根据指定的列对结果集进行排序。
+
+- ORDER BY 
+     默认按照ASC升序对记录进行排序。
+     如果您希望按照降序对记录进行排序，可以使用 DESC 关键字。
 
 ```sql
-/*============== 排序 ================
-语法 : ORDER BY
-   ORDER BY 语句用于根据指定的列对结果集进行排序。
-   ORDER BY 语句默认按照ASC升序对记录进行排序。
-   如果您希望按照降序对记录进行排序，可以使用 DESC 关键字。
    
-*/
-
 -- 查询 数据库结构-1 的所有考试结果(学号 学生姓名 科目名称 成绩)
 -- 按成绩降序排序
 SELECT s.studentno,studentname,subjectname,StudentResult
@@ -1193,20 +1204,27 @@ ON r.subjectno = sub.subjectno
 WHERE subjectname='数据库结构-1'
 ORDER BY StudentResult DESC
 
-/*============== 分页 ================
-语法 : SELECT * FROM table LIMIT [offset,] rows | rows OFFSET offset
-好处 : (用户体验,网络传输,查询压力)
+```
+
+#### 分页
+
+##### 语法:
+
+`SELECT * FROM table LIMIT [offset,] rows | rows OFFSET offset`
+
+> 好处 : (用户体验,网络传输,查询压力)
+
+limit 	起始页, 页面的大小.
 
 推导:
-   第一页 : limit 0,5
-   第二页 : limit 5,5
-   第三页 : limit 10,5
+   第一页 : `limit 0,5`
+   第二页 : `limit 5,5`
+   第三页 : `limit 10,5`
    ......
-   第N页 : limit (pageNo-1)*pageSzie,pageSzie
+   第N页 : `limit (pageNo-1)*pageSize,pageSize`
    [pageNo:页码,pageSize:单页面显示条数]
-   
-*/
 
+```sql
 -- 每页显示5条数据
 SELECT s.studentno,studentname,subjectname,StudentResult
 FROM student s
@@ -1217,7 +1235,9 @@ ON r.subjectno = sub.subjectno
 WHERE subjectname='数据库结构-1'
 ORDER BY StudentResult DESC , studentno
 LIMIT 0,5
+```
 
+```sql
 -- 查询 JAVA第一学年 课程成绩前10名并且分数大于80的学生信息(学号,姓名,课程名,分数)
 SELECT s.studentno,studentname,subjectname,StudentResult
 FROM student s
@@ -1225,7 +1245,7 @@ INNER JOIN result r
 ON r.studentno = s.studentno
 INNER JOIN `subject` sub
 ON r.subjectno = sub.subjectno
-WHERE subjectname='JAVA第一学年'
+WHERE subjectname='JAVA第一学年' AND StudentResult >= 80
 ORDER BY StudentResult DESC
 LIMIT 0,10
 ```
@@ -1234,14 +1254,13 @@ LIMIT 0,10
 
 ### 子查询
 
-```sql
-/*============== 子查询 ================
-什么是子查询?
-   在查询语句中的WHERE条件子句中,又嵌套了另一个查询语句
-   嵌套查询可由多个子查询组成,求解的方式是由里及外;
-   子查询返回的结果一般都是集合,故而建议使用IN关键字;
-*/
+> 什么是子查询?
 
++ 在查询语句中的WHERE条件子句中,又嵌套了另一个查询语句
++ 嵌套查询可由多个子查询组成,求解的方式是由里及外;
++ 子查询返回的结果一般都是集合,故而建议使用IN关键字;
+
+```sql
 -- 查询 数据库结构-1 的所有考试结果(学号,科目编号,成绩),并且成绩降序排列
 -- 方法一:使用连接查询
 SELECT studentno,r.subjectno,StudentResult
@@ -1286,7 +1305,7 @@ WHERE StudentResult>=80 AND subjectno=(
 
 -- 方法三:使用子查询
 -- 分步写简单sql语句,然后将其嵌套起来
-SELECT studentno,studentname FROM student WHERE studentnoIN(
+SELECT studentno,studentname FROM student WHERE studentno IN(
    SELECT studentno FROM result WHERE StudentResult>=80 ANDsubjectno=(
        SELECT subjectno FROM `subject` WHERE subjectname = '高等数学-2'
   )
@@ -1297,5 +1316,243 @@ SELECT studentno,studentname FROM student WHERE studentnoIN(
    查 C语言-1 的前5名学生的成绩信息(学号,姓名,分数)
    使用子查询,查询郭靖同学所在的年级名称
 */
+SELECT s.studentno, studntname, StudentResult From 
+student s inner join 
+studentresult r on s.studentno = r.studentno
+where subjectno = (
+	select subjectno from `subject`
+    where subjectname = `C语言-1`
+)
+order by StudentResult desc 
+limit 0,5
+
+SELECT grade from grade
+where studentno = (
+select studentno from studnt where studentname = '郭靖'
+)
 ```
+
+### 分组和过滤
+
+```sql
+ -- 查询不同课程的平均分,最高分,最低分,平均分大于80
+ -- 前提:根据不同的课程进行分组
+ 
+ SELECT subjectname,AVG(studentresult) AS 平均分,MAX(StudentResult) AS 最高分,MIN(StudentResult) AS 最低分
+ FROM result AS r
+ INNER JOIN `subject` AS s
+ ON r.subjectno = s.subjectno
+ GROUP BY r.subjectno
+ HAVING 平均分>80;
+```
+
+
+
+> - where写在group by前面.
+>
+> -  要是放在分组后面的筛选, 要使用HAVING..
+>
+>   > 因为having是从前面筛选的字段再筛选，而where是从数据表中的>字段直接进行的筛选的
+>   > 
+>   > 
+
+## 
+
+### 小结
+
+```sql
+select 去重 要查询的字段 from 表(注意:表和字段可以取别名)
+xxx join 要连接的表 on 等值判断
+where(具体的值,子查询语句)
+Group by(通过哪个字段来分组)
+Having (过滤分组后的信息,条件和where是一样的,位置不同)
+order by(通过那个字段排序)[升序/降序]
+limit startIndex, pagesize
+```
+
+
+
+## 常用函数
+
+### 常用数学运算
+
+```sql
+ SELECT ABS(-8);  /*绝对值*/
+ SELECT CEILING(9.4); /*向上取整*/
+ SELECT FLOOR(9.4);   /*向下取整*/
+ SELECT RAND();  /*随机数,返回一个0-1之间的随机数*/
+ SELECT SIGN(0); /*符号函数: 负数返回-1;正数返回1;0返回0*/
+  format(x, d)    -- 格式化千分位数值 format(1234567.456, 2) = 1,234,567.46
+ round(x)        -- 四舍五入去整
+ mod(m, n)        -- m%n m mod n 求余 10%3=1
+ pi()            -- 获得圆周率
+ pow(m, n)        -- m^n
+ sqrt(x)            -- 算术平方根
+ truncate(x, d)    -- 截取d位小数
+ 
+```
+
+### 字符串函数
+
+```sql
+ SELECT CHAR_LENGTH('to be or not to be'); /*返回字符串包含的字符数*/
+ SELECT CONCAT('人','性','复杂');  /*合并字符串,参数可以有多个*/
+ SELECT INSERT('我爱编程helloworld',1,2,'超级热爱');  /*替换字符串,从某个位置开始替换某个长度*/
+ SELECT LOWER('Shane'); /*小写*/
+ SELECT UPPER('Shane'); /*大写*/
+ SELECT LEFT('hello,world',5);   /*从左边截取*/
+ SELECT RIGHT('hello,world',5);  /*从右边截取*/
+ SELECT INSTR('hello','e') /*返回第一次出现的子串的索引*/
+ SELECT REPLACE('shane说坚持就能成功','坚持','努力');  /*替换字符串*/
+ SELECT SUBSTR('shane说坚持就能成功',4,6); /*截取字符串,开始和长度*/
+ SELECT REVERSE('shane说坚持就能成功'); /*反转*/
+ 
+ -- 查询姓周的同学,改成邹
+ SELECT REPLACE(studentname,'周','邹') AS 新名字
+ FROM student WHERE studentname LIKE '周%';
+```
+
+### 日期和时间函数
+
+```sql
+ SELECT CURRENT_DATE();   /*获取当前日期*/
+ SELECT CURDATE();   /*获取当前日期*/
+ SELECT NOW();   /*获取当前日期和时间*/
+ SELECT LOCALTIME();   /*获取当前日期和时间*/
+ SELECT SYSDATE();   /*获取当前日期和时间*/
+ 
+ -- 获取年月日,时分秒
+ SELECT YEAR(NOW());
+ SELECT MONTH(NOW());
+ SELECT DAY(NOW());
+ SELECT HOUR(NOW());
+ SELECT MINUTE(NOW());
+ SELECT SECOND(NOW());
+                  
+  -- 当前时间
+ date('yyyy-mm-dd hh:ii:ss');    -- 获取日期部分
+ time('yyyy-mm-dd hh:ii:ss');    -- 获取时间部分
+ date_format('yyyy-mm-dd hh:ii:ss', '%d %y %a %d %m %b %j');    
+ -- 格式化时间
+ unix_timestamp();                -- 获得unix时间戳
+ from_unixtime();                -- 从时间戳获得时间
+```
+
+### 系统信息函数
+
+```sql
+ SELECT VERSION();  /*版本*/
+ SELECT USER();     /*用户*/ 
+```
+
+### 聚合函数
+
+| 函数名称 | 描述                                                         |
+| -------- | ------------------------------------------------------------ |
+| COUNT()  | 返回满足Select条件的记录总和数，如 select count(*) 【不建议使用 *，效率低】 |
+| SUM()    | 返回数字字段或表达式列作统计，返回一列的总和。               |
+| AVG()    | 通常为数值字段或表达列作统计，返回一列的平均值               |
+| MAX()    | 可以为数值字段，字符字段或表达式列作统计，返回最大的值。     |
+| MIN()    | 可以为数值字段，字符字段或表达式列作统计，返回最小的值。     |
+
+```sql
+ -- 聚合函数
+ /*COUNT:非空的*/
+ SELECT COUNT(studentname) FROM student; --指定列(字段)
+ SELECT COUNT(*) FROM student;
+ SELECT COUNT(1) FROM student;  /*推荐*/
+```
+
+从含义上讲，count(1) 与 count(*) 都表示对全部数据行的查询。
+
++ count(字段) 会统计该字段在表中出现的次数，忽略字段为null 的情况。即不统计字段为null 的记录。
+
++ count(\*) 包括了所有的列，相当于行数，在统计结果的时候，包含字段为null 的记录；*
+
++ count(1) 用1代表代码行，在统计结果的时候，包含字段为null 的记录 。
+
+  > 很多人认为count(1)执行的效率会比count(\*)高，原因是count(\*)会存在全表扫描，而count(1)可以针对一个字段进行查询。其实不然，count(1)和count(\*)都会对全表进行扫描，统计所有记录的条数，包括那些为null的记录，因此，它们的效率可以说是相差无几。而count(字段)则与前两者不同，它会统计该字段不为null的记录条数。
+
+**下面它们之间的一些对比**：
+
+1. 在表没有主键时，count(1)比count(\*)快
+2. *有主键时，主键作为计算条件，count(主键)效率最高；*
+3. 若表格只有一个字段，则count(\*)效率较高。
+
+```sql
+ SELECT SUM(StudentResult) AS 总和 FROM result;
+ SELECT AVG(StudentResult) AS 平均分 FROM result;
+ SELECT MAX(StudentResult) AS 最高分 FROM result;
+ SELECT MIN(StudentResult) AS 最低分 FROM result;
+```
+
+
+
+### 题目：
+
+```sql
+ -- 查询不同课程的平均分,最高分,最低分
+ -- 前提:根据不同的课程进行分组
+ 
+ SELECT subjectname,AVG(studentresult) AS 平均分,MAX(StudentResult) AS 最高分,MIN(StudentResult) AS 最低分
+ FROM result AS r
+ INNER JOIN `subject` AS s
+ ON r.subjectno = s.subjectno
+ GROUP BY r.subjectno
+ 
+```
+
+## MD5 加密
+
+### 一、MD5简介
+
+MD5即Message-Digest Algorithm 5（信息-摘要算法5），用于确保信息传输完整一致。是计算机广泛使用的杂凑算法之一（又译摘要算法、哈希算法），主流编程语言普遍已有MD5实现。将数据（如汉字）运算为另一固定长度值，是杂凑算法的基础原理，MD5的前身有MD2、MD3和MD4。
+
+### 二、实现数据加密
+
+新建一个表 testmd5
+
+```sql
+ CREATE TABLE `testmd5` (
+  `id` INT(4) NOT NULL,
+  `name` VARCHAR(20) NOT NULL,
+  `pwd` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`id`)
+ ) ENGINE=INNODB DEFAULT CHARSET=utf8
+```
+
+插入一些数据
+
+```sql
+ INSERT INTO testmd5 VALUES(1,'shane','123456'),(2,'jack','456789')
+```
+
+如果我们要对pwd这一列数据进行加密，语法是：
+
+```sql
+ update testmd5 set pwd = md5(pwd);
+```
+
+如果单独对某个用户(如shane)的密码加密：
+
+```sql
+ INSERT INTO testmd5 VALUES(3,'shane2','123456')
+ update testmd5 set pwd = md5(pwd) where name = 'shane2';
+```
+
+插入新的数据自动加密
+
+```sql
+ INSERT INTO testmd5 VALUES(4,'shane3',md5('123456'));
+```
+
+查询登录用户信息（md5对比使用，查看用户输入加密后的密码进行比对）
+
+```sql
+ SELECT * FROM testmd5 WHERE `name`='shane' ANDpwd=MD5('123456');
+```
+
+
+
+
 
