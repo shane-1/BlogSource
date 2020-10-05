@@ -1356,8 +1356,6 @@ select studentno from studnt where studentname = '郭靖'
 >   > 
 >   > 
 
-## 
-
 ### 小结
 
 ```sql
@@ -1366,7 +1364,7 @@ xxx join 要连接的表 on 等值判断
 where(具体的值,子查询语句)
 Group by(通过哪个字段来分组)
 Having (过滤分组后的信息,条件和where是一样的,位置不同)
-order by(通过那个字段排序)[升序/降序]
+order by(通过那个字段排序)[升序/降序][asc / desc]
 limit startIndex, pagesize
 ```
 
@@ -1549,10 +1547,641 @@ MD5即Message-Digest Algorithm 5（信息-摘要算法5），用于确保信息�
 查询登录用户信息（md5对比使用，查看用户输入加密后的密码进行比对）
 
 ```sql
- SELECT * FROM testmd5 WHERE `name`='shane' ANDpwd=MD5('123456');
+ SELECT * FROM testmd5 WHERE `name`='shane' AND pwd=MD5('123456');
 ```
 
 
+
+## 事务
+
+### 什么是事务
+
+- 事务就是将一组SQL语句放在**同一批次**内去执行
+- 如果一个SQL语句出错,则该批次内的所有SQL都将被取消执行
+- MySQL事务处理只支持InnoDB和BDB数据表类型
+
+### 事务的ACID原则  
+
+#### 原子性(Atomic)
+
+- 整个事务中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节。事务在执行过程中发生错误，会被**回滚（ROLLBACK）**到事务开始前的状态，就像这个事务从来没有执行过一样。
+
+#### 一致性(Consist)
+
+- 事务前后的数据完整性要保证一致
+
+- 一个事务可以封装状态改变（除非它是一个只读的）。事务必须始终保持系统处于一致的状态，不管在任何给定的时间并发事务有多少。也就是说：如果事务是并发多个，系统也必须如同串行事务一样操作。其主要特征是保护性和不变性(Preserving an Invariant)，以转账案例为例，假设有五个账户，每个账户余额是100元，那么五个账户总额是500元，如果在这个5个账户之间同时发生多个转账，无论并发多少个，比如在A与B账户之间转账5元，在C与D账户之间转账10元，在B与E之间转账15元，五个账户总额也应该还是500元，这就是保护性和不变性。
+
+#### 隔离性(Isolated)
+
+- 隔离状态执行事务，使它们好像是系统在给定时间内执行的唯一操作。如果有两个事务，运行在相同的时间内，执行相同的功能，事务的隔离性将确保每一事务在系统中认为只有该事务在使用系统。这种属性有时称为串行化，为了防止事务操作间的混淆，必须串行化或序列化请求，使得在同一时间仅有一个请求用于同一数据。
+
+#### 持久性(Durable)
+
+- 在事务完成以后，该事务对数据库所作的更改便持久的保存在数据库之中，并不会被回滚。
+- 一旦提交,一定会持久化到数据库,不可逆
+
+### 事务隔离导致的问题
+
+#### 脏读
+
+指一个事务读取了另外一个事务未提交的数据
+
+#### 不可重复读
+
+多次读取结果不一致
+
+#### 幻读
+
+指在一个事务内读取到了别的事务插入的数据,导致前后读取不一致
+
+### 基本语法
+
+```sql
+-- 使用set语句来改变自动提交模式
+SET autocommit = 0;   /*关闭*/
+SET autocommit = 1;   /*开启(默认值)*/
+
+-- 流程:先关闭自动提交
+SET autocommit = 0; 
+-- 开始一个事务,标记事务的起始点
+START TRANSACTION  
+
+-- 提交一个事务给数据库(成功)
+COMMIT
+
+-- 将事务回滚,数据回到本次事务的初始状态(失败)
+ROLLBACK
+
+-- 还原MySQL数据库的自动提交
+SET autocommit =1;
+
+-- 保存点
+SAVEPOINT 保存点名称 -- 设置一个事务保存点
+ROLLBACK TO SAVEPOINT 保存点名称 -- 回滚到保存点
+RELEASE SAVEPOINT 保存点名称 -- 删除保存点
+```
+
+#### 注意:
+
+1. MySQL中默认是自动提交
+2. 使用事务时应先关闭自动提交
+3. 事务结束也应该开启自动提交
+
+### 测试
+
+```sql
+/*
+课堂测试题目
+
+A在线买一款价格为500元商品,网上银行转账.
+A的银行卡余额为2000,然后给商家B支付500.
+商家B一开始的银行卡余额为10000
+
+创建数据库shop和创建表account并插入2条数据
+*/
+
+CREATE DATABASE `shop`CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `shop`;
+
+CREATE TABLE `account` (
+`id` INT(11) NOT NULL AUTO_INCREMENT,
+`name` VARCHAR(32) NOT NULL,
+`cash` DECIMAL(9,2) NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+INSERT INTO account (`name`,`cash`)
+VALUES('A',2000.00),('B',10000.00);
+
+-- 转账实现
+
+SET autocommit = 0; -- 关闭自动提交
+
+START TRANSACTION;  -- 开始一个事务,标记事务的起始点
+UPDATE account SET cash=cash-500 WHERE `name`='A';
+UPDATE account SET cash=cash+500 WHERE `name`='B';
+
+COMMIT; -- 提交事务
+rollback; -- 回滚
+
+SET autocommit = 1; -- 恢复自动提交
+```
+
+
+
+## 索引(index)
+
+> 是帮助mysql高效获取数据的数据结构
+
+### 索引的作用
+
+- 提高查询速度
+- 确保数据的唯一性
+- 可以加速表和表之间的连接 , 实现表与表之间的参照完整性
+- 使用分组和排序子句进行数据检索时 , 可以显著减少分组和排序的时间
+- 全文检索字段进行搜索优化.
+
+### 分类
+
+- 主键索引 (Primary Key)
+- 唯一索引 (Unique)
+- 常规索引 (Key/Index)
+- 全文索引 (FullText)
+
+#### 主键索引 (Primary Key)
+
+##### 主键 :
+
+ 某一个属性组能唯一标识一条记录
+
+##### 特点 :
+
+- 最常见的索引类型
+- 确保数据记录的唯一性
+- 确定特定数据记录在数据库中的位置
+
+#### 唯一索引(Unique)
+
+##### 作用 :
+
+ 避免同一个表中某数据列中的值重复
+
+##### 注意:
+
+与主键索引的区别
+
+- 主键索引只能有一个
+- 唯一索引可能有多个
+
+```sql
+CREATE TABLE `Grade`(
+  `GradeID` INT(11) AUTO_INCREMENT PRIMARYKEY,
+  `GradeName` VARCHAR(32) NOT NULL UNIQUE
+   -- 或 UNIQUE KEY `GradeID` (`GradeID`)
+)
+```
+
+#### 常规索引(Index)
+
+##### 作用 : 
+
+快速定位特定数据
+
+##### 注意 :
+
+- index 和 key 关键字都可以设置常规索引
+- 应加在查询找条件的字段
+- 不宜添加太多常规索引,影响数据的插入,删除和修改操作
+
+```sql
+CREATE TABLE `result`(
+   -- 省略一些代码
+  INDEX/KEY `ind` (`studentNo`,`subjectNo`) -- 创建表时添加
+)
+-- 创建后添加
+ALTER TABLE `result` ADD INDEX `ind`(`studentNo`,`subjectNo`);
+```
+
+#### 全文索引(FullText)
+
+##### 作用 :
+
+ 快速定位特定数据
+
+##### 注意 :
+
+- 只能用于MyISAM类型的数据表(新版InnoDB支持)
+- 只能用于CHAR , VARCHAR , TEXT数据列类型
+- 适合大型数据集
+
+### 创建索引
+
+#### 方法一：
+
+创建表时
+
+```sql
+CREATE TABLE 表名 (
+               字段名1 数据类型 [完整性约束条件…],
+               字段名2 数据类型 [完整性约束条件…],
+               [UNIQUE | FULLTEXT | SPATIAL ]   INDEX | KEY
+               [索引名] (字段名[(长度)] [ASC |DESC])
+               );
+```
+
+  　　
+
+#### 方法二：
+
+CREATE在已存在的表上创建索引
+
+```sql
+CREATE [UNIQUE | FULLTEXT | SPATIAL ] INDEX 索引名
+                    ON 表名 (字段名[(长度)] [ASC |DESC]) ;
+```
+
+​    
+
+#### 方法三：
+
+ALTER TABLE在已存在的表上创建索引
+
+```sql
+     ALTER TABLE 表名 ADD [UNIQUE | FULLTEXT | SPATIAL ] INDEX
+                            索引名 (字段名[(长度)] [ASC |DESC]) ;
+```
+
+### 其他操作                           
+
+```sql
+--删除索引：
+DROP INDEX 索引名 ON 表名字;
+
+--删除主键索引:
+ALTER TABLE 表名 DROP PRIMARY KEY;
+
+--显示索引信息: 
+SHOW INDEX FROM student;
+```
+
+### 实例
+
+```sql
+
+/*增加全文索引*/
+ALTER TABLE `school`.`student` ADD FULLTEXT INDEX `studentname` (`StudentName`);
+
+/*EXPLAIN : 分析SQL语句执行性能*/
+EXPLAIN SELECT * FROM student WHERE studentno='1000';
+
+/*使用全文索引*/
+-- 全文搜索通过 MATCH() 函数完成。
+-- 搜索字符串作为 against() 的参数被给定。搜索以忽略字母大小写的方式执行。对于表中的每个记录行，MATCH() 返回一个相关性值。即，在搜索字符串与记录行在 MATCH() 列表中指定的列的文本之间的相似性尺度。
+EXPLAIN SELECT *FROM student WHERE MATCH(studentname) AGAINST('love');
+```
+
+开始之前，先说一下全文索引的版本、存储引擎、数据类型的支持情况
+
+>- MySQL 5.6 以前的版本，只有 MyISAM 存储引擎支持全文索引；
+>-  MySQL 5.6 及以后的版本，MyISAM 和 InnoDB 存储引擎均支持全文索引;
+>-  只有字段的数据类型为 char、varchar、text 及其系列才可以建全文索引。
+>-  测试或使用全文索引时，要先看一下自己的 MySQL 版本、存储引擎和数据类型是否支持全文索引。
+
+### 拓展：测试索引
+
+**建表app_user：**
+
+```sql
+CREATE TABLE `app_user` (
+`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+`name` varchar(50) DEFAULT '' COMMENT '用户昵称',
+`email` varchar(50) NOT NULL COMMENT '用户邮箱',
+`phone` varchar(20) DEFAULT '' COMMENT '手机号',
+`gender` tinyint(4) unsigned DEFAULT '0' COMMENT '性别（0:男；1：女）',
+`password` varchar(100) NOT NULL COMMENT '密码',
+`age` tinyint(4) DEFAULT '0' COMMENT '年龄',
+`create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+`update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='app用户表'
+```
+
+**批量插入数据：100w**
+
+```sql
+DROP FUNCTION IF EXISTS mock_data;
+DELIMITER $$
+CREATE FUNCTION mock_data()
+RETURNS INT
+DETERMINISTIC
+BEGIN
+DECLARE num INT DEFAULT 1000000;
+DECLARE i INT DEFAULT 0;
+WHILE i < num DO
+  INSERT INTO app_user(`name`, `email`, `phone`, `gender`, `password`, `age`)
+   VALUES(CONCAT('用户', i), '24736743@qq.com', CONCAT('18', FLOOR(RAND()*(999999999-100000000)+100000000)),FLOOR(RAND()*2),UUID(), FLOOR(RAND()*100));
+  SET i = i + 1;
+END WHILE;
+RETURN i;
+END;
+SELECT mock_data();
+```
+
+**索引效率测试**
+
+无索引
+
+```sql
+SELECT * FROM app_user WHERE name = '用户9999'; -- Total Time     : 1.538 sec
+
+EXPLAIN SELECT * FROM app_user WHERE name = '用户9999';
+
+/*
+          id: 1
+select_type: SIMPLE
+       table: app_user
+  partitions: NULL
+        type: ALL
+possible_keys: NULL
+        key: NULL
+    key_len: NULL
+        ref: NULL
+        rows: 992759
+    filtered: 10.00
+      Extra: Using where
+*/
+```
+
+创建索引
+
+```sql
+CREATE INDEX idx_app_user_name ON app_user(name);
+```
+
+测试普通索引
+
+```sql
+SELECT * FROM app_user WHERE name = '用户9999'
+-- Total Time     : 0.011 sec
+
+EXPLAIN SELECT * FROM app_user WHERE name = '用户9999'
+
+/*
+          id: 1
+select_type: SIMPLE
+       table: app_user
+  partitions: NULL
+        type: ref
+possible_keys: idx_app_user_name
+        key: idx_app_user_name
+    key_len: 203
+        ref: const
+        rows: 1
+    filtered: 100.00
+      Extra: NULL
+*/
+```
+
+### 索引准则
+
+- 索引不是越多越好
+- 不要对经常变动的数据加索引
+- **小数据量的表建议不要加索引**
+- 索引一般应加在常用来查询的字段上
+
+### 索引的数据结构
+
+我们可以在创建上述索引的时候，为其指定索引类型，分两类
++ hash类型的索引：查询单条快，范围查询慢
++ btree类型的索引：b+树，层数越多，数据量指数级增长（我们就用它，因为innodb默认支持它）
++ -- 不同的存储引擎支持的索引类型也不一样
+  InnoDB 支持事务，支持行级别锁定，支持 B-tree、Full-text 等索引，不支持 Hash 索引；
+  MyISAM 不支持事务，支持表级别锁定，支持 B-tree、Full-text 等索引，不支持 Hash 索引；
+  Memory 不支持事务，支持表级别锁定，支持 B-tree、Hash 等索引，不支持 Full-text 索引；
+  NDB 支持事务，支持行级别锁定，支持 Hash 索引，不支持 B-tree、Full-text 等索引；
+  Archive 不支持事务，支持表级别锁定，不支持 B-tree、Hash、Full-text等索引
+
+```
+
+
+-- 不同的存储引擎支持的索引类型也不一样
+InnoDB 支持事务，支持行级别锁定，支持 B-tree、Full-text 等索引，不支持 Hash 索引；
+MyISAM 不支持事务，支持表级别锁定，支持 B-tree、Full-text 等索引，不支持 Hash 索引；
+Memory 不支持事务，支持表级别锁定，支持 B-tree、Hash 等索引，不支持 Full-text 索引；
+NDB 支持事务，支持行级别锁定，支持 Hash 索引，不支持 B-tree、Full-text 等索引；
+Archive 不支持事务，支持表级别锁定，不支持 B-tree、Hash、Full-text等索引；
+```
+
+## 用户管理
+
+> 使用SQLyog 创建用户，并授予权限演示
+
+![img](https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Jf7deolwQa44rXvicIhXZ0NGL4sZKg8nicBGrYlEBJh1V3ymJ4WzBx9zXsIZyPYFADJBzn0ibCmgiauA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+
+> 基本命令
+
+```
+/* 用户和权限管理 */ ------------------
+用户信息表：mysql.user
+
+-- 刷新权限
+FLUSH PRIVILEGES
+
+-- 增加用户 CREATE USER kuangshen IDENTIFIED BY '123456'
+CREATE USER 用户名 IDENTIFIED BY [PASSWORD] 密码(字符串)
+  - 必须拥有mysql数据库的全局CREATE USER权限，或拥有INSERT权限。
+  - 只能创建用户，不能赋予权限。
+  - 用户名，注意引号：如 'user_name'@'192.168.1.1'
+  - 密码也需引号，纯数字密码也要加引号
+  - 要在纯文本中指定密码，需忽略PASSWORD关键词。要把密码指定为由PASSWORD()函数返回的混编值，需包含关键字PASSWORD
+
+-- 重命名用户 RENAME USER kuangshen TO kuangshen2
+RENAME USER old_user TO new_user
+
+-- 设置密码
+SET PASSWORD = PASSWORD('密码')    -- 为当前用户设置密码
+SET PASSWORD FOR 用户名 = PASSWORD('密码')    -- 为指定用户设置密码
+
+-- 删除用户 DROP USER kuangshen2
+DROP USER 用户名
+
+-- 分配权限/添加用户
+GRANT 权限列表 ON 表名 TO 用户名 [IDENTIFIED BY [PASSWORD]'password']
+  - all privileges 表示所有权限
+  - *.* 表示所有库的所有表
+  - 库名.表名 表示某库下面的某表
+
+-- 查看权限   SHOW GRANTS FOR root@localhost;
+SHOW GRANTS FOR 用户名
+   -- 查看当前用户权限
+  SHOW GRANTS; 或 SHOW GRANTS FOR CURRENT_USER; 或 SHOW GRANTS FOR CURRENT_USER();
+
+-- 撤消权限
+REVOKE 权限列表 ON 表名 FROM 用户名
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM 用户名    -- 撤销所有权限
+```
+
+> 权限解释
+
+```
+-- 权限列表
+ALL [PRIVILEGES]    -- 设置除GRANT OPTION之外的所有简单权限
+ALTER    -- 允许使用ALTER TABLE
+ALTER ROUTINE    -- 更改或取消已存储的子程序
+CREATE    -- 允许使用CREATE TABLE
+CREATE ROUTINE    -- 创建已存储的子程序
+CREATE TEMPORARY TABLES        -- 允许使用CREATE TEMPORARY TABLE
+CREATE USER        -- 允许使用CREATE USER, DROP USER, RENAME USER和REVOKE ALL PRIVILEGES。
+CREATE VIEW        -- 允许使用CREATE VIEW
+DELETE    -- 允许使用DELETE
+DROP    -- 允许使用DROP TABLE
+EXECUTE        -- 允许用户运行已存储的子程序
+FILE    -- 允许使用SELECT...INTO OUTFILE和LOAD DATA INFILE
+INDEX     -- 允许使用CREATE INDEX和DROP INDEX
+INSERT    -- 允许使用INSERT
+LOCK TABLES        -- 允许对您拥有SELECT权限的表使用LOCK TABLES
+PROCESS     -- 允许使用SHOW FULL PROCESSLIST
+REFERENCES    -- 未被实施
+RELOAD    -- 允许使用FLUSH
+REPLICATION CLIENT    -- 允许用户询问从属服务器或主服务器的地址
+REPLICATION SLAVE    -- 用于复制型从属服务器（从主服务器中读取二进制日志事件）
+SELECT    -- 允许使用SELECT
+SHOW DATABASES    -- 显示所有数据库
+SHOW VIEW    -- 允许使用SHOW CREATE VIEW
+SHUTDOWN    -- 允许使用mysqladmin shutdown
+SUPER    -- 允许使用CHANGE MASTER, KILL, PURGE MASTER LOGS和SET GLOBAL语句，mysqladmin debug命令；允许您连接（一次），即使已达到max_connections。
+UPDATE    -- 允许使用UPDATE
+USAGE    -- “无权限”的同义词
+GRANT OPTION    -- 允许授予权限
+
+
+/* 表维护 */
+
+-- 分析和存储表的关键字分布
+ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE 表名 ...
+-- 检查一个或多个表是否有错误
+CHECK TABLE tbl_name [, tbl_name] ... [option] ...
+option = {QUICK | FAST | MEDIUM | EXTENDED | CHANGED}
+-- 整理数据文件的碎片
+OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...
+```
+
+
+
+### MySQL备份
+
+数据库备份必要性
+
+- 保证重要数据不丢失
+- 数据转移
+
+MySQL数据库备份方法
+
+- mysqldump备份工具
+- 数据库管理工具,如SQLyog
+- 直接拷贝数据库文件和相关配置文件
+
+**mysqldump客户端**
+
+作用 :
+
+- 转储数据库
+- 搜集数据库进行备份
+- 将数据转移到另一个SQL服务器,不一定是MySQL服务器
+
+![img](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+
+```
+-- 导出
+1. 导出一张表 -- mysqldump -uroot -p123456 school student >D:/a.sql
+　　mysqldump -u用户名 -p密码 库名 表名 > 文件名(D:/a.sql)
+2. 导出多张表 -- mysqldump -uroot -p123456 school student result >D:/a.sql
+　　mysqldump -u用户名 -p密码 库名 表1 表2 表3 > 文件名(D:/a.sql)
+3. 导出所有表 -- mysqldump -uroot -p123456 school >D:/a.sql
+　　mysqldump -u用户名 -p密码 库名 > 文件名(D:/a.sql)
+4. 导出一个库 -- mysqldump -uroot -p123456 -B school >D:/a.sql
+　　mysqldump -u用户名 -p密码 -B 库名 > 文件名(D:/a.sql)
+
+可以-w携带备份条件
+
+-- 导入
+1. 在登录mysql的情况下：-- source D:/a.sql
+　　source 备份文件
+2. 在不登录的情况下
+　　mysql -u用户名 -p密码 库名 < 备份文件
+```
+
+
+
+## 规范化数据库设计
+
+### 为什么需要数据库设计
+
+**当数据库比较复杂时我们需要设计数据库**
+
+**糟糕的数据库设计 :** 
+
+- 数据冗余,存储空间浪费
+- 数据更新和插入的异常
+- 程序性能差
+
+**良好的数据库设计 :** 
+
+- 节省数据的存储空间
+- 能够保证数据的完整性
+- 方便进行数据库应用系统的开发
+
+ **软件项目开发周期中数据库设计 :**
+
+- 需求分析阶段: 分析客户的业务和数据处理需求
+- 概要设计阶段:设计数据库的E-R模型图 , 确认需求信息的正确和完整.
+
+**设计数据库步骤**
+
+- 收集信息
+
+- - 与该系统有关人员进行交流 , 座谈 , 充分了解用户需求 , 理解数据库需要完成的任务.
+
+- 标识实体[Entity]
+
+- 
+
+- - 标识数据库要管理的关键对象或实体,实体一般是名词
+
+- 标识每个实体需要存储的详细信息[Attribute]
+
+- 标识实体之间的关系[Relationship]
+
+
+
+### 三大范式
+
+**问题 : 为什么需要数据规范化?**
+
+不合规范的表设计会导致的问题：
+
+- 信息重复
+
+- 更新异常
+
+- 插入异常
+
+- - 无法正确表示信息
+
+- 删除异常
+
+- - 丢失有效信息
+
+> 三大范式
+
+**第一范式 (1st NF)**
+
+第一范式的目标是确保每列的原子性,如果每列都是不可再分的最小数据单元,则满足第一范式
+
+**第二范式(2nd NF)**
+
+第二范式（2NF）是在第一范式（1NF）的基础上建立起来的，即满足第二范式（2NF）必须先满足第一范式（1NF）。
+
+第二范式要求每个表只描述一件事情
+
+**第三范式(3rd NF)**
+
+如果一个关系满足第二范式,并且除了主键以外的其他列都不传递依赖于主键列,则满足第三范式.
+
+第三范式需要确保数据表中的每一列数据都和主键直接相关，而不能间接相关。
+
+
+
+**规范化和性能的关系**
+
+为满足某种商业目标 , 数据库性能比规范化数据库更重要
+
+在数据规范化的同时 , 要综合考虑数据库的性能
+
+通过在给定的表中添加额外的字段,以大量减少需要从中搜索信息所需的时间
+
+通过在给定的表中插入计算列,以方便查询
 
 
 
