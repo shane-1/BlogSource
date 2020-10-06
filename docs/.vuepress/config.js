@@ -92,27 +92,11 @@ module.exports = {
           }
         }
       ],
-    ],
-  }
-  module.exports = {
-    plugins: [
       [
         '@vuepress/google-analytics',
         {
           'ga': 'UA-179730919-1' // UA-00000000-0
         }
       ]
-    ]
+    ],
   }
-    //google-analytics
-    // ,
-    // plugins: [
-    //   [
-    //     '@vuepress/google-analytics',
-    //     {
-    //       'ga': '' // UA-00000000-0
-    //     }
-    //   ]
-    // ]
-
- 
