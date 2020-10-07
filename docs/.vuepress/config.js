@@ -23,6 +23,7 @@ module.exports = {
           text: 'Java', 
           items :[
             {text:'Java基础',link:'/Java/Java.md'},
+            {text:'JDBC',link:'/Java/JDBC.md'},
             {text:'Spring',link:'/Java/Spring.md'},
             {text:'框架基础-注解和反射',link:'/Java/AnnotationReflection.md'},
             {text:'设计模式 DesignPattern',link:'/Java/DesignPattern.md'},

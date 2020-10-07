@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>JDBC | Viva la Vida</title>
+    <meta name="generator" content="VuePress 1.6.0">
+    <link rel="icon" href="/logo.png">
+    <meta name="description" content="Romain Rolland">
+    <link rel="preload" href="/assets/css/0.styles.5d996116.css" as="style"><link rel="preload" href="/assets/js/app.9efacacf.js" as="script"><link rel="preload" href="/assets/js/2.6633232e.js" as="script"><link rel="preload" href="/assets/js/12.5a16f362.js" as="script"><link rel="prefetch" href="/assets/js/10.1cf2659a.js"><link rel="prefetch" href="/assets/js/11.a94157bc.js"><link rel="prefetch" href="/assets/js/13.90b58c6e.js"><link rel="prefetch" href="/assets/js/14.61c89cc4.js"><link rel="prefetch" href="/assets/js/15.418a1007.js"><link rel="prefetch" href="/assets/js/16.f717270e.js"><link rel="prefetch" href="/assets/js/17.ff813185.js"><link rel="prefetch" href="/assets/js/18.b696684b.js"><link rel="prefetch" href="/assets/js/19.09b24868.js"><link rel="prefetch" href="/assets/js/20.793148a0.js"><link rel="prefetch" href="/assets/js/21.52609304.js"><link rel="prefetch" href="/assets/js/22.a70f77a6.js"><link rel="prefetch" href="/assets/js/23.efbd30bc.js"><link rel="prefetch" href="/assets/js/24.34e73634.js"><link rel="prefetch" href="/assets/js/25.842300a1.js"><link rel="prefetch" href="/assets/js/26.e5f1431c.js"><link rel="prefetch" href="/assets/js/27.f98b6df7.js"><link rel="prefetch" href="/assets/js/28.4e0aa83c.js"><link rel="prefetch" href="/assets/js/29.89b687c1.js"><link rel="prefetch" href="/assets/js/3.a6982fa3.js"><link rel="prefetch" href="/assets/js/30.6cf69e54.js"><link rel="prefetch" href="/assets/js/31.3cb634c3.js"><link rel="prefetch" href="/assets/js/4.73f91862.js"><link rel="prefetch" href="/assets/js/5.62cb2747.js"><link rel="prefetch" href="/assets/js/6.b8fe872d.js"><link rel="prefetch" href="/assets/js/7.b75fe2ca.js"><link rel="prefetch" href="/assets/js/8.eb6dd783.js"><link rel="prefetch" href="/assets/js/9.19ef3f6d.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.5d996116.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Viva la Vida</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Note" class="dropdown-title"><span class="title">Note</span> <span class="arrow down"></span></button> <button type="button" aria-label="Note" class="mobile-dropdown-title"><span class="title">Note</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Note/Markdown.html" class="nav-link">
+  Markdown
+</a></li><li class="dropdown-item"><!----> <a href="/Note/DBOM.html" class="nav-link">
+  Octave与Matlab的区别
+</a></li><li class="dropdown-item"><!----> <a href="/Note/Cmd.html" class="nav-link">
+  CMD Manual
+</a></li><li class="dropdown-item"><!----> <a href="/Note/MySQL.html" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/Note/IndexDS.html" class="nav-link">
+  MySQL索引背后的数据结构及算法原理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Java/Java.html" class="nav-link">
+  Java基础
+</a></li><li class="dropdown-item"><!----> <a href="/Java/JDBC.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  JDBC
+</a></li><li class="dropdown-item"><!----> <a href="/Java/Spring.html" class="nav-link">
+  Spring
+</a></li><li class="dropdown-item"><!----> <a href="/Java/AnnotationReflection.html" class="nav-link">
+  框架基础-注解和反射
+</a></li><li class="dropdown-item"><!----> <a href="/Java/DesignPattern.html" class="nav-link">
+  设计模式 DesignPattern
+</a></li><li class="dropdown-item"><!----> <a href="/Java/Multithread.html" class="nav-link">
+  多线程 Multithread
+</a></li><li class="dropdown-item"><!----> <a href="/Java/DevOpsThinking.html" class="nav-link">
+  DevOps 思想
+</a></li><li class="dropdown-item"><!----> <a href="/Java/DockerBase.html" class="nav-link">
+  Docker基础
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="ALGO" class="dropdown-title"><span class="title">ALGO</span> <span class="arrow down"></span></button> <button type="button" aria-label="ALGO" class="mobile-dropdown-title"><span class="title">ALGO</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/ALGO/KMP.html" class="nav-link">
+  KMP
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Python" class="dropdown-title"><span class="title">Python</span> <span class="arrow down"></span></button> <button type="button" aria-label="Python" class="mobile-dropdown-title"><span class="title">Python</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Python/ZenOfPython.html" class="nav-link">
+  The Zen of Python
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="ML" class="dropdown-title"><span class="title">ML</span> <span class="arrow down"></span></button> <button type="button" aria-label="ML" class="mobile-dropdown-title"><span class="title">ML</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/ML/TensorflowEnvironment.html" class="nav-link">
+  Tensorflow环境搭建指南
+</a></li><li class="dropdown-item"><!----> <a href="/ML/TensorflowError.html" class="nav-link">
+  Tensorflow常见报错解决
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Phil" class="dropdown-title"><span class="title">Phil</span> <span class="arrow down"></span></button> <button type="button" aria-label="Phil" class="mobile-dropdown-title"><span class="title">Phil</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Phil/WCHNS.html" class="nav-link">
+  中国为什么没有科学精神
+</a></li><li class="dropdown-item"><!----> <a href="/Phil/ENFP.html" class="nav-link">
+  ENFP
+</a></li><li class="dropdown-item"><!----> <a href="/Phil/Internet.html" class="nav-link">
+  从Internet说起
+</a></li></ul></div></div><div class="nav-item"><a href="/Meme/Meme.html" class="nav-link">
+  Meme
+</a></div><div class="nav-item"><a href="https://github.com/shane-1" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Note" class="dropdown-title"><span class="title">Note</span> <span class="arrow down"></span></button> <button type="button" aria-label="Note" class="mobile-dropdown-title"><span class="title">Note</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Note/Markdown.html" class="nav-link">
+  Markdown
+</a></li><li class="dropdown-item"><!----> <a href="/Note/DBOM.html" class="nav-link">
+  Octave与Matlab的区别
+</a></li><li class="dropdown-item"><!----> <a href="/Note/Cmd.html" class="nav-link">
+  CMD Manual
+</a></li><li class="dropdown-item"><!----> <a href="/Note/MySQL.html" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/Note/IndexDS.html" class="nav-link">
+  MySQL索引背后的数据结构及算法原理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Java/Java.html" class="nav-link">
+  Java基础
+</a></li><li class="dropdown-item"><!----> <a href="/Java/JDBC.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  JDBC
+</a></li><li class="dropdown-item"><!----> <a href="/Java/Spring.html" class="nav-link">
+  Spring
+</a></li><li class="dropdown-item"><!----> <a href="/Java/AnnotationReflection.html" class="nav-link">
+  框架基础-注解和反射
+</a></li><li class="dropdown-item"><!----> <a href="/Java/DesignPattern.html" class="nav-link">
+  设计模式 DesignPattern
+</a></li><li class="dropdown-item"><!----> <a href="/Java/Multithread.html" class="nav-link">
+  多线程 Multithread
+</a></li><li class="dropdown-item"><!----> <a href="/Java/DevOpsThinking.html" class="nav-link">
+  DevOps 思想
+</a></li><li class="dropdown-item"><!----> <a href="/Java/DockerBase.html" class="nav-link">
+  Docker基础
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="ALGO" class="dropdown-title"><span class="title">ALGO</span> <span class="arrow down"></span></button> <button type="button" aria-label="ALGO" class="mobile-dropdown-title"><span class="title">ALGO</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/ALGO/KMP.html" class="nav-link">
+  KMP
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Python" class="dropdown-title"><span class="title">Python</span> <span class="arrow down"></span></button> <button type="button" aria-label="Python" class="mobile-dropdown-title"><span class="title">Python</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Python/ZenOfPython.html" class="nav-link">
+  The Zen of Python
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="ML" class="dropdown-title"><span class="title">ML</span> <span class="arrow down"></span></button> <button type="button" aria-label="ML" class="mobile-dropdown-title"><span class="title">ML</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/ML/TensorflowEnvironment.html" class="nav-link">
+  Tensorflow环境搭建指南
+</a></li><li class="dropdown-item"><!----> <a href="/ML/TensorflowError.html" class="nav-link">
+  Tensorflow常见报错解决
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Phil" class="dropdown-title"><span class="title">Phil</span> <span class="arrow down"></span></button> <button type="button" aria-label="Phil" class="mobile-dropdown-title"><span class="title">Phil</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Phil/WCHNS.html" class="nav-link">
+  中国为什么没有科学精神
+</a></li><li class="dropdown-item"><!----> <a href="/Phil/ENFP.html" class="nav-link">
+  ENFP
+</a></li><li class="dropdown-item"><!----> <a href="/Phil/Internet.html" class="nav-link">
+  从Internet说起
+</a></li></ul></div></div><div class="nav-item"><a href="/Meme/Meme.html" class="nav-link">
+  Meme
+</a></div><div class="nav-item"><a href="https://github.com/shane-1" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>JDBC</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Java/JDBC.html#数据库驱动" class="sidebar-link">数据库驱动</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Java/JDBC.html#jdbc-2" class="sidebar-link">JDBC</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Java/JDBC.html#第一个jdbc程序" class="sidebar-link">第一个JDBC程序</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Java/JDBC.html#代码" class="sidebar-link">代码</a></li><li class="sidebar-sub-header"><a href="/Java/JDBC.html#注意" class="sidebar-link">注意:</a></li><li class="sidebar-sub-header"><a href="/Java/JDBC.html#步骤总结" class="sidebar-link">步骤总结</a></li></ul></li><li><a href="/Java/JDBC.html#数据库驱动-2" class="sidebar-link">数据库驱动</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Java/JDBC.html#url" class="sidebar-link">URL</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Java/JDBC.html#connection" class="sidebar-link">Connection</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Java/JDBC.html#statement-preparestatement" class="sidebar-link">Statement&amp;PrepareStatement</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Java/JDBC.html#resultset" class="sidebar-link">ResultSet</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Java/JDBC.html#释放资源" class="sidebar-link">释放资源</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Java/JDBC.html#自定义数据库工具类" class="sidebar-link">自定义数据库工具类</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Java/JDBC.html#测试工具类" class="sidebar-link">测试工具类</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="jdbc"><a href="#jdbc" class="header-anchor">#</a> JDBC</h1> <h2 id="数据库驱动"><a href="#数据库驱动" class="header-anchor">#</a> 数据库驱动</h2> <p>程序通过数据库驱动和数据库交互</p> <h2 id="jdbc-2"><a href="#jdbc-2" class="header-anchor">#</a> JDBC</h2> <p>SUN公司为了简化开发人员的(对数据库统一的)操作,提供了一个Java操作数据库的规范,俗称JDBC</p> <p>这些规范的实现由具体的厂商去实现</p> <p>对于开发人员来说,我们只需要掌握JDBC接口的操作即可</p> <blockquote><p>java.sql</p> <p>javax.sql</p></blockquote> <p>还需要导入一个数据库驱动包</p> <p><code>mysql-connector-java-5.1.47.jar</code></p> <h2 id="第一个jdbc程序"><a href="#第一个jdbc程序" class="header-anchor">#</a> 第一个JDBC程序</h2> <h3 id="代码"><a href="#代码" class="header-anchor">#</a> 代码</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> JDBC<span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ClassNotFoundException</span><span class="token punctuation">,</span> <span class="token class-name">SQLException</span><span class="token punctuation">{</span>
+        
+        <span class="token comment">//1.加载驱动</span>
+        <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forNAme</span><span class="token punctuation">(</span><span class="token string">&quot;com.mysql.jdbc.Driver&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//固定写法</span>
+        
+        <span class="token comment">//2.用户信息和url</span>
+		<span class="token class-name">String</span> url <span class="token operator">=</span> <span class="token string">&quot;jdbc:mysql://localhost:3306/DateBaseName?useUnicode=true&amp;characterEncoding=utf9&amp;useSSL=true&quot;</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> username <span class="token operator">=</span> <span class="token string">&quot;root&quot;</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> password <span class="token operator">=</span> <span class="token string">&quot;123456&quot;</span><span class="token punctuation">;</span>
+            
+        <span class="token comment">//3.连接成功,数据库对象</span>
+        <span class="token class-name">Connection</span> connection <span class="token operator">=</span> <span class="token class-name">DriverManager</span><span class="token punctuation">.</span><span class="token function">getConnection</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span>username<span class="token punctuation">,</span>password<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">//4.执行sql的对象</span>
+        <span class="token class-name">Statement</span> statement <span class="token operator">=</span> connection<span class="token punctuation">.</span><span class="token function">createStatement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">//5.执行sql的对象去执行sql,可能存在结构,查看返回结果</span>
+        <span class="token class-name">String</span> sql <span class="token operator">=</span> <span class="token string">&quot;SELECT * FROM users&quot;</span><span class="token punctuation">;</span>
+        <span class="token class-name">ResultSet</span> resultSet <span class="token operator">=</span> statement<span class="token punctuation">.</span><span class="token function">executeQuery</span><span class="token punctuation">(</span>sql<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//返回的结果集,为链表</span>
+        
+        <span class="token keyword">while</span><span class="token punctuation">(</span>resultSet<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;id=&quot;</span> <span class="token operator">+</span> resultSet<span class="token punctuation">.</span><span class="token function">getObeject</span><span class="token punctuation">(</span>columnLabel<span class="token operator">:</span><span class="token string">&quot;id&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;name=&quot;</span> <span class="token operator">+</span> resultSet<span class="token punctuation">.</span><span class="token function">getObeject</span><span class="token punctuation">(</span>columnLabel<span class="token operator">:</span><span class="token string">&quot;NAME&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   
+         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;pwd=&quot;</span> <span class="token operator">+</span> resultSet<span class="token punctuation">.</span><span class="token function">getObeject</span><span class="token punctuation">(</span>columnLabel<span class="token operator">:</span><span class="token string">&quot;PASSWORD&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      
+        <span class="token punctuation">}</span>
+        <span class="token comment">//6.释放连接</span>
+        resultSet<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        statement<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        connection<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="注意"><a href="#注意" class="header-anchor">#</a> 注意:</h3> <blockquote><p>时区问题加&amp;serverTimezone=GMT%2B8</p> <p>ssl报错是因为5.7.28以后的版本才真正支持ssl,但应用服务器没有提供验证出错,可以提供truststore或关闭ssl解决</p> <p>8.0的sql驱动为com.mysql.cj.jdbc.driver</p></blockquote> <h3 id="步骤总结"><a href="#步骤总结" class="header-anchor">#</a> 步骤总结</h3> <ol><li>加载驱动</li> <li>连接数据库 DriverManage</li> <li>获取执行sql的对象 Statement</li> <li>获得返回的结果集</li> <li>释放连接</li></ol> <h2 id="数据库驱动-2"><a href="#数据库驱动-2" class="header-anchor">#</a> 数据库驱动</h2> <div class="language-sql extra-class"><pre class="language-sql"><code>DiverManager<span class="token punctuation">.</span>registerDriver<span class="token punctuation">(</span>new com<span class="token punctuation">.</span>mysql<span class="token punctuation">.</span>jdbc<span class="token punctuation">.</span>Driver<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      
+<span class="token comment">// 不建议这样使用,因为注册相关代码为静态代码块,类被加载就已经注册,这样写等同于注册了两次驱动</span>
+
+<span class="token comment">//推荐写法(利用反射)</span>
+ Class<span class="token punctuation">.</span>forNAme<span class="token punctuation">(</span><span class="token string">&quot;com.mysql.jdbc.Driver&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//固定写法</span>
+</code></pre></div><h2 id="url"><a href="#url" class="header-anchor">#</a> URL</h2> <p><code>String url = &quot;jdbc:mysql://localhost:3306/DateBaseName?useUnicode=true&amp;characterEncoding=utf9&amp;useSSL=true&quot;;</code></p> <p>jdbc:mysql://主机地址:端口号/数据库名?参数1&amp;参数2&amp;参数3</p> <blockquote><p>默认mysql端口3306,Oracle1521,sqlServer1433;</p> <p>Oracle:  jdbc:oracle:thin:@localhost:1521:sid</p></blockquote> <h2 id="connection"><a href="#connection" class="header-anchor">#</a> Connection</h2> <p><code>Connection connection = DriverManager.getConnection(url,username,password);</code></p> <p>connection代表数据库</p> <p>该层可以设置自动提交\事务提交\事务回滚等数据库层能做的事</p> <h2 id="statement-preparestatement"><a href="#statement-preparestatement" class="header-anchor">#</a> Statement&amp;PrepareStatement</h2> <p><strong>jdbc中的statement对象用于向数据库发送SQL语句,想完成对数据库的增删改查,只需要通过这个对象向狙击发送增删改查语句即可.</strong></p> <p><code>Statement statement = connection.createStatement();</code></p> <ul><li><code>statement.executeQuery();</code>查询操作返回ResultSet</li> <li><code>statement.execute();</code>执行任何sql</li> <li><code>statement.executeUpdate();</code> 更新\插入\删除,都是用这个,返回一个受影响的行数</li></ul> <h2 id="resultset"><a href="#resultset" class="header-anchor">#</a> ResultSet</h2> <p>ResultSet查询结果集:封装了所有的查询结果</p> <p>在不知道列类型情况下使用</p> <div class="language-java extra-class"><pre class="language-java"><code>resultSet<span class="token punctuation">.</span><span class="token function">getObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>在知道了列类型时,获得指定的类型</p> <div class="language-java extra-class"><pre class="language-java"><code>resultSet<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+resultSet<span class="token punctuation">.</span><span class="token function">getInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+resultSet<span class="token punctuation">.</span><span class="token function">getFloat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+resultSet<span class="token punctuation">.</span><span class="token function">getDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre></div><p>注意:结果集结构上为双向链表</p> <ol><li><code>resultSet.beforeFirst();</code>:移动到最前面</li> <li><code>resultSet.afterLast();</code>:移动到最后面</li> <li><code>resultSet.next();</code>:移动到下一个数据</li> <li><code>resultSet.previous();</code>:移动到前一行</li> <li><code>resultSet.absolute(row);</code>:移动到指定行</li></ol> <div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">//一般使用while遍历</span>
+<span class="token keyword">while</span><span class="token punctuation">(</span>resultSet<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="释放资源"><a href="#释放资源" class="header-anchor">#</a> 释放资源</h2> <h2 id="自定义数据库工具类"><a href="#自定义数据库工具类" class="header-anchor">#</a> 自定义数据库工具类</h2> <p>//将数据库资源配置解耦,单独存放于src目录下的db.properties文件</p> <div class="language- extra-class"><pre class="language-text"><code>driver=com.mysql.jdbc.Driver
+url=jdbc:mysql://localhost:3306/DateBaseName?useUnicode=true&amp;characterEncoding=utf9&amp;useSSL=true
+username=root
+password=123456
+</code></pre></div><div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">//将数据库资源配置解耦,单独存放于src目录下的db.properties文件</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">InputStream</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Properties</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JdbcUtils</span> <span class="token keyword">throws</span> <span class="token class-name">ClassNotFoundException</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">String</span> driver <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">String</span> url <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">String</span> username <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">String</span> password <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">static</span><span class="token punctuation">{</span>
+        <span class="token keyword">try</span><span class="token punctuation">{</span>
+            <span class="token class-name">InputStream</span> in <span class="token operator">=</span> <span class="token class-name">JdbcUtils</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getResourceAsStream</span><span class="token punctuation">(</span><span class="token string">&quot;db.properties&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">Properties</span> properties <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Properties</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            properties<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+            driver <span class="token operator">=</span> properties<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">&quot;driver&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            url <span class="token operator">=</span> properties<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">&quot;url&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            username <span class="token operator">=</span> properties<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">&quot;username&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            password <span class="token operator">=</span> properties<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">&quot;password&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+            <span class="token comment">//1.加载驱动(只加载一次)</span>
+            <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span>driver<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        	e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">//获取连接</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Connection</span> <span class="token function">getConnection</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">SQLException</span><span class="token punctuation">{</span>
+    	<span class="token keyword">return</span> <span class="token class-name">Connection</span> connection <span class="token operator">=</span> <span class="token class-name">DriverManager</span><span class="token punctuation">.</span><span class="token function">getConnection</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span>username<span class="token punctuation">,</span>password<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">//释放连接资源</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">release</span><span class="token punctuation">(</span><span class="token class-name">Connection</span> connection<span class="token punctuation">,</span> <span class="token class-name">Statement</span> statement<span class="token punctuation">,</span> <span class="token class-name">ResultSet</span> resultSet<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    	<span class="token keyword">if</span><span class="token punctuation">(</span>resultset <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">try</span><span class="token punctuation">{</span>
+                resultSet<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>statement <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">try</span><span class="token punctuation">{</span>
+                statement<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>connection <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">try</span><span class="token punctuation">{</span>
+                connection<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="测试工具类"><a href="#测试工具类" class="header-anchor">#</a> 测试工具类</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>sahne<span class="token punctuation">.</span>utils<span class="token punctuation">.</span></span><span class="token class-name">JdbcUtils</span><span class="token punctuation">;</span> <span class="token comment">//导入自定义工具类</span>
+
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token operator">*</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span><span class="token punctuation">{</span>
+	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    
+        <span class="token class-name">Connection</span> connection <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token class-name">Statement</span> statement <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token class-name">ResultSet</span> resultSet <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span><span class="token punctuation">{</span>
+            connection <span class="token operator">=</span> <span class="token class-name">JdbcUtils</span><span class="token punctuation">.</span><span class="token function">getConnection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//获取数据库连接</span>
+            statement <span class="token operator">=</span> connection<span class="token punctuation">.</span><span class="token class-name">CreateStatement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//创建SQL执行对象</span>
+            <span class="token class-name">String</span> sql <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> i <span class="token operator">=</span> statement<span class="token punctuation">.</span><span class="token function">executeUpdate</span><span class="token punctuation">(</span>sql<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//假设sql内容为插入,返回受影响行(删改同理)</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>i <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;插入成功~&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            resultSet <span class="token operator">=</span> statement<span class="token punctuation">.</span><span class="token function">executeQuery</span><span class="token punctuation">(</span>sql<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//假设sql为查询</span>
+            	<span class="token keyword">while</span><span class="token punctuation">(</span>resultSet<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        		 <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;id=&quot;</span> <span class="token operator">+</span> resultSet<span class="token punctuation">.</span><span class="token function">getObeject</span><span class="token punctuation">(</span>columnLabel<span class="token operator">:</span><span class="token string">&quot;id&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        		 <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;name=&quot;</span> <span class="token operator">+</span> resultSet<span class="token punctuation">.</span><span class="token function">getObeject</span><span class="token punctuation">(</span>columnLabel<span class="token operator">:</span><span class="token string">&quot;NAME&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   
+       		     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;pwd=&quot;</span> <span class="token operator">+</span> resultSet<span class="token punctuation">.</span><span class="token function">getObeject</span><span class="token punctuation">(</span>columnLabel<span class="token operator">:</span><span class="token string">&quot;PASSWORD&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      
+      			  <span class="token punctuation">}</span>    
+        <span class="token punctuation">}</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">finally</span><span class="token punctuation">{</span>
+            <span class="token class-name">JdbcUtils</span><span class="token punctuation">.</span><span class="token function">release</span><span class="token punctuation">(</span>connection<span class="token punctuation">,</span>statement<span class="token punctuation">,</span>resultSet<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        
+    <span class="token punctuation">}</span>
+    
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/shane-1/edit/blob/master/docs/Java/JDBC.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <!----> </main></div><div class="global-ui"><div></div></div></div>
+    <script src="/assets/js/app.9efacacf.js" defer></script><script src="/assets/js/2.6633232e.js" defer></script><script src="/assets/js/12.5a16f362.js" defer></script>
+  </body>
+</html>
