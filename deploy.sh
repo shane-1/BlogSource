@@ -8,6 +8,7 @@ cd docs/.vuepress/dist
 git init
 git config user.name "shane-1"
 git config user.email "qq1217232433@outlook.com"
+cp C:/Users/qq121/Desktop/doc/Git/Blog/googlefc62804cfc44bb36.html C:/Users/qq121/Desktop/doc/Git/Blog/docs/.vuepress/dist/
 git add *
 #git add C:/Users/qq121/Desktop/doc/Git/Blog/googlefc62804cfc44bb36.html
 git commit -m 'version 2.0'
