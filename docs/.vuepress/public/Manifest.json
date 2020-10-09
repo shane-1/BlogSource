@@ -1,16 +1,16 @@
 {
   "name": "Viva la Vida",
-  "short_name": "VLV",
+  "short_name": "V'Blog",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#3711f3",
   "description": "shane's blog",
-  "theme_color": "red",
+  "theme_color": "white",
   "icons": [
     {
-      "src": "./rick.png",
+      "src": "./rick.jpg",
       "sizes": "144x144",
-      "type": "image/png"
+      "type": "image/jpg"
     }
   ],
   "related_applications": [
