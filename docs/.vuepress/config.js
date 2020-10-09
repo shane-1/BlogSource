@@ -64,7 +64,7 @@ module.exports = {
         { text: 'Github', link: 'https://github.com/shane-1' },
       ],
       sidebar: 'auto',
-      auto_to_top:
+      back_to_top:'true',
 
     // 假如你的文档仓库和项目本身不在一个仓库：
     docsRepo: 'https://github.com/shane-1/',
@@ -79,6 +79,7 @@ module.exports = {
         
       
     },
+    plugins: ['@vuepress/back-to-top'],
     plugins: [
       ['@vuepress/active-header-links', 
       {
