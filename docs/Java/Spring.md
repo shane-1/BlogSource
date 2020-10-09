@@ -463,3 +463,8 @@ prop.driverClass=com.mysql.jdbc.Driver
 	@Resource注解要求提供一个bean名称的属性，若该属性为空，则自动采用标注处的变量或方法名作为bean的名称。
 5.	@Inject
 	@Inject和@Autowired注解一样也是按类型注入匹配的bean，但没有reqired属性。
+
+
+---
+
+整理不易，转载请注明出处。

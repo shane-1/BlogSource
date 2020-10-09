@@ -86,5 +86,8 @@ INSERT INTO 'user'{'id', 'name', 'pwd'} VALUES
 
 
 
+---
+
+整理不易，转载请注明出处。
 
 
