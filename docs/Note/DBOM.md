@@ -68,7 +68,9 @@ A = rand (1,
 A = rand (1, \
         2) ;
 ```
+
 ## if、for等环境的结束符
+
 Octave用
 `end{if,for, ...}`<br>
 而MatLab则统一用 `end`。
