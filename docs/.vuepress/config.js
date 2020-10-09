@@ -5,7 +5,7 @@ module.exports = {
     smoothScroll: true,
     head: [
         ["link", { rel:"icon", href:"/logo.png"}],
-        ['link', { rel: 'manifest', href: '/manifest.json' }],
+        ['link', { rel: 'manifest', href: '/Manifest.json' }],
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
@@ -64,6 +64,7 @@ module.exports = {
         { text: 'Github', link: 'https://github.com/shane-1' },
       ],
       sidebar: 'auto',
+      auto_to_top:
 
     // 假如你的文档仓库和项目本身不在一个仓库：
     docsRepo: 'https://github.com/shane-1/',
@@ -91,7 +92,7 @@ module.exports = {
         updatePopup: {
             message: "有新的内容更新",
             buttonText: "刷新"
-          }}
+          }},
   ],
       [
         'vuepress-plugin-mygitalk', {
