@@ -71,6 +71,16 @@ module.exports = {
       
     },
     plugins: [
+      ['@vuepress/active-header-links', 
+      {
+        sidebarLinkSelector: '.sidebar-link',
+        headerAnchorSelector: '.header-anchor'
+    }],
+
+    [
+      '@vuepress/back-to-top', {'true'}
+    ],
+    []
       [
         'vuepress-plugin-mygitalk', {
           // 是否启用(关闭请设置为false)(default: true)
