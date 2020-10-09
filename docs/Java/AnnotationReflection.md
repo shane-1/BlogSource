@@ -733,3 +733,7 @@ class Student{
 发布时间:2015年06月24日<br>
 原始链接:http://www.sczyh30.com/posts/Java/java-reflection-1/<br>
 许可协议: "知识共享-保持署名-非商用-相同方式共享 4.0" 转载请保留原文链接及作者。
+
+---
+
+整理不易，转载请注明出处。

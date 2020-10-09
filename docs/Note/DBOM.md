@@ -71,8 +71,10 @@ A = rand (1, \
 
 ## if、for等环境的结束符
 
-Octave用
-`end{if,for, ...}`<br>
+Octave用`end{if,for, ...}`
+
 而MatLab则统一用 `end`。
+
 ---
+
 整理不易，转载请注明出处。
