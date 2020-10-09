@@ -78,8 +78,7 @@ module.exports = {
     }],
 
     [
-      '@vuepress/back-to-top',{'back-to-top':'true'
-    }
+      '@vuepress/back-to-top',true
   ],
       [
         'vuepress-plugin-mygitalk', {
