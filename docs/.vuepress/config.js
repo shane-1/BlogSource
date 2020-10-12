@@ -1,6 +1,6 @@
 module.exports = {
     title: 'Viva la Vida',  // 设置网站标题
-    description : 'Shane\'s Blog',
+    description : 'Romain Rolland',
     //图标
     smoothScroll: true,
     head: [
@@ -26,7 +26,7 @@ module.exports = {
           {text:'CMD Manual',link:'/Note/Cmd.md'},
           {text:'MySQL',link:'/Note/MySQL.md'},
           {text:'MySQL索引背后的数据结构及算法原理',link:'/Note/IndexDS.md'},
-          {text:'PWA介绍及快速上手搭建一个PWA应用',link:'/Note/PWA.md'}
+          {text:'PWA介绍及快速上手搭建',link:'/Note/PWA.md'}
         ]},
         { 
           text: 'Java', 
@@ -92,8 +92,8 @@ module.exports = {
       '@vuepress/pwa', {
         serviceWorker: true,
         updatePopup: {
-            message: "有新的内容更新",
-            buttonText: "刷新"
+            message: "有新的内容更新 & Blog has change",
+            buttonText: "Refresh"
           }},
   ],
       [
