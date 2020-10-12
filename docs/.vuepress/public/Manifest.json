@@ -8,9 +8,9 @@
   "theme_color": "white",
   "icons": [
     {
-      "src": "./rick.jpg",
+      "src": "./rick1.png",
       "sizes": "144x144",
-      "type": "image/jpg"
+      "type": "image/png"
     }
   ],
   "related_applications": [
