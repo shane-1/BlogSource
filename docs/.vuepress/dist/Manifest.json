@@ -1,9 +1,9 @@
 {
   "name": "Viva la Vida",
-  "short_name": "V'Blog",
+  "short_name": "S'Blog",
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#77913",
+  "background_color": "#779103",
   "description": "shane's blog",
   "theme_color": "white",
   "icons": [

@@ -1,18 +1,18 @@
 module.exports = {
     title: 'Viva la Vida',  // 设置网站标题
-    description : 'Romain Rolland',
+    description : 'Shane\'s Blog',
     //图标
     smoothScroll: true,
     head: [
         ["link", { rel:"icon", href:"/logo.png"}],
         ['link', { rel: 'manifest', href: '/Manifest.json' }],
-    ['meta', { name: 'theme-color', content: '                                                                                                ' }],
+    ['meta', { name: 'theme-color', content: '                                                                                             ' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
-    ['link', { rel: 'apple-touch-icon', href: '/icons/apple-touch-icon-152x152.png' }],
-    ['link', { rel: 'mask-icon', href: '/icons/safari-pinned-tab.svg', color: '#3eaf7c' }],
-    ['meta', { name: 'msapplication-TileImage', content: '/icons/msapplication-icon-144x144.png' }],
-    ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
+    ['link', { rel: 'apple-touch-icon', href: '/rick1.png' }],
+    ['link', { rel: 'mask-icon', href: '/rick.svg', color: '#3eaf7c' }],
+    ['meta', { name: 'msapplication-TileImage', content: '/rick1.png' }],
+    ['meta', { name: 'msapplication-TileColor', content: '#FFFFFF' }]
     ],
     themeConfig: {
       lastUpdated:'Last Updated',
@@ -25,7 +25,8 @@ module.exports = {
           {text:'Octave与Matlab的区别',link:'/Note/DBOM.md'},
           {text:'CMD Manual',link:'/Note/Cmd.md'},
           {text:'MySQL',link:'/Note/MySQL.md'},
-          {text:'MySQL索引背后的数据结构及算法原理',link:'/Note/IndexDS.md'}
+          {text:'MySQL索引背后的数据结构及算法原理',link:'/Note/IndexDS.md'},
+          {text:'PWA介绍及快速上手搭建一个PWA应用',link:'/Note/PWA.md'}
         ]},
         { 
           text: 'Java', 
