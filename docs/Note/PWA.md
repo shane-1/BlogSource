@@ -40,11 +40,11 @@ SW 是什么呢？这个是离线缓存文件。我们 PWA 技术使用的就是
 
 顺便带一句：目前只能在 HTTPS 环境下才能使用SW，因为SW 的权利比较大，能够直接截取和返回用户的请求，所以要考虑一下安全性问题。
 
-![img](https://segmentfault.com/img/remote/1460000014639478?w=2048&h=498)
+![](/images/2020-10-12-10-20-59.png)
 
-**事件机制**
+**事件机制** 
 
-![img](https://segmentfault.com/img/remote/1460000014639479?w=598&h=164)
+![](/images/2020-10-12-10-21-50.png)
 
 **功能**(还是比较逆天的)
 
@@ -61,7 +61,7 @@ SW 是什么呢？这个是离线缓存文件。我们 PWA 技术使用的就是
 
 **生命周期**
 
-![img](https://segmentfault.com/img/remote/1460000014639480?w=772&h=232)
+![](/images/2020-10-12-10-22-32.png)
 
 - Parsed （ 解析成功 ）： 首次注册 SW 时，浏览器解决脚本并获得入口点，如果解析成功，就可以访问到 SW 注册对象，在这一点中我们需要在 HTML 页面中添加一个判断，判断该浏览器是否支持 SW 。
 
@@ -119,11 +119,11 @@ Push 和 Notification 是两个不同的功能，涉及到两个 API 。
 
 创建一个 sw.js 文件
 
-![img](https://segmentfault.com/img/remote/1460000014639481?w=340&h=143)
+![](/images/2020-10-12-10-23-05.png)
 
 **index.html**
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -170,7 +170,7 @@ background_color: “ ” 设置启动页面的背景颜色
 
 icons：”” 就是添加到主屏幕之后的图标
 
-```
+```json
 {
   "name": "一个PWA示例",
   "short_name": "PWA示例",
@@ -196,7 +196,7 @@ icons：”” 就是添加到主屏幕之后的图标
 
 借助 SW 注册完成安装 SW 时，抓取资源写入缓存中。使用了一个方法那就是 self.skipWaiting( ) ，为了在页面更新的过程当中，新的 SW 脚本能够立刻激活和生效。
 
-```
+```js
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.1.0/workbox-sw.js");
 var cacheStorageKey = 'minimal-pwa-1'
 var cacheList=[
@@ -218,7 +218,7 @@ self.addEventListener('install',e =>{
 
 更新静态资源，缓存的资源会跟随着版本的更新会过期的，所以会根据缓存的字符串名称清除旧缓存。在新安装的 SW 中通过调用 self.clients.claim( ) 取得页面的控制权，这样之后打开页面都会使用版本更新的缓存。旧的 SW 脚本不在控制着页面之后会被停止，也就是会进入 Redundant 期。
 
-```
+```js
 self.addEventListener('fetch',function(e){
   e.respondWith(
     caches.match(e.request).then(function(response){
@@ -256,35 +256,35 @@ self.addEventListener('activate',function(e){
 
 打开 chrom 的调试工具，打开 application ，点击 service workers 之后我们会发现 sw.js 脚本已经存到了 SW 中 。
 
-![img](https://segmentfault.com/img/remote/1460000014639482?w=1617&h=863)
+![](/images/2020-10-12-10-24-22.png)
 
 我们打开 Network 刷新页面一下，看看，我们的页面资源来自 SW 而不是其他的地方，在 Console 中也打印出了我们在 index.html 中判断的语句，浏览器支持就会打印出这一句话。
 
-![img](https://segmentfault.com/img/remote/1460000014639483?w=1032&h=368)
+![](/images/2020-10-12-10-24-47.png)
 
 接下来我们断网操作，在 Application 中给 Offline 打上对勾就行啦。然后刷新页面，我们仍然能看到之前的页面，原因就是我们在上图看到，他的资源是从 SW 上获得到的。当我们第一次打开这个页面的时候，Resopnse 对象被存到了 Cache Storage （ 定义在 SW 规范中 ，相关资料请同学们自行查询啦 ）中，我们看下图：
 
-![img](https://segmentfault.com/img/remote/1460000014639484?w=827&h=461)
+![](/images/2020-10-12-10-25-18.png)
 
 通过存放到 Cache Storage 中，我们下次访问的时候如果是弱网或者断网的情况下，就可以不走网络请求，而直接就能将本地缓存的内容展示给用户，优化用户的弱网及断网体验。
 
 这个时候肯定会有同学在想，如果内容更新了，那么页面展示的内容是新内容呢还是旧内容呢？下面我们操作一下，打开 index.html 文件，我们在 body 中添加一个 p 标签 ，然后回到页面刷新。
 
-![img](https://segmentfault.com/img/remote/1460000014639485?w=713&h=258)
+![](/images/2020-10-12-10-25-52.png)
 
-![img](https://segmentfault.com/img/remote/1460000014639486?w=1731&h=715)
+![](/images/2020-10-12-10-26-19.png)
 
 我们看到，页面上的内容并没有显示出我刚刚添加的那个 p 标签。这说明了，我们拿到的数据还是从 Cache Storage 中获取到的，Cache Storage中的内容并没有更新，强制刷新也不行哦，那么我们怎么才能让我刚刚添加的那个 p 标签显示出来呢。
 
 我们打开 sw.js 脚本文件，我们修改一下 cacheStorageKey。
 
-![img](https://segmentfault.com/img/remote/1460000014639487?w=765&h=330)
+![](/images/2020-10-12-10-26-43.png)
 
 修改后，我们再次打开该网址，强制刷新下或者关掉浏览器重新打开。
 
 页面中出现了刚刚添加的P标签，我们再看一下 Cache Storage 中的缓存名字，已经被修改。
 
-![img](https://segmentfault.com/img/remote/1460000014639488?w=1473&h=548)
+![](/images/2020-10-12-10-27-05.png)
 
 ### 总结
 
@@ -293,6 +293,275 @@ self.addEventListener('activate',function(e){
 研究PWA门槛不低，部署的服务器要求HTTPS，ServiceWorker涉及API众多，需要单独学习，另外npm中也已经有这个包了[https://www.npmjs.com/package...](https://www.npmjs.com/package/web-pwa) ，玩玩可以，真正部署到项目生产环境可能坑很多，但有坑填坑，不折腾还叫前端么。
 
 本作品系 原创， [采用《署名-非商业性使用-禁止演绎 4.0 国际》许可协议](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+
+## Vuepress PWA支持
+
+### [@vuepress/plugin-pwa](https://github.com/vuejs/vuepress/tree/master/packages/@vuepress/plugin-pwa)
+
+> PWA 插件
+
+### 安装
+
+```bash
+yarn add -D @vuepress/plugin-pwa
+# OR npm install -D @vuepress/plugin-pwa
+```
+
+### 使用
+
+```javascript
+module.exports = {
+  plugins: ['@vuepress/pwa']
+}
+```
+
+提示
+
+为了让你的网站完全地兼容 PWA，你需要:
+
+- 在 `.vuepress/public` 提供 Manifest 和 icons
+- 在 `.vuepress/config.js` 添加正確的 [head links](https://v1.vuepress.vuejs.org/config/#head)(参见下面例子).
+
+更多细节，请参见 [MDN docs about the Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest).
+
+这是一个在VuePress中完全地兼容 PWA 的例子：
+
+```javascript
+module.exports = {
+  head: [
+    ['link', { rel: 'icon', href: '/logo.png' }],
+    ['link', { rel: 'manifest', href: '/manifest.json' }],
+    ['meta', { name: 'theme-color', content: '#3eaf7c' }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+    ['link', { rel: 'apple-touch-icon', href: '/icons/apple-touch-icon-152x152.png' }],
+    ['link', { rel: 'mask-icon', href: '/icons/safari-pinned-tab.svg', color: '#3eaf7c' }],
+    ['meta', { name: 'msapplication-TileImage', content: '/icons/msapplication-icon-144x144.png' }],
+    ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
+  ],
+  plugins: ['@vuepress/pwa', {
+      serviceWorker: true,
+      updatePopup: true
+  }],
+}
+```
+
+### 选项
+
+#### serviceWorker
+
+- 类型: `boolean`
+- 默认值: `true`
+
+如果设置为 `true`，VuePress 将自动生成并注册一个 [Service Worker](https://developers.google.com/web/fundamentals/primers/service-workers/)，用于缓存页面的内容以供离线使用（仅会在生产环境中启用）。
+
+有一个别名化的模块 `@sw-event` 模块将会 emit 以下事件：
+
+- `sw-ready`
+- `sw-cached`
+- `sw-updated`
+- `sw-offline`
+- `sw-error`
+
+提示
+
+只有在你能够使用 SSL 部署您的站点时才能启用此功能，因为 service worker 只能在 HTTPs 的 URL 下注册。
+
+#### generateSWConfig
+
+- 类型: `object`
+- 默认值: `{}`
+
+workbox-build 的 [generateSW config](https://developers.google.com/web/tools/workbox/modules/workbox-build#full_generatesw_config)。
+
+#### updatePopup
+
+- 类型: `boolean|popupConfig`
+- 默认值: `undefined`
+
+类型 `popupConfig` 的定义如下：
+
+```typescript
+interface normalPopupConfig {
+  message: string; // defaults to 'New content is available.'
+  buttonText: string; // defaults to 'Refresh'
+}
+
+interface localedPopupConfig {
+  [localePath: string]: normalPopupConfig
+}
+
+type popupConfig = normalPopupConfig | localedPopupConfig
+```
+
+本选项开启了一个用于刷新内容的弹窗。这个弹窗将会在站点有内容更新时显示出来，并提供了一个 `refresh` 按钮，允许用户立即刷新内容。
+
+> 如果没有“刷新”按钮，则只有在所有的 [Clients](https://developer.mozilla.org/en-US/docs/Web/API/Clients) 被关闭后，新的 Service Worker 才会处于活动状态。这意味着用户在关闭你网站的所有标签之前无法看到新内容。但是 `refresh` 按钮会立即激活新的 Service Worker。
+
+#### popupComponent
+
+- 类型: `string`
+- 默认值: `undefined`
+
+用于替换默认弹出组件的自定义组件。
+
+**参考:**
+
+- [自定义 SW-Update Popup](https://v1.vuepress.vuejs.org/zh/plugin/official/plugin-pwa.html#自定义-sw-update-popup-的-ui)
+
+### 从 0.x 迁移
+
+#### Service Worker
+
+```diff
+module.exports = {
+- serviceWorker: true,
++ plugins: ['@vuepress/pwa']
+}
+```
+
+#### SW-Update Popup
+
+```diff
+module.exports = {
+  themeConfig: {
+-   serviceWorker: {
+-     updatePopup: {
+-        message: "New content is available.",
+-        buttonText: "Refresh"
+-     }
+-   }
+  },
++  plugins: {
++   '@vuepress/pwa': {
++      serviceWorker: true,
++      updatePopup: {
++        message: "New content is available.",
++        buttonText: "Refresh"
++      }
++    }
++ }
+}
+```
+
+如果你在 [i18n](https://v1.vuepress.vuejs.org/zh/guide/i18n.html) 模式下:
+
+```diff
+module.exports = {
+  themeConfig: {
+    '/': {
+-     serviceWorker: {
+-       updatePopup: {
+-         message: "New content is available.",
+-         buttonText: "Refresh"
+-       }
+-     }
+    },
+    '/zh/': {
+-     serviceWorker: {
+-       updatePopup: {
+-         message: "发现新内容可用",
+-         buttonText: "刷新"
+-       }
+-     }
+    }
+  },
++  plugins: {
++    '@vuepress/pwa': {
++      serviceWorker: true,
++      updatePopup: {
++        '/': {
++          message: "New content is available.",
++          buttonText: "Refresh"
++        },
++        '/zh/': {
++          message: "发现新内容可用",
++          buttonText: "刷新"
++        }
++      }
++    }
++  }
+```
+
+值得一提的是本插件已经内置了上述的 i18n 配置，所以如果你想直接使用默认的 i18n，你可以将上面的配置缩写为：
+
+```js
+module.exports = {
+  plugins: {
+    '@vuepress/pwa': {
+      serviceWorker: true,
+      updatePopup: true
+    }
+  }
+}
+```
+
+欢迎提交 PR 以增加默认的 [i18n 配置](https://github.com/vuejs/vuepress/blob/master/packages/%40vuepress/plugin-pwa/lib/i18n.js).
+
+### 自定义 SW-Update Popup 的 UI
+
+默认的 SW-Update Popup 组件提供了一个默认插槽，使您能够完全控制弹窗的外观。
+
+首先，您需要在 `.vuepress/components` 中创建一个全局组件（例如`MySWUpdatePopup`)。 一个基于默认组件创建的简单组件如下：
+
+```vue
+<template>
+  <SWUpdatePopup v-slot="{ enabled, reload, message, buttonText }">
+    <div
+      v-if="enabled"
+      class="my-sw-update-popup">
+      {{ message }}<br>
+      <button @click="reload">{{ buttonText }}</button>
+    </div>
+  </SWUpdatePopup>
+</template>
+
+<script>
+import SWUpdatePopup from '@vuepress/plugin-pwa/lib/SWUpdatePopup.vue'
+
+export default {
+  components: { SWUpdatePopup }
+}
+</script>
+
+<style>
+.my-sw-update-popup {
+  text-align: right;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #fff;
+  font-size: 20px;
+  padding: 10px;
+  border: 5px solid #3eaf7c;
+}
+
+.my-sw-update-popup button {
+  border: 1px solid #fefefe;
+}
+</style>
+```
+
+接着，更新你的插件配置：
+
+```diff
+module.exports = {
+   plugins: {
+    '@vuepress/pwa': {
+       serviceWorker: true,
++      popupComponent: 'MySWUpdatePopup',
+       updatePopup: true
+     }
+  }
+}
+```
+
+### 参考:
+
+[**vuepress官方文档**](https://v1.vuepress.vuejs.org/zh/plugin/official/plugin-pwa.html#%E5%AE%89%E8%A3%85)
+
+- [VuePress > 使用组件](https://v1.vuepress.vuejs.org/zh/guide/using-vue.html#使用组件)
+- [Vue > 作用域插槽](https://cn.vuejs.org/v2/guide/components-slots.html#作用域插槽)
 
 ## 原文链接
 
