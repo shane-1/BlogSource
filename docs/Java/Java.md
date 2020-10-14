@@ -11,6 +11,7 @@
 5. 静态代码块
 >在类加载过程中调用，只调用一次
 6. 内部类
+
 ## 对象创建过程
 1. 在内存分配内存空间
 
@@ -37,6 +38,22 @@ static成员，跟对象无关，访问方式是`Class.XXX()`<br>
 - 静态方法只能访问静态成员
 - 静态方法不能出现this，super等对象关键字
 - 主函数是静态的
+
+## javadoc
+
+使用`/**-----*/`
+
+参数列表:
+- @author
+- @Version
+- @Since
+- @param
+- @return
+- @throws
+
+`javadoc -encoding UTF-8 -charset UTF-8 xx.java`
+生成文档
+
 ## JavaBean
 bean.
 getter/setter
