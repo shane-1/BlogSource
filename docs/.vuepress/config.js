@@ -26,19 +26,21 @@ module.exports = {
           {text:'CMD Manual',link:'/Note/Cmd.md'},
           {text:'MySQL',link:'/Note/MySQL.md'},
           {text:'MySQL索引背后的数据结构及算法原理',link:'/Note/IndexDS.md'},
-          {text:'PWA介绍及快速上手搭建',link:'/Note/PWA.md'}
+          {text:'PWA介绍及快速上手搭建',link:'/Note/PWA.md'},
+          {text:'Docker基础',link:'/Note/DockerBase.md'},
+          {text:'微服务',link:'/Note/Microservices.md'},
         ]},
         { 
           text: 'Java', 
           items :[
             {text:'Java基础',link:'/Java/Java.md'},
-            {text:'JDBC',link:'/Java/JDBC.md'},
-            {text:'Spring',link:'/Java/Spring.md'},
-            {text:'框架基础-注解和反射',link:'/Java/AnnotationReflection.md'},
-            {text:'设计模式 DesignPattern',link:'/Java/DesignPattern.md'},
             {text:'多线程 Multithread',link:'/Java/Multithread.md'},
+            {text:'设计模式 DesignPattern',link:'/Java/DesignPattern.md'},
+            {text:'JDBC',link:'/Java/JDBC.md'},
+            {text:'框架基础-注解和反射',link:'/Java/AnnotationReflection.md'},
+            {text:'Spring',link:'/Java/Spring.md'},
             {text:'DevOps 思想',link:'/Java/DevOpsThinking.md'},
-            {text:'Docker基础',link:'/Java/DockerBase.md'},
+            
         ]},
         {
             text: 'ALGO', 
