@@ -27,8 +27,8 @@ module.exports = {
           {text:'MySQL',link:'/Note/MySQL.md'},
           {text:'MySQL索引背后的数据结构及算法原理',link:'/Note/IndexDS.md'},
           {text:'PWA介绍及快速上手搭建',link:'/Note/PWA.md'},
-          {text:'Docker基础',link:'/Note/DockerBase.md'},
-          {text:'微服务',link:'/Note/Microservices.md'},
+          {text:'The Zen of Python',link:'/Note/ZenOfPython.md'},
+          
         ]},
         { 
           text: 'Java', 
@@ -44,15 +44,16 @@ module.exports = {
             {text:'DevOps 思想',link:'/Java/DevOpsThinking.md'},
             
         ]},
+        {  text: 'Cloud', 
+          items :[
+            {text:'Docker基础',link:'/Cloud/DockerBase.md'},
+            {text:'微服务',link:'/Cloud/Microservices.md'},
+          ]},
         {
             text: 'ALGO', 
             items  :[
-              {text:'KMP',link:'/ALGO/KMP.md'}
+              {text:'KMP',link:'/ALGO/KMP.md'},
                                     ]},
-        {  text: 'Python', 
-          items :[
-            {text:'The Zen of Python',link:'/Python/ZenOfPython.md'}
-          ]},
         
         { text: 'ML', 
           items :[
