@@ -133,47 +133,39 @@ Spring官方提供了非常方便的工具让我们快速构建应用
 
 Spring Initializr：https://start.spring.io/
 
-**项目创建方式一：**使用Spring Initializr 的 Web页面创建项目
+### 项目创建方式一：
 
-1、打开  https://start.spring.io/
+**使用Spring Initializr 的 Web页面创建项目**
 
-2、填写项目信息
-
-3、点击”Generate Project“按钮生成项目；下载此项目
-
-4、解压项目包，并用IDEA以Maven项目导入，一路下一步即可，直到项目导入完毕。
-
-5、如果是第一次使用，可能速度会比较慢，包比较多、需要耐心等待一切就绪。
+1. 打开  https://start.spring.io/
+2. 填写项目信息
+3. 点击”Generate Project“按钮生成项目；下载此项目
+4. 解压项目包，并用IDEA以Maven项目导入，一路下一步即可，直到项目导入完毕。
+5. 如果是第一次使用，可能速度会比较慢，包比较多、需要耐心等待一切就绪。
 
 
 
-**项目创建方式二：**使用 IDEA 直接创建项目
+### 项目创建方式二：
 
-1、创建一个新项目
+**使用 IDEA 直接创建项目**
 
-2、选择spring initalizr ， 可以看到默认就是去官网的快速构建工具那里实现
-
-3、填写项目信息
-
-4、选择初始化的组件（初学勾选 Web 即可）
-
-5、填写项目路径
-
-6、等待项目构建成功
+1. 创建一个新项目
+2. 选择spring initalizr ， 可以看到默认就是去官网的快速构建工具那里实现
+3. 填写项目信息
+4. 选择初始化的组件（初学勾选 Web 即可）
+5. 填写项目路径
+6. 等待项目构建成功
 
 
 
-**项目结构分析：**
+### 项目结构分析：
 
 通过上面步骤完成了基础项目的创建。就会自动生成以下文件。
 
-1、程序的主启动类
-
-2、一个 application.properties 配置文件
-
-3、一个 测试类
-
-4、一个 pom.xml
+1. 程序的主启动类
+2. 一个 application.properties 配置文件
+3. 一个 测试类
+4. 一个 pom.xml
 
 
 
@@ -181,10 +173,46 @@ Spring Initializr：https://start.spring.io/
 
 打开pom.xml，看看Spring Boot项目的依赖：
 
-```
-<!-- 父依赖 --><parent>    <groupId>org.springframework.boot</groupId>    <artifactId>spring-boot-starter-parent</artifactId>    <version>2.2.5.RELEASE</version>    <relativePath/></parent>
-<dependencies>    <!-- web场景启动器 -->    <dependency>        <groupId>org.springframework.boot</groupId>        <artifactId>spring-boot-starter-web</artifactId>    </dependency>    <!-- springboot单元测试 -->    <dependency>        <groupId>org.springframework.boot</groupId>        <artifactId>spring-boot-starter-test</artifactId>        <scope>test</scope>        <!-- 剔除依赖 -->        <exclusions>            <exclusion>                <groupId>org.junit.vintage</groupId>                <artifactId>junit-vintage-engine</artifactId>            </exclusion>        </exclusions>    </dependency></dependencies>
-<build>    <plugins>        <!-- 打包插件 -->        <plugin>            <groupId>org.springframework.boot</groupId>            <artifactId>spring-boot-maven-plugin</artifactId>        </plugin>    </plugins></build>
+```xml
+
+<!-- 父依赖 -->
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.5.RELEASE</version>
+    <relativePath/>
+</parent>
+
+<dependencies>
+    <!-- web场景启动器 -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!-- springboot单元测试 -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+        <!-- 剔除依赖 -->
+        <exclusions>
+            <exclusion>
+                <groupId>org.junit.vintage</groupId>
+                <artifactId>junit-vintage-engine</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+</dependencies>
+
+<build>
+    <plugins>
+        <!-- 打包插件 -->
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+</build>
 ```
 
 
@@ -194,16 +222,6 @@ Spring Initializr：https://start.spring.io/
 1、在主程序的同级目录下，新建一个controller包，一定要在同级目录下，否则识别不到
 
 2、在包中新建一个HelloController类
-
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
 
 ```
 @RestControllerpublic class HelloController {

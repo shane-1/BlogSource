@@ -39,6 +39,8 @@ module.exports = {
             {text:'JDBC',link:'/Java/JDBC.md'},
             {text:'框架基础-注解和反射',link:'/Java/AnnotationReflection.md'},
             {text:'Spring',link:'/Java/Spring.md'},
+            {text:'SpringBoot',link:'/Java/SpringBoot.md'},
+            {text:'Mybatis',link:'/Java/Mybatis.md'},
             {text:'DevOps 思想',link:'/Java/DevOpsThinking.md'},
             
         ]},
