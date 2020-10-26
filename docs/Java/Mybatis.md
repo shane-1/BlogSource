@@ -727,10 +727,139 @@ id  name  password
 -  **STDOUT_LOGGING** 
 -  NO_LOGGING
 
-在Mybatis
+在Mybatis中具体使用哪个日志实现,在设置中设定!
 
+- **STDOUT_LOGGING标准日志输出**
 
+在Mybatis核心配置文件中,配置我们的日志
 
+```xml
+<settings>
+	<setting name="logImpl" value="STDOUT_LOGGING"/>
+</settings>
+```
+效果
+![](/images/2020-10-21-09-05-03.png)
+
+### 6.2 Log4j
+
+**什么是Log4j?**
+
+Log4j是[Apache](https://baike.baidu.com/item/Apache/8512995)的一个开源项目，通过使用Log4j，我们可以控制日志信息输送的目的地是[控制台](https://baike.baidu.com/item/控制台/2438626)、文件、[GUI](https://baike.baidu.com/item/GUI)组件，甚至是套接口服务器、[NT](https://baike.baidu.com/item/NT/3443842)的事件记录器、[UNIX](https://baike.baidu.com/item/UNIX) [Syslog](https://baike.baidu.com/item/Syslog)[守护进程](https://baike.baidu.com/item/守护进程/966835)等；
+
+- 我们也可以控制每一条日志的输出格式；
+- 通过定义每一条日志信息的级别，我们能够更加细致地控制日志的生成过程。
+- 通过一个[配置文件](https://baike.baidu.com/item/配置文件/286550)来灵活地进行配置，而不需要修改应用的代码。
+
+**如何配置**
+
+1. 先导入log4j的依赖
+
+   ```xml
+   <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+   <dependency>
+       <groupId>log4j</groupId>
+       <artifactId>log4j</artifactId>
+       <version>1.2.17</version>
+   </dependency>
+   
+   ```
+
+2. 在CLASSPATH下建立log4j.properties。内容如下(数字为行号)：
+
+   ```properties
+   ### 配置根 ###
+   log4j.rootLogger = debug,console ,fileAppender,dailyRollingFile,ROLLING_FILE,MAIL,DATABASE
+   
+   ### 设置输出sql的级别，其中logger后面的内容全部为jar包中所包含的包名 ###
+   log4j.logger.org.apache=dubug
+   log4j.logger.java.sql.Connection=dubug
+   log4j.logger.java.sql.Statement=dubug
+   log4j.logger.java.sql.PreparedStatement=dubug
+   log4j.logger.java.sql.ResultSet=dubug
+   ### 配置输出到控制台 ###
+   log4j.appender.console = org.apache.log4j.ConsoleAppender
+   log4j.appender.console.Target = System.out
+   log4j.appender.console.layout = org.apache.log4j.PatternLayout
+   log4j.appender.console.layout.ConversionPattern =  %d{ABSOLUTE} %5p %c{ 1 }:%L - %m%n
+   
+   ### 配置输出到文件 ###
+   log4j.appender.fileAppender = org.apache.log4j.FileAppender
+   log4j.appender.fileAppender.File = logs/log.log
+   log4j.appender.fileAppender.Append = true
+   log4j.appender.fileAppender.Threshold = DEBUG
+   log4j.appender.fileAppender.layout = org.apache.log4j.PatternLayout
+   log4j.appender.fileAppender.layout.ConversionPattern = %-d{yyyy-MM-dd HH:mm:ss}  [ %t:%r ] - [ %p ]  %m%n
+   
+   ### 配置输出到文件，并且每天都创建一个文件 ###
+   log4j.appender.dailyRollingFile = org.apache.log4j.DailyRollingFileAppender
+   log4j.appender.dailyRollingFile.File = logs/log.log
+   log4j.appender.dailyRollingFile.Append = true
+   log4j.appender.dailyRollingFile.Threshold = DEBUG
+   log4j.appender.dailyRollingFile.layout = org.apache.log4j.PatternLayout
+   log4j.appender.dailyRollingFile.layout.ConversionPattern = %-d{yyyy-MM-dd HH:mm:ss}  [ %t:%r ] - [ %p ]  %m%n### 配置输出到文件，且大小到达指定尺寸的时候产生一个新的文件 ###log4j.appender.ROLLING_FILE=org.apache.log4j.RollingFileAppender log4j.appender.ROLLING_FILE.Threshold=ERROR log4j.appender.ROLLING_FILE.File=rolling.log log4j.appender.ROLLING_FILE.Append=true log4j.appender.ROLLING_FILE.MaxFileSize=10KB log4j.appender.ROLLING_FILE.MaxBackupIndex=1 log4j.appender.ROLLING_FILE.layout=org.apache.log4j.PatternLayout log4j.appender.ROLLING_FILE.layout.ConversionPattern=[framework] %d - %c -%-4r [%t] %-5p %c %x - %m%n
+   
+   ### 配置输出到邮件 ###
+   log4j.appender.MAIL=org.apache.log4j.net.SMTPAppender
+   log4j.appender.MAIL.Threshold=FATAL
+   log4j.appender.MAIL.BufferSize=10
+   log4j.appender.MAIL.From=chenyl@yeqiangwei.com
+   log4j.appender.MAIL.SMTPHost=mail.hollycrm.com
+   log4j.appender.MAIL.Subject=Log4J Message
+   log4j.appender.MAIL.To=chenyl@yeqiangwei.com
+   log4j.appender.MAIL.layout=org.apache.log4j.PatternLayout
+   log4j.appender.MAIL.layout.ConversionPattern=[framework] %d - %c -%-4r [%t] %-5p %c %x - %m%n
+   
+   ### 配置输出到数据库 ###
+   log4j.appender.DATABASE=org.apache.log4j.jdbc.JDBCAppender
+   log4j.appender.DATABASE.URL=jdbc:mysql://localhost:3306/test
+   log4j.appender.DATABASE.driver=com.mysql.jdbc.Driver
+   log4j.appender.DATABASE.user=root
+   log4j.appender.DATABASE.password=
+   log4j.appender.DATABASE.sql=INSERT INTO LOG4J (Message) VALUES ('[framework] %d - %c -%-4r [%t] %-5p %c %x - %m%n')
+   log4j.appender.DATABASE.layout=org.apache.log4j.PatternLayout
+   log4j.appender.DATABASE.layout.ConversionPattern=[framework] %d - %c -%-4r [%t] %-5p %c %x - %m%n
+   log4j.appender.A1=org.apache.log4j.DailyRollingFileAppender
+   log4j.appender.A1.File=SampleMessages.log4j
+   log4j.appender.A1.DatePattern=yyyyMMdd-HH'.log4j'
+   log4j.appender.A1.layout=org.apache.log4j.xml.XMLLayout
+   ```
+
+3. 配置log4j为日志的实现
+
+   ```xml
+   <settings>
+       <setting name="logImpl" value="LOG4J"/>
+   </settings>
+   ```
+
+   
+
+4. 在要输出日志的类中加入相关语句：
+
+   定义属性：`static Logger logger = Logger.getLogger(LogDemo.class); //LogDemo为相关的类`
+
+   在相应的方法中：
+
+   ```java
+   if(logger.isDebugEnabled()){
+   
+   logger.debug(“System …..”);
+   
+   }
+   ```
+
+**简单使用**
+
+1. 在要使用Log4j的类中,导入包`import org.apache.log4j.Logger;`
+
+2. 日志对象,参数为当前类的class
+
+   ```java
+   static Logger logger = Logger.getLogger(userDaoTest.class);
+   ```
+
+3. 
 
 ---
 

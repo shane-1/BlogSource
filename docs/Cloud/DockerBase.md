@@ -45,7 +45,7 @@
 ### 容器的劣势
 
 + 进程级的隔离:虽然容器本身使用了namespce,cgroup的方法做隔离和限制。但是在某些对Linux该特性支持不佳的应用上就会出问题。
-+ 容器网 络:大部分容器网络基于虚拟网络、Snat、隧道技术实现。而这部分会导致不如传统的L2网络。
++ 容器网络:大部分容器网络基于虚拟网络、Snat、隧道技术实现。而这部分会导致不如传统的L2网络。
 + 数据存储:基于挂载点实现的容器存储,如果需要用好容器,势必需要一个完善的共享存储系统。
 
 ## Docker的架构
@@ -128,32 +128,32 @@ Harbor 镜像仓库
   CMD ["/usr/src/app/supervisord.sh"]
   ```
 
-  ### Docker CONTAINERS
+### Docker CONTAINERS
 
-  - Docker容器是Docker镜像的可运行实例·
+- Docker容器是Docker镜像的可运行实例·
 
-  - 使用Docker Client或Docker AP可以对Docker容器进行创建、运行、停止、删除等操作.
+- 使用Docker Client或Docker AP可以对Docker容器进行创建、运行、停止、删除等操作.
 
-  - Docker容器可以被连接上一个或多个网络.
+- Docker容器可以被连接上一个或多个网络.
 
-  - Docker容器可以被分配存储.
+- Docker容器可以被分配存储.
 
-  - Docker容器的当前状态可以被用来创建新的镜像·
+- Docker容器的当前状态可以被用来创建新的镜像·
 
-  - 默认情况下,容器与容器之间、容器与宿主机之间是相对隔离的·
+- 默认情况下,容器与容器之间、容器与宿主机之间是相对隔离的·
 
-    > (Namespace做隔离,CGroup做限制 )
+  > (Namespace做隔离,CGroup做限制 )
 
-  - 可以通过配置参数的方法来配置Docker容器的运行
+- 可以通过配置参数的方法来配置Docker容器的运行
 
-  - 当运行命令`docker run-i-t ubuntu /bin/bash`时,系统中会发生以下事件
+- 当运行命令`docker run-i-t ubuntu /bin/bash`时,系统中会发生以下事件
 
-    - 如果本地没有需要的镜像, Docker会从Docker Hub上下载镜像
-    - Docker创建一个新的容器
-    - Docker会给这个容器分配一个可读写层,所有对于已运行的容器的文件操作都会在这个可读写层上进行
-    - Docker为容器创建网卡并将该容器连接到默认网络上,这一步包括为容器分配IP地址
-    - Docker启动新创建出的容器并且运行"/bin/bash",该容器是以可交互的方式运行并且被附加到当前Terminal上
-    - 当输入"exit"命令时, "/bin/bash"命令被终止,该容器被停止但并未被移除
+  - 如果本地没有需要的镜像, Docker会从Docker Hub上下载镜像
+  - Docker创建一个新的容器
+  - Docker会给这个容器分配一个可读写层,所有对于已运行的容器的文件操作都会在这个可读写层上进行
+  - Docker为容器创建网卡并将该容器连接到默认网络上,这一步包括为容器分配IP地址
+  - Docker启动新创建出的容器并且运行"/bin/bash",该容器是以可交互的方式运行并且被附加到当前Terminal上
+  - 当输入"exit"命令时, "/bin/bash"命令被终止,该容器被停止但并未被移除
 
 ## 小结:
 
@@ -169,11 +169,11 @@ Harbor 镜像仓库
 
 Kubernetes Cluster
 
-### Docker安装
+## Docker安装
 
-官网:
+官网(centos):
 
-https://docs.docker.com/install/linux/docker-ce/centos/
+https://docs.docker.com/engine/install/centos/
 
 行内使用yum安装:
 
@@ -191,13 +191,227 @@ https://docs.docker.com/install/linux/docker-ce/centos/
 3. `systemctl status docker #查看docker服务端是否启动`
 4. ` systemctl start docker && systemctl enable docker #启动docker并加入开机启动`
 
-### Docker常用运行命令
+## Docker常用运行命令
 
-docker help  查看docker命令
+### 帮助命令
 
-管理镜像常用命令:
+`docker 命令 --help`  查看docker命令
 
- docker image CONNMAD
+```CMD
+docker info #显示docker的系统信息
+docker version #显示docker的版本
+```
+
+
+
+### 镜像命令
+
+> Docker image CONNMAD
+
+```CMD
+#docker images
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+docker/getting-started   latest              1f32459ef038        3 months ago        26.8MB
+hello-world              latest              bf756fb1ae65        9 months ago        13.3kB
+#解释
+REPOSITORY	镜像的仓库源
+TAG			镜像的标签
+IMAGE ID 	镜像的id
+CREATED		创建的创建时间
+SIZE		大小
+
+#可选项
+ -a, --all             Show all images (default hides intermediate images)
+      --digests         Show digests
+  -f, --filter filter   Filter output based on conditions provided
+      --format string   Pretty-print images using a Go template
+      --no-trunc        Don't truncate output
+  -q, --quiet           Only show numeric IDs
+```
+
+#### 搜索镜像
+
+`docker search`
+
+```CMD
+NAME                              DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
+mysql                             MySQL is a widely used, open-source relation…   10100               [OK]
+mariadb                           MariaDB is a community-developed fork of MyS…   3705                [OK]
+mysql/mysql-server                Optimized MySQL Server Docker images. Create…   738                                     [OK]
+
+#可选项
+Options:
+  -f, --filter filter   Filter output based on conditions provided
+      --format string   Pretty-print search using a Go template
+      --limit int       Max number of search results (default 25)
+      --no-trunc        Don't truncate output
+      
+      --filter=STARS=3000 #搜索收藏数大于3000的
+      
+```
+
+
+
+#### 下载镜像
+
+`docker pull 镜像名[:tag]`
+
+> 默认拉取最新版
+
+```CMD
+Options:
+  -a, --all-tags                Download all tagged images in the repository
+      --disable-content-trust   Skip image verification (default true)
+      --platform string         Set platform if server is multi-platform capable
+  -q, --quiet                   Suppress verbose output
+```
+
+```CMD
+root@Surface:/home/shane# docker pull mysql
+Using default tag: latest
+latest: Pulling from library/mysql
+bb79b6b2107f: Pull complete
+49e22f6fb9f7: Pull complete
+842b1255668c: Pull complete
+9f48d1f43000: Pull complete
+c693f0615bce: Pull complete
+8a621b9dbed2: Pull complete
+0807d32aef13: Pull complete
+a56aca0feb17: Pull complete
+de9d45fd0f07: Pull complete
+1d68a49161cc: Pull complete
+d16d318b774e: Pull complete
+49e112c55976: Pull complete
+Digest: sha256:8c17271df53ee3b843d6e16d46cff13f22c9c04d6982eb15a9a47bd5c9ac7e2d
+Status: Downloaded newer image for mysql:latest
+docker.io/library/mysql:latest
+```
+
+
+
+#### 删除镜像
+
+`docker rmi -f id`
+
+删除对应id镜像(多个使用空格分隔)
+
+`docker rmi -f $(docker images -aq)  `
+
+删除全部的容器
+
+#### 查看镜像的元数据
+
+`docker inspect`查看镜像全部信息
+
+`docker inspect centos`
+
+```json
+[
+    {
+        "Id": "sha256:0d120b6ccaa8c5e149176798b3501d4dd1885f961922497cd0abef155c869566",
+        "RepoTags": [
+            "centos:latest"
+        ],
+        "RepoDigests": [
+            "centos@sha256:76d24f3ba3317fa945743bb3746fbaf3a0b752f10b10376960de01da70685fbd"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2020-08-10T18:19:49.837885498Z",
+        "Container": "3b04ecd9fb2d3f921f12d858edf5f3a6aa7c36c8e1e6f74bd32555fd4d7f7da2",
+        "ContainerConfig": {
+            "Hostname": "3b04ecd9fb2d",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "CMD [\"/bin/bash\"]"
+            ],
+            "ArgsEscaped": true,
+            "Image": "sha256:69587a438b2c9b803db8ed4f6e6b5abce25a6b8ec2583a394807cf82bfd23693",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "org.label-schema.build-date": "20200809",
+                "org.label-schema.license": "GPLv2",
+                "org.label-schema.name": "CentOS Base Image",
+                "org.label-schema.schema-version": "1.0",
+                "org.label-schema.vendor": "CentOS"
+            }
+        },
+        "DockerVersion": "18.09.7",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/bin/bash"
+            ],
+            "ArgsEscaped": true,
+            "Image": "sha256:69587a438b2c9b803db8ed4f6e6b5abce25a6b8ec2583a394807cf82bfd23693",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "org.label-schema.build-date": "20200809",
+                "org.label-schema.license": "GPLv2",
+                "org.label-schema.name": "CentOS Base Image",
+                "org.label-schema.schema-version": "1.0",
+                "org.label-schema.vendor": "CentOS"
+            }
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 215102299,
+        "VirtualSize": 215102299,
+        "GraphDriver": {
+            "Data": {
+                "MergedDir": "/var/lib/docker/overlay2/3b172334602338425b3b12a39ab86ed55ab8b118b9ad9f5efa3e576a3a052703/merged",
+                "UpperDir": "/var/lib/docker/overlay2/3b172334602338425b3b12a39ab86ed55ab8b118b9ad9f5efa3e576a3a052703/diff",
+                "WorkDir": "/var/lib/docker/overlay2/3b172334602338425b3b12a39ab86ed55ab8b118b9ad9f5efa3e576a3a052703/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:291f6e44771a7b4399b0c6fb40ab4fe0331ddf76eda11080f052b003d96c7726"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+```
+
+
+
+#### 其他
 
 |   指令   |                 描述                  |
 | :------: | :-----------------------------------: |
@@ -212,6 +426,168 @@ docker help  查看docker命令
 |   save   | 保存了一个镜像或多个镜像至一个tar归档 |
 |   load   |        从标准输入载入一个归档         |
 |   tag    |          给一个镜像打一个tag          |
+
+
+
+### 容器命令
+
+> 说明:我们有了镜像才可以创建容器,以centos为例
+
+#### 新建容器并启动
+
+```cmd
+docker run [可选参数] image
+
+#参数说明
+--name="Name" 容器名字
+-d    		后台方式运行
+-it			以交互方式运行,进入容器查看内容
+-p 	端口号		指定容器的端口 
+-p 主机端口:容器端口 主机映射端口
+-p ip:主机端口:容器端口
+-p	随机指定端口
+```
+
+测试,启动并进入容器
+
+```CMD
+root@Surface:/home/shane# docker run -it centos /bin/bash
+[root@966f11ab42c9 /]# ls #查看容器内部的centos,基础版本,很多命令不完善
+bin  etc   lib    lost+found  mnt  proc  run   srv  tmp  var
+dev  home  lib64  media       opt  root  sbin  sys  usr
+```
+
+`exit`-从容器退回主机
+
+```cmd
+[root@966f11ab42c9 /]# exit
+exit
+```
+
+#### 查看运行的容器
+
+`docker ps`查看运行的容器
+
+`docker ps -a`查看所有运行的容器(包含历史)
+
+```cmd
+root@Surface:/home/shane# docker ps -a
+CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS                          PORTS                NAMES
+966f11ab42c9        centos                   "/bin/bash"              4 minutes ago       Exited (0) About a minute ago                        festive_williamson
+fbf9b4271ea1        centos                   "/bin/bash"              5 minutes ago       Exited (127) 4 minutes ago                           hopeful_edison
+14df202a332b        hello-world              "/hello"                 2 days ago          Exited (0) 2 days ago                                gracious_kare
+6011f47bd41b        docker/getting-started   "/docker-entrypoint.…"   3 days ago          Exited (255) 6 hours ago        0.0.0.0:80->80/tcp   practical_vaughan
+
+```
+
+`docker ps -n=?`显示最近创建的n个容器
+
+`docker ps -q` 只显示容器编号
+
+#### 退出容器
+
+exit 直接容器停止并退出
+
+ctrl + P + Q 容器不停止退出
+
+#### 删除容器
+
+`docker rm 容器 id` 删除指定容器
+
+`docker rm -f $(docker ps -aq)`轻质删除所有容器
+
+`docker ps -a -q|xargs docker rm `删除所有容器
+
+#### 启动和停止容器的操作
+
+`docker start 容器id`启动容器
+
+`docker restart 容器id`重启容器
+
+`docker stop 容器id`停止当前正在运行的容器
+
+`docker kill 容器id`强制停止当前容器
+
+
+
+#### 后台启动容器
+
+`docker run -d 镜像名`
+
+> docker run -d centos 发现停止了
+>
+> **原因:** docker容器后台启动,必须有一个前台进程
+
+#### 查看日志
+
+`docker logs -ft --tail n 容器id`查看n条日志
+
+#### 查看进程
+
+`docker top 容器id` 查看指定id的进程
+
+#### 进入容器
+
+`docker exec -it 容器id bashShell`
+
+进入容器后开启一个新的终端(可以操作)
+
+`docker attach 容器id`
+
+进入正在执行的终端,不会启动新的进程
+
+#### 拷贝文件
+
+`docker cp 容器id:容器内路径 目的主机路径`
+
+> 拷贝为手动实现,之后使用-v 卷的技术,可以实现同步
+
+### 小结
+
+```cmd
+attach    Attach to a running container  #当前shell下attach连接指定运行镜像
+build     Build an image from a Dockerfile  #通过Dockerfile定制镜像
+commit    Create a new image from a container's changes  #提交当前容器为新的镜像
+cp    Copy files/folders from a container to a HOSTDIR or to STDOUT  #从容器中拷贝指定文件或者目录到宿主机中
+create    Create a new container  #创建一个新的容器，同run 但不启动容器
+diff    Inspect changes on a container's filesystem  #查看docker容器变化
+events    Get real time events from the server#从docker服务获取容器实时事件
+exec    Run a command in a running container#在已存在的容器上运行命令
+export    Export a container's filesystem as a tar archive  #导出容器的内容流作为一个tar归档文件(对应import)
+history    Show the history of an image  #展示一个镜像形成历史
+images    List images  #列出系统当前镜像
+import    Import the contents from a tarball to create a filesystem image  #从tar包中的内容创建一个新的文件系统映像(对应export)
+info    Display system-wide information  #显示系统相关信息
+inspect    Return low-level information on a container or image  #查看容器详细信息
+kill    Kill a running container  #kill指定docker容器
+load    Load an image from a tar archive or STDIN  #从一个tar包中加载一个镜像(对应save)
+login    Register or log in to a Docker registry#注册或者登陆一个docker源服务器
+logout    Log out from a Docker registry  #从当前Docker registry退出
+logs    Fetch the logs of a container  #输出当前容器日志信息
+pause    Pause all processes within a container#暂停容器
+port    List port mappings or a specific mapping for the CONTAINER  #查看映射端口对应的容器内部源端口
+ps    List containers  #列出容器列表
+pull    Pull an image or a repository from a registry  #从docker镜像源服务器拉取指定镜像或者库镜像
+push    Push an image or a repository to a registry  #推送指定镜像或者库镜像至docker源服务器
+rename    Rename a container  #重命名容器
+restart    Restart a running container  #重启运行的容器
+rm    Remove one or more containers  #移除一个或者多个容器
+rmi    Remove one or more images  #移除一个或多个镜像(无容器使用该镜像才可以删除，否则需要删除相关容器才可以继续或者-f强制删除)
+run    Run a command in a new container  #创建一个新的容器并运行一个命令
+save    Save an image(s) to a tar archive#保存一个镜像为一个tar包(对应load)
+search    Search the Docker Hub for images  #在docker
+hub中搜索镜像
+start    Start one or more stopped containers#启动容器
+stats    Display a live stream of container(s) resource usage statistics  #统计容器使用资源
+stop    Stop a running container  #停止容器
+tag         Tag an image into a repository  #给源中镜像打标签
+top       Display the running processes of a container #查看容器中运行的进程信息
+unpause    Unpause all processes within a container  #取消暂停容器
+version    Show the Docker version information#查看容器版本号
+wait         Block until a container stops, then print its exit code  #截取容器停止时的退出状态值
+```
+
+
 
 ## 学习资料
 
