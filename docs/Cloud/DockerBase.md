@@ -197,7 +197,7 @@ https://docs.docker.com/engine/install/centos/
 
 `docker 命令 --help`  查看docker命令
 
-```CMD
+```shell
 docker info #显示docker的系统信息
 docker version #显示docker的版本
 ```
@@ -208,7 +208,7 @@ docker version #显示docker的版本
 
 > Docker image CONNMAD
 
-```CMD
+```shell
 #docker images
 REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
 docker/getting-started   latest              1f32459ef038        3 months ago        26.8MB
@@ -233,7 +233,7 @@ SIZE		大小
 
 `docker search`
 
-```CMD
+```shell
 NAME                              DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
 mysql                             MySQL is a widely used, open-source relation…   10100               [OK]
 mariadb                           MariaDB is a community-developed fork of MyS…   3705                [OK]
@@ -258,7 +258,7 @@ Options:
 
 > 默认拉取最新版
 
-```CMD
+```shell
 Options:
   -a, --all-tags                Download all tagged images in the repository
       --disable-content-trust   Skip image verification (default true)
@@ -266,7 +266,7 @@ Options:
   -q, --quiet                   Suppress verbose output
 ```
 
-```CMD
+```shell
 root@Surface:/home/shane# docker pull mysql
 Using default tag: latest
 latest: Pulling from library/mysql
@@ -435,7 +435,7 @@ docker.io/library/mysql:latest
 
 #### 新建容器并启动
 
-```cmd
+```shell
 docker run [可选参数] image
 
 #参数说明
@@ -450,7 +450,7 @@ docker run [可选参数] image
 
 测试,启动并进入容器
 
-```CMD
+```shell
 root@Surface:/home/shane# docker run -it centos /bin/bash
 [root@966f11ab42c9 /]# ls #查看容器内部的centos,基础版本,很多命令不完善
 bin  etc   lib    lost+found  mnt  proc  run   srv  tmp  var
@@ -459,7 +459,7 @@ dev  home  lib64  media       opt  root  sbin  sys  usr
 
 `exit`-从容器退回主机
 
-```cmd
+```shell
 [root@966f11ab42c9 /]# exit
 exit
 ```
@@ -470,7 +470,7 @@ exit
 
 `docker ps -a`查看所有运行的容器(包含历史)
 
-```cmd
+```shell
 root@Surface:/home/shane# docker ps -a
 CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS                          PORTS                NAMES
 966f11ab42c9        centos                   "/bin/bash"              4 minutes ago       Exited (0) About a minute ago                        festive_williamson
@@ -544,7 +544,7 @@ ctrl + P + Q 容器不停止退出
 
 ### 小结
 
-```cmd
+```shell
 attach    Attach to a running container  #当前shell下attach连接指定运行镜像
 build     Build an image from a Dockerfile  #通过Dockerfile定制镜像
 commit    Create a new image from a container's changes  #提交当前容器为新的镜像

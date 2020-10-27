@@ -48,6 +48,7 @@ module.exports = {
           items :[
             {text:'Docker基础',link:'/Cloud/DockerBase.md'},
             {text:'微服务',link:'/Cloud/Microservices.md'},
+            {text:'AWS',link:'/Cloud/AWS.md'},
           ]},
         {
             text: 'ALGO', 

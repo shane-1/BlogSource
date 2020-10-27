@@ -289,7 +289,147 @@
 
 ![](/images/2020-10-26-16-15-59.png)
 
-## VPC资源
+## 容器
+
+- 恰到好处的隔离
+- 通过control group
+
+### 优势
+
+- only one kernel runs on the machine
+- No Hypervisor overhead
+- run different os
+- process isolation&security 
+
+### 建议
+
+- 不要创建大型镜像
+- 不要使用单层镜像
+
+> 单层不要太大,一个功能打一层
+
+- 不要在单个容器运行多个进程
+- 不要在容器保存凭据,不要依赖IP地址
+- 以非root用户运行进程
+- 不要使用"最新"标签
+
+> lasted tag
+
+- 不要利用运行中的容器创建镜像
+- 不要将数据存放在容器内
+
+### K8S
+
+#### CLI
+
+#### Master
+
+- APIserver
+
+交互
+
+- Controller
+
+容器调度
+
+- Scheduler
+- ETCD
+
+服务发现,分布式存储系统
+
+#### Node
+
+- pod
+
+> pause负责管理pod
+
+- kubelet
+
+#### 发布方式
+
+1. deployment
+
+   不区分状态
+
+2. StatefulSet
+
+   区分状态
+
+3. DaemonSst
+
+   守护
+
+   > 子集ReplicaSet
+
+#### 不同Node通讯
+
+- IPTAble
+
+> 集群少
+
+## AWS Developer Tools for CI/CD
+
+> Souce -> Build-> Test -> Deploy -> Monitor
+
+- AWS CodeStar
+- AWS CodeBuild
+- AWS CodeCommit
+- AWS CodeDeploy
+- AWS CodePipline
+
+## AWS Cloud9
+
+用于编写\运行和调试代码的云IDE
+
+## AWS CodeCommit
+
+- 安全的\可扩展的\可管理的Git源代码管理
+- 使用标准的Git工具
+
+## AWS CodeBuild
+
+- 易于管库的编译源代码\运行测试和软件打包的构建服务
+- 可持续扩展并同时处理多个构建
+- 用户不用管理build服务器
+- 按分钟付费,只为您使用的计算资源付费
+- 通过CloudWatch事件监控构建
+
+>
+>
+>- 每次构建都在新的容器运行,以保证一致的\不变的环境
+>- 每个官方的CodeBuild镜像都安装了Docker和AWS CLI
+>- 通过使用Docker镜像自定义环境
+
+## AWS CodeDeploy
+
+- 将代码自动部署到任何实体和lambda中
+- 处理更新应用程序的福扎心
+- 避免应用部署期间的停机时间
+- 检测到事故自动回滚
+
+## Code Pipeline
+
+1. EC2
+2. 容器
+3. 无服务Lambda
+
+## AWS CodeStar
+
+Preconfigured 持续交付工具链
+
+## AWS CodeGuru
+
+> 内置的代码审查和可操作并提供有用的建议->上线前检测并优化代码->轻松识别程序缺陷
+
+## EKS
+
+> Elastic Kubernetes Server
+
+### 概览
+
+全托管开源Kubernetes控制平台
+
+ 
 
 
 
