@@ -7,6 +7,7 @@
 ## 2020.10.21
 
 这是一个悖论的世界,但总有人觉得自己就是真理.
+Someone thought themselves are authority in this paradox world.
 
 ## 2020.9.26
 
