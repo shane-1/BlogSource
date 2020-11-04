@@ -33,7 +33,7 @@ public class JDBC{
         Class.forNAme("com.mysql.jdbc.Driver");  //固定写法
         
         //2.用户信息和url
-		String url = "jdbc:mysql://localhost:3306/DateBaseName?useUnicode=true&characterEncoding=utf9&useSSL=true";
+		String url = "jdbc:mysql://localhost:3306/DateBaseName?useUnicode=true&characterEncoding=utf8&useSSL=true";
         String username = "root";
         String password = "123456";
             
@@ -88,7 +88,7 @@ DiverManager.registerDriver(new com.mysql.jdbc.Driver());
 
 ## URL
 
-`String url = "jdbc:mysql://localhost:3306/DateBaseName?useUnicode=true&characterEncoding=utf9&useSSL=true";`
+`String url = "jdbc:mysql://localhost:3306/DateBaseName?useUnicode=true&characterEncoding=utf8&useSSL=true";`
 
 jdbc:mysql://主机地址:端口号/数据库名?参数1&参数2&参数3
 
@@ -163,7 +163,7 @@ while(resultSet.next()){
 
 ```
 driver=com.mysql.jdbc.Driver
-url=jdbc:mysql://localhost:3306/DateBaseName?useUnicode=true&characterEncoding=utf9&useSSL=true
+url=jdbc:mysql://localhost:3306/DateBaseName?useUnicode=true&characterEncoding=utf8&useSSL=true
 username=root
 password=123456
 ```
