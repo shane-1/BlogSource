@@ -30,7 +30,7 @@ public class JDBC{
     public static void main(String[] args) throws ClassNotFoundException, SQLException{
         
         //1.加载驱动
-        Class.forNAme("com.mysql.jdbc.Driver");  //固定写法
+        Class.forName("com.mysql.jdbc.Driver");  //固定写法
         
         //2.用户信息和url
 		String url = "jdbc:mysql://localhost:3306/DateBaseName?useUnicode=true&characterEncoding=utf8&useSSL=true";
@@ -83,7 +83,7 @@ DiverManager.registerDriver(new com.mysql.jdbc.Driver());
 // 不建议这样使用,因为注册相关代码为静态代码块,类被加载就已经注册,这样写等同于注册了两次驱动
 
 //推荐写法(利用反射)
- Class.forNAme("com.mysql.jdbc.Driver");  //固定写法
+ Class.forName("com.mysql.jdbc.Driver");  //固定写法
 ```
 
 ## URL
