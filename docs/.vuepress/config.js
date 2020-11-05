@@ -25,6 +25,7 @@ module.exports = {
           {text:'Octave与Matlab的区别',link:'/Note/DBOM.md'},
           {text:'CMD Manual',link:'/Note/Cmd.md'},
           {text:'MySQL',link:'/Note/MySQL.md'},
+          {text:'MySQLExplain',link:'/Note/MySQLExplain.md'},
           {text:'MySQL索引背后的数据结构及算法原理',link:'/Note/IndexDS.md'},
           {text:'PWA介绍及快速上手搭建',link:'/Note/PWA.md'},
           {text:'The Zen of Python',link:'/Note/ZenOfPython.md'},
