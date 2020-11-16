@@ -27,6 +27,7 @@ module.exports = {
           {text:'MySQL',link:'/Note/MySQL.md'},
           {text:'MySQLExplain',link:'/Note/MySQLExplain.md'},
           {text:'MySQL索引背后的数据结构及算法原理',link:'/Note/IndexDS.md'},
+          {text:'Redis',link:'/Note/Redis.md'},
           {text:'PWA介绍及快速上手搭建',link:'/Note/PWA.md'},
           {text:'The Zen of Python',link:'/Note/ZenOfPython.md'},
           
