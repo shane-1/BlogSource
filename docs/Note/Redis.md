@@ -230,7 +230,7 @@ MySQL的压力就变得十分小(研究处理这些问题!)大数据的IO压力�
 ### 相关资源
 
 1. 官网: https://redis.io/
-2. 中文官网: http://reids.cn/
+2. 中文官网: http://www.redis.cn/
 3. 下载地址: 通过官网下载
 
 > 注意: Windows版本在GitHub下载
@@ -315,14 +315,412 @@ MySQL的压力就变得十分小(研究处理这些问题!)大数据的IO压力�
 
 ![](/images/2020-11-16-15-16-03.png)
 
+**简单测试:**
 
+```bash
+# 测试:100个并发连接 100000请求
+redis-benchmark -h localhost -p 6379 -c 100 -n 100000
+```
 
+![](/images/2020-11-16-15-27-49.png)
 
+![](/images/2020-11-16-15-29-39.png)
 
+## 基础知识
 
+redis默认有16个数据库
 
+![](/images/2020-11-16-15-31-27.png)
 
+默认使用的是第0个数据库
 
+可以使用select进行切换数据库
+
+```bash
+127.0.0.1:6379> select 3 #切换数据库
+OK
+127.0.0.1:6379[3]> DBSIZE #查看DB大小
+(integer) 0
+```
+
+![](/images/2020-11-16-15-35-28.png)
+
+```bash
+127.0.0.1:6379[3]> keys* #查看所有的key
+1) "name"
+```
+
+清除当前数据库`flush`
+
+清除所有数据库`FLUSHALL`
+
+```bash
+127.0.0.1:6379[3]> flushdb #清除当前数据库
+OK
+127.0.0.1:6379[3]> keys*
+(empty list or set)
+```
+
+思考: 为什么redis默认端口是6379!
+
+> 追星(MySQL3306女儿名)
+
+### Redis是单线程的
+
+Redis是很快的,基于内存操作,CPU不是Redis的性能瓶颈,而是根据极其的内存和网络带宽.既然可以使用单线程来实现,就使用单线程了!
+
+Redis是C语言写的,官方提供数据为100000+的QPS,完全不比同样是使用key-value的Memecache差!
+
+**Redis为什么单线程还快?**
+
+1. 误区1: 高性能的服务器一定是多线程的!
+
+2. 误区2:多线程一定比单线程效率高!
+
+   > CPU上下文会切换,所以不一定
+
+核心:redis是将所有的数据全部放在内存中的,所以谁使用单线程去操作效率就是最高的,多线程(<u>存在CPU上下文切换的耗时操作</u>),**对于内存系统来说,如果没有上下文切换效率就是最高的!**多次读写都是在一个CPU上的**,在内存情况下,这个就是最佳的方案!**
+
+## 五大数据类型
+
+Redis是一个开源(BSD许可)的,内存中的数据结构存储系统,它可以用作**数据库、缓存和消息中间件MQ**。它支持多种类型的
+数据结构,如字符串( strings), 散列( hashes), 列表( lists), 集合(sets), 有序集合( sorted sets)与范围查询, bitmaps, hyperloglogs和地理空间( geospatial)索引半径查询。 
+
+Redis内置了复制( replication),LUA脚本(Luascripting), LRU驱动事件( LRU eviction), 事务( transactions)和不同级别的磁盘持久化( persistence),并通过Reds哨兵(Sentinel)和自动分区( Cluster)提供高可用性( high availability)。
+
+### Redis-Key
+
+```bash
+127.0.0.1:6379> keys* #查看所有的key
+(empty list or set)
+127.0.0.1:6379> set name shane #set key
+OK
+127.0.0.1:6379> keys*
+1)"name"
+127.0.0.1:6379> set age 1
+127.0.0.1:6379> keys*
+1) "age"
+2) "name"
+127,0.0.1:6379> EXISTS name #判断当前key是否存在
+(integer) 1
+127.0.0.1:6379> EXISTS name1
+(integer) 0
+127,0.0.1:6379> move name 1 #1代表数据库一
+(integer) 1
+127.0.0.1:6379> keys*
+1) "age"
+127.0.0.1:6379> set name shane
+OK
+127.0.0.1:6379> keys *
+1) "age"
+2) "name"
+127.0.0.1:6379> get name
+"shane"
+127.0.0,1:6379> EXPIRE name 10 #设置key的过期时间,单位是秒
+(integer) 1
+127,0.0.1:6379> ttl name #查看当前key剩余时间
+(integer) 4
+127.0.0.1:6379> tt1 name
+(integer) 3
+127.0.0.1:6379> tt1 name
+(integer) -2 #已过期
+127.0.0.1:6379> type name #查看当前key类型
+string
+
+```
+
+[官网命令查询地址](http://www.redis.cn/commands.html)
+
+### String(字符串)
+
+90%的程序员只会使用的类型
+
+#### 设置获取
+
+```bash
+127.0.0.1:6379> set key v1 #设置值
+127.0.0.1:6379> get key	   #获得值
+"v1"
+127.0.0.1:6379> APPEND key "hello" #追加到原字符串
+127.0.0.1:6379> STRLEN key #查看当前字符串长度
+(integer)7
+```
+
+#### 自增减
+
+```bash
+127.0.0.1:6379> set views 0 #设置值
+127.0.0.1:6379> get key	   #获得值
+"0"
+127.0.0.1:6379> incr views #自增一
+127.0.0.1:6379> decr views #自减一
+127.0.0.1:6379> INCRBY views 10 #+10
+127.0.0.1:6379> DECRBY views 10 #-10
+```
+
+#### 字符串范围
+
+```bash
+127.0.0.1:6379> set key "hello,world!!!"
+OK
+127.0.0.1:6379> GETRANGEkey 0 3 #字符串截取[0,3]
+"hell"
+127.0.0.1:6379> GETRANGE 0 -1 #获得全部字符串 和 get key 一样
+"hello,world!!!"
+```
+
+#### 替换
+
+```bash
+127.0.0.1:6379> set key abcdefg
+OK
+127.0.0.1:6379> get key
+"abcdefg"
+127.0.0.1:6379> SETRANGE key 1 xx #替换指定位置开始的字符串!
+(integer) 7
+127.0.0.1:6379> get key
+"axxdefg"
+```
+
+#### 过期时间设置
+
+```bash
+# setex (set with expire) #设置过期时间
+# setnx (set if not exist) #不存在再设置(在分布式锁中常用)
+127.0.0.1:6379> setex key 30 "hello"
+OK
+127.0.0.1:6379> ttl key
+(integer) 26
+127.0.0.1:6379> setnx mykey "redis"
+(integer)1 #设置成功
+127.0.0.1:6379> setnx mykey "MongoDB"
+(integer)0 #设置失败
+```
+
+#### 批量操作
+
+```bash
+127.0.0.1:6379> mset k1 v1 k2 v2 k3 v3
+OK
+127.0.0.1:6379> mget k1 k2 k3
+1) "v1"
+2) "v2"
+3) "v3"
+127.0.0.1:6379> msetnx k1 v1 k4 v4
+(integer) 0	#原子性操作,一起成功一起失败
+127.0.0.1:6379> get k4
+(nil)
+```
+
+#### 对象
+
+```bash
+set user:1 {name:shane, age:3}# 设置一个user:1对象值为json字符来保存一个对象
+#这里的key是一个巧妙的设计: user:{id}:{filed}, 如此设计在redis中完全可行
+127.0.0.1:6379> mset user:1:name shane user:1:age 2
+OK
+127.0.0.1:6379> mget user:1:name user:1:age
+1) "shane"
+2) "2"
+```
+
+#### getset
+
+```bash
+127.0.0.1:6379> getset bd redis #如果不存在值,则返回nil
+(nil)
+127.0.0.1:6379> get db
+"redis"
+127.0.0.1:6379> getset db mongobd #如果存在值,则返回当前值后设置新值
+"redis"
+127.0.0.1:6379> get db
+"mongobd"
+```
+
+String类型的使用场景: value除了是我们的字符串还可以是我们的数字!
+
+- 计数器
+- 统计多单位的数量
+- 粉丝数
+- 对象缓存存储
+
+### List(列表)
+
+> 在redis里面,我们可以把list玩成栈, 队列, 阻塞队列!
+
+所有的list命令都是用l开头的
+
+#### LPUSH&RPUSH
+
+```bash
+127.0.0.1:6379> LPUSH list one #将一个或多个值插入列表的头部
+(integer) 1
+127.0.0.1:6379> LPUSH list two
+(integer) 2
+127.0.0.1:6379> LPUSH list three
+(integer) 3
+127.0.0.1:6379> LRANGE list 0 -1 #获取区间值,-1为全部
+1) "three"
+2) "two"
+3) "one"
+127.0.0.1:6379> LRANGE list 0 1
+1) "three"
+2) "two"
+127.0.0.1:6379> Rpush list four	#将一个或多个值插入列表的尾部
+(integer) 4
+127.0.0.1:6379> LRANGE list 0 -1 
+1) "three"
+2) "two"
+3) "one"
+4) "four"
+```
+
+#### LPOP&RPOP
+
+```bash
+127.0.0.1:6379> LRANGE list 0 -1 
+1) "three"
+2) "two"
+3) "one"
+4) "four"
+127.0.0.1:6379> Lpop list	#移除头部第一个元素
+"three"
+127.0.0.1:6379> Rpop list	#移除尾部第一个元素
+"four"
+127.0.0.1:6379> LRANGE list 0 -1
+1) "two"
+2) "one"
+```
+
+#### Lindex
+
+```bash
+127.0.0.1:6379> LRANGE list 0 -1
+1) "two"
+2) "one"
+127.0.0.1:6379> Lindex list 1 #通过下标获得list某一个值
+"one"
+127.0.0.1:6379> Lindex list 0
+"two"
+```
+
+#### Llen
+
+```bash
+127.0.0.1:6379> LPUSH list one 
+(integer) 1
+127.0.0.1:6379> LPUSH list two
+(integer) 2
+127.0.0.1:6379> LPUSH list three
+(integer) 3
+127.0.0.1:6379> Llen list	#返回列表的长度
+(integer) 3
+```
+
+#### Lrem
+
+> 移除指定的值
+
+```bash
+127.0.0.1:6379> LRANGE list 0 -1
+1) "four"
+2) "three"
+3) "two"
+4) "one"
+127.0.0.1:6379> Lrem list 1 one #移除一个指定建值为one的值
+(integer) 1
+127.0.0.1:6379> LRANGE list 0 -1
+1) "four"
+2) "three"
+3) "two"
+```
+
+#### ltrim
+
+修建/截断
+
+```bash
+127.0.0.1:6379> Rpush mylist "hello"
+(integer) 1
+127.0.0.1:6379> Rpush mylist "hello1"
+(integer) 2
+127.0.0.1:6379> Rpush mylist "hello2"
+(integer) 3
+127.0.0.1:6379> Rpush mylist "hello3"
+(integer) 4
+127.0.0.1:6379> ltrim mylist 1 2 #通过下标截取指定的长度,这个list只剩下已经截取的部分
+OK
+127.0.0.1:6379> LRANGE mylist 0 -1
+1) "hello1"
+2) "hello2"
+```
+
+#### rpoolpush
+
+> 移除带列表最后一个元素,并将它移动到新的列表
+
+```bash
+127.0.0.1:6379> Rpush mylist "hello"
+(integer) 1
+127.0.0.1:6379> Rpush mylist "hello1"
+(integer) 2
+127.0.0.1:6379> Rpush mylist "hello2"
+(integer) 3
+127.0.0.1:6379> rpoolpush mylist myotherlist
+"hello2"
+```
+
+#### Lset
+
+> 列表必须存在,否则报错`(error) ERR no such key`
+>
+> 列表的index必须存在,否则报错`(error) ERR index out of range`
+
+```bash
+127.0.0.1:6379> lpush list value
+(integer) 1
+127.0.0.1:6379> lrange list 0 -1
+"value"
+127.0.0.1:6379> lset list 0 new
+OK
+127.0.0.1:6379> lrange list 0 -1
+"new"
+```
+
+#### linsert
+
+> 将某个值插入到特定值的前面/后面
+
+```bash
+127.0.0.1:6379> Rpush mylist "hello"
+(integer) 1
+127.0.0.1:6379> Rpush mylist "hello1"
+(integer) 2
+127.0.0.1:6379> LINSERT mylisy before "hello1" "hello2"
+(integer) 3
+127.0.0.1:6379> lrange list 0 -1
+1) "hello"
+2) "hello2"
+3) "hello1"
+127.0.0.1:6379> LINSERT mylisy after "hello1" "hello3"
+(integer) 4
+127.0.0.1:6379> lrange list 0 -1
+1) "hello"
+2) "hello2"
+3) "hello1"
+4) "hello3"
+```
+
+#### 小结
+
+- list实际为一个链表,before Node after, left, right 都可以插入值
+- 如果key不存在,创建新的脸
+- 如果key存在,新增内容
+- 如果移除了所有值,空链表,也代表不存在
+- 在两边插入或改动值,效率最高!
+- 在中间元素操作,效率低一点!
+
+消息排队!消息队列|(Lpush,Rpop), 栈(Lpush,Lpop)
 
 
 
