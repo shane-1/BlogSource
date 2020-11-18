@@ -49,7 +49,7 @@ module.exports = {
         {  text: 'Cloud', 
           items :[
             {text:'Docker基础',link:'/Cloud/DockerBase.md'},
-            {text:'K8s部署Redis集群',link:'/Cloud/RedisOnk8s.md'},
+            {text:'K8s部署Redis集群',link:'/Cloud/RedisOnK8s.md'},
             {text:'微服务',link:'/Cloud/Microservices.md'},
             {text:'AWS',link:'/Cloud/AWS.md'},
           ]},
