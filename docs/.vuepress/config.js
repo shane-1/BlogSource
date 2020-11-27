@@ -30,6 +30,7 @@ module.exports = {
           {text:'Redis',link:'/Note/Redis.md'},
           {text:'PWA介绍及快速上手搭建',link:'/Note/PWA.md'},
           {text:'The Zen of Python',link:'/Note/ZenOfPython.md'},
+          {text:'Windows编辑文件在linux运行错误',link:'/Note/WindowsLinuxError.md'},
           
         ]},
         { 
