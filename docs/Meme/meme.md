@@ -4,6 +4,14 @@
 
 ---------------------------
 
+## 2020.11.29
+
+人类虽是个体，但其独特的社会属性才成就了我们，但这属性却被科技和政治剥离（信息茧房、舆论控制、deepfake、民粹主义……）。这是一个喧嚣的时代，喧嚣得每个人都提高着分贝，结果是我们更听不清别人。未来并不明朗，也许就从未明朗。也许此时的担忧显得多余，永恒即虚无，我们的开始就不可避免的迎来结束，就如同个体的生命。这可能就是人生和人类的意义吧，向死而生，总有一些微光能温暖我们，活过爱过，能向着光的方向在黑暗中前行就是最大的意义。保护着那一丝的理想主义微光，奋力前行，不被世界定义。听着虽有些像受基督影响，但正如罗素先生所说，“love is wish, hatred is foolish.”，所以choose love， always choose love。
+                                ———— 观<years and years> 有感
+
+Even Human beings are individuals, unique social attributes make us who we are, which have been stripped away by technology and politics (information cocoon rooms, control of opinion, Deepfake, populism...)This is a noisy era,too noisy to hear each other. The future is not clear, and probably never will be. Perhaps my worry is unnecessary, eternity is nothing, our beginning inevitably comes to an end, just like individual's life. This may be the meaning of life and humanity, to die to live, there is always some light to warm us, to live and love, to walk towards the direction of light in the dark is the meaning we been searching for. Protecting a glimmer of idealism, struggling forward, undefined by the world. Like Russell said,"love is wish, hatred is foolish."So choose love,always choose love.
+                                -- improvisation after watched <years and years> 
+
 ## 2020.10.21
 
 这是一个悖论的世界,但总有人觉得自己就是真理.<br>
