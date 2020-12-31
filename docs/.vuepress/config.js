@@ -32,6 +32,7 @@ module.exports = {
           {text:'The Zen of Python',link:'/Note/ZenOfPython.md'},
           {text:'Windows编辑文件在linux运行错误',link:'/Note/WindowsLinuxError.md'},
           {text:'开源软件',link:'/Note/OpenSourceSoftware.md'},
+          {text:'Shell 脚本传参方法总结',link:'/Note/Shell.md'},
           
         ]},
         { 
