@@ -1,4 +1,8 @@
-module.exports = {
+import { defaultTheme } from '@vuepress/theme-default'
+import { backToTopPlugin } from '@vuepress/plugin-back-to-top'
+import { pwaPlugin } from '@vuepress/plugin-pwa'
+
+export default {
     title: 'Viva la Vida',  // 设置网站标题
     description : 'Romain Rolland',
     //图标
@@ -14,13 +18,13 @@ module.exports = {
     ['meta', { name: 'msapplication-TileImage', content: '/rick1.png' }],
     ['meta', { name: 'msapplication-TileColor', content: '#FFFFFF' }]
     ],
-    themeConfig: {
+    theme: defaultTheme({
       lastUpdated:'Last Updated',
-      nav: [
+      navbar: [
         { text: 'Home', link: '/' },
         {
           text: 'Note', 
-          items  :[
+          children  :[
           {text:'Markdown',link:'/Note/Markdown.md'},
           {text:'Octave与Matlab的区别',link:'/Note/DBOM.md'},
           {text:'CMD Manual',link:'/Note/Cmd.md'},
@@ -37,7 +41,7 @@ module.exports = {
         ]},
         { 
           text: 'Java', 
-          items :[
+          children :[
             {text:'Java基础',link:'/Java/Java.md'},
             {text:'多线程 Multithread',link:'/Java/Multithread.md'},
             {text:'设计模式 DesignPattern',link:'/Java/DesignPattern.md'},
@@ -50,7 +54,7 @@ module.exports = {
             
         ]},
         {  text: 'Cloud', 
-          items :[
+        children :[
             {text:'Docker基础',link:'/Cloud/DockerBase.md'},
             {text:'K8s部署Redis集群',link:'/Cloud/RedisOnK8s.md'},
             {text:'微服务',link:'/Cloud/Microservices.md'},
@@ -58,24 +62,26 @@ module.exports = {
           ]},
         {
             text: 'ALGO', 
-            items  :[
+            children  :[
               {text:'KMP',link:'/ALGO/KMP.md'},
                                     ]},
         
         { text: 'ML', 
-          items :[
+        children :[
             {text:'Tensorflow环境搭建指南',link:'/ML/TensorflowEnvironment.md'},
             {text:'Tensorflow常见报错解决',link:'/ML/TensorflowError.md'}
           ]},
         { text: 'Phil',
-          items :[
+        children :[
             {text:'中国为什么没有科学精神', link:'/Phil/WCHNS.md'},
             {text:'ENFP',link:'/Phil/ENFP.md'},
             {text:'从Internet说起',link:'/Phil/Internet.md'}
           ]},
         { text: 'Meme', link: '/Meme/Meme.md' },
-        { text: 'Github', link: 'https://github.com/shane-1' },
       ],
+      logo:'/logo.png',
+      logoDark:'/logo.png',
+      repo:'https://github.com/shane-1',
       sidebar: 'auto',
       back_to_top:'true',
 
@@ -92,49 +98,17 @@ module.exports = {
         
       
     },
-    plugins: ['@vuepress/back-to-top'],
-    plugins: [
-      ['@vuepress/active-header-links', 
-      {
-        sidebarLinkSelector: '.sidebar-link',
-        headerAnchorSelector: '.header-anchor'
-    }],
-
-    [
-      '@vuepress/pwa', {
-        serviceWorker: true,
-        updatePopup: {
-            message: "有新的内容更新 & Blog has change",
-            buttonText: "Refresh"
-          }},
-  ],
-      [
-        'vuepress-plugin-mygitalk', {
-          // 是否启用(关闭请设置为false)(default: true)
-          enable: true,
-          // 是否开启首页评论(default: true)
-          home: false,
-          // Gitalk配置
-          gitalk: {
-            // GitHub Application Client ID.
-            clientID: '9f1916a40885cbf94d08',
-            // GitHub Application Client Secret.
-            clientSecret: 'ffa1919b6c8849fa7eb4025e5909c305d5992485',
-            // GitHub repository. 存储评论的 repo
-            repo: 'shane-1.github.io',
-            // GitHub repository 所有者，可以是个人或者组织。
-            owner: 'shane-1',
-            admin: ['shane-1'],
-            // 设置语言(default: zh-CN)
-            language: 'zh-CN',
-          }
-        }
+    ),
+      plugins: [
+        backToTopPlugin(),
+        pwaPlugin({
+          // 配置项
+          skipWaiting: true,
+          serviceWorker: true,
+          updatePopup: {
+              message: "有新的内容更新 & Blog has change",
+              buttonText: "Refresh"
+            },
+        }),
       ],
-      [
-        '@vuepress/google-analytics',
-        {
-          'ga': 'UA-179730919-1' // UA-00000000-0
-        }
-      ]
-    ],
   }

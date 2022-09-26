@@ -1,18 +1,17 @@
 {
   "name": "Blog",
   "version": "2.0.0",
-  "description": "",
+  "description": "blog",
   "main": "index.html",
   "scripts": {
     "dev": "vuepress dev docs",
-    "build": "vuepress build docs",
-    "test": "echo\"Error:no test specifed\" && exit 1",
-    "deploy": "bash deploy.sh"
+    "build": "vuepress build docs"
   },
   "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^2.0.0-beta.51",
     "@vuepress/plugin-google-analytics": "^1.6.0",
-    "@vuepress/plugin-pwa": "^1.6.0",
-    "vuepress": "^1.6.0"
+    "@vuepress/plugin-pwa": "^2.0.0-beta.51",
+    "vuepress": "^2.0.0-beta.51"
   },
   "dependencies": {
     "vuepress-plugin-mygitalk": "^1.0.5"
