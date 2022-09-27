@@ -1,6 +1,7 @@
 import { defaultTheme } from '@vuepress/theme-default'
 import { backToTopPlugin } from '@vuepress/plugin-back-to-top'
 import { pwaPlugin } from '@vuepress/plugin-pwa'
+import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 
 export default {
     title: 'Viva la Vida',  // 设置网站标题
@@ -10,7 +11,7 @@ export default {
     head: [
         ["link", { rel:"icon", href:"/logo.png"}],
         ['link', { rel: 'manifest', href: '/Manifest.json' }],
-    ['meta', { name: 'theme-color', content: '                                                                                             ' }],
+    ['meta', { name: 'theme-color', content: '' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
     ['link', { rel: 'apple-touch-icon', href: '/rick1.png' }],
@@ -101,14 +102,18 @@ export default {
     ),
       plugins: [
         backToTopPlugin(),
+        googleAnalyticsPlugin({
+          // 配置项
+          id: 'UA-179730919-1'
+        }),
         pwaPlugin({
           // 配置项
           skipWaiting: true,
-          serviceWorker: true,
-          updatePopup: {
-              message: "有新的内容更新 & Blog has change",
-              buttonText: "Refresh"
-            },
-        }),
-      ],
+          // serviceWorker: true,
+          // updatePopup: {
+          //     message: "有新的内容更新 & Blog has change",
+          //     buttonText: "Refresh"
+          //   },
+        })
+      ]
   }

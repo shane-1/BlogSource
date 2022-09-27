@@ -74,18 +74,18 @@ Anaconda可以在以下系统平台中安装和使用：<br>
 <ol start="3">
 <li>安装过程中，看到提示<code v-pre>In order to continue the installation process, please review the license agreement.</code>（“请浏览许可证协议以便继续安装。”），点击“Enter”查看“许可证协议”。</li>
 <li>在“许可证协议”界面将屏幕滚动至底，输入“yes”表示同意许可证协议内容。然后进行下一步。</li>
-<li>安装过程中，提示<code v-pre>Press Enter to confirm the location, Press CTRL-C to cancel the installation or specify an alternate installation directory.</code>（“按回车键确认安装路径，按'CTRL-C'取消安装或者指定安装目录。”）如果接受默认安装路径，则会显示<code v-pre>PREFIX=/home/&lt;user&gt;/anaconda&lt;2 or 3&gt; </code>并且继续安装。安装过程大约需要几分钟的时间。</li>
+<li>安装过程中，提示<code v-pre>Press Enter to confirm the location, Press CTRL-C to cancel the installation or specify an alternate installation directory.</code>（“按回车键确认安装路径，按'CTRL-C'取消安装或者指定安装目录。”）如果接受默认安装路径，则会显示<code v-pre>PREFIX=/home/&amp;lt;user&amp;gt;/anaconda&lt;2 or 3&gt; </code>并且继续安装。安装过程大约需要几分钟的时间。</li>
 </ol>
 <blockquote>
 <p>•	建议：直接接受默认安装路径。</p>
 </blockquote>
 <ol start="6">
-<li>安装器若提示<code v-pre>Do you wish the installer to prepend the Anaconda install location to PATH in your /home/&lt;user&gt;/.bash_profile ?</code>（“你希望安装器添加Anaconda安装路径在/home/<user>/.bash_profile 文件中吗？”），建议输入“yes”。</li>
+<li>安装器若提示<code v-pre>Do you wish the installer to prepend the Anaconda install location to PATH in your /home/&amp;lt;user&amp;gt;/.bash_profile ?</code>（“你希望安装器添加Anaconda安装路径在/home/&lt;user&gt;/.bash_profile 文件中吗？”），建议输入“yes”。</li>
 </ol>
 <blockquote>
 <p>•	注意：<br>
-① 路径 /home/<user>/.bash_profile 中 <user> 即进入到家目录后你的目录名。<br>
-② 如果输入“no”，则需要手动添加路径。添加 export PATH=&quot;/<path to anaconda>/bin:$PATH&quot; 在 .bashrc 或者 .bash_profile 中。其中， <path to anaconda>替换为你真实的Anaconda安装路径。</p>
+① 路径 /home/&lt;user&gt;/.bash_profile 中 &lt;user&gt; 即进入到家目录后你的目录名。<br>
+② 如果输入“no”，则需要手动添加路径。添加 export PATH=&quot;/&lt;path to anaconda&gt;/bin:$PATH&quot; 在 .bashrc 或者 .bash_profile 中。其中， &lt;path to anaconda&gt;替换为你真实的Anaconda安装路径。</p>
 </blockquote>
 <ol start="7">
 <li>当看到<code v-pre>Thank you for installing Anaconda!</code>则说明已经成功完成安装。</li>
@@ -165,17 +165,17 @@ Anaconda可以在以下系统平台中安装和使用：<br>
 <ol start="4">
 <li>安装过程中，看到提示<code v-pre>In order to continue the installation process, please review the license agreement.</code>（“请浏览许可证协议以便继续安装。”），点击“Enter”查看“许可证协议”。</li>
 <li>在“许可证协议”界面将屏幕滚动至底，输入“yes”表示同意许可证协议内容。然后进行下一步。</li>
-<li>安装过程中，提示<code v-pre>Press Enter to accept the default install location, CTRL-C to cancel the installation or specify an alternate installation directory.</code>（“按回车键确认安装路径，按'CTRL-C'取消安装或者指定安装目录。”）如果接受默认安装路径，则会显示PREFIX=/home/<user>/anaconda&lt;2 or 3&gt; 并且继续安装。安装过程大约需要几分钟的时间。</li>
+<li>安装过程中，提示<code v-pre>Press Enter to accept the default install location, CTRL-C to cancel the installation or specify an alternate installation directory.</code>（“按回车键确认安装路径，按'CTRL-C'取消安装或者指定安装目录。”）如果接受默认安装路径，则会显示PREFIX=/home/&lt;user&gt;/anaconda&lt;2 or 3&gt; 并且继续安装。安装过程大约需要几分钟的时间。</li>
 </ol>
 <blockquote>
 <p>•	建议：直接接受默认安装路径。</p>
 </blockquote>
 <ol start="7">
-<li>安装器若提示<code v-pre>Do you wish the installer to prepend the Anaconda&lt;2 or 3&gt; install location to PATH in your /home/&lt;user&gt;/.bashrc ?</code>（“你希望安装器添加Anaconda安装路径在 /home/<user>/.bashrc 文件中吗？”），建议输入“yes”。</li>
+<li>安装器若提示<code v-pre>Do you wish the installer to prepend the Anaconda&lt;2 or 3&gt; install location to PATH in your /home/&amp;lt;user&amp;gt;/.bashrc ?</code>（“你希望安装器添加Anaconda安装路径在 /home/&lt;user&gt;/.bashrc 文件中吗？”），建议输入“yes”。</li>
 </ol>
 <blockquote>
 <p>•	注意：<br>
-① 路径 /home/<user>/.bash_rc 中 “<user>” 即进入到家目录后你的目录名。<br>
+① 路径 /home/&lt;user&gt;/.bash_rc 中 “&lt;user&gt;” 即进入到家目录后你的目录名。<br>
 ② 如果输入“no”，则需要手动添加路径，否则conda将无法正常运行。</p>
 </blockquote>
 <ol start="8">

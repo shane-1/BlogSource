@@ -48,12 +48,12 @@ Anaconda可以在以下系统平台中安装和使用：<br>
 ▫ 强烈建议：不要修改文件名。如果重命名，使用英文进行命名。
 3. 安装过程中，看到提示`In order to continue the installation process, please review the license agreement.`（“请浏览许可证协议以便继续安装。”），点击“Enter”查看“许可证协议”。
 4. 在“许可证协议”界面将屏幕滚动至底，输入“yes”表示同意许可证协议内容。然后进行下一步。
-5. 安装过程中，提示`Press Enter to confirm the location, Press CTRL-C to cancel the installation or specify an alternate installation directory.`（“按回车键确认安装路径，按'CTRL-C'取消安装或者指定安装目录。”）如果接受默认安装路径，则会显示`PREFIX=/home/<user>/anaconda<2 or 3> `并且继续安装。安装过程大约需要几分钟的时间。
+5. 安装过程中，提示`Press Enter to confirm the location, Press CTRL-C to cancel the installation or specify an alternate installation directory.`（“按回车键确认安装路径，按'CTRL-C'取消安装或者指定安装目录。”）如果接受默认安装路径，则会显示`PREFIX=/home/&lt;user&gt;/anaconda<2 or 3> `并且继续安装。安装过程大约需要几分钟的时间。
 >•	建议：直接接受默认安装路径。
-6. 安装器若提示`Do you wish the installer to prepend the Anaconda install location to PATH in your /home/<user>/.bash_profile ?`（“你希望安装器添加Anaconda安装路径在/home/<user>/.bash_profile 文件中吗？”），建议输入“yes”。
+6. 安装器若提示`Do you wish the installer to prepend the Anaconda install location to PATH in your /home/&lt;user&gt;/.bash_profile ?`（“你希望安装器添加Anaconda安装路径在/home/&lt;user&gt;/.bash_profile 文件中吗？”），建议输入“yes”。
 >•	注意：<br>
->① 路径 /home/<user>/.bash_profile 中 <user> 即进入到家目录后你的目录名。<br>
->② 如果输入“no”，则需要手动添加路径。添加 export PATH="/<path to anaconda>/bin:$PATH" 在 .bashrc 或者 .bash_profile 中。其中， <path to anaconda>替换为你真实的Anaconda安装路径。
+>① 路径 /home/&lt;user&gt;/.bash_profile 中 &lt;user&gt; 即进入到家目录后你的目录名。<br>
+>② 如果输入“no”，则需要手动添加路径。添加 export PATH="/&lt;path to anaconda&gt;/bin:$PATH" 在 .bashrc 或者 .bash_profile 中。其中， &lt;path to anaconda&gt;替换为你真实的Anaconda安装路径。
 7. 当看到`Thank you for installing Anaconda!`则说明已经成功完成安装。
 8. 关闭终端，然后再打开终端以使安装后的Anaconda启动。
 9. 验证安装结果。可选用以下任意一种方法：<br>
@@ -106,11 +106,11 @@ Anaconda可以在以下系统平台中安装和使用：<br>
 ③ 除非被要求使用root权限，否则均选择“Install Anaconda as a user”。
 4. 安装过程中，看到提示`In order to continue the installation process, please review the license agreement.`（“请浏览许可证协议以便继续安装。”），点击“Enter”查看“许可证协议”。
 5. 在“许可证协议”界面将屏幕滚动至底，输入“yes”表示同意许可证协议内容。然后进行下一步。
-6. 安装过程中，提示`Press Enter to accept the default install location, CTRL-C to cancel the installation or specify an alternate installation directory.`（“按回车键确认安装路径，按'CTRL-C'取消安装或者指定安装目录。”）如果接受默认安装路径，则会显示PREFIX=/home/<user>/anaconda<2 or 3> 并且继续安装。安装过程大约需要几分钟的时间。
+6. 安装过程中，提示`Press Enter to accept the default install location, CTRL-C to cancel the installation or specify an alternate installation directory.`（“按回车键确认安装路径，按'CTRL-C'取消安装或者指定安装目录。”）如果接受默认安装路径，则会显示PREFIX=/home/&lt;user&gt;/anaconda<2 or 3> 并且继续安装。安装过程大约需要几分钟的时间。
 >•	建议：直接接受默认安装路径。
-7. 安装器若提示`Do you wish the installer to prepend the Anaconda<2 or 3> install location to PATH in your /home/<user>/.bashrc ?`（“你希望安装器添加Anaconda安装路径在 /home/<user>/.bashrc 文件中吗？”），建议输入“yes”。
+7. 安装器若提示`Do you wish the installer to prepend the Anaconda<2 or 3> install location to PATH in your /home/&lt;user&gt;/.bashrc ?`（“你希望安装器添加Anaconda安装路径在 /home/&lt;user&gt;/.bashrc 文件中吗？”），建议输入“yes”。
 >•	注意：<br>
-① 路径 /home/<user>/.bash_rc 中 “<user>” 即进入到家目录后你的目录名。<br>
+① 路径 /home/&lt;user&gt;/.bash_rc 中 “&lt;user&gt;” 即进入到家目录后你的目录名。<br>
 ② 如果输入“no”，则需要手动添加路径，否则conda将无法正常运行。
 8. 当看到`Thank you for installing Anaconda<2 or 3>!`则说明已经成功完成安装。
 9. 关闭终端，然后再打开终端以使安装后的Anaconda启动。或者直接在终端中输入 `source ~/.bashrc 也可完成启动。

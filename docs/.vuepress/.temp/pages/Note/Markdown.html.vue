@@ -76,7 +76,7 @@ Markdown 段首缩进：
 <tr>
 <td style="text-align:center">5</td>
 <td style="text-align:center"><code v-pre>上标：O&lt;sup&gt;2</code></td>
-<td style="text-align:center">O<sup>2</td>
+<td style="text-align:center">&lt;sup&gt;2</td>
 </tr>
 <tr>
 <td style="text-align:center">6</td>
