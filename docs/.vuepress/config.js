@@ -3,7 +3,6 @@ import { backToTopPlugin } from '@vuepress/plugin-back-to-top'
 import { pwaPlugin } from '@vuepress/plugin-pwa'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 import {pwaPopupPlugin} from '@vuepress/plugin-pwa-popup'
-import {KanBanNiang} from '@vuepress-reco/vuepress-plugin-kan-ban-niang'
 
 export default {
     title: 'Viva la Vida',  // 设置网站标题
@@ -125,8 +124,5 @@ export default {
             }
           }
         }),
-        KanBanNiang({
-          
-        })
       ]
   }

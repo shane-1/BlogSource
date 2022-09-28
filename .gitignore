@@ -1,1 +1,13 @@
-node_modules
+#vuepress
+docs/.vuepress/.temp
+docs/.vuepress/assets
+docs/.vuepress/dist
+docs/.vuepress/.cache
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+
+# Yarn Integrity file
+.yarn-integrity
