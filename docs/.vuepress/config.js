@@ -61,6 +61,8 @@ export default {
             {text:'K8s部署Redis集群',link:'/Cloud/RedisOnK8s.md'},
             {text:'微服务',link:'/Cloud/Microservices.md'},
             {text:'AWS',link:'/Cloud/AWS.md'},
+            {text:'Flyway',link:'/Cloud/Flyway.md'}
+            
           ]},
         {
             text: 'ALGO', 
@@ -76,7 +78,7 @@ export default {
         { text: 'Phil',
         children :[
             {text:'中国为什么没有科学精神', link:'/Phil/WCHNS.md'},
-            {text:'ENFP',link:'/Phil/ENFP.md'},
+            // {text:'ENFP',link:'/Phil/ENFP.md'},
             {text:'从Internet说起',link:'/Phil/Internet.md'}
           ]},
         { text: 'Meme', link: '/Meme/Meme.md' },
