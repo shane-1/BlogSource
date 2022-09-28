@@ -1,11 +1,11 @@
 {
   "name": "Viva la Vida",
-  "short_name": "S'Blog",
-  "start_url": "index.html",
+  "short_name": "Shane-1",
+  "description": "Shane's Blog",
+  "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#779103",
-  "description": "shane's blog",
-  "theme_color": "white",
+  "background_color": "#d6eeba",
+  "theme_color": "#d6eeba",
   "icons": [
     {
       "src": "./rick1.png",

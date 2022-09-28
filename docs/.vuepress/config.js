@@ -2,6 +2,8 @@ import { defaultTheme } from '@vuepress/theme-default'
 import { backToTopPlugin } from '@vuepress/plugin-back-to-top'
 import { pwaPlugin } from '@vuepress/plugin-pwa'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
+import {pwaPopupPlugin} from '@vuepress/plugin-pwa-popup'
+import {KanBanNiang} from '@vuepress-reco/vuepress-plugin-kan-ban-niang'
 
 export default {
     title: 'Viva la Vida',  // 设置网站标题
@@ -114,6 +116,17 @@ export default {
           //     message: "有新的内容更新 & Blog has change",
           //     buttonText: "Refresh"
           //   },
+        }),
+        pwaPopupPlugin({
+          locales:{
+            '/':{
+              message: "New Content is availavle.",
+              buttonText: "Refresh"
+            }
+          }
+        }),
+        KanBanNiang({
+          
         })
       ]
   }

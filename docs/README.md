@@ -15,5 +15,5 @@ features:
 footer: Powered.Veupress | Created.Shane
 ---
 优秀主页链接 § BlogLink ：<br>
-[算法小抄](https://labuladong.gitbook.io/algo/)
-[宝可梦大师](http://speech.ee.ntu.edu.tw/~tlkagk/)
+[Machine learning](http://speech.ee.ntu.edu.tw/~tlkagk/)
+[代码随想录](https://www.programmercarl.com/)

@@ -7,6 +7,7 @@ import clientConfig5 from 'C:/Users/qq121/Desktop/doc/Git/Blog/node_modules/@vue
 import clientConfig6 from 'C:/Users/qq121/Desktop/doc/Git/Blog/node_modules/@vuepress/plugin-back-to-top/lib/client/config.js'
 import clientConfig7 from 'C:/Users/qq121/Desktop/doc/Git/Blog/node_modules/@vuepress/plugin-google-analytics/lib/client/config.js'
 import clientConfig8 from 'C:/Users/qq121/Desktop/doc/Git/Blog/node_modules/@vuepress/plugin-pwa/lib/client/config.js'
+import clientConfig9 from 'C:/Users/qq121/Desktop/doc/Git/Blog/node_modules/@vuepress/plugin-pwa-popup/lib/client/config.js'
 
 export const clientConfigs = [
   clientConfig0,
@@ -18,4 +19,5 @@ export const clientConfigs = [
   clientConfig6,
   clientConfig7,
   clientConfig8,
+  clientConfig9,
 ]
