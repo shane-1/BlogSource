@@ -28,7 +28,7 @@ export default {
         {
           text: 'Note', 
           children  :[
-            { text: 'ML', 
+            { text: 'Machine Learning', 
             children :[
                 {text:'Tensorflow环境搭建指南',link:'/Note/ML/TensorflowEnvironment.md'},
                 {text:'Tensorflow常见报错解决',link:'/Note/ML/TensorflowError.md'}
