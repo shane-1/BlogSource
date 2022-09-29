@@ -1,4 +1,5 @@
 package-lock.json
+yarn.lock
 #vuepress
 docs/.vuepress/.temp
 docs/.vuepress/assets
