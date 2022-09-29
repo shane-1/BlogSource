@@ -1,6 +1,6 @@
 # PWA介绍及快速上手搭建一个PWA应用
 
-> 作者 游魂 | 发布于 2018-04-27
+> 原始文档- 游魂 | 发布于 2018-04-27
 
 ## PWA初次体验
 
@@ -496,7 +496,51 @@ module.exports = {
 }
 ```
 
+
 欢迎提交 PR 以增加默认的 [i18n 配置](https://github.com/vuejs/vuepress/blob/master/packages/%40vuepress/plugin-pwa/lib/i18n.js).
+
+
+### 迁移到 2.x
+
+#### install
+
+```cmd
+npm i -D @vuepress/plugin-pwa@next
+```
+
+#### Config
+
+```diff
+import { pwaPlugin } from '@vuepress/plugin-pwa'
+
+export default {
+  plugins: [
+    pwaPlugin({
+      // 配置项
+    }),
+  ],
+}
+```
+#### pwa-popup
+```cmd
+npm i -D @vuepress/plugin-pwa-popup@next
+
+```
+
+```diff
+import { pwaPlugin } from '@vuepress/plugin-pwa'
+import { pwaPopupPlugin } from '@vuepress/plugin-pwa-popup'
+
+export default {
+  plugins: [
+    pwaPlugin(),
+    pwaPopupPlugin({
+      // 配置项
+    }),
+  ],
+}
+  ],
+}
 
 ### 自定义 SW-Update Popup 的 UI
 

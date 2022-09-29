@@ -3,6 +3,7 @@ docs/.vuepress/.temp
 docs/.vuepress/assets
 docs/.vuepress/dist
 docs/.vuepress/.cache
+docs/Private
 
 # Dependency directories
 node_modules/

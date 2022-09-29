@@ -3,6 +3,7 @@ import { backToTopPlugin } from '@vuepress/plugin-back-to-top'
 import { pwaPlugin } from '@vuepress/plugin-pwa'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 import {pwaPopupPlugin} from '@vuepress/plugin-pwa-popup'
+import { searchPlugin } from '@vuepress/plugin-search'
 
 export default {
     title: 'Viva la Vida',  // 设置网站标题
@@ -61,8 +62,7 @@ export default {
             {text:'K8s部署Redis集群',link:'/Cloud/RedisOnK8s.md'},
             {text:'微服务',link:'/Cloud/Microservices.md'},
             {text:'AWS',link:'/Cloud/AWS.md'},
-            {text:'Flyway',link:'/Cloud/Flyway.md'}
-            
+            {text:'Flyway', link:'/Cloud/Flyway.md'},
           ]},
         {
             text: 'ALGO', 
@@ -78,7 +78,6 @@ export default {
         { text: 'Phil',
         children :[
             {text:'中国为什么没有科学精神', link:'/Phil/WCHNS.md'},
-            // {text:'ENFP',link:'/Phil/ENFP.md'},
             {text:'从Internet说起',link:'/Phil/Internet.md'}
           ]},
         { text: 'Meme', link: '/Meme/Meme.md' },
@@ -125,6 +124,16 @@ export default {
               buttonText: "Refresh"
             }
           }
+        }),
+        searchPlugin({
+          locales: {
+            '/': {
+              placeholder: 'Search',
+            },
+            // '/zh/': {
+            //   placeholder: '搜索',
+            // },
+          },
         }),
       ]
   }
