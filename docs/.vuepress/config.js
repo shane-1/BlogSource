@@ -28,18 +28,28 @@ export default {
         {
           text: 'Note', 
           children  :[
+            { text: 'ML', 
+            children :[
+                {text:'Tensorflow环境搭建指南',link:'/Note/ML/TensorflowEnvironment.md'},
+                {text:'Tensorflow常见报错解决',link:'/Note/ML/TensorflowError.md'}
+              ]},
+            { text: 'MySQL',
+            children:[
+              {text:'MySQL',link:'/Note/MySQL.md'},
+              {text:'MySQLExplain',link:'/Note/MySQL/MySQLExplain.md'},
+              {text:'MySQL索引详解',link:'/Note/MySQL/IndexDS.md'},
+            ]
+            },
           {text:'Markdown',link:'/Note/Markdown.md'},
           {text:'Octave与Matlab的区别',link:'/Note/DBOM.md'},
           {text:'CMD Manual',link:'/Note/Cmd.md'},
-          {text:'MySQL',link:'/Note/MySQL.md'},
-          {text:'MySQLExplain',link:'/Note/MySQLExplain.md'},
-          {text:'MySQL索引背后的数据结构及算法原理',link:'/Note/IndexDS.md'},
           {text:'Redis',link:'/Note/Redis.md'},
           {text:'PWA介绍及快速上手搭建',link:'/Note/PWA.md'},
           {text:'The Zen of Python',link:'/Note/ZenOfPython.md'},
-          {text:'Windows编辑文件在linux运行错误',link:'/Note/WindowsLinuxError.md'},
+          {text:'Windows编辑linux运行错误',link:'/Note/WindowsLinuxError.md'},
           {text:'开源软件',link:'/Note/OpenSourceSoftware.md'},
           {text:'Shell 脚本传参方法总结',link:'/Note/Shell.md'},
+
           
         ]},
         { 
@@ -70,11 +80,7 @@ export default {
               {text:'KMP',link:'/ALGO/KMP.md'},
                                     ]},
         
-        { text: 'ML', 
-        children :[
-            {text:'Tensorflow环境搭建指南',link:'/ML/TensorflowEnvironment.md'},
-            {text:'Tensorflow常见报错解决',link:'/ML/TensorflowError.md'}
-          ]},
+        
         { text: 'Phil',
         children :[
             {text:'中国为什么没有科学精神', link:'/Phil/WCHNS.md'},
