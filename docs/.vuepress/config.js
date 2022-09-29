@@ -35,7 +35,7 @@ export default {
               ]},
             { text: 'MySQL',
             children:[
-              {text:'MySQL',link:'/Note/MySQL.md'},
+              {text:'MySQL',link:'/Note/MySQL/MySQL.md'},
               {text:'MySQLExplain',link:'/Note/MySQL/MySQLExplain.md'},
               {text:'MySQL索引详解',link:'/Note/MySQL/IndexDS.md'},
             ]
