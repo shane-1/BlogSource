@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "deploy": "cmd run ./deploy.sh"
+    "deploy": "bash ./deploy.sh"
   },
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^2.0.0-beta.51",
