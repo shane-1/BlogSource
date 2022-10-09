@@ -10,7 +10,7 @@ git config --global user.name "shane-1"
 git init
 git add *
 git commit -m 'version 4.1'
-git push -f http://shane-1:${{TOKEN}}@github.com/shane-1/shane-1.github.io.git 
+git push -f http://shane-1:${{ secrets.TOKEN }}@github.com/shane-1/shane-1.github.io.git 
 cd ..
 cd ..
 cd ..
