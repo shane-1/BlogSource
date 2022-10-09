@@ -25,9 +25,5 @@ jobs:
           node-version: 16
       - run: npm i
       - run: npm run build
-      - run: cd docs/.vuepress/dist
-      - run: git init
-      - run: cp googlefc62804cfc44bb36.html docs/.vuepress/dist/
-      - run: git add *
-      - run: git commit -m 'version 4.1'
-      - run: git push -f git@github.com:shane-1/shane-1.github.io.git master
+      - run: npm run deploy
+
