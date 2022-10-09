@@ -20,21 +20,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
          
       - name: install
-      - run: npm i
+        run: npm i
+        
       - name: build
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16
-      
-      - run: npm run build
+        run: npm run build
       - name: deploy
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16
-      
-      - run: |
+        run: |
               cp googlefc62804cfc44bb36.html docs/.vuepress/dist/
               cd docs/.vuepress/dist
               git config --global init.defaultBranch master
@@ -50,7 +47,5 @@ jobs:
               git add *
               git commit -m 'version 4.1'
               git push git@github.com:shane-1/edit.git master
-        env:
-              HELM_EXPERIMENTAL_OCI: 1
       
 
