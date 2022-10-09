@@ -7,7 +7,7 @@ git init
 cp googlefc62804cfc44bb36.html docs/.vuepress/dist/
 git add *
 git commit -m 'version 4.1'
-git push -f git@github.com:shane-1/shane-1.github.io.git master
+git push -f git@github.com:shane-1/shane-1.github.io.git main
 cd ..
 cd ..
 cd ..
