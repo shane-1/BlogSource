@@ -44,15 +44,6 @@ jobs:
               
       - name: edit
         run: |
-              pwd
-              ls
-              cd ..
-              ls
-              cd ..
-              ls
-              cd ..
-              pwd
-              ls
               git init
               git add *
               git commit -m 'version 4.2'
