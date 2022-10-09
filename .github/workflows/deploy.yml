@@ -23,7 +23,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 16
+          TOKEN: ${{ secrets.TOKEN }}
       - run: npm i
       - run: npm run build
       - run: npm run deploy
+      
 
