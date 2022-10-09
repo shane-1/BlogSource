@@ -4,6 +4,7 @@ set -e
 
 cp googlefc62804cfc44bb36.html docs/.vuepress/dist/
 cd docs/.vuepress/dist
+git config --global init.defaultBranch master
 git config --global user.email "shane-liang@outlook.com"
 git config --global user.name "shane-1"
 git init
