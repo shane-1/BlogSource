@@ -10,7 +10,7 @@ git config --global user.name "shane-1"
 git init
 git add *
 git commit -m 'version 4.1'
-git push -f git@github.com:shane-1/shane-1.github.io.git master
+git push -f shane-1:${{ pwd }}@https://github.com/shane-1/shane-1.github.io.git master 
 cd ..
 cd ..
 cd ..
