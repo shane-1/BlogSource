@@ -41,10 +41,10 @@ jobs:
               git add *
               git commit -m 'version 4.1'
               git push -f https://shane-1:${{ secrets.TOKEN }}@github.com/shane-1/shane-1.github.io.git master
-              cd ..
-              cd ..
-              cd ..
-              git add *
+              
+      - name: edit
+        run: |
+            git add *
               git commit -m 'version 4.1'
               git push -f https://shane-1:${{ secrets.TOKEN }}@github.com/shane-1/edit.git master
 
