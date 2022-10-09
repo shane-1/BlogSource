@@ -43,5 +43,8 @@ jobs:
               git push -f https://shane-1:${{ secrets.TOKEN }}@github.com/shane-1/shane-1.github.io.git master
               
       - name: edit
-        run: git push -f https://shane-1:${{ secrets.TOKEN }}@github.com/shane-1/edit.git master
+        run: |
+              git add *
+              git commit -m 'version 4.2'
+              git push -f https://shane-1:${{ secrets.TOKEN }}@github.com/shane-1/edit.git master
 
