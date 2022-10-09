@@ -9,11 +9,11 @@ git config --global user.email "shane-liang@outlook.com"
 git config --global user.name "shane-1"
 git init
 git add *
-git commit -m 'version 4.1'
-git push -f http://shane-1:${{ secrets.TOKEN }}@github.com/shane-1/shane-1.github.io.git 
+git commit -m 'version 4.2'
+git push -f git@github.com:shane-1/shane-1.github.io.git master
 cd ..
 cd ..
 cd ..
 git add *
-git commit -m 'version 4.1'
-git push git@github.com:shane-1/edit.git master
+git commit -m 'version 4.2'
+git push git@github.com:shane-1/BlogSource.git master
