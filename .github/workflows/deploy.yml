@@ -25,11 +25,6 @@ jobs:
           node-version: 16
       - run: npm i
       - run: npm run build
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-git@latest
       - run: cd docs/.vuepress/dist
       - run: git init
       - run: cp googlefc62804cfc44bb36.html docs/.vuepress/dist/
