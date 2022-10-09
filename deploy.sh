@@ -2,8 +2,6 @@
 
 set -e
 
-yarn build
-
 cd docs/.vuepress/dist
 git init
 cp googlefc62804cfc44bb36.html docs/.vuepress/dist/
