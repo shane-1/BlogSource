@@ -3,7 +3,9 @@
 >> Something similar to the role of genes in biological evolution is involved in the transmission of language, ideas, beliefs, behaviors, etc.<br>
 
 ---------------------------
-
+## 2022.10.10
+一个人的孤独不是孤独，一个人找另一个人，一句话找另一句话，才是真正的孤独。
+                                ———— 刘震云                               
 ## 2020.11.29
 
 人类虽是个体，但其独特的社会属性才成就了我们，但这属性却被科技和政治剥离（信息茧房、舆论控制、deepfake、民粹主义……）。这是一个喧嚣的时代，喧嚣得每个人都提高着分贝，结果是我们更听不清别人。未来并不明朗，也许就从未明朗。也许此时的担忧显得多余，永恒即虚无，我们的开始就不可避免的迎来结束，就如同个体的生命。这可能就是人生和人类的意义吧，向死而生，总有一些微光能温暖我们，活过爱过，能向着光的方向在黑暗中前行就是最大的意义。保护着那一丝的理想主义微光，奋力前行，不被世界定义。听着虽有些像受基督影响，但正如罗素先生所说，“love is wish, hatred is foolish.”，所以choose love， always choose love。
