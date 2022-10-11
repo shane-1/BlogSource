@@ -28,30 +28,31 @@ export default {
         {
           text: 'Note', 
           children  :[
-            { text: 'Machine Learning', 
-            children :[
-                {text:'Tensorflow环境搭建指南',link:'/Note/ML/TensorflowEnvironment.md'},
-                {text:'Tensorflow常见报错解决',link:'/Note/ML/TensorflowError.md'}
-              ]},
-            { text: 'MySQL',
-            children:[
-              {text:'MySQL',link:'/Note/MySQL/MySQL.md'},
-              {text:'MySQLExplain',link:'/Note/MySQL/MySQLExplain.md'},
-              {text:'MySQL索引详解',link:'/Note/MySQL/IndexDS.md'},
-            ]
-            },
           {text:'Markdown',link:'/Note/Markdown.md'},
           {text:'Octave与Matlab的区别',link:'/Note/DBOM.md'},
-          {text:'CMD Manual',link:'/Note/Cmd.md'},
-          {text:'Redis',link:'/Note/Redis.md'},
+          {text:'CMD Manual',link:'/Note/Cmd.md'},      
           {text:'PWA介绍及快速上手搭建',link:'/Note/PWA.md'},
           {text:'The Zen of Python',link:'/Note/ZenOfPython.md'},
           {text:'Windows编辑linux运行错误',link:'/Note/WindowsLinuxError.md'},
-          {text:'开源软件',link:'/Note/OpenSourceSoftware.md'},
           {text:'Shell 脚本传参方法总结',link:'/Note/Shell.md'},
-
-          
+          { text: 'Machine Learning', 
+          children :[
+              {text:'Tensorflow环境搭建指南',link:'/Note/ML/TensorflowEnvironment.md'},
+              {text:'Tensorflow常见报错解决',link:'/Note/ML/TensorflowError.md'}
+            ]},
         ]},
+        { text: 'OpenSource',
+        children :[
+          {text:'开源软件',link:'/OpenSource/OpenSourceSoftware.md'},
+          {text:'Redis',link:'/OpenSource/Redis.md'},
+          { text: 'MySQL',
+            children:[
+              {text:'MySQL',link:'/OpenSource/MySQL/MySQL.md'},
+              {text:'MySQLExplain',link:'/OpenSource/MySQL/MySQLExplain.md'},
+              {text:'MySQL索引详解',link:'/OpenSource/MySQL/IndexDS.md'},
+            ]
+            },
+          ]},
         { 
           text: 'Java', 
           children :[
@@ -63,7 +64,7 @@ export default {
             {text:'Spring',link:'/Java/Spring.md'},
             {text:'SpringBoot',link:'/Java/SpringBoot.md'},
             {text:'Mybatis',link:'/Java/Mybatis.md'},
-            {text:'DevOps 思想',link:'/Java/DevOpsThinking.md'},
+           
             
         ]},
         {  text: 'Cloud', 
@@ -73,6 +74,7 @@ export default {
             {text:'微服务',link:'/Cloud/Microservices.md'},
             {text:'AWS',link:'/Cloud/AWS.md'},
             {text:'Flyway', link:'/Cloud/Flyway.md'},
+            {text:'DevOps 思想',link:'/Cloud/DevOpsThinking.md'},
           ]},
         {
             text: 'ALGO', 
