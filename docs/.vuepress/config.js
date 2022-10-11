@@ -91,7 +91,7 @@ export default {
         { text: 'Meme', link: '/Meme/Meme.md' },
       ],
       logo:'/logo.png',
-      logoDark:'/logo.png',
+      logoDark:'/logo_dark.png',
       repo:'https://github.com/shane-1',
       sidebar: 'auto',
       back_to_top:'true',
