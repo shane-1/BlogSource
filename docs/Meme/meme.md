@@ -3,6 +3,10 @@
 >> Something similar to the role of genes in biological evolution is involved in the transmission of language, ideas, beliefs, behaviors, etc.<br>
 
 ---------------------------
+## 备忘录
+```
+https://teams.microsoft.com/l/meetup-join/19%3ameeting_ODE4OGI4NjAtZTU4OS00NTVlLTgzOTctMzdkYjY0Zjg1ZDI4%40thread.v2/0?context=%7b%22Tid%22%3a%2244eed8c9-8392-4ce3-a90a-1afc08dcde62%22%2c%22Oid%22%3a%22f3150636-dbd3-4f51-9b5b-ef29e833442b%22%7d
+```
 ## 2022.10.10
 一个人的孤独不是孤独，一个人找另一个人，一句话找另一句话，才是真正的孤独。
                                 —— 刘震云                               
