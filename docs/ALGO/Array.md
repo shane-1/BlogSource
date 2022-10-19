@@ -54,9 +54,9 @@ return -1;
 
 ### 相关题目推荐
 
-[35.搜索插入位置 💚](https://leetcode.cn/classic/problems/search-insert-position/description/)
-
 [34.在排序数组中查找元素的第一个和最后一个位置 🧡](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/)
+
+[35.搜索插入位置 💚](https://leetcode.cn/classic/problems/search-insert-position/description/)
 
 [69.x的平方根 💚](https://leetcode.cn/classic/problems/sqrtx/description/)
 
