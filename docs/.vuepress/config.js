@@ -76,6 +76,7 @@ export default {
             {text:'AWS',link:'/Cloud/AWS.md'},
             {text:'Flyway', link:'/Cloud/Flyway.md'},
             {text:'DevOps 思想',link:'/Cloud/DevOpsThinking.md'},
+            {text:'软件架构杂谈',link:'/Cloud/SoftwareArchitecture.md'},
           ]},
         {
             text: 'ALGO', 
