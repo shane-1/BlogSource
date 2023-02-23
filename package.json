@@ -14,7 +14,7 @@
     "@vuepress/plugin-pwa": "^2.0.0-beta.51",
     "@vuepress/plugin-pwa-popup": "^2.0.0-beta.51",
     "@vuepress/plugin-search": "^2.0.0-beta.51",
-    "vuepress": "^2.0.0-beta.51"
+    "vuepress": "2.0.0-beta.51"
   },
   "dependencies": {
     "vuepress-plugin-mygitalk": "^1.0.5"
