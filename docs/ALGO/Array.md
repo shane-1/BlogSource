@@ -152,9 +152,9 @@ class Solution {
 
 [26.删除排序数组中的重复项 💚](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/)
 
-[283.移动零 🧡](https://leetcode.cn/classic/problems/search-insert-position/description/)
+[283.移动零 💚](https://leetcode.cn/problems/move-zeroes/)
 
-[844.比较含退格的字符串](https://leetcode.cn/classic/problems/sqrtx/description/)
+[844.比较含退格的字符串 💚](https://leetcode.cn/problems/backspace-string-compare/)
 
-[977.有序数组的平方 💚](https://leetcode.cn/classic/problems/valid-perfect-square/description/)
+[977.有序数组的平方 💚](https://leetcode.cn/problems/squares-of-a-sorted-array/)
 
