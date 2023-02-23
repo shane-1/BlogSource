@@ -19,3 +19,4 @@ footer: Powered.Vuepress.2.beta | Created.Shane-1
 [李宏毅](https://speech.ee.ntu.edu.tw/~hylee/)
 [代码随想录](https://www.programmercarl.com/)
 [鱻蒼載](https://xiancangzai.github.io/)
+[JavaGudies](https://javaguide.cn)
