@@ -233,3 +233,66 @@ class Solution {
 
 ###  [最小子序列](https://leetcode.cn/problems/minimum-size-subarray-sum/)
 
+>暴力解法是使用双层遍历，而滑动窗口基于此延伸
+
+1. 由于序列顺序一定不变，可以用一个可变指针作为左侧
+
+> while(当前结果 > target){
+                添加解;
+                当前结果 -= nums[左指针++];
+            }
+
+2. 然后将右侧作为遍历变量不断遍历，就可以获得可用解
+
+3. 由于存在多个解，需要最小的结果。故需要一个result存放当前长度，且不断和之后的结果比较取最短。
+
+>  int result = Integer.MAX_VALUE;
+
+>   result = Math.min(result, end-start+1);
+
+
+
+### 参考代码
+
+
+> 时间复杂度：O(n)
+
+> 空间复杂度：O(1)
+
+代码：
+
+```java
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        
+        if(nums.length == 0)
+           return 0;
+           
+        if(nums[0] == target)
+           return 1;
+        
+        int start = 0,count = 0;
+        int result = Integer.MAX_VALUE;
+        
+        
+        for(int end = 0; end < nums.length; end++){
+            
+            count += nums[end];
+            
+            //left side  
+            while(count > target){
+                 result = Math.min(result, end-start+1);
+                count -= nums[start++];
+            }
+            
+            //equal
+            if(count >= target){
+                result = Math.min(result, end-start+1);
+            }
+            
+        }
+        
+        return result ==  Integer.MAX_VALUE ? 0 : result;
+    }
+}
+```
