@@ -280,14 +280,9 @@ class Solution {
             count += nums[end];
             
             //left side  
-            while(count > target){
-                 result = Math.min(result, end-start+1);
-                count -= nums[start++];
-            }
-            
-            //equal
-            if(count >= target){
+            while(count >= target){
                 result = Math.min(result, end-start+1);
+                count -= nums[start++];
             }
             
         }
@@ -301,4 +296,64 @@ class Solution {
 
 [76.最小覆盖子串 ❤️](https://leetcode.cn/classic/problems/minimum-window-substring/description/)
 
+> 扩展
+```
+java
+class Solution {
+    public String minWindow(String s, String t) {
+         
+         int start = 0;
+         int rest = t.length();
+         
+         int[] need = new int[123];
+         int[] result = new int[2];
+         int length = Integer.MAX_VALUE;
+         
+         int index = 0;
+         
+         for(char each : t.toCharArray()){
+             need[each]++;
+         }
+         
+         for(int end = 0; end < s.length(); end++){
+             
+             char now = s.charAt(end);
+             
+             if(need[now] > 0){
+                 rest--;
+             }
+             
+             need[now]--;        
+             
+             if(rest== 0){
+                 
+             //move left
+              while(start<end&&need[s.charAt(start)] < 0){
+                    need[s.charAt(start)]++; 
+                    start++;
+                       
+              }
+              if(length > end-start+1){
+                    result[1] = end;
+                    result[0] = start;
+                    length = end - start+1;
+              }
+                             
+                 need[s.charAt(start)]++; 
+                 start++; 
+                 rest++;   
+                                
+             }
+             }
+             
+             return length == Integer.MAX_VALUE ? "":s.substring(result[0],result[1]+1);
+
+         }
+         
+
+    
+}
+```
+
 [904.水果成篮 🧡](https://leetcode.cn/problems/fruit-into-baskets/)
+
