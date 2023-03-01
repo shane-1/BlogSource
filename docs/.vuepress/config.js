@@ -35,6 +35,7 @@ export default {
           {text:'The Zen of Python',link:'/Note/ZenOfPython.md'},
           {text:'Windows编辑linux运行错误',link:'/Note/WindowsLinuxError.md'},
           {text:'Shell 脚本传参方法总结',link:'/Note/Shell.md'},
+          {text:'DDD-领域驱动设计',link:'/Note/DDD.md'},
          
         ]},
         { text: 'OpenSource',
