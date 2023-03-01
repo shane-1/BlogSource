@@ -35,11 +35,7 @@ export default {
           {text:'The Zen of Python',link:'/Note/ZenOfPython.md'},
           {text:'Windows编辑linux运行错误',link:'/Note/WindowsLinuxError.md'},
           {text:'Shell 脚本传参方法总结',link:'/Note/Shell.md'},
-          { text: 'Machine Learning', 
-          children :[
-              {text:'Tensorflow环境搭建指南',link:'/Note/ML/TensorflowEnvironment.md'},
-              {text:'Tensorflow常见报错解决',link:'/Note/ML/TensorflowError.md'}
-            ]},
+         
         ]},
         { text: 'OpenSource',
         children :[
@@ -53,6 +49,11 @@ export default {
               {text:'KeyCloak保护应用和服务指引',link:'/OpenSource/keycloak.md'},
             ]
             },
+          { text: 'Machine Learning', 
+            children :[
+                {text:'Tensorflow环境搭建指南',link:'/OpenSource/ML/TensorflowEnvironment.md'},
+                {text:'Tensorflow常见报错解决',link:'/OpenSource/ML/TensorflowError.md'}
+          ]},
           ]},
         { 
           text: 'Java', 
