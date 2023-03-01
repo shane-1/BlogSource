@@ -221,7 +221,9 @@ public void execute(Identity buyerId, List<orderItem> items,ShippingAddress ship
 
 > 所有引用基类的地方必须能透明地使用其子类的对象
 
+> 继承必须保证超类所拥有的性质(property)在子类中仍然成立
 
+property -> 属性
 
 ### ISP 接口隔离
 
