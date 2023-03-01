@@ -93,9 +93,81 @@ DDD 不是设计准则或规范，更不是架构设计的脚手架
 > 拥抱变化
 > 只被第一颗子弹击中
 
+### 隔离
+
+>隔离业务复杂度与技术复杂度
+
+首要任务就是确认业务逻辑与技术实现1的边界，从而隔离各自的复杂度
+
+![图片2]()
+
+基础设施层-资源库样例
+
+```java
+public interface OrderRepository{
+    List<order> forBuyerId(Identity buyerId);
+    void add(Order order);
+}
+public class PlaceOrderService{
+    @Repository
+    private OrderRepository orderRepository;
+    @service
+    private OrderValidator orderValidator;
+
+public void execute(Identity buyerId, List<orderItem> items,ShippingAddress shipping, BillingAddress billing) {
+    Order order = Order.create(buyerId, items, shipping, billing);
+    
+    if (orderValidator.isValid(order)) {
+        orderRepository.add(order); 
+    }
+
+    else {
+        throw new OrderException(String.format("Invalid", buyerId));
+}
+}
+}
+
+```
+
+### 切割
+
+#### 横切
+
+>流程切割
+
+![图片3]()
+
+微观建模
+
+#### 纵切 
+
+>业务切割
+
+![图片4]()
+
+宏观建模
+
 ## SOLID原则
 
+>面向对象设计五大原则
+
+### SRP 单一职责
+
+就一个软件实体而言，应该仅有一个引起它变化的原因
+
+### OCP 开放封闭
+
+### LSP 里氏替换
+
+### ISP 接口隔离
+
+### DIP 依赖倒置
+
 ## 通用语言
+
+### 宏观-战略建模
+
+> 使用通用语言，精准地划分领域以及处理各个领域之间的关系
 
 ## 领域
 
