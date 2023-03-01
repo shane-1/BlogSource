@@ -40,6 +40,7 @@ export default {
         ]},
         { text: 'OpenSource',
         children :[
+          {text:'KeyCloak保护应用和服务指引',link:'/OpenSource/keycloak.md'},
           {text:'开源软件',link:'/OpenSource/OpenSourceSoftware.md'},
           {text:'Redis',link:'/OpenSource/Redis.md'},
           { text: 'MySQL',
@@ -47,7 +48,7 @@ export default {
               {text:'MySQL',link:'/OpenSource/MySQL/MySQL.md'},
               {text:'MySQLExplain',link:'/OpenSource/MySQL/MySQLExplain.md'},
               {text:'MySQL索引详解',link:'/OpenSource/MySQL/IndexDS.md'},
-              {text:'KeyCloak保护应用和服务指引',link:'/OpenSource/keycloak.md'},
+              
             ]
             },
           { text: 'Machine Learning', 
