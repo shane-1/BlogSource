@@ -305,40 +305,49 @@ class Solution {
          int start = 0;
          int rest = t.length();
          
+         //字母记录
          int[] need = new int[123];
+
+         //结果储存，当前可以只储存起始位置算偏移
          int[] result = new int[2];
          int length = Integer.MAX_VALUE;
          
          int index = 0;
          
+         //标记目标字符
          for(char each : t.toCharArray()){
              need[each]++;
          }
          
+         //开始匹配
          for(int end = 0; end < s.length(); end++){
              
              char now = s.charAt(end);
              
+             //如果当前串必需，则所需字符总数减一
              if(need[now] > 0){
                  rest--;
              }
              
              need[now]--;        
              
+             //所需字符为，即匹配成功
              if(rest== 0){
                  
-             //move left
+             //当左边界字符不是所需字符则不断右移直到必需字符(因为非必需字符已经被need[now]--减为负数)
               while(start<end&&need[s.charAt(start)] < 0){
                     need[s.charAt(start)]++; 
                     start++;
                        
               }
+
+              //当前结果比记录结果更短则更新
               if(length > end-start+1){
                     result[1] = end;
                     result[0] = start;
                     length = end - start+1;
               }
-                             
+                //继续移动左边界一位，同时将必需字符+1
                  need[s.charAt(start)]++; 
                  start++; 
                  rest++;   
