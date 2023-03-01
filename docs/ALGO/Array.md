@@ -15,6 +15,8 @@
 
 [704.二分查找 💚](https://leetcode.cn/problems/binary-search/)
 
+> 💚 简单 🧡中等 ❤️困难
+
 ### 前提
 
 - 有序数组
@@ -296,7 +298,7 @@ class Solution {
 
 [76.最小覆盖子串 ❤️](https://leetcode.cn/classic/problems/minimum-window-substring/description/)
 
-> 扩展
+> 解题
 ```
 java
 class Solution {
