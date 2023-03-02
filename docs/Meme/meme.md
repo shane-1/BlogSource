@@ -4,9 +4,9 @@
 
 ---------------------------
 ## 备忘录
+
 ```
-https://teams.microsoft.com/l/meetup-join/19%3ameeting_ODE4OGI4NjAtZTU4OS00NTVlLTgzOTctMzdkYjY0Zjg1ZDI4%40thread.v2/0?context=%7b%22Tid%22%3a%2244eed8c9-8392-4ce3-a90a-1afc08dcde62%22%2c%22Oid%22%3a%22f3150636-dbd3-4f51-9b5b-ef29e833442b%22%7d
-https://blog.csdn.net/austindev/article/details/119026515
+
 ```
 
 ## 2023.3.2
