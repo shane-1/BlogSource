@@ -221,9 +221,48 @@ public void execute(Identity buyerId, List<orderItem> items,ShippingAddress ship
 
 > 所有引用基类的地方必须能透明地使用其子类的对象
 
-> 继承必须保证超类所拥有的性质(property)在子类中仍然成立
+> 继承必须保证超类所拥有的性质(property-行为即函数)在子类中仍然成立
 
-property -> 属性
+property  ->  行为
+attribute ->  属性
+
+- 白盒复用
+
+    有任何接口和行为变化都会影响
+
+- 黑盒复用
+    有任何借口变化才会影响
+
+>继承不是好的复用代码的方式，优先使用组合而不是继承
+
+#### IS-A
+
+继承应该是行为一致，而不是属性
+
+从行为的角度看，正方形在<u>特定实现</u>不是矩形
+
+#### 契约式设计
+
+- 前置条件 (Pre-Condition):
+
+    - 前置条件必须为 "true" 方法才能执行
+
+- 后置条件 (Post-Condition):
+
+    - 方法执行完成之后, 后置条件必须为 "true"
+
+- 正确使用继承的标准
+    - Pre-Conditions: Derived Class <= Base Class
+
+(子类前提条件不强于基类
+
+    - Post-Conditions: Derived Class => Base Class
+
+(子类后置条件不弱于量类
+
+![图片12]()
+
+绿色-子类 红色-子类
 
 ### ISP 接口隔离
 
