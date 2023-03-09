@@ -21,7 +21,7 @@
 基于数据建模 --> 基于领域建模
 基于技术设计 --> 面向对象设计
 
-![图片1]()
+![图片1](/images/DDD/1.jpg)
 
 ### 步骤
 
@@ -99,7 +99,7 @@ DDD 不是设计准则或规范，更不是架构设计的脚手架
 
 首要任务就是确认业务逻辑与技术实现1的边界，从而隔离各自的复杂度
 
-![图片2]()
+![图片2](/images/DDD/2.jpg)
 
 基础设施层-资源库样例
 
@@ -135,7 +135,7 @@ public void execute(Identity buyerId, List<orderItem> items,ShippingAddress ship
 
 >流程切割
 
-![图片3]()
+![图片3](/images/DDD/3.jpg)
 
 微观建模
 
@@ -143,7 +143,7 @@ public void execute(Identity buyerId, List<orderItem> items,ShippingAddress ship
 
 >业务切割
 
-![图片4]()
+![图片4](/images/DDD/4.jpg)
 
 宏观建模
 
@@ -163,7 +163,7 @@ public void execute(Identity buyerId, List<orderItem> items,ShippingAddress ship
 
 
 
-![图片6]()
+![图片6](/images/DDD/6.jpg)
 
 <big>变化永远向着依赖的反方向传递</big>
 
@@ -175,17 +175,17 @@ public void execute(Identity buyerId, List<orderItem> items,ShippingAddress ship
 
 #### 示例
 
-![图片7]()
+![图片7](/images/DDD/7.jpg)
 
 >违背SRP原则
 
 
-![图片8]()
+![图片8](/images/DDD/8.jpg)
 
 >proxy模式
 
-![图片9]()
-![图片10]()
+![图片9](/images/DDD/9.jpg)
+![图片10](/images/DDD/10.jpg)
 
 ### OCP 开放封闭
 
