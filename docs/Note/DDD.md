@@ -199,7 +199,7 @@ public void execute(Identity buyerId, List<orderItem> items,ShippingAddress ship
 
 通过抽象和多态可以很好的实现即开放，又封闭的OCP原则。
 
-![图片11]()
+![图片11](/images/DDD/11.jpg)
 
 ❤️ **注意：OCP不是免费的午餐！**
 
@@ -260,9 +260,12 @@ attribute ->  属性
 
 (子类后置条件不弱于量类
 
-![图片12]()
+![图片12](/images/DDD/12.jpg)
 
 绿色-子类 红色-子类
+
+![图片13](/images/DDD/13.jpg)
+
 
 ### ISP 接口隔离
 
