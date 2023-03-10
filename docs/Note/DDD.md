@@ -167,7 +167,7 @@ public void execute(Identity buyerId, List<orderItem> items,ShippingAddress ship
 
 <big>变化永远向着依赖的反方向传递</big>
 
-![图片5]()
+![图片5](/images/DDD/5.jpg)
 
 接口耦合，实现解耦。
 
@@ -192,10 +192,10 @@ public void execute(Identity buyerId, List<orderItem> items,ShippingAddress ship
 > 软件实体(类，模块，函数等)应对扩展开放，对修改封闭
 
 - 对扩展开放
-    - 模块的行为可扩展, 可复用性好
+   - 模块的行为可扩展, 可复用性好
 
 - 对修改封闭
-    - 模块的源代码不可被修改, 可维护性好
+   - 模块的源代码不可被修改, 可维护性好
 
 通过抽象和多态可以很好的实现即开放，又封闭的OCP原则。
 
@@ -265,7 +265,6 @@ attribute ->  属性
 绿色-子类 红色-子类
 
 ![图片13](/images/DDD/13.jpg)
-
 
 ### ISP 接口隔离
 
