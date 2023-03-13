@@ -268,13 +268,126 @@ attribute ->  属性
 
 ### ISP 接口隔离
 
+#### 接口污染
+  
+  一个类实现一个接口却不得不实现一个对其无关的方法
+
+    - 原因：接口中存在部分子类（不是所有子类）需要的方法
+
+    - 解决方案：适配器模式
+
+
+如何分离接口（委托）？
+
+#### 类适配器
+
+> 通过多继承，多接口实现（Java），在编译确认的适配器模式
+
+![](/images/DDD/2023-03-13-11-03-51.png)
+
+#### 对象适配器
+
+> 运行时对象的组合
+
+![](/images/DDD/2023-03-13-11-05-17.png)
+
+
+> 在使用类适配器解决ISP时，往往会引发LSP问题
+
+#### 测试驱动开发 TDD
+
+>由一个失败的单测开始编写业务代码
+
+![](/images/DDD/2023-03-13-15-24-10.png)
+
+![](/images/DDD/2023-03-13-15-27-08.png)
+
+![](/images/DDD/2023-03-13-15-40-38.png)
+
 ### DIP 依赖倒置
+
+- 高层模块不应该依赖于低层模块，它们都应该依赖于抽象
+  
+> High-level modules should not depend on low-level modules.
+
+> Both should depend on abstractions.
+
+- 抽象不应该依赖于细节，细节应该依赖于抽象
+
+>Abstractions should not depend upon defails. 
+
+>Details should depend upon abstractions.
+
+- 实施前
+  
+![](/images/DDD/2023-03-13-15-49-01.png)
+
+- 实施后
+
+![](/images/DDD/2023-03-13-15-52-11.png)
+
+#### 示例
+
+![](/images/DDD/2023-03-13-15-53-15.png)
+
+![](/images/DDD/2023-03-13-15-53-38.png)
+
+#### 分层
+
+
+- All well structured object-oriented architectures
+have clearly-defined layers,with each layer
+providing some coherent set of services though a
+well-defined and controlled interface.   
+        
+     -Grady Booch
+  
+>所有结构良好的面向对象架构拥有清晰的分层，每个分层
+通过良好定义的接口提供条理分明的一系列服务
+
+分层应该是隔离的！
+
+![](/images/DDD/2023-03-13-15-59-38.png)
+
+上图所示的依赖关系是传递的!没有隔离!
+
+![](/images/DDD/2023-03-13-16-00-26.png)
+
+#### 架构演进
+
+- 传统架构
+  
+![](/images/DDD/2023-03-13-16-01-38.png)
+
+- 领域架构演进
+  
+![](/images/DDD/2023-03-13-16-10-47.png)
+
+![](/images/DDD/2023-03-13-16-12-39.png)
+
+抽象的接口应该属于高层
+
+![](/images/DDD/2023-03-13-16-14-09.png)
+
+![](/images/DDD/2023-03-13-16-15-28.png)
+
+高层拥有接口，底层实现接口
+
+#### DependencyResolver
+
+1. Service Locating
+   
+2. 依赖注入器
+
+![](/images/DDD/2023-03-13-18-14-56.png)
 
 ## 通用语言
 
 ### 宏观-战略建模
 
 > 使用通用语言，精准地划分领域以及处理各个领域之间的关系
+
+需求划分为微服务
 
 ## 领域
 
