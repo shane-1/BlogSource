@@ -395,7 +395,7 @@ well-defined and controlled interface.
 
 UML的Use Case图是通用语言的一个简单工具
 
-![](images/DDD/2023-03-13-19-04-50.png)
+![](/images/DDD/2023-03-13-19-04-50.png)
 
 ### 术语
 
