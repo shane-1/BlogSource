@@ -235,7 +235,7 @@ class Solution {
 **其实滑动窗口可以看成双指针的延伸**
 
 
-###  [最小子序列](https://leetcode.cn/problems/minimum-size-subarray-sum/)
+###  [最小子序列 🧡](https://leetcode.cn/problems/minimum-size-subarray-sum/)
 
 >暴力解法是使用双层遍历，而滑动窗口基于此延伸
 
@@ -369,4 +369,63 @@ class Solution {
 ```
 
 [904.水果成篮 🧡](https://leetcode.cn/problems/fruit-into-baskets/)
+
+
+## [螺旋矩阵II 🧡](https://leetcode.cn/problems/spiral-matrix-ii/)
+
+
+可以直接按照要求逻辑处理字符串，但是特别注意：
+
+1. 是否按照统一方式处理边界值？
+2. 是否正确对应行或者列？
+3. 是否在遍历完一条边后缩小边界
+4. 是否正确使用退出条件
+
+> 解题
+
+```java
+class Solution {
+    public int[][] generateMatrix(int n) {
+
+        int[][] result = new int[n][n];
+
+        int left = 0, top = 0;
+        int right = n-1, bottom = n-1;
+        int count = 1;
+        
+        //只有到达中心点后退出循环
+        while (left <= right && top <= bottom) {
+
+            //边界值统一采用左闭右闭
+
+            for(int j = left; j <= right; j++)
+
+            //使用行i列j区分当然位置
+                result[top][j] = count++;
+            //缩小边界
+            top++;
+
+            for(int i = top; i <= bottom; i++)
+                result[i][right] = count++;
+            right--;
+
+            for(int j = right; j >= left; j--)
+                result[bottom][j]= count++;
+            bottom--;
+
+            for(int i = bottom; i >= top; i--)
+                result[i][left] = count++;
+            
+            left++;
+        }
+
+        return result;
+
+    }
+}
+```
+
+### 相关题目推荐
+
+[螺旋矩阵I 🧡](https://leetcode.cn/problems/spiral-matrix/)
 
