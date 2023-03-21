@@ -300,7 +300,15 @@ class Solution {
 
 [76.最小覆盖子串 ❤️](https://leetcode.cn/classic/problems/minimum-window-substring/description/)
 
-> 解题
+### 参考代码
+
+
+> 时间复杂度：O(n)
+
+> 空间复杂度：O(n)
+
+代码：
+
 ```
 java
 class Solution {
@@ -429,3 +437,43 @@ class Solution {
 
 [螺旋矩阵I 🧡](https://leetcode.cn/problems/spiral-matrix/)
 
+
+```java
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> result = new ArrayList<>();
+        int left = 0, up = 0;
+        int right = matrix[0].length-1,down = matrix.length-1;
+
+        while(left <= right&&up<=down){
+                for(int j = left; j <= right; j++)
+                    result.add(matrix[up][j]);
+                up++;
+
+                for(int i = up; i <= down; i++)
+                    result.add(matrix[i][right]);
+                right--;
+
+
+                /**这里需要增加额外判断条件up<=down
+                因为当输入矩阵为非正方形时，可能仅满足当前长未遍历完，导致宽被重复添加
+                    例如在[[1,2,3,4],[5,6,7,8],[9,10,11,12]]矩阵
+                        注：不能直接在while循环修改结束条件为||,是因为可能重复添加，
+                            例如在[[1,2,3,4],[5,6,7,8],[9,10,11,12]]矩阵
+                 **/
+                for(int j = right; j >= left&&up<=down; j--)
+                    result.add(matrix[down][j]);
+                down--;
+
+                /**这里的left<=right
+                因为当输入矩阵为非正方形时，当前矩阵已经被前三条边完全添加
+                     例如在[[7],[9],[6]]矩阵
+                **/
+                for(int i = down; i >= up&&left<=right; i--)
+                    result.add(matrix[i][left]);
+                left++;
+        }
+        return result;
+    }
+}
+```
