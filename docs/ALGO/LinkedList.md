@@ -182,3 +182,94 @@ class Solution {
 }
 
 ```
+
+## [设计链表](https://leetcode.cn/problems/design-linked-list/)
+
+
+### 代码
+
+#### 错误思路
+
+>未使用int记录当前链表长度导致每次需要单独处理索引为空
+
+```java
+class MyLinkedList {
+
+        int val;
+        MyLinkedList next;
+        
+        public MyLinkedList(){}
+
+        public MyLinkedList(int val){
+            this.val = val;
+        }
+
+        MyLinkedList(int val, MyLinkedList next){
+            this.val = val;
+            this.next = next;
+        }
+    
+    
+    public int get(int index) {
+        MyLinkedList point = this;
+        while(index > 0&&point==null){
+            point = point.next; 
+            index --;
+        }
+        return point == null?-1:point.val;
+    }
+    
+    public void addAtHead(int val) {
+        MyLinkedList point = new MyLinkedList(val);
+        point.next = this;
+
+    }
+    
+    public void addAtTail(int val) {
+        MyLinkedList point = this;
+        while(point.next!=null)
+            point = point.next;
+        
+        point.next = new MyLinkedList(val);
+
+    }
+    
+    public void addAtIndex(int index, int val) {
+
+        MyLinkedList point = new MyLinkedList();
+        point.next = this;
+        while(index > 0 && point!=null){
+            point = point.next;
+        }
+        if(point == null)
+        return;
+        MyLinkedList newNode = new MyLinkedList(val);
+        newNode.next = point.next;
+        point.next = newNode;
+    }
+    
+    public void deleteAtIndex(int index) {
+        MyLinkedList point = new MyLinkedList();
+        point.next = this;
+        while(index > 0&&point!=null){
+            point = point.next;
+        }
+        if(point == null)
+        return;
+        point.next = point.next.next;
+
+    }
+}
+
+/**
+ * Your MyLinkedList object will be instantiated and called as such:
+ * MyLinkedList obj = new MyLinkedList();
+ * int param_1 = obj.get(index);
+ * obj.addAtHead(val);
+ * obj.addAtTail(val);
+ * obj.addAtIndex(index,val);
+ * obj.deleteAtIndex(index);
+ */
+
+```
+
