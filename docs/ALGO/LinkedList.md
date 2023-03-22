@@ -4,14 +4,181 @@
 
 每一个节点由两部分组成：
 
-- 一个是数据域
-- 一个是指针域
+- 一部分是数据域
+- 一部分是指针域
 
 >单链表最后一个节点的指针域指向null（空指针的意思）
 
-## 分类
+## 基础
+
+### 分类
 
 根据链表的指针一般分为：
 
 - 单链表
+
+>指针域部分仅有一个指针，指向下一个节点
+
 - 双链表
+
+>指针域部分有两个指针，头指针指向上一个节点，尾指针指向下一个节点
+
+- 循环链表
+
+>和双指针一样由头指针和尾指针，但是首尾相接，形成环
+
+注：循环链表可以用来解决约瑟夫环问题。
+
+#### 约瑟夫环
+
+N个人围成一圈，第一个人从1开始报数，报M的将被杀掉，下一个人接着从1开始报。如此反复，最后剩下一个，求最后的胜利者。
+例如只有三个人，把他们叫做A、B、C，他们围成一圈，从A开始报数，假设报2的人被杀掉。
+
+>可以使用循环链表来处理，但是由于设计大量的链表移除节点操作，在大数量级下，往往超时。
+
+所以一般通过下面的公式处理：
+
+`f(N,M)=(f(N−1,M)+M)%N`
+
+```java
+
+//迭代
+class Solution {
+    public int circle(int N, int M) {
+            int result = 0;
+            for(int i = 2; i <= N; i++){
+                result = （resulr + M）% N;
+            }
+
+            //下标从0开始，故返回需要加一
+            return result+1;
+        }
+        
+//递归        
+
+```
+### 存储方式
+
+数组是在内存中是连续分布的（很多语言中，例如C），但是链表在内存中可不是连续分布的。
+
+### 定义
+
+在 C++ 中链表定义如下：
+
+```c++
+// 单链表
+struct ListNode {
+    int val;  // 节点上存储的元素
+    ListNode *next;  // 指向下一个节点的指针
+    ListNode(int x) : val(x), next(NULL) {}  // 节点的构造函数
+};
+```
+
+在 Java 中链表定义如下：
+
+```java
+// 单链表
+public class ListNode {
+    // 结点的值
+    int val;
+
+    // 下一个结点
+    ListNode next;
+
+    // 节点的构造函数(无参)
+    public ListNode() {
+    }
+
+    // 节点的构造函数(有一个参数)
+    public ListNode(int val) {
+        this.val = val;
+    }
+
+    // 节点的构造函数(有两个参数)
+    public ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
+```
+
+### 操作
+
+>添加和删除是链表的核心操作
+
+#### 删除节点
+
+![](/images/LinkedList/2023-03-22-10-24-22.png)
+
+只要将C节点的next指针 指向E节点就可以了。
+
+#### 添加节点
+
+![](/images/LinkedList/2023-03-22-10-24-42.png)
+
+>链表的增添和删除都是O(1)操作，也不会影响到其他节点。
+
+> 但是要是删除第N个节点，需要从头节点查找到第N-1个节点通过next指针进行删除操作，查找的时间复杂度是O(n)。
+
+### 性能分析
+
+||删除/添加时间复杂度|查询时间复杂度|使用场景|
+|:-:|:-:|:-:|:-:|
+|数组|O(n)|O(1)|数据量固定,少增删,频繁查询|
+|链表|O(1)|O(n)|数据量变化,少查询,频繁增删|
+
+>数组在定义的时候，长度就是固定的，如果想改动数组的长度，就需要重新定义一个新的数组
+
+>链表的长度可以是不固定的，并且可以动态增删， 适合数据量不固定，频繁增删，较少查询的场景
+
+## [移除链表元素](https://leetcode.cn/problems/remove-linked-list-elements/)
+
+
+### 思路
+
+使用两个指针,一个指针指向当前节点,另一个指针指向当前节点的前置节点.
+
+设置一个虚拟头节点指向当前链表头,前置节点初始化指向头节点.
+
+最终结果节点指向该初始化虚拟头节点,因为可能首个节点满足等于val需要移除,结果返回头节点的next
+
+### 代码
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+
+        ListNode point = head;
+
+        //虚拟头
+        ListNode pre = new ListNode();
+        pre.next = point;
+        head = pre;
+
+        while(pre.next != null){
+            if(point.val == val){
+                pre.next = point.next;
+            }
+            else{
+                pre = pre.next;
+            }
+            
+            point = point.next;
+        }
+
+        return head.next;
+    }
+}
+
+```
