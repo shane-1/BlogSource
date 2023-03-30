@@ -422,3 +422,46 @@ class Solution {
     }
 }
 ```
+
+>递归
+
+```java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+
+        return reverse(null, head);
+         
+    }
+    private ListNode reverse(ListNode pre, ListNode head){
+        if(head == null){
+            return pre;
+        }
+        ListNode temp = head.next;
+        head.next = pre;
+        return reverse(head, temp);
+
+    }
+}
+```
+
+>从后向前递归
+
+
+```java
+class Solution {
+    ListNode reverseList(ListNode head) {
+        // 边缘条件判断
+        if(head == null) return null;
+        if (head.next == null) return head;
+        
+        // 递归调用，翻转第二个节点开始往后的链表
+        ListNode last = reverseList(head.next);
+        // 翻转头节点与第二个节点的指向
+        head.next.next = head;
+        // 此时的 head 节点为尾节点，next 需要指向 NULL
+        head.next = null;
+        return last;
+    } 
+}
+
+```
