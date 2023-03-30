@@ -192,6 +192,8 @@ class Solution {
 
 >未使用int记录当前链表长度导致每次需要单独处理索引为空
 
+>内定义内部类ListNode
+
 ```java
 class MyLinkedList {
 
@@ -273,3 +275,150 @@ class MyLinkedList {
 
 ```
 
+#### 正确思路
+
+```java
+
+class MyLinkedList {
+    
+    ListNode head;
+    
+    int length;
+    
+    class ListNode{
+        int val;
+        ListNode next;
+        public ListNode(int val){
+            this.val = val;
+        }
+    }
+    
+    
+    public MyLinkedList() {
+        this.length = 0;  
+    }
+    
+    public int get(int index) {
+        if(index > length-1) 
+            return -1;
+               
+        ListNode point = head;
+        while(index-- > 0){
+           point = point.next;
+        }
+        return point.val;        
+    }
+    
+    public void addAtHead(int val) {
+        ListNode newNode = new ListNode(val);
+        newNode.next = head;
+        this.head = newNode;
+        this.length++;
+    }
+    
+    private ListNode newDummyHead(ListNode head){
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;
+        return dummmyHead;
+
+    }
+    public void addAtTail(int val) {
+        
+        ListNode dummyHead = newDummyHead(this.head);
+        ListNode point = dummyHead;
+        
+        while(point.next != null){
+            point = point.next;
+        }
+        
+        point.next =  new ListNode(val);
+        this.head = dummyHead.next;
+        this.length++;
+
+    }
+    
+    public void addAtIndex(int index, int val) {
+        
+        if(index > length) 
+            return;
+            
+        ListNode dummyHead = newDummyHead(this.head);
+        ListNode point = dummyHead;
+        
+         while(index-- > 0){
+            point = point.next;
+         }
+         
+         ListNode newNode = new ListNode(val);
+         newNode.next = point.next;
+         point.next = newNode;
+         
+         this.head = dummyHead.next;   
+         this.length++;
+         
+    }
+    
+    public void deleteAtIndex(int index) {
+        if(index > length-1) 
+            return;
+            
+        ListNode dummyHead = newDummyHead(this.head);
+        ListNode point = dummyHead;
+        
+         while(index-- > 0){
+             
+           point = point.next;
+         }
+         point.next = point.next.next;
+         this.head = dummyHead.next;
+         
+         this.length--;
+
+    }
+}
+
+/**
+ * Your MyLinkedList object will be instantiated and called as such:
+ * MyLinkedList obj = new MyLinkedList();
+ * int param_1 = obj.get(index);
+ * obj.addAtHead(val);
+ * obj.addAtTail(val);
+ * obj.addAtIndex(index,val);
+ * obj.deleteAtIndex(index);
+ */
+```
+
+## [反转链表](https://leetcode.cn/problems/reverse-linked-list/)
+
+
+### 代码
+
+>逐渐转向
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+
+        ListNode pre = null;
+
+        while(head!= null){
+            ListNode temp = head.next;
+            head.next = pre;
+            pre = head;
+            head = temp;
+        }
+        return pre;
+         
+    }
+}
+```
