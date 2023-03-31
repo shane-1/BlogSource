@@ -84,8 +84,10 @@ export default {
         {
             text: 'ALGO', 
             children  :[
+              {text:'链表',link:'/ALGO/LinkedList.md'},
               {text:'数组',link:'/ALGO/Array.md'},      
               {text:'KMP',link:'/ALGO/KMP.md'},
+
                                     ]},
         
         

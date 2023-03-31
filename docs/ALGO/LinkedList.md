@@ -393,7 +393,7 @@ class MyLinkedList {
 
 ### 代码
 
->逐渐转向
+>双指针-逐渐转向
 
 ```java
 /**
