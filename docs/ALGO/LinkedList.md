@@ -576,3 +576,42 @@ public class Solution {
     }
 }
 ```
+
+## [链表环](https://leetcode.cn/problems/linked-list-cycle-ii/submissions/)
+
+### 思路
+
+[参考地址](https://www.programmercarl.com/0142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II.html#%E6%80%9D%E8%B7%AF)
+
+### 代码
+
+>错误解法
+
+```java
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        
+        ListNode fast = head;
+        ListNode slow = head;
+
+        while(fast != null&&fast.next != null&&slow != fast){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+
+        if(fast == null || fast.next == null){
+            return null;
+        }
+
+        while(head !=  fast){
+            head = head.next;
+            fast = fast.next;
+        }
+
+        return fast;
+
+        
+        
+    }
+}
+```
