@@ -523,3 +523,56 @@ class Solution {
     }
 }
 ```
+
+## [交叉链表相交点](https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/)
+
+### 思路
+
+获取链表A和链表B的长度，获取两个链表的差值，通过差值**对其两个链表尾部**。
+
+因为当前交叉链表的交点一定在两个链表对其尾部之后，可以将两边的指针同时后移，此时相交点是两个**指针相等**的点（不是值相等）。
+
+### 代码
+
+
+```java
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int lengthA = getLength(headA);
+        int lengthB = getLength(headB);
+
+        int size = Math.abs(lengthA - lengthB);
+        if(lengthA > lengthB){
+            while(size-- > 0){
+                headA = headA.next;
+            }
+
+        }else{
+            while(size-- > 0){
+                headB = headB.next;
+            }
+
+        }
+        
+        while(headA != null && headB != null && headA != headB){
+                headA = headA.next;
+                headB = headB.next;
+        }
+
+        return (headA == null || headB == null)? null : headA;
+        
+
+
+        
+    }
+
+    private int  getLength(ListNode head){
+        int count = 1;
+        while(head != null){
+            head = head.next;
+            count++;
+        }
+        return count;
+    }
+}
+```
