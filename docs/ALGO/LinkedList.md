@@ -393,7 +393,9 @@ class MyLinkedList {
 
 ### 代码
 
->双指针-逐渐转向
+#### 双指针
+
+>从前到后逐渐转向
 
 ```java
 /**
@@ -423,7 +425,10 @@ class Solution {
 }
 ```
 
->递归
+
+#### 递归
+
+>从前到后逐渐转向
 
 ```java
 class Solution {
@@ -444,8 +449,7 @@ class Solution {
 }
 ```
 
->从后向前递归
-
+>从后到前逐渐转向
 
 ```java
 class Solution {
@@ -464,4 +468,58 @@ class Solution {
     } 
 }
 
+## [两两交换链表](https://leetcode.cn/problems/swap-nodes-in-pairs)
+
+### 代码
+
+> 直接通过双指针遍历处理
+
+```java
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;
+        ListNode point = dummyHead;
+
+        while(point.next!=null&&point.next.next!=null){
+            ListNode temp1 = point.next.next;
+            ListNode temp2 = point.next.next.next;
+            point.next = temp1;
+            temp1.next = head;
+            head.next = temp2;
+            point = head;
+            head = head.next;
+        }
+
+        return dummyHead.next;
+    }
+}
+```
+
+## [删除链表的倒数第N个节点](https://leetcode.cn/problems/remove-nth-node-from-end-of-list/submissions/)
+
+### 代码
+
+> 通过双指针可以轻松处理回退
+
+
+```java
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;    
+        ListNode point = dummyHead;
+        while( n-- > 0){
+            head = head.next;
+        }
+
+        while(head != null){
+            head = head.next;
+            point = point.next;
+
+        }
+        point.next = point.next.next;
+        return dummyHead.next;
+    }
+}
 ```
