@@ -615,3 +615,43 @@ public class Solution {
     }
 }
 ```
+
+>注意审题，本题中不一定存在环，在不存在环时需要返回空
+
+>正确解法
+
+```java
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        
+        ListNode fast = head;
+        ListNode slow = head;
+
+        boolean hasCycle = false;
+
+        while(fast != null&&fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow){
+                hasCycle = true;
+                break;
+            }
+        }
+
+        if(!hasCycle)
+        return null;
+
+        if(fast == null || fast.next == null){
+            return null;
+        }
+
+        while(head !=  fast){
+            head = head.next;
+            fast = fast.next;
+        }
+
+        return fast;
+ 
+    }
+}
+```
