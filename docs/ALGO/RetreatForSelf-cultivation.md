@@ -135,3 +135,9 @@ class Solution {
 
 
 ```
+
+## [同积元组](https://leetcode.cn/problems/tuple-with-same-product/)
+
+### 初试
+
+采用回溯法遍历所有
