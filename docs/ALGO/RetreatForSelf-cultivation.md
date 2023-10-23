@@ -37,7 +37,7 @@ class Solution {
 3. 通过对排序后数组的前后元素对比，找出相等频率的字符然后进行操作
 **该步骤发现无法对当前已经发现的元素合理的进行删除，因为需要回溯之前已经遍历的频率寻找合适的位置**
 
-### 答案
+### 参考
 
 ```java
 
@@ -113,7 +113,7 @@ class Solution {
 
 >结果：数据量过大时超时
 
-### 答案
+### 参考
 
 1. 采用双指针处理
 
@@ -140,4 +140,44 @@ class Solution {
 
 ### 初试
 
-采用回溯法遍历所有
+采用回溯法遍历所有可能情况，但是该方案可能超时，所以理论上应该有更优解。
+
+### 参考
+
+采用 HashMap 记录所有乘积的出现频度，将频度所有大于 2 的取出.
+然后通过当前频度去 C22，每次有八种排列组合
+
+> Input:  [2,3,4,6] 
+>
+> Output:  (2,6,3,4) , (2,6,4,3) , (6,2,3,4) , (6,2,4,3) (3,4,2,6) , (4,3,2,6) , (3,4,6,2) , (4,3,6,2)
+
+
+```java
+class Solution {
+    public int tupleSameProduct(int[] nums) {
+
+        Map<Integer, Integer> resultMap = new HashMap<>();
+
+        int len = nums.length;
+        for(int i = 0; i < len - 1; i++){
+            for(int j = i + 1; j < len; j++){
+                int temp = nums[i] * nums[j];
+                if(resultMap.containsKey(temp)){
+                    resultMap.put(temp, resultMap.get(temp) + 1);
+                }else {
+                    resultMap.put(temp, 1);
+                }
+            }
+        }
+        int result = 0;
+        for(int each : resultMap.values()){
+            if(each > 1){
+                result += (each - 1) * each * 4;
+            }
+
+        }
+
+        return result;
+    }
+}
+```
