@@ -186,6 +186,7 @@ class Solution {
 
 ### 初试
 
+
 使用递归处理，一层一层反转
 
 
@@ -196,7 +197,6 @@ class Solution {
             return head;
     
         ListNode now = reverseList(head.next);
-
         //使用当前节点下一个节点作为头，最大的问题是 head 的 next 没有进行处理
         now.next = head;
         return now;
@@ -224,7 +224,8 @@ class Solution {
 }
 
 ```
->runtime_error:java.lang.NullPointerException: Cannot read field "next" because "<parameter1>" is null
+
+>runtime_error:java.lang.NullPointerException: Cannot read field "next" because parameter1 is null
 
 这里在使用 head.next 时未判断空
 
@@ -244,5 +245,4 @@ class Solution {
         return now;
     }
 }
-
 ```
