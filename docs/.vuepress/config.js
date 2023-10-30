@@ -29,42 +29,43 @@ export default {
           text: 'Note', 
           children  :[
           {text:'Markdown',link:'/Note/Markdown.md'},
-          {text:'Octave与Matlab的区别',link:'/Note/DBOM.md'},
+          {text:'Octave 与 Matlab 的区别',link:'/Note/DBOM.md'},
           {text:'CMD Manual',link:'/Note/Cmd.md'},      
-          {text:'PWA介绍及快速上手搭建',link:'/Note/PWA.md'},
+          {text:'PWA 介绍及快速上手搭建',link:'/Note/PWA.md'},
           {text:'The Zen of Python',link:'/Note/ZenOfPython.md'},
-          {text:'Windows编辑linux运行错误',link:'/Note/WindowsLinuxError.md'},
+          {text:'Windows 编辑 linux 运行错误',link:'/Note/WindowsLinuxError.md'},
           {text:'Shell 脚本传参方法总结',link:'/Note/Shell.md'},
           {text:'DDD-领域驱动设计',link:'/Note/DDD.md'},
          
         ]},
         { text: 'OpenSource',
         children :[
-          {text:'KeyCloak保护应用和服务指引',link:'/OpenSource/keycloak.md'},
+          {text:'KeyCloak 保护应用和服务指引',link:'/OpenSource/keycloak.md'},
           {text:'开源软件',link:'/OpenSource/OpenSourceSoftware.md'},
           {text:'Redis',link:'/OpenSource/Redis.md'},
           { text: 'MySQL',
             children:[
               {text:'MySQL',link:'/OpenSource/MySQL/MySQL.md'},
               {text:'MySQLExplain',link:'/OpenSource/MySQL/MySQLExplain.md'},
-              {text:'MySQL索引详解',link:'/OpenSource/MySQL/IndexDS.md'},
+              {text:'MySQL 索引详解',link:'/OpenSource/MySQL/IndexDS.md'},
               
             ]
             },
           { text: 'Machine Learning', 
             children :[
-                {text:'Tensorflow环境搭建指南',link:'/OpenSource/ML/TensorflowEnvironment.md'},
-                {text:'Tensorflow常见报错解决',link:'/OpenSource/ML/TensorflowError.md'}
+                {text:'NLP',link:'/OpenSource/ML/NLP.md'},
+                {text:'Tensorflow 环境搭建指南',link:'/OpenSource/ML/TensorflowEnvironment.md'},
+                {text:'Tensorflow 常见报错解决',link:'/OpenSource/ML/TensorflowError.md'}
           ]},
           ]},
         { 
           text: 'Java', 
           children :[
-            {text:'Java基础',link:'/Java/Java.md'},
+            {text:'Java 基础',link:'/Java/Java.md'},
             {text:'多线程 Multithread',link:'/Java/Multithread.md'},
             {text:'设计模式 DesignPattern',link:'/Java/DesignPattern.md'},
             {text:'JDBC',link:'/Java/JDBC.md'},
-            {text:'框架基础-注解和反射',link:'/Java/AnnotationReflection.md'},
+            {text:'框架基础 - 注解和反射',link:'/Java/AnnotationReflection.md'},
             {text:'Spring',link:'/Java/Spring.md'},
             {text:'SpringBoot',link:'/Java/SpringBoot.md'},
             {text:'Mybatis',link:'/Java/Mybatis.md'},
@@ -73,8 +74,8 @@ export default {
         ]},
         {  text: 'Cloud', 
         children :[
-            {text:'Docker基础',link:'/Cloud/DockerBase.md'},
-            {text:'K8s部署Redis集群',link:'/Cloud/RedisOnK8s.md'},
+            {text:'Docker 基础',link:'/Cloud/DockerBase.md'},
+            {text:'K8s 部署 Redis 集群',link:'/Cloud/RedisOnK8s.md'},
             {text:'微服务',link:'/Cloud/Microservices.md'},
             {text:'AWS',link:'/Cloud/AWS.md'},
             {text:'Flyway', link:'/Cloud/Flyway.md'},
@@ -87,6 +88,7 @@ export default {
               {text:'链表',link:'/ALGO/LinkedList.md'},
               {text:'数组',link:'/ALGO/Array.md'},      
               {text:'KMP',link:'/ALGO/KMP.md'},
+              {text:'算法特训',link:'/ALGO/RetreatForSelf-cultivation.md'},
 
                                     ]},
         
@@ -94,7 +96,7 @@ export default {
         { text: 'Phil',
         children :[
             {text:'中国为什么没有科学精神', link:'/Phil/WCHNS.md'},
-            {text:'从Internet说起',link:'/Phil/Internet.md'}
+            {text:'从 Internet 说起',link:'/Phil/Internet.md'}
           ]},
         { text: 'Meme', link: '/Meme/Meme.md' },
       ],

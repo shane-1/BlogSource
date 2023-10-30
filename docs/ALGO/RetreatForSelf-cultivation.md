@@ -181,3 +181,68 @@ class Solution {
     }
 }
 ```
+
+## [反转链表](https://leetcode.cn/problems/reverse-linked-list/)
+
+### 初试
+
+使用递归处理，一层一层反转
+
+
+```java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head.next == null)
+            return head;
+    
+        ListNode now = reverseList(head.next);
+
+        //使用当前节点下一个节点作为头，最大的问题是 head 的 next 没有进行处理
+        now.next = head;
+        return now;
+
+    }
+}
+
+```
+>code_output: Error - Found cycle in the ListNode
+
+当前节点直接插入反转，未处理其后续指针
+
+```java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+
+        if(head.next == null)
+            return head;
+
+        ListNode now = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return now;
+    }
+}
+
+```
+>runtime_error:java.lang.NullPointerException: Cannot read field "next" because "<parameter1>" is null
+
+这里在使用 head.next 时未判断空
+
+
+### 参考
+
+```java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+
+        if(head == null||head.next == null)
+            return head;
+
+        ListNode now = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return now;
+    }
+}
+
+```
