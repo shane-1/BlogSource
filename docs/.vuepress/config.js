@@ -89,7 +89,7 @@ export default {
               {text:'数组',link:'/ALGO/Array.md'},      
               {text:'KMP',link:'/ALGO/KMP.md'},
               {text:'算法特训',link:'/ALGO/RetreatForSelf-cultivation.md'},
-              {text:'卡特兰数',link:'/ALGO/Catalan.md'}
+              {text:'卡特兰数',link:'/ALGO/Catalan.md'},
                                     ]},
         
         
