@@ -34,7 +34,6 @@
 
 ![](/images/Catalan/4.png)
 
-
 ## 考点
 
 ### 进出栈
@@ -74,6 +73,58 @@ k 的取值范围是 1 <k<n，再根据加法原理：
 ### 二叉树构成
 
 [96. n 个二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/)
+
+#### 递推解法
+
+可以使用递推，但要注意精度损失！
+
+```java
+//由于精度损失导致的计算错误
+class Solution {
+    public int numTrees(int n) {
+        int[] dp = new int[n + 1];
+        dp[0] = 1;
+        for (int i = 1; i <= n; i++){
+            dp[i] = ((4 * n - 2) / (n+1)) * dp[i-1];
+        }
+        return dp[n];
+    }
+}
+
+```
+
+```java
+class Solution {
+    public int numTrees(int n) {
+        double[] dp = new double[n + 1];
+        dp[0] = 1.0;
+        for (int i = 1; i <= n; i++){
+            dp[i] = ((4 * i - 2) * 1.0 / (i + 1)) * dp[i - 1];
+        }
+        // 将结果四舍五入为整数
+        return (int) Math.round(dp[n]);
+    }
+}
+
+```
+
+#### 动规解法
+
+```jave
+class Solution {
+    public int numTrees(int n) {
+        int[] dp = new int[n + 1];
+        dp[0] = 1;
+        dp[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            for (int j = 0; j < i; j++) {
+                dp[i] += dp[j] * dp[i - 1 - j];
+            }
+        }
+        return dp[n];
+    }
+}
+```
 
 ## 四连击
 
