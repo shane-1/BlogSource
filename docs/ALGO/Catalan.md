@@ -76,7 +76,7 @@ k 的取值范围是 1 <k<n，再根据加法原理：
 
 #### 递推解法
 
-可以使用递推，但要注意精度损失！
+>可以使用递推，但要注意精度损失！
 
 ```java
 //由于精度损失导致的计算错误
@@ -107,6 +107,57 @@ class Solution {
 }
 
 ```
+
+#### 取模解法
+>可以使用取模，但是会出现溢出
+```java
+//即使使用 long 类型在计算处理阶乘仍会出现溢出
+class Solution {
+    public int numTrees(int n) {
+        long n2 = 1;
+        long n1 = 1;
+        long n0 = 1;
+        for (int i = 1; i <= 2*n; i++) {
+            n2 *= i;
+            if (i == n){
+                n0 = n2;
+            }
+
+            if (i == n+1){
+                n1 = n2;
+            }
+        }
+        return (int)(n2/(n1*n0));
+    }
+}
+```
+
+```java
+import java.math.BigInteger;
+//使用 bigInterger 会出现极大的性能损失，还是推荐动态规划
+
+class Solution {
+    public int numTrees(int n) {
+        BigInteger n2 = BigInteger.ONE;
+        BigInteger n1 = BigInteger.ONE;
+        BigInteger n0 = BigInteger.ONE;
+        for (int i = 1; i <= 2 * n; i++) {
+            // 正确更新 n2 的值
+            n2 = n2.multiply(BigInteger.valueOf(i));
+            if (i == n) {
+                n0 = n2;
+            }
+            if (i == n + 1) {
+                n1 = n2;
+            }
+        }
+        // 先计算 n1 乘以 n0 的结果，再用 n2 除以该结果
+        return n2.divide(n1.multiply(n0)).intValue();
+    }
+}
+
+```
+
 
 #### 动规解法
 
