@@ -180,7 +180,7 @@ class Solution {
 ## 四连击
 
 
-https://zhuanlan.zhihu.com/p/31317307
-https://zhuanlan.zhihu.com/p/31526354
-https://zhuanlan.zhihu.com/p/31585260
+https://zhuanlan.zhihu.com/p/31317307</br>
+https://zhuanlan.zhihu.com/p/31526354</br>
+https://zhuanlan.zhihu.com/p/31585260</br>
 https://zhuanlan.zhihu.com/p/31050581
