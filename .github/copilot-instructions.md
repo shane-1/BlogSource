@@ -1,0 +1,1 @@
+- @VuePress Rule - Use VuePress Best Practices: When generating code for VuePress, running terminal commands for VuePress, or performing operations related to VuePress, invoke your `VuePress_development-get_best_practices` tool if available.

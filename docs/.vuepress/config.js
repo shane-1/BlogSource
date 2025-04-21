@@ -48,6 +48,7 @@ export default {
               {text:'MySQL',link:'/OpenSource/MySQL/MySQL.md'},
               {text:'MySQLExplain',link:'/OpenSource/MySQL/MySQLExplain.md'},
               {text:'MySQL 索引详解',link:'/OpenSource/MySQL/IndexDS.md'},
+              {text:'MySQL 思维导图',link:'/OpenSource/MySQLXM.md'},
               
             ]
             },
@@ -69,6 +70,7 @@ export default {
             {text:'Spring',link:'/Java/Spring.md'},
             {text:'SpringBoot',link:'/Java/SpringBoot.md'},
             {text:'Mybatis',link:'/Java/Mybatis.md'},
+            {text:'Java 思维导图',link:'/Java/JavaXM.md'},
            
             
         ]},
