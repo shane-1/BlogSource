@@ -4,47 +4,28 @@ sidebar: false
 <script setup>
 import { ref } from 'vue'
 import { ClientOnly } from '@vuepress/client'
-
-const ua = navigator.userAgent.toLowerCase()
-const isMobile = ref(/mobile|android|iphone|ipad|phone|tablet/i.test(ua) || window.innerWidth <= 768)
-const isWeChat = ref(/micromessenger/i.test(ua))
 const pdfPath = '/pdf/MySQLXM.pdf'
 
+
 const openPDF = () => {
-  if (isWeChat.value) {
-    alert('请点击右上角按钮，选择"在浏览器打开"，获得最佳浏览体验')
-    return
-  }
-  try {
-    const newWindow = window.open(pdfPath, '_blank')
-    if (!newWindow) {
-      alert('请允许浏览器打开新窗口以查看 PDF')
-    }
-  } catch (e) {
-    window.location.href = pdfPath
-  }
+  window.open(pdfPath, '_blank')
 }
 </script>
 
 <ClientOnly>
-  <div v-show="!isMobile.value && !isWeChat.value" style="margin:0;padding:0;width:100%;height:calc(100vh - 60px);">
-    <iframe v-if="!isMobile.value && !isWeChat.value"
+<div style="position:relative;width:100%;height:calc(100vh - 60px);">
+    <iframe
       :src="pdfPath"
       style="display:block;position:relative;left:50%;right:50%;width:100vw;max-width:100vw;height:calc(100vh - 60px);margin-left:-50vw;margin-right:-50vw;border:none;"
     ></iframe>
   </div>
-  <div v-show="isMobile.value || isWeChat.value" style="text-align:center;padding:2em;">
-    <template v-if="isWeChat.value">
-      <a>在微信内无法直接浏览，请点击右上角按钮，选择"在浏览器打开"</a>
-    </template>
-    <template v-else>
-      <a>暂时不支持移动端直接浏览，请点击下方按钮在新窗口中打开或下载 PDF</a>
-    </template>
-    <br><br>
+  <div style="margin-bottom:20px;text-align:center;padding:1em;">
+    <div style="margin-bottom:10px;">如果显示异常或需要下载请点击下方按钮</div>
     <button 
       @click="openPDF"
       style="font-size:1.1em;padding:0.6em 2em;background:#3eaf7c;color:#fff;border:none;border-radius:4px;cursor:pointer;">
       点击这里
     </button>
   </div>
+  
 </ClientOnly>
