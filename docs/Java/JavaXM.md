@@ -2,18 +2,13 @@
 sidebar: false
 ---
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { ClientOnly } from '@vuepress/client'
 
-const isMobile = ref(false)
-const isWeChat = ref(false)
+const ua = navigator.userAgent.toLowerCase()
+const isMobile = ref(/mobile|android|iphone|ipad|phone|tablet/i.test(ua) || window.innerWidth <= 768)
+const isWeChat = ref(/micromessenger/i.test(ua))
 const pdfPath = '/pdf/JavaXM.pdf'
-
-const checkPlatform = () => {
-  const ua = navigator.userAgent.toLowerCase()
-  isMobile.value = /mobile|android|iphone|ipad|phone/i.test(ua)
-  isWeChat.value = /micromessenger/i.test(ua)
-}
 
 const openPDF = () => {
   if (isWeChat.value) {
@@ -30,20 +25,16 @@ const openPDF = () => {
     window.location.href = pdfPath
   }
 }
-
-onMounted(() => {
-  checkPlatform()
-})
 </script>
 
 <ClientOnly>
-  <div v-if="!isMobile.value && !isWeChat.value" style="margin:0;padding:0;width:100%;height:calc(100vh - 60px);">
-    <iframe
+  <div v-show="!isMobile.value && !isWeChat.value" style="margin:0;padding:0;width:100%;height:calc(100vh - 60px);">
+    <iframe v-if="!isMobile.value && !isWeChat.value"
       :src="pdfPath"
       style="display:block;position:relative;left:50%;right:50%;width:100vw;max-width:100vw;height:calc(100vh - 60px);margin-left:-50vw;margin-right:-50vw;border:none;"
     ></iframe>
   </div>
-  <div v-else style="text-align:center;padding:2em;">
+  <div v-show="isMobile.value || isWeChat.value" style="text-align:center;padding:2em;">
     <template v-if="isWeChat.value">
       <a>在微信内无法直接浏览，请点击右上角按钮，选择"在浏览器打开"</a>
     </template>
