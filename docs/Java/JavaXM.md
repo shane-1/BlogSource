@@ -2,8 +2,10 @@
 sidebar: false
 ---
 <script setup>
+import { ref } from 'vue'
 import { ClientOnly } from '@vuepress/client'
-const pdfPath = '/pdf/MySQLXM.pdf'
+const pdfPath = '/pdf/JavaXM.pdf'
+
 
 const openPDF = () => {
   window.open(pdfPath, '_blank')
@@ -18,12 +20,13 @@ const openPDF = () => {
     ></iframe>
   </div>
   <div style="margin-bottom:20px;text-align:center;padding:1em;">
-    <div style="margin-bottom:10px;">如果显示异常或需要下载请点击下方按钮</div>
+    <div style="margin-bottom:10px;font-size:1.2em;font-weight:bold;">如果显示异常或需要下载请点击下方按钮</div>
     <button 
       @click="openPDF"
       style="font-size:1.1em;padding:0.6em 2em;background:#3eaf7c;color:#fff;border:none;border-radius:4px;cursor:pointer;">
-      点击这里
+      PDF 文件
     </button>
   </div>
   
 </ClientOnly>
+
