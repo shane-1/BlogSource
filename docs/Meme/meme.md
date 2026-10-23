@@ -1,13 +1,13 @@
 # My Meme
 >“在诸如语言、观念、信仰、行为方式等的传递过程中与基因在生物进化过程中所起的作用相类似的那个东西”。<br>—— Richard Dawkins《The Selfish Gene》<br>
 >> Something similar to the role of genes in biological evolution is involved in the transmission of language, ideas, beliefs, behaviors, etc.<br>
-
 ---------------------------
 ## 备忘录
 
 ```
 ```
-## 2025.11.7
+## 2025.11.7.
+
 
 过于绝对的观点都要小心，它不像是观点，更像是口号，而口号的作用不是分享一种想法，而是攻击口号的对立面。
 

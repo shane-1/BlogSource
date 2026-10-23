@@ -10,7 +10,7 @@ on:
   pull_request:
     branches: [ "master" ]
 
-  # Allows you to run this workflow manually from the Actions tab
+  # Allows you to run the workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -19,17 +19,18 @@ jobs:
   deploy-blog:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16
-         
+          node-version: 22
+
       - name: install
         run: npm i
-        
+
       - name: build
         run: npm run build
+
       - name: deploy
         run: |
               cp googlefc62804cfc44bb36.html docs/.vuepress/dist/
@@ -41,11 +42,10 @@ jobs:
               git add *
               git commit -m 'version 4.2'
               git push -f https://shane-1:${{ secrets.TOKEN }}@github.com/shane-1/shane-1.github.io.git master
-              
+
 #       - name: edit
 #         run: |
 #               git init
 #               git add *
 #               git commit -m 'version 4.2'
 #               git push -f https://shane-1:${{ secrets.TOKEN }}@github.com/shane-1/edit.git master
-
