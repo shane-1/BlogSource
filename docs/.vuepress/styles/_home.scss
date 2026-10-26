@@ -1,0 +1,241 @@
+// ============================================================
+// _home.scss — 首页：液态玻璃 + 科幻网格
+// ============================================================
+
+// ---------- 首页容器（网格背景已提升为全局，见 _motion.scss） ----------
+.vp-home {
+  position: relative;
+  min-height: calc(100vh - var(--navbar-height));
+}
+
+// ---------- Hero ----------
+.vp-hero {
+  padding-top: 3.5rem;
+
+  // Hero 图容器（头像，辉光沿角色轮廓，无方框）
+  .vp-hero-image {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.6rem;
+
+    img {
+      // 角色轮廓辉光颜色（深色默认；浅色在下方覆盖）
+      --hero-glow-a-soft: rgb(34 211 238 / 38%);
+      --hero-glow-b-soft: rgb(34 211 238 / 18%);
+      --hero-glow-a: rgb(34 211 238 / 62%);
+      --hero-glow-b: rgb(34 211 238 / 34%);
+      width: 100%;
+      height: 100%;
+      // 辉光沿角色 alpha 轮廓（非方框），并带呼吸动画
+      filter:
+        drop-shadow(0 0 10px var(--hero-glow-a-soft))
+        drop-shadow(0 0 24px var(--hero-glow-b-soft));
+      animation: hero-glow 5s ease-in-out infinite;
+    }
+  }
+
+  .vp-hero-title {
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    background: linear-gradient(
+      120deg,
+      var(--vp-c-text) 30%,
+      var(--vp-c-accent) 75%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .vp-hero-description {
+    color: var(--vp-c-text-mute);
+    font-size: 1.05rem;
+    max-width: 620px;
+  }
+}
+
+// ---------- Hero 按钮 ----------
+.vp-hero-actions {
+  margin-top: 1.8rem;
+  gap: 12px;
+}
+
+.vp-hero-action-button {
+  position: relative;
+  border-radius: var(--radius);
+  padding: 0.66rem 1.6rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  transition:
+    transform var(--vp-t-transform),
+    box-shadow var(--vp-t-color),
+    background-color var(--vp-t-color),
+    color var(--vp-t-color);
+
+  // 主按钮：玻璃 + 青色描边
+  &.primary {
+    background-color: var(--vp-c-accent-soft);
+    border: 1px solid var(--vp-c-accent);
+    color: var(--vp-c-accent);
+
+    &:hover {
+      box-shadow: var(--glow-strong);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: scale(0.96);
+    }
+  }
+
+  // 次按钮：弱边框
+  &.secondary {
+    border: 1px solid var(--vp-c-border);
+    color: var(--vp-c-text-mute);
+    background-color: transparent;
+
+    &:hover {
+      border-color: var(--vp-c-accent);
+      color: var(--vp-c-accent);
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+}
+
+// ---------- Features：玻璃卡片（三列等宽网格） ----------
+.vp-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 3.5rem;
+  padding: 0;
+  align-items: stretch;
+
+  // 平板：两列
+  @media (max-width: 959px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  // 移动端：单列
+  @media (max-width: 719px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.vp-feature {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  padding: 1.6rem 1.6rem 1.7rem;
+  max-width: none;
+  flex: none;
+  background-color: var(--glass-tint);
+  backdrop-filter:
+    blur(var(--glass-blur)) saturate(var(--glass-saturate))
+    brightness(var(--glass-brightness));
+  -webkit-backdrop-filter:
+    blur(var(--glass-blur)) saturate(var(--glass-saturate))
+    brightness(var(--glass-brightness));
+  border: 1px solid var(--glass-outline);
+  box-shadow: var(--glass-shadow);
+  overflow: hidden;
+  transform: translateZ(0);
+  transition:
+    transform var(--vp-t-transform),
+    box-shadow var(--vp-t-color),
+    border-color var(--vp-t-color);
+
+  // 文字内容浮于镜面高光（::before）之上
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  &:hover {
+    transform: translateY(-4px) translateZ(0);
+    box-shadow: var(--glass-shadow-strong);
+    border-color: var(--glass-rim);
+  }
+
+  &:active {
+    transform: translateY(-1px) scale(0.985) translateZ(0);
+  }
+
+  .vp-feature-title {
+    font-size: 1.05rem;
+    font-weight: 650;
+    line-height: 1.4;
+    color: var(--vp-c-text);
+    margin-bottom: 0.7rem;
+
+    // ▶ 符号品牌色
+    &::first-letter {
+      color: var(--vp-c-accent);
+    }
+  }
+
+  .vp-feature-details {
+    font-size: 0.9rem;
+    color: var(--vp-c-text-mute);
+    line-height: 1.7;
+    flex: 1;
+  }
+}
+
+// ---------- 页脚 ----------
+.vp-footer {
+  color: var(--vp-c-text-subtle);
+  font-size: 0.82rem;
+  margin-top: 4rem;
+}
+
+// ============================================================
+// 角色轮廓辉光 keyframes（沿形象边缘，非方框）；颜色取 token
+// ============================================================
+@keyframes hero-glow {
+  0%, 100% {
+    filter:
+      drop-shadow(0 0 9px var(--hero-glow-a-soft))
+      drop-shadow(0 0 22px var(--hero-glow-b-soft));
+  }
+  50% {
+    filter:
+      drop-shadow(0 0 15px var(--hero-glow-a))
+      drop-shadow(0 0 36px var(--hero-glow-b));
+  }
+}
+
+// 浅色模式下辉光更柔和（仅覆盖颜色变量，不重定义 keyframes）
+[data-theme='light'] {
+  .vp-hero-image img {
+    --hero-glow-a-soft: rgb(8 145 178 / 24%);
+    --hero-glow-b-soft: rgb(8 145 178 / 12%);
+    --hero-glow-a: rgb(8 145 178 / 40%);
+    --hero-glow-b: rgb(8 145 178 / 22%);
+  }
+}
+
+// ---------- 减少透明度/动效：首页降级 ----------
+@media (prefers-reduced-transparency: reduce) {
+  .vp-feature {
+    background-color: var(--vp-c-bg-elv);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vp-hero .vp-hero-image img {
+    animation: none;
+  }
+}

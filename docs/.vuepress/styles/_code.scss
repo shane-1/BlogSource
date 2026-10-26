@@ -1,0 +1,130 @@
+// ============================================================
+// _code.scss — 深色玻璃代码面板
+// ============================================================
+
+// ---------- 代码块容器 ----------
+.vp-content {
+  div[class*='language-'] {
+    border-radius: var(--code-border-radius);
+    background-color: var(--code-c-bg);
+    border: 1px solid var(--vp-c-border);
+    box-shadow:
+      0 0.5px 1px rgb(200 230 255 / 10%) inset,
+      0 12px 40px rgb(0 0 0 / 42%);
+    overflow: hidden;
+    position: relative;
+
+    // 顶部光泽（玻璃质感）
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 44px;
+      background: linear-gradient(
+        180deg,
+        rgb(255 255 255 / 5%),
+        transparent
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    pre {
+      background: transparent;
+      font-family: var(--code-font-family);
+      font-size: 0.9rem;
+    }
+
+    // 行高亮
+    .highlight-lines .highlighted {
+      background-color: var(--code-c-highlight-bg);
+      border-left: 2px solid var(--vp-c-accent);
+      box-shadow: 0 0 16px rgb(34 211 238 / 14%);
+    }
+
+    // 行号
+    .line-numbers .line-number {
+      color: var(--code-c-line-number);
+    }
+  }
+
+  // 浅色模式覆盖
+  [data-theme='light'] & div[class*='language-'] {
+    box-shadow:
+      0 0.5px 0.5px rgb(255 255 255 / 60%) inset,
+      0 8px 24px rgb(8 100 130 / 8%);
+  }
+}
+
+// ---------- 代码块标题栏（语言标签） ----------
+.code-block-title-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background-color: var(--code-c-bg);
+  border-bottom: 1px solid var(--vp-c-border);
+  border-radius: var(--code-border-radius) var(--code-border-radius) 0 0;
+  font-size: 0.78rem;
+  color: var(--vp-c-text-mute);
+  font-family: var(--code-font-family);
+
+  // 三个矩形状态点（科幻细节）
+  &::before {
+    content: '';
+    flex: 0 0 auto;
+    width: 30px;
+    height: 10px;
+    background:
+      radial-gradient(circle at 5px 5px, var(--vp-c-border-hard) 3px, transparent 3.5px),
+      radial-gradient(circle at 15px 5px, var(--vp-c-border-hard) 3px, transparent 3.5px),
+      radial-gradient(circle at 25px 5px, var(--vp-c-accent) 3px, transparent 3.5px);
+  }
+}
+
+// 带标题的代码块去重圆角
+.code-block-with-title {
+  > div[class*='language-'] {
+    border-radius: 0 0 var(--code-border-radius) var(--code-border-radius);
+  }
+}
+
+// ---------- 代码分组 Tabs ----------
+.vp-code-tabs {
+  border-radius: var(--code-border-radius);
+  overflow: hidden;
+  border: 1px solid var(--vp-c-border);
+
+  .vp-code-tabs-nav {
+    background-color: var(--code-c-bg);
+    border-bottom: 1px solid var(--vp-c-border);
+  }
+
+  .vp-code-tab-title {
+    transition:
+      color var(--vp-t-color),
+      background-color var(--vp-t-color);
+
+    &.active {
+      color: var(--vp-c-accent);
+    }
+  }
+}
+
+// ---------- 复制按钮（默认主题内置） ----------
+.vp-copy-code-button,
+.copy-code-button {
+  border-radius: 8px;
+  color: var(--vp-c-text-subtle);
+  transition:
+    color var(--vp-t-color),
+    background-color var(--vp-t-color),
+    box-shadow var(--vp-t-color);
+
+  &:hover {
+    color: var(--vp-c-accent);
+    background-color: var(--vp-c-control);
+    box-shadow: 0 0 12px rgb(34 211 238 / 25%);
+  }
+}

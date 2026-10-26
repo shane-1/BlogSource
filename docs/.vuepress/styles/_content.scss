@@ -1,0 +1,179 @@
+// ============================================================
+// _content.scss — 内容排版
+// ============================================================
+
+.vp-content {
+  // ---------- 基础排版 ----------
+  line-height: 1.75;
+  font-size: 1rem;
+
+  // ---------- 标题 ----------
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    transition: color var(--vp-t-color);
+  }
+
+  h2 {
+    margin-top: 2.8rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--vp-c-divider);
+  }
+
+  h1 {
+    letter-spacing: -0.02em;
+  }
+
+  // ---------- 链接 ----------
+  a {
+    color: var(--vp-c-accent);
+    text-decoration: none;
+    background-image: linear-gradient(var(--vp-c-accent), var(--vp-c-accent));
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition:
+    background-size var(--vp-t-color),
+    text-shadow var(--vp-t-color);
+    padding-bottom: 1px;
+
+    &:hover {
+      background-size: 100% 1px;
+      text-shadow: 0 0 12px rgb(34 211 238 / 40%);
+    }
+  }
+
+  // ---------- 图片 ----------
+  img {
+    border-radius: 10px;
+    border: 1px solid var(--vp-c-divider);
+  }
+
+  // ---------- 引用 ----------
+  blockquote {
+    border-left: 3px solid var(--vp-c-accent);
+    border-radius: 0 10px 10px 0;
+    background-color: var(--vp-c-control);
+    color: var(--vp-c-text-mute);
+    padding: 0.6rem 1rem;
+  }
+
+  // ---------- 表格 ----------
+  table {
+    display: table;
+    border-radius: 10px;
+    border: 1px solid var(--vp-c-divider);
+    overflow: hidden;
+
+    th {
+      background-color: var(--vp-c-bg-alt);
+      font-weight: 600;
+    }
+
+    th, td {
+      border-color: var(--vp-c-divider);
+    }
+
+    tr {
+      transition: background-color var(--vp-t-color);
+
+      &:hover {
+        background-color: var(--vp-c-control);
+      }
+    }
+  }
+
+  // ---------- 行内代码 ----------
+  code {
+    border-radius: 6px;
+    padding: 0.15em 0.4em;
+    font-size: 0.88em;
+    color: var(--vp-c-accent);
+    background-color: var(--vp-c-accent-soft);
+  }
+
+  // ---------- 分隔线 ----------
+  hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--vp-c-border),
+      transparent
+    );
+  }
+
+  // ---------- 自定义容器（hint-container） ----------
+  .hint-container {
+    border-radius: 12px;
+    border: 1px solid var(--vp-c-divider);
+    border-left: 3px solid var(--vp-c-border-hard);
+    background-color: var(--vp-c-control);
+    padding: 0.8rem 1.1rem;
+    margin: 1.4rem 0;
+
+    .hint-container-title {
+      font-size: 0.85rem;
+      font-weight: 650;
+      letter-spacing: 0.02em;
+    }
+  }
+
+  // tip / warning / danger 仅换左侧指示条与标题色
+  .hint-container.tip {
+    border-left-color: var(--vp-c-accent);
+    .hint-container-title { color: var(--vp-c-accent); }
+  }
+
+  .hint-container.warning {
+    border-left-color: #d97706;
+    .hint-container-title { color: #d97706; }
+  }
+
+  .hint-container.danger {
+    border-left-color: #dc2626;
+    .hint-container-title { color: #dc2626; }
+  }
+
+  // ---------- 键盘标记 ----------
+  kbd {
+    border-radius: 6px;
+    border: 1px solid var(--vp-c-border);
+    background-color: var(--vp-c-bg-elv);
+    box-shadow: 0 1px 0 var(--vp-c-border);
+    font-family: var(--code-font-family);
+    font-size: 0.82em;
+    padding: 0.15em 0.5em;
+  }
+}
+
+// ---------- 页面页脚（编辑链接/更新时间/上下页） ----------
+.vp-page-meta {
+  color: var(--vp-c-text-subtle);
+  font-size: 0.82rem;
+
+  a {
+    color: var(--vp-c-text-mute);
+    transition: color var(--vp-t-color);
+    &:hover { color: var(--vp-c-accent); }
+  }
+}
+
+.vp-page-nav {
+  .vp-page-nav-item {
+    border-radius: 10px;
+    border: 1px solid var(--vp-c-divider);
+    background-color: var(--vp-c-control);
+    transition:
+    border-color var(--vp-t-color),
+    box-shadow var(--vp-t-color),
+    transform var(--vp-t-transform);
+
+    &:hover {
+      border-color: var(--vp-c-accent);
+      box-shadow: var(--glow);
+      transform: translateY(-1px);
+    }
+  }
+}

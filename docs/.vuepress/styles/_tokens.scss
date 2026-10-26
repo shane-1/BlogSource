@@ -1,0 +1,189 @@
+// ============================================================
+// _tokens.scss — 设计 Token：Apple Liquid Glass（双模式）
+// 仅在此处调色；其余模块只引用变量。
+// ============================================================
+
+:root {
+  // ---------- 品牌色（浅色：冷青蓝） ----------
+  --vp-c-accent: #0891b2;
+  --vp-c-accent-bg: #0891b2;
+  --vp-c-accent-hover: #0e7490;
+  --vp-c-accent-text: #ffffff;
+  --vp-c-accent-soft: rgb(8 145 178 / 12%);
+
+  // ---------- 背景（浅色：冷白） ----------
+  --vp-c-bg: #f7f9fc;
+  --vp-c-bg-alt: #eef2f7;
+  --vp-c-bg-elv: #ffffff;
+
+  // ---------- 文字（浅色） ----------
+  --vp-c-text: rgb(15 23 42 / 92%);
+  --vp-c-text-mute: rgb(15 23 42 / 68%);
+  --vp-c-text-subtle: rgb(15 23 42 / 46%);
+
+  // ---------- 边框/分隔 ----------
+  --vp-c-divider: #e3e8ef;
+  --vp-c-border: #cbd5e1;
+  --vp-c-border-hard: #94a3b8;
+
+  // ---------- 阴影 ----------
+  --vp-c-shadow: rgb(2 30 45 / 12%);
+
+  // ---------- 控件底色 ----------
+  --vp-c-control: rgb(100 116 139 / 9%);
+  --vp-c-control-hover: rgb(100 116 139 / 17%);
+  --vp-c-control-disabled: #eef2f6;
+
+  // ---------- 液态玻璃材质（浅色） ----------
+  --glass-blur: 18px;
+  --glass-saturate: 190%;
+  --glass-brightness: 1.06;
+  --glass-tint: rgb(255 255 255 / 56%);
+  --glass-tint-strong: rgb(255 255 255 / 74%);
+  --glass-border: rgb(255 255 255 / 72%);
+  --glass-outline: rgb(15 50 80 / 9%);
+  --glass-highlight: rgb(255 255 255 / 80%);
+  --glass-rim: rgb(120 160 200 / 22%);
+  // 指针跟随的镜面高光（浅色：偏白、克制）
+  --glass-sheen: rgb(255 255 255 / 0.9);
+  --glass-sheen-strength: 0.55;
+  // 导航栏/Dock 专用：顶部亮缘、底部暗缘、大面积镜面光斑
+  --glass-top-rim: rgb(255 255 255 / 75%);
+  --glass-bottom-rim: rgb(100 130 170 / 10%);
+  --glass-specular: rgb(255 255 255 / 0.38);
+  --glass-shadow:
+    0 0.5px 0.5px rgb(255 255 255 / 70%) inset,
+    0 -1px 2px rgb(120 150 190 / 10%) inset,
+    0 10px 30px rgb(8 100 130 / 10%),
+    0 2px 8px rgb(2 30 45 / 6%);
+  --glass-shadow-strong:
+    0 0.5px 1px rgb(255 255 255 / 85%) inset,
+    0 -1px 3px rgb(120 150 190 / 14%) inset,
+    0 22px 56px rgb(8 100 130 / 18%),
+    0 6px 16px rgb(2 30 45 / 8%);
+
+  // ---------- 辉光（浅色，克制） ----------
+  --glow: 0 0 0 1px rgb(8 145 178 / 14%), 0 8px 26px rgb(8 145 178 / 12%);
+  --glow-strong: 0 0 0 1px rgb(8 145 178 / 22%), 0 14px 38px rgb(8 145 178 / 20%);
+
+  // ---------- 环境极光（浅色：低饱和冷调） ----------
+  --aurora-1: rgb(56 189 248 / 30%);
+  --aurora-2: rgb(167 139 250 / 26%);
+  --aurora-3: rgb(45 212 191 / 22%);
+  --grid-line: rgb(15 40 70 / 5%);
+  --grid-dot: rgb(15 40 70 / 7%);
+
+  // ---------- 代码块（浅色：冷灰玻璃） ----------
+  --code-c-bg: #f1f5f9;
+  --code-c-text: #0f172a;
+  --code-c-highlight-bg: rgb(8 145 178 / 10%);
+  --code-c-line-number: rgb(15 23 42 / 30%);
+  --code-border-radius: 14px;
+  --code-bg-color: #e2e8f0;
+
+  // ---------- 圆角（连续圆角，全部圆角矩形） ----------
+  --radius-sm: 10px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  // ---------- 布局 ----------
+  --content-width: 760px;
+  --homepage-width: 980px;
+
+  // ---------- 字体 ----------
+  --font-family:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display',
+    'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei',
+    sans-serif;
+  --code-font-family:
+    ui-monospace, 'SF Mono', 'JetBrains Mono', Consolas, Monaco,
+    'Liberation Mono', monospace;
+
+  // ---------- 动效（Apple 式缓动） ----------
+  --vp-t-color: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  --vp-t-transform: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-press: cubic-bezier(0.34, 1.45, 0.48, 1);
+}
+
+// ============================================================
+// 深色模式（visionOS 深空：深蓝黑 + 霓虹青 / 紫）
+// ============================================================
+[data-theme='dark'] {
+  // ---------- 品牌色 ----------
+  --vp-c-accent: #38d6ee;
+  --vp-c-accent-bg: #06b6d4;
+  --vp-c-accent-hover: #7deefb;
+  --vp-c-accent-text: #04121a;
+  --vp-c-accent-soft: rgb(56 214 238 / 14%);
+
+  // ---------- 背景 ----------
+  --vp-c-bg: #080c16;
+  --vp-c-bg-alt: #060a12;
+  --vp-c-bg-elv: #0f1626;
+
+  // ---------- 文字 ----------
+  --vp-c-text: rgb(222 232 246 / 90%);
+  --vp-c-text-mute: rgb(192 208 228 / 62%);
+  --vp-c-text-subtle: rgb(158 178 206 / 40%);
+
+  // ---------- 边框/分隔 ----------
+  --vp-c-divider: rgb(148 180 230 / 10%);
+  --vp-c-border: #283550;
+  --vp-c-border-hard: #3c4d6e;
+
+  // ---------- 阴影 ----------
+  --vp-c-shadow: rgb(0 0 0 / 55%);
+
+  // ---------- 控件底色 ----------
+  --vp-c-control: rgb(120 160 210 / 13%);
+  --vp-c-control-hover: rgb(120 160 210 / 22%);
+  --vp-c-control-disabled: #16202f;
+
+  // ---------- 液态玻璃材质（深色） ----------
+  --glass-blur: 20px;
+  --glass-saturate: 185%;
+  --glass-brightness: 1.1;
+  --glass-tint: rgb(140 180 250 / 7%);
+  --glass-tint-strong: rgb(146 190 250 / 12%);
+  --glass-border: rgb(170 210 255 / 18%);
+  --glass-outline: rgb(140 195 255 / 16%);
+  --glass-highlight: rgb(196 228 255 / 30%);
+  --glass-rim: rgb(96 172 240 / 28%);
+  // 指针跟随的镜面高光（深色：青白微光 + 一点点折射亮边）
+  --glass-sheen: rgb(190 235 255 / 0.85);
+  --glass-sheen-strength: 0.7;
+  // 导航栏/Dock 专用：顶部亮缘、底部暗缘、大面积镜面光斑（深色）
+  --glass-top-rim: rgb(208 236 255 / 18%);
+  --glass-bottom-rim: rgb(56 130 214 / 14%);
+  --glass-specular: rgb(190 235 255 / 0.22);
+  --glass-shadow:
+    0 0.5px 1px rgb(208 236 255 / 16%) inset,
+    0 -2px 5px rgb(56 130 214 / 14%) inset,
+    0 12px 40px rgb(0 0 0 / 52%);
+  --glass-shadow-strong:
+    0 0.5px 1px rgb(208 236 255 / 22%) inset,
+    0 -2px 6px rgb(56 130 214 / 20%) inset,
+    0 26px 64px rgb(0 0 0 / 64%);
+
+  // ---------- 辉光（深色：霓虹青） ----------
+  --glow: 0 0 0 1px rgb(56 214 238 / 20%), 0 0 24px rgb(56 214 238 / 18%);
+  --glow-strong:
+    0 0 0 1px rgb(56 214 238 / 32%),
+    0 0 40px rgb(56 214 238 / 30%);
+
+  // ---------- 环境极光（深色：霓虹青 / 蓝紫 / 翡翠） ----------
+  --aurora-1: rgb(34 211 238 / 26%);
+  --aurora-2: rgb(124 108 255 / 24%);
+  --aurora-3: rgb(45 212 191 / 18%);
+  --grid-line: rgb(150 190 250 / 5%);
+  --grid-dot: rgb(150 190 250 / 9%);
+
+  // ---------- 代码块（深色：深空玻璃） ----------
+  --code-c-bg: rgb(12 19 33 / 86%);
+  --code-c-text: #dbe6f5;
+  --code-c-highlight-bg: rgb(56 214 238 / 10%);
+  --code-c-line-number: rgb(180 205 240 / 28%);
+  --code-bg-color: #0d1526;
+}

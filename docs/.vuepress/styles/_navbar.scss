@@ -1,0 +1,518 @@
+// ============================================================
+// _navbar.scss — 液态玻璃导航栏
+// 顶部：全宽玻璃镜片；下滑后：收缩为悬浮 Dock 胶囊
+// Dock 态由 client.js 切换 .navbar-scrolled
+// ============================================================
+
+// ---------- 导航栏主体：液态玻璃 ----------
+.vp-navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  box-sizing: border-box;
+
+  height: var(--navbar-height);
+  padding: var(--navbar-padding-v) var(--navbar-padding-h);
+  border: 1px solid transparent;
+  border-radius: 0;
+
+  background-color: var(--glass-tint);
+  background-image:
+    // 顶部反光带：玻璃厚度感
+    linear-gradient(
+      180deg,
+      var(--glass-highlight) 0%,
+      transparent 42%
+    );
+  backdrop-filter:
+    blur(var(--glass-blur)) saturate(var(--glass-saturate))
+    brightness(var(--glass-brightness));
+  -webkit-backdrop-filter:
+    blur(var(--glass-blur)) saturate(var(--glass-saturate))
+    brightness(var(--glass-brightness));
+
+  transition:
+    top 0.55s var(--ease-spring),
+    left 0.55s var(--ease-spring),
+    right 0.55s var(--ease-spring),
+    height 0.55s var(--ease-spring),
+    width 0.55s var(--ease-spring),
+    padding 0.55s var(--ease-spring),
+    margin 0.55s var(--ease-spring),
+    border-radius 0.55s var(--ease-spring),
+    border-color 0.45s var(--ease-spring),
+    background-color 0.45s var(--ease-spring),
+    background-image 0.45s var(--ease-spring),
+    box-shadow 0.55s var(--ease-spring);
+
+  // 光标跟随的镜面高光（client.js 写入 --mx / --my）
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      260px circle at var(--mx, 50%) var(--my, -60%),
+      var(--glass-specular) 0%,
+      transparent 62%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  // 边缘光学轮廓：顶部亮发丝线 + 底部暗缘
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow:
+      inset 0 1px 0 var(--glass-top-rim),
+      inset 0 -1px 0 var(--glass-bottom-rim);
+    transition: box-shadow 0.45s var(--ease-spring);
+  }
+
+  // 内容层位于光学层之上（不改变默认主题的定位方式）
+  > span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .vp-navbar-items-wrapper,
+  .vp-toggle-sidebar-button {
+    z-index: 1;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+
+  // ============================================================
+  // Dock 态：下滑后收缩为居中悬浮胶囊
+  // ============================================================
+  &.navbar-scrolled {
+    top: 10px;
+    left: max(12px, calc(50% - 528px));
+    right: max(12px, calc(50% - 528px));
+    height: 3.2rem;
+    padding: 0.3rem 0.45rem;
+    display: flex;
+    align-items: center;
+
+    border-radius: 20px;
+    border-color: var(--glass-outline);
+    background-color: var(--glass-tint-strong);
+    background-image:
+      linear-gradient(
+        180deg,
+        var(--glass-highlight) 0%,
+        transparent 52%
+      );
+    box-shadow:
+      var(--glass-shadow-strong),
+      0 4px 12px rgb(2 30 45 / 8%);
+
+    // 四周边缘光（圆角跟随）
+    &::after {
+      box-shadow:
+        inset 0 1px 0 var(--glass-top-rim),
+        inset 0 -1px 0 var(--glass-bottom-rim),
+        inset 1px 0 0 rgb(255 255 255 / 25%),
+        inset -1px 0 0 rgb(100 140 180 / 8%);
+    }
+
+    // 右侧控件组：垂直居中
+    .vp-navbar-items-wrapper {
+      top: 50%;
+      inset-inline-end: 0.45rem;
+      transform: translateY(-50%);
+      height: auto;
+      padding-inline-start: 0.5rem;
+    }
+
+    // 站点名折叠，仅保留 Logo（Apple 式 Dock 收缩）
+    .vp-site-name {
+      max-width: 0;
+      opacity: 0;
+    }
+
+    .vp-site-logo {
+      margin-inline-end: 0;
+    }
+
+    // 导航项间距收紧
+    .vp-navbar-item {
+      margin-inline-start: 0.85rem;
+    }
+
+    // 移动端：为汉堡按钮留出空间
+    @media screen and (max-width: 719px) {
+      padding-inline-start: 2.9rem;
+
+      .vp-toggle-sidebar-button {
+        inset-inline-start: 0.45rem;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+// ---------- 品牌区 ----------
+.vp-navbar .vp-site-name {
+  display: inline-block;
+  max-width: 220px;
+  opacity: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: top;
+  transition:
+    max-width 0.5s var(--ease-spring),
+    opacity 0.3s ease;
+}
+
+.vp-navbar .vp-site-logo {
+  transition: margin 0.5s var(--ease-spring);
+}
+
+.vp-navbar .vp-site-name {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition:
+    max-width 0.5s var(--ease-spring),
+    opacity 0.3s ease,
+    color var(--vp-t-color),
+    text-shadow var(--vp-t-color);
+}
+
+.vp-navbar .vp-navbar-brand:hover {
+  .vp-site-name {
+    color: var(--vp-c-accent);
+    text-shadow: 0 0 14px rgb(34 211 238 / 35%);
+  }
+}
+
+// ---------- 导航项 ----------
+.vp-navbar-item {
+  > .auto-link {
+    display: inline-block;
+    padding-inline: 8px;
+    border-radius: 8px;
+    transition:
+      background-color var(--vp-t-color),
+      color var(--vp-t-color);
+  }
+
+  &:hover > .auto-link {
+    background-color: var(--vp-c-control);
+    color: var(--vp-c-accent);
+  }
+
+  // 激活态：去掉默认 2px 底部指示条，改为浅青底胶囊
+  > .auto-link.route-link-active {
+    margin-bottom: 0;
+    border-bottom: none;
+    color: var(--vp-c-accent);
+    background-color: var(--vp-c-accent-soft);
+  }
+}
+
+// 激活态（顶部导航中“直接子项”的自动链接，如 Home）：
+// 默认主题在 .vp-navbar-items > .auto-link 上保留 2px 指示条，
+// 必须用同层级且更高优先级的选择器覆盖，否则会残留下划线。
+.vp-navbar .vp-navbar-items > .auto-link.route-link-active {
+  margin-bottom: 0 !important;
+  border-bottom: 2px solid transparent !important;
+  color: var(--vp-c-accent);
+  background-color: var(--vp-c-accent-soft);
+  border-radius: 8px;
+}
+
+// 窄屏（≤959）：折叠站点名、收紧导航项，避免与居中菜单重叠
+@media (max-width: 959px) {
+  .vp-navbar .vp-site-name {
+    max-width: 0;
+    opacity: 0;
+  }
+  .vp-navbar .vp-navbar-item {
+    margin-inline-start: 0.35rem;
+  }
+  .vp-navbar .vp-navbar-item > .auto-link {
+    padding-inline: 6px;
+  }
+}
+
+// ---------- 下拉菜单：强玻璃浮层 ----------
+.vp-navbar-dropdown-wrapper {
+  .vp-navbar-dropdown {
+    border-radius: 14px;
+    background-color: var(--glass-tint-strong);
+    backdrop-filter:
+      blur(var(--glass-blur)) saturate(var(--glass-saturate))
+      brightness(var(--glass-brightness));
+    -webkit-backdrop-filter:
+      blur(var(--glass-blur)) saturate(var(--glass-saturate))
+      brightness(var(--glass-brightness));
+    border: 1px solid var(--glass-outline);
+    box-shadow:
+      var(--glass-shadow-strong),
+      inset 0 1px 0 var(--glass-top-rim);
+    padding: 6px;
+    overflow: hidden;
+  }
+
+  .vp-navbar-dropdown-title {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--vp-c-text-subtle);
+    padding: 6px 10px;
+  }
+
+  .vp-navbar-dropdown-item {
+    border-radius: 8px;
+    transition:
+      background-color var(--vp-t-color),
+      color var(--vp-t-color);
+
+    &:hover {
+      background-color: var(--vp-c-control);
+      color: var(--vp-c-accent);
+    }
+  }
+}
+
+// ---------- 搜索框：玻璃圆角矩形 ----------
+.vp-navbar .search-box {
+  // 建议面板绝对定位在表单内，不能被 glass-live 的 overflow:hidden 裁剪
+  &.glass-live {
+    overflow: visible;
+  }
+
+  .search-box-input {
+    border-radius: 10px;
+    background-color: var(--glass-tint);
+    border: 1px solid var(--glass-outline);
+    transition:
+      border-color var(--vp-t-color),
+      box-shadow var(--vp-t-color),
+      background-color var(--vp-t-color);
+
+    &:focus {
+      border-color: var(--vp-c-accent);
+      box-shadow: var(--glow);
+      background-color: var(--vp-c-bg-elv);
+    }
+  }
+}
+
+// 搜索建议面板（@vuepress/plugin-search 实际类名 .suggestions，旧版 .search-box-results 兼容）
+.vp-navbar .search-box .suggestions,
+.search-box-results {
+  border-radius: 14px;
+  background-color: var(--glass-tint-strong);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-outline);
+  box-shadow:
+    var(--glass-shadow-strong),
+    inset 0 1px 0 var(--glass-top-rim);
+  overflow: hidden;
+
+  .suggestion,
+  .search-box-item {
+    border-radius: 8px;
+    transition: background-color var(--vp-t-color);
+
+    &:hover,
+    &.focus,
+    &.selected {
+      background-color: var(--vp-c-control);
+    }
+  }
+}
+
+// 搜索结果面板
+.search-box-results {
+  border-radius: 14px;
+  background-color: var(--glass-tint-strong);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-outline);
+  box-shadow:
+    var(--glass-shadow-strong),
+    inset 0 1px 0 var(--glass-top-rim);
+  overflow: hidden;
+
+  .search-box-item {
+    transition: background-color var(--vp-t-color);
+
+    &:hover,
+    &.selected {
+      background-color: var(--vp-c-control);
+    }
+  }
+}
+
+// ---------- 主题切换 / 侧边栏按钮 ----------
+.vp-toggle-color-mode-button,
+.vp-toggle-sidebar-button {
+  border-radius: 10px;
+  transition:
+    background-color var(--vp-t-color),
+    transform var(--vp-t-transform),
+    color var(--vp-t-color);
+
+  &:hover {
+    background-color: var(--vp-c-control);
+    color: var(--vp-c-accent);
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+}
+
+// Dock 态侧边栏按钮的按压缩放需要保留垂直居中
+.vp-navbar.navbar-scrolled .vp-toggle-sidebar-button:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
+// ---------- 移动端抽屉 ----------
+.vp-navbar-screen-full {
+  background-color: var(--glass-tint-strong);
+  backdrop-filter:
+    blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter:
+    blur(var(--glass-blur)) saturate(var(--glass-saturate));
+}
+
+// ---------- PWA 弹窗：玻璃镜片 ----------
+.pwa-popup {
+  border-radius: 16px;
+  background-color: var(--glass-tint-strong);
+  backdrop-filter:
+    blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter:
+    blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-outline);
+  box-shadow:
+    var(--glass-shadow-strong),
+    inset 0 1px 0 var(--glass-top-rim);
+  color: var(--vp-c-text);
+}
+
+// ============================================================
+// 回顶部按钮：液态玻璃圆角方块（替代默认圆形）
+// ============================================================
+.vp-back-to-top-button {
+  inset-inline-end: 1.25rem;
+  bottom: 1.5rem;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid var(--glass-outline);
+  background-color: var(--glass-tint-strong);
+  background-image: linear-gradient(
+    180deg,
+    var(--glass-highlight) 0%,
+    transparent 55%
+  );
+  backdrop-filter:
+    blur(var(--glass-blur)) saturate(var(--glass-saturate))
+    brightness(var(--glass-brightness));
+  -webkit-backdrop-filter:
+    blur(var(--glass-blur)) saturate(var(--glass-saturate))
+    brightness(var(--glass-brightness));
+  box-shadow:
+    var(--glass-shadow),
+    inset 0 1px 0 var(--glass-top-rim);
+  color: var(--vp-c-accent);
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform var(--vp-t-transform),
+    box-shadow var(--vp-t-color),
+    color var(--vp-t-color),
+    background-color var(--vp-t-color);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      120px circle at var(--mx, 50%) var(--my, -40%),
+      var(--glass-specular) 0%,
+      transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &:hover {
+    color: var(--vp-c-accent);
+    transform: translateY(-3px);
+    box-shadow:
+      var(--glow-strong),
+      inset 0 1px 0 var(--glass-top-rim);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    transform: scale(0.9);
+    transition-duration: 0.12s;
+  }
+
+  .back-to-top-icon {
+    position: relative;
+    z-index: 1;
+  }
+
+  // 圆形进度环与圆角矩形语言冲突，隐藏（顶部已有线性阅读进度条）
+  .vp-scroll-progress {
+    display: none;
+  }
+}
+
+// ============================================================
+// 减少透明度：导航栏实体化
+// ============================================================
+@media (prefers-reduced-transparency: reduce) {
+  .vp-navbar,
+  .vp-navbar.navbar-scrolled,
+  .vp-navbar-dropdown-wrapper .vp-navbar-dropdown,
+  .search-box-results,
+  .vp-navbar-screen-full,
+  .pwa-popup,
+  .vp-back-to-top-button {
+    background-color: var(--vp-c-bg-elv);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+// ============================================================
+// 减少动效：Dock 形变即时完成
+// ============================================================
+@media (prefers-reduced-motion: reduce) {
+  .vp-navbar,
+  .vp-back-to-top-button {
+    transition:
+      background-color 0.01ms,
+      box-shadow 0.01ms;
+  }
+}

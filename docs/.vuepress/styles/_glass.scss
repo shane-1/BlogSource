@@ -1,0 +1,162 @@
+// ============================================================
+// _glass.scss — 苹果 Liquid Glass 动态材质
+//
+// 分层（从下到上）：
+//   1. tint 底色 + backdrop-filter（毛玻璃折射）
+//   2. inset 边缘光学：顶部受光高光 + 底部环境反射（box-shadow）
+//   3. ::before 指针跟随镜面高光（--mx/--my 由 client.js 写入）
+//   4. ::after 1px 描边（随光线渐变的发丝边）
+// 仅动画 transform / opacity / 两个 CSS 变量，保证合成层性能。
+// ============================================================
+
+// ---------- 指针跟随镜面高光（::before） ----------
+@mixin glass-sheen($size: 260px) {
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    background:
+      radial-gradient(
+        circle $size at var(--mx, 50%) var(--my, 0%),
+        var(--glass-sheen) 0%,
+        rgb(255 255 255 / 18%) 18%,
+        transparent 52%
+      );
+    transition: opacity 0.4s var(--ease-spring);
+    will-change: opacity, background;
+  }
+
+  &:hover::before {
+    opacity: var(--glass-sheen-strength, 0.6);
+  }
+}
+
+// ---------- 1px 光线描边（::after） ----------
+@mixin glass-rim {
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background:
+      linear-gradient(
+        150deg,
+        var(--glass-highlight),
+        var(--glass-outline) 34%,
+        rgb(255 255 255 / 0%) 62%,
+        var(--glass-rim) 100%
+      );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.9;
+  }
+}
+
+// ---------- 材质 mixin ----------
+@mixin glass-material($tint, $shadow, $radius: var(--radius)) {
+  position: relative;
+  border-radius: $radius;
+  background-color: $tint;
+  backdrop-filter:
+    blur(var(--glass-blur)) saturate(var(--glass-saturate))
+    brightness(var(--glass-brightness));
+  -webkit-backdrop-filter:
+    blur(var(--glass-blur)) saturate(var(--glass-saturate))
+    brightness(var(--glass-brightness));
+  box-shadow: $shadow;
+  border: 1px solid transparent;
+  isolation: isolate;
+  transform: translateZ(0);
+  transition:
+    transform var(--vp-t-transform),
+    box-shadow var(--vp-t-color),
+    background-color var(--vp-t-color),
+    border-color var(--vp-t-color);
+
+  @include glass-sheen;
+  @include glass-rim;
+}
+
+// ---------- 常规玻璃 ----------
+.glass {
+  @include glass-material(var(--glass-tint), var(--glass-shadow));
+}
+
+// ---------- 强磨砂玻璃（浮层/弹窗） ----------
+.glass-strong {
+  @include glass-material(var(--glass-tint-strong), var(--glass-shadow-strong), var(--radius-lg));
+}
+
+// ---------- 深色玻璃面板（代码块等） ----------
+.glass-dark {
+  position: relative;
+  border-radius: var(--code-border-radius);
+  background-color: var(--code-c-bg);
+  border: 1px solid var(--vp-c-border);
+  box-shadow:
+    0 0.5px 1px rgb(200 230 255 / 10%) inset,
+    0 12px 40px rgb(0 0 0 / 40%);
+  isolation: isolate;
+
+  [data-theme='light'] & {
+    background-color: #f1f5f9;
+    border-color: var(--vp-c-divider);
+    box-shadow:
+      0 0.5px 0.5px rgb(255 255 255 / 60%) inset,
+      0 8px 24px rgb(8 100 130 / 8%);
+  }
+}
+
+// ---------- 指针镜面高光（由 client.js 给玻璃表面挂 .glass-live） ----------
+.glass-live {
+  position: relative;
+  overflow: hidden;
+  @include glass-sheen;
+}
+
+// ---------- 玻璃交互态（卡片/按钮通用，弹簧物理） ----------
+.glass-interactive {
+  &:hover {
+    transform: translateY(-2px) translateZ(0);
+    box-shadow: var(--glass-shadow-strong);
+  }
+
+  &:active {
+    transform: translateY(0) scale(0.97) translateZ(0);
+    transition-duration: 0.14s;
+    transition-timing-function: var(--ease-press);
+  }
+}
+
+// ============================================================
+// 可访问性：减少透明度 → 实体材质（flat）
+// ============================================================
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  .glass-strong {
+    background-color: var(--vp-c-bg-elv);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    &::before {
+      opacity: 0.18;
+    }
+  }
+
+  .glass-dark {
+    background-color: var(--vp-c-bg-elv);
+  }
+}

@@ -1,0 +1,77 @@
+// ============================================================
+// _sidebar.scss — 侧边栏
+// ============================================================
+
+.vp-sidebar {
+  background-color: transparent;
+  transition: background-color var(--vp-t-color);
+}
+
+// 分组标题
+.vp-sidebar-heading {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-subtle);
+}
+
+// 侧边栏项
+.vp-sidebar-item {
+  position: relative;
+  border-radius: 8px;
+  transition:
+    background-color var(--vp-t-color),
+    color var(--vp-t-color);
+
+  // 激活态：浅青底 + 左侧指示条
+  &.active {
+    color: var(--vp-c-accent);
+    background-color: var(--vp-c-accent-soft);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 60%;
+      border-radius: 2px;
+      background-color: var(--vp-c-accent);
+      box-shadow: 0 0 8px rgb(34 211 238 / 55%);
+    }
+  }
+
+  &:hover {
+    background-color: var(--vp-c-control);
+    color: var(--vp-c-accent);
+  }
+}
+
+// 移动端：玻璃抽屉
+.vp-sidebar-mask {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+@media (max-width: 719px) {
+  .vp-sidebar {
+    background-color: var(--glass-tint-strong);
+    backdrop-filter:
+      blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter:
+      blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border-right: 1px solid var(--glass-outline);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  @media (max-width: 719px) {
+    .vp-sidebar {
+      background-color: var(--vp-c-bg-elv);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+  }
+}

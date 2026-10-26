@@ -2,8 +2,10 @@
 home: true
 heroImage: /rick.png
 heroText: To see the world as it is and to love it. 
-actionText: Update
-actionLink: /Meme/Meme.md
+actions:
+  - text: Update
+    link: /Meme/Meme.md
+    type: primary
 
 features:
 - title:   ▶学习笔记 § Study Notes
@@ -13,7 +15,6 @@ features:
 - title:   ▶个人思考 § Self Thinking
   details: 个人的一点思考，涉及宗教、西方哲学、个人经历、意识形态、形而上学等。     Involving religion, Western philosophy, personal experience, ideology, metaphysics, etc.
 footer: Powered.Vuepress.2.beta | Created.Shane-1
----
 ---
 友情链接 § BlogLink ：<br>
 [李宏毅](https://speech.ee.ntu.edu.tw/~hylee/)

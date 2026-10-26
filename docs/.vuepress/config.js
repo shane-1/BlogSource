@@ -18,11 +18,11 @@ export default defineUserConfig({
   head: [
     ['link', { rel: 'icon', href: '/logo.png' }],
     ['link', { rel: 'manifest', href: '/Manifest.json' }],
-    ['meta', { name: 'theme-color', content: '' }],
+    ['meta', { name: 'theme-color', content: '#0a0f1c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
     ['link', { rel: 'apple-touch-icon', href: '/rick1.png' }],
-    ['link', { rel: 'mask-icon', href: '/rick.svg', color: '#3eaf7c' }],
+    ['link', { rel: 'mask-icon', href: '/rick.svg', color: '#22d3ee' }],
     ['meta', { name: 'msapplication-TileImage', content: '/rick1.png' }],
     ['meta', { name: 'msapplication-TileColor', content: '#FFFFFF' }],
   ],
@@ -50,7 +50,7 @@ export default defineUserConfig({
       {
         text: 'OpenSource',
         children: [
-          { text: 'KeyCloak 保护应用和服务指引', link: '/OpenSource/keycloak.md' },
+          { text: 'KeyCloak 保护应用和服务指引', link: '/OpenSource/KeyCloak.md' },
           { text: '开源软件', link: '/OpenSource/OpenSourceSoftware.md' },
           { text: 'Redis', link: '/OpenSource/Redis.md' },
           {
@@ -137,11 +137,11 @@ export default defineUserConfig({
   }),
 
   plugins: [
-    googleAnalyticsPlugin({
-      // 注意：新版插件仅支持 GA4（衡量 ID，以 "G-" 开头）。
-      // 旧的 Universal Analytics ID（UA- 开头）已停止服务，请替换为你的 GA4 ID。
-      id: 'G-XXXXXXXXXX',
-    }),
+    // GA 仅在提供真实 GA4 ID（环境变量 VITE_GA_ID，形如 G-XXXXXXX）时启用，
+    // 占位 ID 会让插件在 dev 下抛 __GA_OPTIONS__ 未定义并中断页面挂载。
+    ...(process.env.VITE_GA_ID
+      ? [googleAnalyticsPlugin({ id: process.env.VITE_GA_ID })]
+      : []),
     pwaPlugin({
       skipWaiting: true,
       // 原 @vuepress/plugin-pwa-popup 已合并为 pwa 插件的 updatePopup 选项
