@@ -122,6 +122,61 @@ function markGlassLive(root) {
 }
 
 // ============================================================
+// 3.5 Dock 图标化导航：把文字菜单替换为语义图标（节约面积、缩放不溢出）
+// 原文字保留在 <span class="nav-label"> 内（可访问性 + hover 提示），
+// Dock 态由 CSS 隐藏文字、仅显示图标；顶部态图标 + 文字并存。
+// ============================================================
+const NAV_ICONS = {
+  home:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+  note:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+  opensource:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
+  java:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h12v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M16 11h2a3 3 0 0 1 0 6h-2"/><path d="M7 4l1 2M11 4l1 2M15 4l1 2"/></svg>',
+  cloud:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>',
+  algo:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
+  phil:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+  meme:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>',
+  github:
+    '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.85.09-.67.35-1.12.63-1.38-2.24-.26-4.6-1.15-4.6-5.11 0-1.13.4-2.05 1.04-2.77-.1-.26-.45-1.31.1-2.73 0 0 .85-.28 2.78 1.06a9.45 9.45 0 0 1 5.06 0c1.93-1.34 2.78-1.06 2.78-1.06.55 1.42.2 2.47.1 2.73.65.72 1.04 1.64 1.04 2.77 0 3.96-2.36 4.85-4.6 5.11.36.32.68.94.68 1.9v2.83c0 .27.18.6.69.49A10.25 10.25 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>',
+}
+
+function injectNavIcons(root) {
+  if (typeof document === 'undefined')
+    return
+  root = root || document
+  root.querySelectorAll?.('.vp-navbar-items > .vp-navbar-item').forEach((item) => {
+    // 直接链接项取 .auto-link；下拉父项取 .title（保留展开箭头 .arrow）
+    const labelEl =
+      item.querySelector(':scope > .auto-link')
+      || item.querySelector(':scope > .vp-navbar-dropdown-wrapper > .vp-navbar-dropdown-title > .title')
+    if (!labelEl || labelEl.querySelector('.nav-icon'))
+      return
+    const text = (labelEl.textContent || '').trim().toLowerCase()
+    const icon = NAV_ICONS[text]
+    if (!icon)
+      return
+    // 原文字保留在 .nav-label（可访问性 + hover 提示），视觉层叠图标
+    const svg = document.createElement('span')
+    svg.className = 'nav-icon'
+    svg.setAttribute('aria-hidden', 'true')
+    svg.innerHTML = icon
+    const label = document.createElement('span')
+    label.className = 'nav-label'
+    label.textContent = labelEl.textContent
+    labelEl.textContent = ''
+    labelEl.appendChild(svg)
+    labelEl.appendChild(label)
+  })
+}
+
+// ============================================================
 // 4. 丝滑页面过渡
 // ============================================================
 const supportsVT =
@@ -149,6 +204,7 @@ function init() {
   sheenFinePointer =
     window.matchMedia && window.matchMedia('(pointer: fine)').matches
   onScroll()
+  injectNavIcons()
   markGlassLive()
   window.addEventListener('scroll', onScroll, { passive: true })
   if (sheenFinePointer && !prefersReducedMotion())
@@ -197,8 +253,9 @@ export default defineClientConfig({
       if (typeof window === 'undefined')
         return
       onScroll()
-      // 新页面挂载后标记玻璃；不支持 VT 时再播放降级入场
+      // 新页面挂载后标记玻璃、确保图标注入（幂等）；不支持 VT 时再播放降级入场
       requestAnimationFrame(() => {
+        injectNavIcons()
         markGlassLive()
         if (!supportsVT)
           playPageEnter()

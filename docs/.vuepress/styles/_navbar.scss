@@ -222,6 +222,82 @@
   }
 }
 
+// ---------- 图标化导航（client.js 注入 .nav-icon / .nav-label） ----------
+// 顶部态：小图标 + 文字并存；Dock 态：仅图标（固定 28px 格、文字隐藏保留 title），
+// 大幅节约显示面积，窗口缩小时导航不再溢出 Dock 胶囊。
+.vp-navbar .vp-navbar-item {
+  .nav-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    color: var(--vp-c-text-mute);
+    vertical-align: middle;
+    transition:
+      color var(--vp-t-color),
+      background-color var(--vp-t-color),
+      transform 0.45s var(--ease-spring);
+
+    svg {
+      display: block;
+      width: 17px;
+      height: 17px;
+    }
+  }
+
+  .nav-label {
+    display: inline;
+  }
+
+  &:hover > .auto-link .nav-icon,
+  &:hover .vp-navbar-dropdown-title .nav-icon {
+    color: var(--vp-c-accent);
+    background-color: var(--vp-c-control);
+    transform: translateY(-1px);
+  }
+
+  // 激活态（直接链接项）：图标格亮起青色玻璃
+  > .auto-link.route-link-active .nav-icon {
+    color: var(--vp-c-accent);
+    background-color: var(--vp-c-accent-soft);
+  }
+}
+
+// 顶部态（未收缩）：图标略小，与文字并排
+.vp-navbar:not(.navbar-scrolled) .vp-navbar-item .nav-icon {
+  width: 24px;
+  height: 24px;
+  margin-inline-end: 6px;
+
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+// Dock 态：仅图标，隐藏文字与下拉箭头；收紧 padding 保证不溢出
+.vp-navbar.navbar-scrolled .vp-navbar-item {
+  .nav-label {
+    display: none;
+  }
+
+  > .auto-link,
+  .vp-navbar-dropdown-title {
+    padding-inline: 4px;
+  }
+
+  .vp-navbar-dropdown-title {
+    padding: 4px;
+    font-size: 0;
+
+    .arrow {
+      display: none;
+    }
+  }
+}
+
 // 激活态（顶部导航中“直接子项”的自动链接，如 Home）：
 // 默认主题在 .vp-navbar-items > .auto-link 上保留 2px 指示条，
 // 必须用同层级且更高优先级的选择器覆盖，否则会残留下划线。
