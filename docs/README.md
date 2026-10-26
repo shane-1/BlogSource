@@ -4,7 +4,7 @@ heroImage: /rick.png
 heroText: To see the world as it is and to love it. 
 actions:
   - text: Update
-    link: /Meme/Meme.md
+    link: /Meme/meme.md
     type: primary
 
 features:

@@ -115,7 +115,7 @@ export default defineUserConfig({
           { text: '从 Internet 说起', link: '/Phil/Internet.md' },
         ],
       },
-      { text: 'Meme', link: '/Meme/Meme.md' },
+      { text: 'Meme', link: '/Meme/meme.md' },
     ],
 
     logo: '/logo.png',

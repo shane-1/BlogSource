@@ -248,24 +248,26 @@
 }
 
 // ---------- 下拉菜单：强玻璃浮层 ----------
-.vp-navbar-dropdown-wrapper {
-  .vp-navbar-dropdown {
-    border-radius: 14px;
-    background-color: var(--glass-tint-strong);
-    backdrop-filter:
-      blur(var(--glass-blur)) saturate(var(--glass-saturate))
-      brightness(var(--glass-brightness));
-    -webkit-backdrop-filter:
-      blur(var(--glass-blur)) saturate(var(--glass-saturate))
-      brightness(var(--glass-brightness));
-    border: 1px solid var(--glass-outline);
-    box-shadow:
-      var(--glass-shadow-strong),
-      inset 0 1px 0 var(--glass-top-rim);
-    padding: 6px;
-    overflow: hidden;
-  }
+// 注意：主题自带 `.vp-navbar-dropdown-wrapper:not(.mobile) .vp-navbar-dropdown`
+// 以更高特异性（0,3,0）覆盖背景为实色面板，这里单独用同等特异性规则压过它。
+.vp-navbar-dropdown-wrapper:not(.mobile) .vp-navbar-dropdown {
+  border-radius: 14px;
+  background-color: var(--glass-tint-strong);
+  backdrop-filter:
+    blur(var(--glass-blur)) saturate(var(--glass-saturate))
+    brightness(var(--glass-brightness));
+  -webkit-backdrop-filter:
+    blur(var(--glass-blur)) saturate(var(--glass-saturate))
+    brightness(var(--glass-brightness));
+  border: 1px solid var(--glass-outline);
+  box-shadow:
+    var(--glass-shadow-strong),
+    inset 0 1px 0 var(--glass-top-rim);
+  padding: 6px;
+  overflow: hidden;
+}
 
+.vp-navbar-dropdown-wrapper {
   .vp-navbar-dropdown-title {
     font-size: 0.72rem;
     font-weight: 600;
