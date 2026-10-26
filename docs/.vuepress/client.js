@@ -177,13 +177,9 @@ function injectNavIcons(root) {
 }
 
 // ============================================================
-// 3.6 首页饱满化装饰（惰性注入，缓解视觉空旷）
-//  a. hero 下方技术标签胶囊行（贴合站点主题）
-//  b. 特性卡顶部语义图标徽章
-// 均幂等：已有标记则跳过；SSR 阶段无 document 先短路。
+// 3.6 首页装饰：特性卡顶部语义图标徽章（惰性注入，幂等）
+// 标签胶囊行已按用户要求移除。
 // ============================================================
-const TECH_CHIPS = ['Java', 'Spring', 'Docker', 'K8s', 'Cloud', 'ALGO', 'AIGC', 'OpenSource']
-
 const FEATURE_ICONS = [
   { match: '学习笔记', icon: NAV_ICONS.note },
   { match: '私人博客', icon: NAV_ICONS.cloud },
@@ -195,21 +191,7 @@ function injectHomeDecor(root) {
     return
   root = root || document
 
-  // a. hero 标签胶囊行：插在 actions 之后
-  const hero = root.querySelector('.vp-hero')
-  if (hero && !hero.querySelector('.hero-chips')) {
-    const chips = document.createElement('div')
-    chips.className = 'hero-chips'
-    chips.setAttribute('aria-hidden', 'true')
-    chips.innerHTML = TECH_CHIPS.map((c) => `<span class="chip">${c}</span>`).join('')
-    const actions = hero.querySelector('.vp-hero-actions')
-    if (actions)
-      actions.after(chips)
-    else
-      hero.appendChild(chips)
-  }
-
-  // b. 特性卡图标徽章：按标题匹配注入
+  // 特性卡图标徽章：按标题匹配注入
   root.querySelectorAll('.vp-feature').forEach((card) => {
     if (card.querySelector('.feature-icon'))
       return

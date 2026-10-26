@@ -120,7 +120,8 @@ export default defineUserConfig({
 
     logo: '/logo.png',
     logoDark: '/logo_dark.png',
-    repo: 'https://github.com/shane-1',
+    // repo 关闭：避免导航栏尾部渲染 GitHub 链接（github 尾巴）
+    // repo: 'https://github.com/shane-1',
     sidebar: 'auto',
 
     // 返回顶部已由默认主题内置（themePlugins.backToTop 默认开启），无需单独安装插件

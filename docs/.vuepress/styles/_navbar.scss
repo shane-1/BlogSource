@@ -97,8 +97,10 @@
   // ============================================================
   &.navbar-scrolled {
     top: 10px;
-    left: max(12px, calc(50% - 528px));
-    right: max(12px, calc(50% - 528px));
+    // Dock 宽度自适应内容：左右各留 50% - 440px，最宽 880px，
+    // 图标化导航下紧凑不空荡，各分辨率（含窄屏）均不溢出
+    left: max(12px, calc(50% - 440px));
+    right: max(12px, calc(50% - 440px));
     height: 3.2rem;
     padding: 0.3rem 0.45rem;
     display: flex;
