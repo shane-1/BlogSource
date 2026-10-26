@@ -130,8 +130,8 @@
 // ---------- 玻璃交互态（卡片/按钮通用，弹簧物理） ----------
 .glass-interactive {
   &:hover {
-    transform: translateY(-2px) translateZ(0);
-    box-shadow: var(--glass-shadow-strong);
+    transform: translateY(-1px) translateZ(0);
+    box-shadow: var(--glass-shadow-hover);
   }
 
   &:active {

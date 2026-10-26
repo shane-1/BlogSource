@@ -183,14 +183,16 @@ main.page {
 // 4. 返回顶部：玻璃镜片
 // ============================================================
 .back-to-top {
-  width: 46px;
-  height: 46px;
-  border-radius: var(--radius);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
   background-color: var(--glass-tint-strong);
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   border: 1px solid var(--glass-outline);
-  box-shadow: var(--glass-shadow);
+  box-shadow:
+    var(--glass-shadow),
+    inset 0 1px 0 var(--glass-top-rim);
   color: var(--vp-c-accent);
   transition:
     transform var(--vp-t-transform),
@@ -199,7 +201,7 @@ main.page {
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: var(--glow-strong);
+    box-shadow: var(--glass-shadow-hover);
   }
 
   &:active {
