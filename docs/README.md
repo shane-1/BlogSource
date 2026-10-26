@@ -16,8 +16,12 @@ features:
   details: 个人的一点思考，涉及宗教、西方哲学、个人经历、意识形态、形而上学等。     Involving religion, Western philosophy, personal experience, ideology, metaphysics, etc.
 footer: Powered.Vuepress.2.beta | Created.Shane-1
 ---
-友情链接 § BlogLink ：<br>
-[李宏毅](https://speech.ee.ntu.edu.tw/~hylee/)
-[代码随想录](https://www.programmercarl.com/)
-[鱻蒼載](https://xiancangzai.github.io/)
-[JavaGudies](https://javaguide.cn)
+<div class="friend-links">
+  <h3 class="friend-links-title">友情链接 § BlogLink</h3>
+  <div class="friend-links-grid">
+    <a class="friend-link" href="https://speech.ee.ntu.edu.tw/~hylee/" target="_blank" rel="noopener">李宏毅</a>
+    <a class="friend-link" href="https://www.programmercarl.com/" target="_blank" rel="noopener">代码随想录</a>
+    <a class="friend-link" href="https://xiancangzai.github.io/" target="_blank" rel="noopener">鱻蒼載</a>
+    <a class="friend-link" href="https://javaguide.cn" target="_blank" rel="noopener">JavaGudies</a>
+  </div>
+</div>

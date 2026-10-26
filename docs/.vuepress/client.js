@@ -177,6 +177,59 @@ function injectNavIcons(root) {
 }
 
 // ============================================================
+// 3.6 首页饱满化装饰（惰性注入，缓解视觉空旷）
+//  a. hero 下方技术标签胶囊行（贴合站点主题）
+//  b. 特性卡顶部语义图标徽章
+// 均幂等：已有标记则跳过；SSR 阶段无 document 先短路。
+// ============================================================
+const TECH_CHIPS = ['Java', 'Spring', 'Docker', 'K8s', 'Cloud', 'ALGO', 'AIGC', 'OpenSource']
+
+const FEATURE_ICONS = [
+  { match: '学习笔记', icon: NAV_ICONS.note },
+  { match: '私人博客', icon: NAV_ICONS.cloud },
+  { match: '个人思考', icon: NAV_ICONS.phil },
+]
+
+function injectHomeDecor(root) {
+  if (typeof document === 'undefined')
+    return
+  root = root || document
+
+  // a. hero 标签胶囊行：插在 actions 之后
+  const hero = root.querySelector('.vp-hero')
+  if (hero && !hero.querySelector('.hero-chips')) {
+    const chips = document.createElement('div')
+    chips.className = 'hero-chips'
+    chips.setAttribute('aria-hidden', 'true')
+    chips.innerHTML = TECH_CHIPS.map((c) => `<span class="chip">${c}</span>`).join('')
+    const actions = hero.querySelector('.vp-hero-actions')
+    if (actions)
+      actions.after(chips)
+    else
+      hero.appendChild(chips)
+  }
+
+  // b. 特性卡图标徽章：按标题匹配注入
+  root.querySelectorAll('.vp-feature').forEach((card) => {
+    if (card.querySelector('.feature-icon'))
+      return
+    const title = card.querySelector('h2')
+    if (!title)
+      return
+    const matched = FEATURE_ICONS.find(({ match }) =>
+      (title.textContent || '').includes(match))
+    const icon = matched && matched.icon
+    if (!icon)
+      return
+    const badge = document.createElement('span')
+    badge.className = 'feature-icon'
+    badge.setAttribute('aria-hidden', 'true')
+    badge.innerHTML = icon
+    card.prepend(badge)
+  })
+}
+
+// ============================================================
 // 4. 丝滑页面过渡
 // ============================================================
 const supportsVT =
@@ -205,6 +258,7 @@ function init() {
     window.matchMedia && window.matchMedia('(pointer: fine)').matches
   onScroll()
   injectNavIcons()
+  injectHomeDecor()
   markGlassLive()
   window.addEventListener('scroll', onScroll, { passive: true })
   if (sheenFinePointer && !prefersReducedMotion())
@@ -256,6 +310,7 @@ export default defineClientConfig({
       // 新页面挂载后标记玻璃、确保图标注入（幂等）；不支持 VT 时再播放降级入场
       requestAnimationFrame(() => {
         injectNavIcons()
+        injectHomeDecor()
         markGlassLive()
         if (!supportsVT)
           playPageEnter()
