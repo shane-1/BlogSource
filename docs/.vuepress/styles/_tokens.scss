@@ -38,8 +38,9 @@
   --glass-blur: 18px;
   --glass-saturate: 190%;
   --glass-brightness: 1.06;
-  --glass-tint: rgb(255 255 255 / 56%);
-  --glass-tint-strong: rgb(255 255 255 / 74%);
+  // tint 不透明度足：玻璃"清晰"（材质可感知、文字对比好），而非全透雾感
+  --glass-tint: rgb(255 255 255 / 72%);
+  --glass-tint-strong: rgb(255 255 255 / 84%);
   --glass-border: rgb(255 255 255 / 72%);
   --glass-outline: rgb(15 50 80 / 9%);
   --glass-highlight: rgb(255 255 255 / 80%);
@@ -151,8 +152,9 @@
   --glass-blur: 20px;
   --glass-saturate: 185%;
   --glass-brightness: 1.1;
-  --glass-tint: rgb(140 180 250 / 7%);
-  --glass-tint-strong: rgb(146 190 250 / 12%);
+  // 深色玻璃 tint 提实：半透明深蓝黑基底，磨砂清晰（此前 7%/12% 近全透）
+  --glass-tint: rgb(13 22 40 / 55%);
+  --glass-tint-strong: rgb(20 32 54 / 68%);
   --glass-border: rgb(170 210 255 / 18%);
   --glass-outline: rgb(140 195 255 / 16%);
   --glass-highlight: rgb(196 228 255 / 30%);

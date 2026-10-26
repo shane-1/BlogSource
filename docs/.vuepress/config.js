@@ -16,6 +16,8 @@ export default defineUserConfig({
   shouldPrefetch: false,
 
   head: [
+    // 蓝色液态玻璃 favicon（浏览器标签 logo），置于首位
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
     ['link', { rel: 'icon', href: '/logo.png' }],
     ['link', { rel: 'manifest', href: '/Manifest.json' }],
     ['meta', { name: 'theme-color', content: '#0a0f1c' }],
@@ -116,6 +118,7 @@ export default defineUserConfig({
         ],
       },
       { text: 'Meme', link: '/Meme/meme.md' },
+      { text: 'GitHub', link: 'https://github.com/shane-1' },
     ],
 
     logo: '/logo.png',

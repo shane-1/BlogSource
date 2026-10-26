@@ -128,12 +128,13 @@
         inset -1px 0 0 rgb(100 140 180 / 8%);
     }
 
-    // 右侧控件组：垂直居中
+    // 导航项组：占据中部弹性空间并居中（不折叠贴左）
     .vp-navbar-items-wrapper {
-      top: 50%;
-      inset-inline-end: 0.45rem;
-      transform: translateY(-50%);
-      height: auto;
+      position: static;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      height: 100%;
       padding-inline-start: 0.5rem;
     }
 
@@ -180,6 +181,51 @@
 
 .vp-navbar .vp-site-logo {
   transition: margin 0.5s var(--ease-spring);
+}
+
+// 品牌 Logo：闭合蓝色液态玻璃徽章（圆角矩形 + 蓝玻璃渐变 + 边缘光）
+// logo 图为透明 PNG，图案居中悬浮于蓝色玻璃之上
+.vp-navbar .vp-site-logo {
+  width: 32px;
+  height: 32px;
+  box-sizing: border-box;
+  padding: 5px;
+  object-fit: contain;
+  border-radius: 9px;
+  background: linear-gradient(
+    145deg,
+    rgb(125 211 252 / 48%) 0%,
+    rgb(56 189 248 / 42%) 38%,
+    rgb(2 132 199 / 55%) 100%
+  );
+  border: 1px solid rgb(186 230 253 / 60%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 62%),
+    inset 0 -1px 0 rgb(3 105 161 / 34%),
+    0 2px 10px rgb(2 30 45 / 16%);
+}
+
+// Dock 态：logo 徽章与图标格同尺寸，视觉一致
+.vp-navbar.navbar-scrolled .vp-site-logo {
+  width: 34px;
+  height: 34px;
+  padding: 6px;
+}
+
+// 深色：更深邃的蓝色玻璃
+[data-theme='dark'] {
+  .vp-navbar .vp-site-logo {
+    background: linear-gradient(
+      145deg,
+      rgb(56 189 248 / 40%) 0%,
+      rgb(14 116 144 / 50%) 100%
+    );
+    border-color: rgb(125 211 252 / 42%);
+    box-shadow:
+      inset 0 1px 0 rgb(186 230 253 / 34%),
+      inset 0 -1px 0 rgb(8 100 130 / 40%),
+      0 2px 10px rgb(0 0 0 / 30%);
+  }
 }
 
 .vp-navbar .vp-site-name {
@@ -279,7 +325,7 @@
   }
 }
 
-// Dock 态：仅图标，隐藏文字与下拉箭头；收紧 padding 保证不溢出
+// Dock 态：仅图标，统一 36px 交互格（严格对齐、尺寸一致），隐藏文字与箭头
 .vp-navbar.navbar-scrolled .vp-navbar-item {
   .nav-label {
     display: none;
@@ -287,17 +333,35 @@
 
   > .auto-link,
   .vp-navbar-dropdown-title {
-    padding-inline: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0;
+    line-height: 1;
+    border-radius: 10px;
+  }
+
+  .nav-icon {
+    width: 28px;
+    height: 28px;
   }
 
   .vp-navbar-dropdown-title {
-    padding: 4px;
     font-size: 0;
 
     .arrow {
       display: none;
     }
   }
+}
+
+// 父项激活高亮（client.js 按当前路由给下拉父项加 .is-active）：
+// 切换标签后选中项保持青色玻璃胶囊，不再丢失
+.vp-navbar .vp-navbar-item > .vp-navbar-dropdown-wrapper.is-active .nav-icon {
+  color: var(--vp-c-accent);
+  background-color: var(--vp-c-accent-soft);
 }
 
 // 激活态（顶部导航中“直接子项”的自动链接，如 Home）：

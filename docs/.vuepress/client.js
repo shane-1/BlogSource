@@ -211,6 +211,25 @@ function injectHomeDecor(root) {
   })
 }
 
+// 按当前路由给导航下拉父项标记 .is-active（主题不提供父项激活态，
+// 切换标签后选中项需持续青色高亮）
+function updateNavActive() {
+  if (typeof document === 'undefined' || typeof window === 'undefined')
+    return
+  const path = window.location.pathname
+  document
+    .querySelectorAll('.vp-navbar-items > .vp-navbar-item > .vp-navbar-dropdown-wrapper')
+    .forEach((w) => {
+      const active = [...w.querySelectorAll('a')].some((a) => {
+        const href = (a.getAttribute('href') || '').split('#')[0]
+        if (!href || href === '/')
+          return false
+        return href === path || path.startsWith(href)
+      })
+      w.classList.toggle('is-active', active)
+    })
+}
+
 // ============================================================
 // 4. 丝滑页面过渡
 // ============================================================
@@ -241,6 +260,7 @@ function init() {
   onScroll()
   injectNavIcons()
   injectHomeDecor()
+  updateNavActive()
   markGlassLive()
   window.addEventListener('scroll', onScroll, { passive: true })
   if (sheenFinePointer && !prefersReducedMotion())
@@ -293,6 +313,7 @@ export default defineClientConfig({
       requestAnimationFrame(() => {
         injectNavIcons()
         injectHomeDecor()
+        updateNavActive()
         markGlassLive()
         if (!supportsVT)
           playPageEnter()
