@@ -183,49 +183,30 @@
   transition: margin 0.5s var(--ease-spring);
 }
 
-// 品牌 Logo：闭合蓝色液态玻璃徽章（圆角矩形 + 蓝玻璃渐变 + 边缘光）
-// logo 图为透明 PNG，图案居中悬浮于蓝色玻璃之上
+// 品牌 Logo：蓝色液态玻璃书签闭合图标（favicon.svg 自带玻璃样式：
+// 蓝渐变闭合书签形状 + 顶部高光 + 镜面光斑），此处仅控尺寸与投影。
+// drop-shadow 沿书签 alpha 轮廓走，不破坏形状。
 .vp-navbar .vp-site-logo {
-  width: 32px;
-  height: 32px;
-  box-sizing: border-box;
-  padding: 5px;
+  width: 24px;
+  height: 30px;
   object-fit: contain;
-  border-radius: 9px;
-  background: linear-gradient(
-    145deg,
-    rgb(125 211 252 / 48%) 0%,
-    rgb(56 189 248 / 42%) 38%,
-    rgb(2 132 199 / 55%) 100%
-  );
-  border: 1px solid rgb(186 230 253 / 60%);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 62%),
-    inset 0 -1px 0 rgb(3 105 161 / 34%),
-    0 2px 10px rgb(2 30 45 / 16%);
+  filter: drop-shadow(0 2px 5px rgb(2 30 45 / 28%));
+  transition:
+    width 0.45s var(--ease-spring),
+    height 0.45s var(--ease-spring),
+    filter 0.3s ease;
 }
 
-// Dock 态：logo 徽章与图标格同尺寸，视觉一致
+// Dock 态：书签与图标格同高，视觉平衡
 .vp-navbar.navbar-scrolled .vp-site-logo {
-  width: 34px;
-  height: 34px;
-  padding: 6px;
+  width: 26px;
+  height: 32px;
 }
 
-// 深色：更深邃的蓝色玻璃
-[data-theme='dark'] {
-  .vp-navbar .vp-site-logo {
-    background: linear-gradient(
-      145deg,
-      rgb(56 189 248 / 40%) 0%,
-      rgb(14 116 144 / 50%) 100%
-    );
-    border-color: rgb(125 211 252 / 42%);
-    box-shadow:
-      inset 0 1px 0 rgb(186 230 253 / 34%),
-      inset 0 -1px 0 rgb(8 100 130 / 40%),
-      0 2px 10px rgb(0 0 0 / 30%);
-  }
+// 悬停：书签轻微浮起
+.vp-navbar .vp-navbar-brand:hover .vp-site-logo {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 4px 9px rgb(2 30 45 / 38%));
 }
 
 .vp-navbar .vp-site-name {

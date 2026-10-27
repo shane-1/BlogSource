@@ -121,8 +121,10 @@ export default defineUserConfig({
       { text: 'GitHub', link: 'https://github.com/shane-1' },
     ],
 
-    logo: '/logo.png',
-    logoDark: '/logo_dark.png',
+    // 品牌 logo：蓝色液态玻璃书签图标（favicon.svg，导航与浏览器标签统一）
+    logo: '/favicon.svg',
+    logoDark: '/favicon.svg',
+    // 品牌 logo 与导航位置一致（书签玻璃图标替代原透明 png）
     // repo 关闭：避免导航栏尾部渲染 GitHub 链接（github 尾巴）
     // repo: 'https://github.com/shane-1',
     sidebar: 'auto',
