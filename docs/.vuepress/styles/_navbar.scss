@@ -228,13 +228,22 @@
 
 // ---------- 导航项 ----------
 .vp-navbar-item {
-  > .auto-link {
-    display: inline-block;
-    padding-inline: 8px;
+  // 直接链接项与下拉父项容器统一为 inline-flex 垂直居中，
+  // 消除 inline-block / block 两类基线差导致的图标上下错位（直接项曾整体偏高 8px）。
+  > .auto-link,
+  > .vp-navbar-dropdown-wrapper > .vp-navbar-dropdown-title {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    padding-block: 0;
     border-radius: 8px;
     transition:
       background-color var(--vp-t-color),
       color var(--vp-t-color);
+  }
+
+  > .auto-link {
+    padding-inline: 8px;
   }
 
   &:hover > .auto-link {
@@ -248,6 +257,15 @@
     border-bottom: none;
     color: var(--vp-c-accent);
     background-color: var(--vp-c-accent-soft);
+  }
+
+  // 外链（GitHub）不渲染主题自带的外部链接箭头占位伪元素
+  > .auto-link.external-link::after {
+    display: none;
+    content: none;
+    width: 0;
+    height: 0;
+    margin: 0;
   }
 }
 
@@ -277,7 +295,9 @@
   }
 
   .nav-label {
-    display: inline;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
   }
 
   &:hover > .auto-link .nav-icon,
@@ -313,7 +333,7 @@
   }
 
   > .auto-link,
-  .vp-navbar-dropdown-title {
+  > .vp-navbar-dropdown-wrapper > .vp-navbar-dropdown-title {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -322,6 +342,12 @@
     padding: 0;
     line-height: 1;
     border-radius: 10px;
+
+    .title {
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+    }
   }
 
   .nav-icon {
@@ -397,7 +423,13 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--vp-c-text-subtle);
-    padding: 6px 10px;
+    padding: 0 10px;
+
+    .title {
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+    }
   }
 
   .vp-navbar-dropdown-item {
