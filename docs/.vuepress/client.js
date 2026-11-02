@@ -231,6 +231,194 @@ function updateNavActive() {
 }
 
 // ============================================================
+// 3.7 文章目录浮层（Note 按钮切换当前文档 h2/h3）
+// 与主题三横线侧边栏互斥：同一时刻只允许一个浮层打开。
+// 仅文章页生效；首页不挂目录开关、不显示浮层。
+// ============================================================
+let tocRail = null
+let tocOpen = false
+let tocObserver = null
+let tocScrollSpy = null
+let tocLinks = []
+
+const TOC_HEAD_ICON =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="8" y1="18" x2="14" y2="18"/><circle cx="4" cy="6" r="1.4" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1.4" fill="currentColor" stroke="none"/></svg>'
+
+function articleHeadings() {
+  const main = document.querySelector('main.vp-page')
+  if (!main)
+    return []
+  return [...main.querySelectorAll('h2, h3')]
+}
+
+// 存在正文标题即视为文章页；首页（无 h2/h3）不启用目录
+function isArticlePage() {
+  return articleHeadings().length > 0
+}
+
+function themeSidebarOpen() {
+  const container = document.querySelector('.vp-theme-container')
+  return !!(container && container.classList.contains('sidebar-open'))
+}
+
+function closeThemeSidebar() {
+  const btn = document.querySelector('.vp-toggle-sidebar-button')
+  if (btn)
+    btn.click()
+}
+
+function closeToc() {
+  tocOpen = false
+  if (tocRail)
+    tocRail.classList.remove('is-open')
+}
+
+function ensureTocRail() {
+  if (tocRail)
+    return tocRail
+  tocRail = document.createElement('aside')
+  tocRail.className = 'article-toc-rail'
+  tocRail.setAttribute('aria-label', '当前文章目录')
+  tocRail.innerHTML = `
+    <div class="article-toc-head">
+      <span class="article-toc-head-icon">${TOC_HEAD_ICON}</span>
+      <span>目录</span>
+    </div>
+    <nav class="article-toc-list" aria-label="章节"></nav>`
+  document.body.appendChild(tocRail)
+  return tocRail
+}
+
+function slugifyHeading(text) {
+  return text
+    .trim()
+    .toLowerCase()
+    .replace(/[^\w一-龥]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+function populateToc() {
+  ensureTocRail()
+  const list = tocRail.querySelector('.article-toc-list')
+  list.innerHTML = ''
+  tocLinks = []
+  articleHeadings().forEach((heading) => {
+    if (!heading.id)
+      heading.id = slugifyHeading(heading.textContent)
+    const link = document.createElement('a')
+    link.className = `article-toc-item ${heading.tagName === 'H3' ? 'level-3' : 'level-2'}`
+    link.href = `#${heading.id}`
+    link.textContent = heading.textContent.trim()
+    link.addEventListener('click', (e) => {
+      e.preventDefault()
+      heading.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      history.replaceState(null, '', `#${heading.id}`)
+    })
+    list.appendChild(link)
+    tocLinks.push({ heading, link })
+  })
+}
+
+function bindTocScrollSpy() {
+  if (tocScrollSpy) {
+    tocScrollSpy.disconnect()
+    tocScrollSpy = null
+  }
+  if (typeof IntersectionObserver === 'undefined')
+    return
+  tocScrollSpy = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting)
+          return
+        const activeHeading = entry.target
+        tocLinks.forEach(({ heading, link }) =>
+          link.classList.toggle('is-active', heading === activeHeading))
+      })
+    },
+    { rootMargin: '-15% 0px -70% 0px', threshold: 0 },
+  )
+  tocLinks.forEach(({ heading }) => tocScrollSpy.observe(heading))
+}
+
+function openToc() {
+  // 仅桌面宽屏（≥1280px）打开左侧目录；更窄由主题侧边栏承担，避免遮挡正文
+  if (typeof window !== 'undefined' && window.innerWidth < 1280)
+    return
+  // 互斥：主题侧边栏若处于打开态，先关闭，保证只保留目录浮层
+  if (themeSidebarOpen())
+    closeThemeSidebar()
+  ensureTocRail()
+  populateToc()
+  tocOpen = true
+  tocRail.classList.add('is-open')
+  bindTocScrollSpy()
+}
+
+function toggleToc() {
+  if (tocOpen)
+    closeToc()
+  else
+    openToc()
+}
+
+// Note 导航按钮：文章页拦截为目录开关；其余页面保留主题原有下拉行为
+function bindNoteTocToggle(root) {
+  root = root || document
+  root
+    .querySelectorAll(
+      '.vp-navbar-dropdown-title[aria-label="Note"], .vp-navbar-dropdown-title-mobile[aria-label="Note"]',
+    )
+    .forEach((btn) => {
+      if (btn.dataset.tocBound)
+        return
+      btn.dataset.tocBound = '1'
+      btn.addEventListener('click', (e) => {
+        // 仅桌面宽屏文章页拦截为目录开关；非文章页与窄屏保留主题原下拉行为
+        if (!isArticlePage())
+          return
+        if (typeof window !== 'undefined' && window.innerWidth < 1280)
+          return
+        e.preventDefault()
+        e.stopPropagation()
+        toggleToc()
+      }, true)
+    })
+}
+
+// 监听主题容器：三横线侧边栏一旦打开，立即关闭目录浮层（互斥）
+function watchThemeSidebar() {
+  if (tocObserver) {
+    tocObserver.disconnect()
+    tocObserver = null
+  }
+  const container = document.querySelector('.vp-theme-container')
+  if (!container)
+    return
+  tocObserver = new MutationObserver(() => {
+    if (container.classList.contains('sidebar-open'))
+      closeToc()
+  })
+  tocObserver.observe(container, { attributes: true, attributeFilter: ['class'] })
+}
+
+// 路由切换后重置目录状态（关闭浮层、断开滚动侦测），由后续 populate 重建
+function resetToc() {
+  closeToc()
+  if (tocScrollSpy) {
+    tocScrollSpy.disconnect()
+    tocScrollSpy = null
+  }
+  tocLinks = []
+}
+
+// 窗口收窄进入非宽屏时收起目录，与 CSS 断点保持一致
+function onTocResize() {
+  if (window.innerWidth < 1280)
+    closeToc()
+}
+
+// ============================================================
 // 4. 丝滑页面过渡
 // ============================================================
 const supportsVT =
@@ -262,6 +450,9 @@ function init() {
   injectHomeDecor()
   updateNavActive()
   markGlassLive()
+  bindNoteTocToggle()
+  watchThemeSidebar()
+  window.addEventListener('resize', onTocResize, { passive: true })
   window.addEventListener('scroll', onScroll, { passive: true })
   if (sheenFinePointer && !prefersReducedMotion())
     document.addEventListener('pointermove', onGlassPointer, { passive: true })
@@ -269,7 +460,16 @@ function init() {
 
 function cleanup() {
   window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('resize', onTocResize)
   document.removeEventListener('pointermove', onGlassPointer)
+  if (tocObserver) {
+    tocObserver.disconnect()
+    tocObserver = null
+  }
+  if (tocScrollSpy) {
+    tocScrollSpy.disconnect()
+    tocScrollSpy = null
+  }
 }
 
 export default defineClientConfig({
@@ -301,6 +501,7 @@ export default defineClientConfig({
             }),
         )
         transition.finished.catch(() => {})
+        transition.ready.catch(() => {})
       })
     }
 
@@ -315,6 +516,9 @@ export default defineClientConfig({
         injectHomeDecor()
         updateNavActive()
         markGlassLive()
+        resetToc()
+        bindNoteTocToggle()
+        watchThemeSidebar()
         if (!supportsVT)
           playPageEnter()
       })
