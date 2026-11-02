@@ -396,6 +396,69 @@
   }
 }
 
+// 中间宽度（720–1439px）：顶部态导航自动收敛为图标格（同 Dock 态视觉）。
+// 未滚动时若保留“图标+文字”，9 项 + 站点名 + 搜索 + 模式按钮总宽约 1300–1500px，
+// 在 720–1440 视口下整行溢出视口右侧（GitHub/搜索/模式被推出屏幕）。
+// 图标化后总宽约 620px，任意中间宽度互不遮挡。
+@media screen and (min-width: 720px) and (max-width: 1439px) {
+  .vp-navbar:not(.navbar-scrolled) {
+    .vp-site-name {
+      max-width: 0;
+      opacity: 0;
+    }
+
+    .vp-site-logo {
+      margin-inline-end: 0;
+    }
+
+    .vp-navbar-item {
+      margin-inline-start: 0.4rem;
+
+      .nav-label {
+        display: none;
+      }
+
+      > .auto-link,
+      > .vp-navbar-dropdown-wrapper > .vp-navbar-dropdown-title {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 36px;
+        height: 36px;
+        padding: 0;
+        line-height: 1;
+        border-radius: 10px;
+      }
+
+      .nav-icon {
+        width: 28px;
+        height: 28px;
+        margin-inline-end: 0;
+      }
+    }
+
+    .vp-navbar-dropdown-title {
+      font-size: 0;
+
+      .arrow {
+        display: none;
+      }
+    }
+  }
+
+  // 中间宽度 Dock 态：强制导航项为统一图标格，消除主题残余宽度撑爆 wrapper
+  .vp-navbar.navbar-scrolled {
+    .vp-navbar-item {
+      margin-inline-start: 0.3rem !important;
+      width: 34px;
+    }
+
+    .vp-navbar-items-wrapper {
+      min-width: 0;
+    }
+  }
+}
+
 // ---------- 下拉菜单：强玻璃浮层 ----------
 // 注意：主题自带 `.vp-navbar-dropdown-wrapper:not(.mobile) .vp-navbar-dropdown`
 // 以更高特异性（0,3,0）覆盖背景为实色面板，这里单独用同等特异性规则压过它。
@@ -656,7 +719,36 @@
 // ============================================================
 @media screen and (max-width: 719px) {
   .vp-navbar a.route-link[href="/"] {
-    margin-inline-start: 2.75rem;
+    margin-inline-start: 2.5rem;
+  }
+
+  // 移动态导航项强制隐藏（主题靠 vp-hide-mobile 在 resize 时序下偶发滞后，
+  // 残余项会把 wrapper 内容撑到 176px 并与左侧 logo/三横线重叠）
+  .vp-navbar .vp-navbar-items {
+    display: none !important;
+  }
+
+  // 折叠态 Dock 胶囊整体调小（原 3.2rem → 2.8rem），贴近“最小状态”观感
+  .vp-navbar.navbar-scrolled {
+    height: 2.8rem;
+    padding: 0.24rem 0.55rem 0.24rem 2.9rem;
+
+    // Dock 态胶囊内三横线已由 padding-inline-start 让位，
+    // logo 无需再叠加 2.5rem 让位，避免与右侧模式/搜索按钮重叠
+    a.route-link[href="/"] {
+      margin-inline-start: 0.3rem;
+    }
+  }
+
+  // 模式切换 + 搜索按钮组：右对齐贴缘（原 absolute 左侧固定宽 130px，
+  // 极窄视口下搜索框会被推出胶囊右缘），内容自适应宽度、任意宽度不溢出
+  .vp-navbar .vp-navbar-items-wrapper {
+    position: absolute !important;
+    left: auto !important;
+    right: 0.55rem !important;
+    width: auto !important;
+    display: flex !important;
+    justify-content: flex-end !important;
   }
 }
 

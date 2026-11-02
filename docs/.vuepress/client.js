@@ -231,7 +231,7 @@ function updateNavActive() {
 }
 
 // ============================================================
-// 3.7 文章目录浮层（Note 按钮切换当前文档 h2/h3）
+// 3.7 文章目录浮层（品牌 logo 切换当前文档 h2/h3）
 // 与主题三横线侧边栏互斥：同一时刻只允许一个浮层打开。
 // 仅文章页生效；首页不挂目录开关、不显示浮层。
 // ============================================================
@@ -362,28 +362,25 @@ function toggleToc() {
     openToc()
 }
 
-// Note 导航按钮：文章页拦截为目录开关；其余页面保留主题原有下拉行为
-function bindNoteTocToggle(root) {
+// 品牌 logo（书签图标）：文章页拦截为目录开关；首页与窄屏保留主题原链接行为。
+// Note 按钮恢复主题原下拉（不再承担目录，避免两个入口功能重复）。
+function bindLogoTocToggle(root) {
   root = root || document
-  root
-    .querySelectorAll(
-      '.vp-navbar-dropdown-title[aria-label="Note"], .vp-navbar-dropdown-title-mobile[aria-label="Note"]',
-    )
-    .forEach((btn) => {
-      if (btn.dataset.tocBound)
+  root.querySelectorAll('a.route-link[href="/"]').forEach((link) => {
+    if (link.dataset.tocBound)
+      return
+    link.dataset.tocBound = '1'
+    link.addEventListener('click', (e) => {
+      // 仅桌面宽屏文章页拦截为目录开关；非文章页与窄屏放行主题原链接
+      if (!isArticlePage())
         return
-      btn.dataset.tocBound = '1'
-      btn.addEventListener('click', (e) => {
-        // 仅桌面宽屏文章页拦截为目录开关；非文章页与窄屏保留主题原下拉行为
-        if (!isArticlePage())
-          return
-        if (typeof window !== 'undefined' && window.innerWidth < 1280)
-          return
-        e.preventDefault()
-        e.stopPropagation()
-        toggleToc()
-      }, true)
-    })
+      if (typeof window !== 'undefined' && window.innerWidth < 1280)
+        return
+      e.preventDefault()
+      e.stopPropagation()
+      toggleToc()
+    }, true)
+  })
 }
 
 // 监听主题容器：三横线侧边栏一旦打开，立即关闭目录浮层（互斥）
@@ -450,7 +447,7 @@ function init() {
   injectHomeDecor()
   updateNavActive()
   markGlassLive()
-  bindNoteTocToggle()
+  bindLogoTocToggle()
   watchThemeSidebar()
   window.addEventListener('resize', onTocResize, { passive: true })
   window.addEventListener('scroll', onScroll, { passive: true })
@@ -517,7 +514,7 @@ export default defineClientConfig({
         updateNavActive()
         markGlassLive()
         resetToc()
-        bindNoteTocToggle()
+        bindLogoTocToggle()
         watchThemeSidebar()
         if (!supportsVT)
           playPageEnter()
