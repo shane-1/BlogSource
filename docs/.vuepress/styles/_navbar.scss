@@ -967,74 +967,45 @@
 }
 
 // ============================================================
-// 文章目录浮层（导航栏首页图标 / 品牌书签切换）
-// 形态：从书签图标向下生长出的“压缩菜单竖条”，材质与 Dock 胶囊同源
-//   宽屏 ≥1280：常驻竖条，无遮罩
-//   窄屏 <1280：带遮罩抽屉，点遮罩 / ✕ / Esc 关闭
+// 文章目录（导航栏首页图标 / 品牌书签切换）
+// 形态：靠左全屏的液态玻璃菜单栏，和主题三横线侧边栏同一套材质与骨架
+//   打开：书签图标纵向拉长 → 左侧菜单栏从边缘推入
+//   关闭：菜单栏退回边缘，图标弹回原尺寸
 // ============================================================
 
-// 书签图标 → 菜单的连接脊线：打开时纵向生长，收起时缩回图标
-.article-toc-stem {
-  position: fixed;
-  top: var(--stem-top, 46px);
-  left: calc(var(--stem-x, 37px) - 1.5px);
-  width: 3px;
-  height: var(--stem-h, 22px);
-  border-radius: 3px;
-  z-index: 94;
-  pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    var(--vp-c-accent) 0%,
-    var(--vp-c-accent-soft) 60%,
-    transparent 100%
-  );
-  box-shadow: 0 0 10px var(--vp-c-accent-soft);
-  opacity: 0.9;
-  transform: scaleY(0);
+// 图标拉长：transform 不影响布局，书签从顶部向下“长”长
+.vp-navbar a.route-link[href='/'] .vp-site-logo {
   transform-origin: top center;
-  will-change: transform;
   transition:
     transform 0.5s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1)),
-    opacity 0.3s ease;
-
-  &.is-open {
-    transform: scaleY(1);
-  }
+    filter 0.3s ease;
 }
 
-// 图标本体的按压反馈：微微下沉 + 光晕
-.vp-navbar a.route-link[href='/'] {
-  transition:
-    transform 0.4s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1)),
-    filter 0.3s ease;
-
-  &.is-toc-on {
-    transform: translateY(1.5px) scale(1.03);
-    filter: drop-shadow(0 2px 8px var(--vp-c-accent-soft));
-  }
+.vp-navbar a.route-link[href='/'].is-toc-on .vp-site-logo {
+  transform: scaleY(1.5);
+  filter: drop-shadow(0 6px 14px rgb(2 30 45 / 42%));
 }
 
 .article-toc-rail {
   position: fixed;
-  top: var(--toc-top, calc(var(--navbar-height) + 12px));
-  inset-inline-start: var(--toc-left, 12px);
+  top: var(--navbar-height);
+  bottom: 0;
+  inset-inline-start: 0;
   z-index: 95;
   box-sizing: border-box;
-  width: 236px;
-  max-height: min(56vh, calc(100vh - var(--navbar-height) - 120px));
+  width: min(328px, 86vw);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 6px;
+  padding: 18px 10px 14px;
 
-  border-radius: 18px;
+  border-radius: 0 20px 20px 0;
   border: 1px solid var(--glass-outline);
-  // 比导航栏更通透：菜单悬在正文上方，需要看到底下的模糊透光与色彩渗色
-  background-color: var(--glass-tint);
-  background-color: color-mix(in srgb, var(--vp-c-bg) 62%, transparent);
+  border-inline-start: none;
+  background-color: var(--glass-tint-strong);
+  background-color: color-mix(in srgb, var(--vp-c-bg) 66%, transparent);
   background-image:
-    linear-gradient(180deg, var(--glass-highlight) 0%, transparent 46%);
+    linear-gradient(180deg, var(--glass-highlight) 0%, transparent 40%);
   backdrop-filter:
     blur(var(--glass-blur)) saturate(var(--glass-saturate))
     brightness(var(--glass-brightness));
@@ -1042,36 +1013,27 @@
     blur(var(--glass-blur)) saturate(var(--glass-saturate))
     brightness(var(--glass-brightness));
   box-shadow:
-    var(--glass-shadow-strong),
+    12px 0 40px rgb(2 15 25 / 24%),
     inset 0 1px 0 var(--glass-top-rim),
-    inset 0 -1px 0 var(--glass-bottom-rim);
+    inset 1px 0 0 var(--glass-top-rim);
 
-  // 关闭态：从图标下方“长出来”（缩放 + 位移，纯合成层动画，避免裁切层掉帧）
+  // 收起态：整条退回到左边缘外侧
   opacity: 0;
   visibility: hidden;
-  transform: translate3d(0, -10px, 0) scale(0.97);
-  transform-origin: top center;
+  transform: translate3d(-100%, 0, 0);
   will-change: transform, opacity;
   transition:
-    transform 0.5s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1)),
-    opacity 0.26s ease,
-    visibility 0.5s;
+    transform 0.45s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1)),
+    opacity 0.28s ease,
+    visibility 0.45s;
 
   &.is-open {
     opacity: 1;
     visibility: visible;
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(0, 0, 0);
   }
 
-  // 外壳：竖向排布头部与列表，避免裁切动画里内容抖动
-  .article-toc-shell {
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    flex: 1 1 auto;
-  }
-
-  // 顶缘镜面高光：与导航栏/Dock 同一套光学语言
+  // 顶缘镜面高光：与导航栏 / Dock 同一套光学语言
   &::before {
     content: '';
     position: absolute;
@@ -1079,7 +1041,7 @@
     border-radius: inherit;
     pointer-events: none;
     background: radial-gradient(
-      150px 90px at 16% 0%,
+      180px 110px at 14% 0%,
       var(--glass-specular) 0%,
       transparent 72%
     );
@@ -1089,6 +1051,10 @@
   .article-toc-shell {
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
   }
 
   .article-toc-head {
@@ -1096,7 +1062,7 @@
     align-items: center;
     gap: 8px;
     flex: 0 0 auto;
-    height: 30px;
+    height: 34px;
     padding: 0 4px 0 8px;
     font-size: 0.68rem;
     font-weight: 700;
@@ -1120,14 +1086,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       padding: 0;
       border: none;
-      border-radius: 7px;
+      border-radius: 8px;
       background: transparent;
       color: var(--vp-c-text-mute);
-      font-size: 0.72rem;
+      font-size: 0.74rem;
       line-height: 1;
       cursor: pointer;
       transition:
@@ -1148,16 +1114,16 @@
     overscroll-behavior: contain;
     flex: 1 1 auto;
     min-height: 0;
-    padding: 2px 0;
+    padding: 2px 0 4px;
     display: flex;
     flex-direction: column;
     gap: 1px;
     scrollbar-width: thin;
     opacity: 0;
-    transform: translateY(-4px);
+    transform: translateX(-6px);
     transition:
-      opacity 0.3s ease 0.06s,
-      transform 0.42s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1)) 0.06s;
+      opacity 0.3s ease 0.08s,
+      transform 0.45s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1)) 0.08s;
   }
 
   &.is-open .article-toc-list {
@@ -1165,13 +1131,13 @@
     transform: none;
   }
 
-  // 压缩行：定宽单行 + 省略号，保持“菜单栏”的紧凑节律
+  // 压缩行：单行定宽 + 省略号，节律与菜单栏 / 侧边栏一致
   .article-toc-item {
     display: block;
-    padding: 5px 9px;
+    padding: 6px 10px;
     border-radius: 9px;
-    font-size: 0.78rem;
-    line-height: 1.28;
+    font-size: 0.8rem;
+    line-height: 1.3;
     color: var(--vp-c-text-mute);
     text-decoration: none;
     white-space: nowrap;
@@ -1189,29 +1155,17 @@
     }
 
     &.level-3 {
-      margin-inline-start: 10px;
-      font-size: 0.74rem;
+      margin-inline-start: 12px;
+      font-size: 0.76rem;
     }
 
-    // 当前阅读章节：青色玻璃胶囊 + 左侧亮条
+    // 当前阅读章节：青色玻璃胶囊 + 左侧亮条（与侧边栏 active 同款）
     &.is-active {
       color: var(--vp-c-accent);
       background-color: var(--vp-c-accent-soft);
-      box-shadow: inset 2px 0 0 var(--vp-c-accent);
-    }
-  }
-
-  // 窄屏：竖条略放宽，其余材质不变
-  @media screen and (max-width: 1279px) {
-    width: min(252px, calc(100vw - 20px));
-    max-height: min(58vh, calc(100vh - var(--navbar-height) - 96px));
-    box-shadow:
-      var(--glass-shadow-strong),
-      0 18px 40px rgb(2 15 25 / 30%);
-
-    .article-toc-item {
-      padding: 7px 9px;
-      font-size: 0.8rem;
+      box-shadow:
+        inset 2px 0 0 var(--vp-c-accent),
+        0 0 12px rgb(34 211 238 / 16%);
     }
   }
 }
@@ -1239,8 +1193,7 @@
 body.toc-open .article-toc-backdrop {
   opacity: 1;
   visibility: visible;
-}
-// ============================================================
+}// ============================================================
 // 减少透明度：导航栏实体化
 // ============================================================
 @media (prefers-reduced-transparency: reduce) {
