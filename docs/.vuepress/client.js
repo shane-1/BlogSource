@@ -59,6 +59,9 @@ function onScroll() {
     const navbar = document.querySelector('.vp-navbar')
     if (navbar)
       navbar.classList.toggle('navbar-scrolled', scrollTop > DOCK_THRESHOLD)
+    // 目录开着时同步“当前章节”高亮（滚动越快越依赖主动计算）
+    if (tocOpen)
+      syncTocActive()
     ticking = false
   })
 }
@@ -152,27 +155,40 @@ function injectNavIcons(root) {
     return
   root = root || document
   root.querySelectorAll?.('.vp-navbar-items > .vp-navbar-item').forEach((item) => {
-    // 直接链接项取 .auto-link；下拉父项取 .title（保留展开箭头 .arrow）
-    const labelEl =
-      item.querySelector(':scope > .auto-link')
-      || item.querySelector(':scope > .vp-navbar-dropdown-wrapper > .vp-navbar-dropdown-title > .title')
-    if (!labelEl || labelEl.querySelector('.nav-icon'))
+    // 一个导航项可能同时存在两份标签元素：
+    //   · 桌面：直接链接 .auto-link / 下拉父项 .vp-navbar-dropdown-title > .title
+    //   · 手机抽屉：下拉父项 .vp-navbar-dropdown-title-mobile > .title
+    // 全部就地注入图标，保证切换断点后两侧都有图标（幂等）
+    const labelEls = [
+      item.querySelector(':scope > .auto-link'),
+      item.querySelector(
+        ':scope > .vp-navbar-dropdown-wrapper > .vp-navbar-dropdown-title > .title',
+      ),
+      item.querySelector(
+        ':scope > .vp-navbar-dropdown-wrapper > .vp-navbar-dropdown-title-mobile > .title',
+      ),
+    ].filter(Boolean)
+    if (!labelEls.length)
       return
-    const text = (labelEl.textContent || '').trim().toLowerCase()
-    const icon = NAV_ICONS[text]
+    const text = (labelEls[0].textContent || '').trim()
+    const icon = NAV_ICONS[text.toLowerCase()]
     if (!icon)
       return
-    // 原文字保留在 .nav-label（可访问性 + hover 提示），视觉层叠图标
-    const svg = document.createElement('span')
-    svg.className = 'nav-icon'
-    svg.setAttribute('aria-hidden', 'true')
-    svg.innerHTML = icon
-    const label = document.createElement('span')
-    label.className = 'nav-label'
-    label.textContent = labelEl.textContent
-    labelEl.textContent = ''
-    labelEl.appendChild(svg)
-    labelEl.appendChild(label)
+    labelEls.forEach((labelEl) => {
+      if (labelEl.querySelector('.nav-icon'))
+        return
+      // 原文字保留在 .nav-label（可访问性 + hover 提示），视觉层叠图标
+      const svg = document.createElement('span')
+      svg.className = 'nav-icon'
+      svg.setAttribute('aria-hidden', 'true')
+      svg.innerHTML = icon
+      const label = document.createElement('span')
+      label.className = 'nav-label'
+      label.textContent = labelEl.textContent
+      labelEl.textContent = ''
+      labelEl.appendChild(svg)
+      labelEl.appendChild(label)
+    })
   })
 }
 
@@ -231,11 +247,13 @@ function updateNavActive() {
 }
 
 // ============================================================
-// 3.7 文章目录浮层（品牌 logo 切换当前文档 h2/h3）
+// 3.7 文章目录浮层（导航栏首页图标 / 品牌书签切换当前文档 h2/h3）
 // 与主题三横线侧边栏互斥：同一时刻只允许一个浮层打开。
 // 仅文章页生效；首页不挂目录开关、不显示浮层。
+// 宽屏（≥1280）为左侧常驻浮层；窄屏/手机为带遮罩的抽屉式浮层。
 // ============================================================
 let tocRail = null
+let tocBackdrop = null
 let tocOpen = false
 let tocObserver = null
 let tocScrollSpy = null
@@ -271,11 +289,27 @@ function closeToc() {
   tocOpen = false
   if (tocRail)
     tocRail.classList.remove('is-open')
+  if (typeof document !== 'undefined')
+    document.body.classList.remove('toc-open')
+}
+
+function ensureTocBackdrop() {
+  if (tocBackdrop && tocBackdrop.isConnected)
+    return tocBackdrop
+  document.querySelectorAll('.article-toc-backdrop').forEach((node) => node.remove())
+  tocBackdrop = document.createElement('div')
+  tocBackdrop.className = 'article-toc-backdrop'
+  tocBackdrop.setAttribute('aria-hidden', 'true')
+  tocBackdrop.addEventListener('click', closeToc)
+  document.body.appendChild(tocBackdrop)
+  return tocBackdrop
 }
 
 function ensureTocRail() {
-  if (tocRail)
+  if (tocRail && tocRail.isConnected)
     return tocRail
+  // 兜底：热更新或状态丢失后可能残留旧节点，先清掉再建，避免叠出两层浮层
+  document.querySelectorAll('.article-toc-rail').forEach((node) => node.remove())
   tocRail = document.createElement('aside')
   tocRail.className = 'article-toc-rail'
   tocRail.setAttribute('aria-label', '当前文章目录')
@@ -283,8 +317,12 @@ function ensureTocRail() {
     <div class="article-toc-head">
       <span class="article-toc-head-icon">${TOC_HEAD_ICON}</span>
       <span>目录</span>
+      <button class="article-toc-close" type="button" aria-label="关闭目录">✕</button>
     </div>
     <nav class="article-toc-list" aria-label="章节"></nav>`
+  tocRail
+    .querySelector('.article-toc-close')
+    .addEventListener('click', closeToc)
   document.body.appendChild(tocRail)
   return tocRail
 }
@@ -313,10 +351,43 @@ function populateToc() {
       e.preventDefault()
       heading.scrollIntoView({ behavior: 'smooth', block: 'start' })
       history.replaceState(null, '', `#${heading.id}`)
+      // 窄屏是遮罩抽屉，点选后立即收起，露出正文
+      if (typeof window !== 'undefined' && window.innerWidth < 1280)
+        closeToc()
+      syncTocActive(heading)
     })
     list.appendChild(link)
     tocLinks.push({ heading, link })
   })
+}
+
+// 依据滚动位置立即标出“当前所在章节”，保证刚打开目录时就有高亮
+// （IntersectionObserver 在已进入视野时不会补发事件，需要主动同步一次）
+function syncTocActive(targetHeading) {
+  if (!tocLinks.length)
+    return
+  if (!targetHeading) {
+    const probe = 120 // 视口顶部往下 120px 内的最后一个小标题视为当前章节
+    targetHeading = tocLinks[0].heading
+    tocLinks.forEach(({ heading }) => {
+      if (heading.getBoundingClientRect().top <= probe)
+        targetHeading = heading
+    })
+  }
+  tocLinks.forEach(({ heading, link }) =>
+    link.classList.toggle('is-active', heading === targetHeading))
+}
+
+// 打开目录时把“当前章节”滚到列表可视区中部，长文档不必手动找
+function revealActiveTocItem() {
+  if (!tocRail)
+    return
+  const list = tocRail.querySelector('.article-toc-list')
+  const active = list && list.querySelector('.article-toc-item.is-active')
+  if (!list || !active)
+    return
+  const top = active.offsetTop - list.clientHeight / 2 + active.offsetHeight / 2
+  list.scrollTop = Math.max(0, top)
 }
 
 function bindTocScrollSpy() {
@@ -331,9 +402,7 @@ function bindTocScrollSpy() {
       entries.forEach((entry) => {
         if (!entry.isIntersecting)
           return
-        const activeHeading = entry.target
-        tocLinks.forEach(({ heading, link }) =>
-          link.classList.toggle('is-active', heading === activeHeading))
+        syncTocActive(entry.target)
       })
     },
     { rootMargin: '-15% 0px -70% 0px', threshold: 0 },
@@ -342,17 +411,18 @@ function bindTocScrollSpy() {
 }
 
 function openToc() {
-  // 仅桌面宽屏（≥1280px）打开左侧目录；更窄由主题侧边栏承担，避免遮挡正文
-  if (typeof window !== 'undefined' && window.innerWidth < 1280)
-    return
   // 互斥：主题侧边栏若处于打开态，先关闭，保证只保留目录浮层
   if (themeSidebarOpen())
     closeThemeSidebar()
   ensureTocRail()
+  ensureTocBackdrop()
   populateToc()
   tocOpen = true
   tocRail.classList.add('is-open')
+  document.body.classList.add('toc-open')
   bindTocScrollSpy()
+  syncTocActive()
+  revealActiveTocItem()
 }
 
 function toggleToc() {
@@ -362,25 +432,29 @@ function toggleToc() {
     openToc()
 }
 
-// 品牌 logo（书签图标）：文章页拦截为目录开关；首页与窄屏保留主题原链接行为。
-// Note 按钮恢复主题原下拉（不再承担目录，避免两个入口功能重复）。
+// 导航栏首页图标（品牌书签）：文章页拦截为目录开关（任意视口宽度）；
+// 首页等非文章页保留主题原链接行为。仅绑定导航栏内的链接，
+// 避免误伤侧边栏/抽屉里的 Home 菜单项。
 function bindLogoTocToggle(root) {
   root = root || document
-  root.querySelectorAll('a.route-link[href="/"]').forEach((link) => {
-    if (link.dataset.tocBound)
-      return
-    link.dataset.tocBound = '1'
-    link.addEventListener('click', (e) => {
-      // 仅桌面宽屏文章页拦截为目录开关；非文章页与窄屏放行主题原链接
-      if (!isArticlePage())
+  root
+    .querySelectorAll('.vp-navbar a.route-link[href="/"]')
+    .forEach((link) => {
+      if (link.dataset.tocBound)
         return
-      if (typeof window !== 'undefined' && window.innerWidth < 1280)
-        return
-      e.preventDefault()
-      e.stopPropagation()
-      toggleToc()
-    }, true)
-  })
+      link.dataset.tocBound = '1'
+      link.addEventListener(
+        'click',
+        (e) => {
+          if (!isArticlePage())
+            return
+          e.preventDefault()
+          e.stopPropagation()
+          toggleToc()
+        },
+        true,
+      )
+    })
 }
 
 // 监听主题容器：三横线侧边栏一旦打开，立即关闭目录浮层（互斥）
@@ -409,9 +483,9 @@ function resetToc() {
   tocLinks = []
 }
 
-// 窗口收窄进入非宽屏时收起目录，与 CSS 断点保持一致
-function onTocResize() {
-  if (window.innerWidth < 1280)
+// Esc 关闭目录浮层（遮罩抽屉形态下的标准退出手势）
+function onTocKeydown(e) {
+  if (e.key === 'Escape' && tocOpen)
     closeToc()
 }
 
@@ -449,15 +523,15 @@ function init() {
   markGlassLive()
   bindLogoTocToggle()
   watchThemeSidebar()
-  window.addEventListener('resize', onTocResize, { passive: true })
   window.addEventListener('scroll', onScroll, { passive: true })
+  document.addEventListener('keydown', onTocKeydown)
   if (sheenFinePointer && !prefersReducedMotion())
     document.addEventListener('pointermove', onGlassPointer, { passive: true })
 }
 
 function cleanup() {
   window.removeEventListener('scroll', onScroll)
-  window.removeEventListener('resize', onTocResize)
+  document.removeEventListener('keydown', onTocKeydown)
   document.removeEventListener('pointermove', onGlassPointer)
   if (tocObserver) {
     tocObserver.disconnect()

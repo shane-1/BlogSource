@@ -13,6 +13,11 @@
   z-index: 100;
   box-sizing: border-box;
 
+  // 统一垂直基线：导航栏始终是 flex 行，品牌区、导航项、模式/搜索按钮
+  // 全部以栏体几何中线对齐，避免行盒基线（inline-block）造成的 1–3px 上下偏差
+  display: flex;
+  align-items: center;
+
   height: var(--navbar-height);
   padding: var(--navbar-padding-v) var(--navbar-padding-h);
   border: 1px solid transparent;
@@ -41,6 +46,7 @@
     width 0.55s var(--ease-spring),
     padding 0.55s var(--ease-spring),
     margin 0.55s var(--ease-spring),
+    transform 0.55s var(--ease-spring),
     border-radius 0.55s var(--ease-spring),
     border-color 0.45s var(--ease-spring),
     background-color 0.45s var(--ease-spring),
@@ -81,9 +87,40 @@
   > span {
     position: relative;
     z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
   }
 
-  .vp-navbar-items-wrapper,
+  // 品牌区：logo 与站点名作为一个整体 flex 居中，
+  // 消除图片按基线（vertical-align:top）落在栏体上方的问题
+  // （默认主题的 brand 链接只有 .route-link，无 .vp-navbar-brand 类）
+  .vp-navbar-brand,
+  > span > a.route-link {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    line-height: 1;
+  }
+
+  // 导航项组：由主题的绝对定位 + 行盒改为 flex 行内布局，
+  // 依赖 flex 的 align-items 居中，任何视口宽度下都严格贴栏体中轴
+  .vp-navbar-items-wrapper {
+    position: static;
+    margin-inline-start: auto;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-inline-start: 0.75rem;
+    z-index: 1;
+  }
+
+  .vp-navbar-items {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
   .vp-toggle-sidebar-button {
     z-index: 1;
   }
@@ -93,14 +130,19 @@
   }
 
   // ============================================================
-  // Dock 态：下滑后收缩为居中悬浮胶囊
+  // Dock 态：下滑后收缩为「贴内容」的居中悬浮胶囊
+  // 宽度由内容决定（max-content），不再用固定左右对称留白，
+  // 避免图标少时胶囊两侧出现大片空白
   // ============================================================
   &.navbar-scrolled {
     top: 10px;
-    // Dock 宽度自适应内容：左右各留 50% - 440px，最宽 880px，
-    // 图标化导航下紧凑不空荡，各分辨率（含窄屏）均不溢出
-    left: max(12px, calc(50% - 440px));
-    right: max(12px, calc(50% - 440px));
+    // 居中方式：left/right 归零 + 内容宽 + margin 自动分配，
+    // 收缩过程不会从左侧滑入（transform 会让胶囊先贴左再横移）
+    left: 0;
+    right: 0;
+    width: max-content;
+    max-width: calc(100vw - 24px);
+    margin-inline: auto;
     height: 3.2rem;
     padding: 0.3rem 0.45rem;
     display: flex;
@@ -128,13 +170,16 @@
         inset -1px 0 0 rgb(100 140 180 / 8%);
     }
 
-    // 导航项组：占据中部弹性空间并居中（不折叠贴左）
+    // 导航项组：胶囊宽度已由内容决定，这里不再抢弹性空间，
+    // 并解除主题写入的 maxWidth 限制（否则会反向压缩胶囊宽度）
     .vp-navbar-items-wrapper {
       position: static;
-      flex: 1;
+      flex: 0 0 auto;
       display: flex;
+      align-items: center;
       justify-content: center;
       height: 100%;
+      max-width: none !important;
       padding-inline-start: 0.5rem;
     }
 
@@ -151,17 +196,13 @@
     // 导航项间距收紧
     .vp-navbar-item {
       margin-inline-start: 0.85rem;
+      height: 36px;
     }
 
-    // 移动端：为汉堡按钮留出空间
+    // 移动端 Dock：三横线进入常规流后无需额外 padding 让位，
+    // 具体定位见文件末尾「手机导航栏」断点
     @media screen and (max-width: 719px) {
-      padding-inline-start: 2.9rem;
-
-      .vp-toggle-sidebar-button {
-        inset-inline-start: 0.45rem;
-        top: 50%;
-        transform: translateY(-50%);
-      }
+      padding-inline-start: 0.55rem;
     }
   }
 }
@@ -227,19 +268,36 @@
 }
 
 // ---------- 导航项 ----------
+// 统一几何：每个导航项为等高（36px）的 flex 单元，图标与文字在同一
+// align-items:center 轴线上；顶部态与 Dock 态共用同一套盒子，仅切换尺寸。
 .vp-navbar-item {
-  // 直接链接项与下拉父项容器统一为 inline-flex 垂直居中，
-  // 消除 inline-block / block 两类基线差导致的图标上下错位（直接项曾整体偏高 8px）。
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 36px;
+  line-height: 1;
+
+  // 直接链接项与下拉父项容器统一为等高 flex 盒，
+  // 消除 inline-block / block 两类基线差导致的图标上下错位
   > .auto-link,
   > .vp-navbar-dropdown-wrapper > .vp-navbar-dropdown-title {
     display: inline-flex;
     align-items: center;
-    line-height: 1;
+    justify-content: center;
+    height: 36px;
     padding-block: 0;
+    line-height: 1;
     border-radius: 8px;
     transition:
       background-color var(--vp-t-color),
       color var(--vp-t-color);
+  }
+
+  // 下拉父项容器：与直接链接项同高，避免高度不一（1.8rem vs 36px）造成错位
+  > .vp-navbar-dropdown-wrapper {
+    display: flex;
+    align-items: center;
+    height: 36px;
   }
 
   > .auto-link {
@@ -275,10 +333,11 @@
 .vp-navbar .vp-navbar-item {
   .nav-icon {
     display: inline-flex;
+    flex: 0 0 auto;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     border-radius: 8px;
     color: var(--vp-c-text-mute);
     vertical-align: middle;
@@ -289,8 +348,8 @@
 
     svg {
       display: block;
-      width: 17px;
-      height: 17px;
+      width: 16px;
+      height: 16px;
     }
   }
 
@@ -316,14 +375,7 @@
 
 // 顶部态（未收缩）：图标略小，与文字并排
 .vp-navbar:not(.navbar-scrolled) .vp-navbar-item .nav-icon {
-  width: 24px;
-  height: 24px;
   margin-inline-end: 6px;
-
-  svg {
-    width: 15px;
-    height: 15px;
-  }
 }
 
 // Dock 态：仅图标，统一 36px 交互格（严格对齐、尺寸一致），隐藏文字与箭头
@@ -353,6 +405,11 @@
   .nav-icon {
     width: 28px;
     height: 28px;
+
+    svg {
+      width: 17px;
+      height: 17px;
+    }
   }
 
   .vp-navbar-dropdown-title {
@@ -361,6 +418,11 @@
     .arrow {
       display: none;
     }
+  }
+
+  // Dock 态下拉面板与胶囊留出 8px 呼吸间隙（面板相对导航项 bottom 展开）
+  .vp-navbar-dropdown {
+    margin-top: 8px;
   }
 }
 
@@ -396,11 +458,10 @@
   }
 }
 
-// 中间宽度（720–1439px）：顶部态导航自动收敛为图标格（同 Dock 态视觉）。
-// 未滚动时若保留“图标+文字”，9 项 + 站点名 + 搜索 + 模式按钮总宽约 1300–1500px，
-// 在 720–1440 视口下整行溢出视口右侧（GitHub/搜索/模式被推出屏幕）。
-// 图标化后总宽约 620px，任意中间宽度互不遮挡。
-@media screen and (min-width: 720px) and (max-width: 1439px) {
+// 中间宽度（720–1535px）：顶部态导航自动收敛为图标格（同 Dock 态视觉）。
+// 未滚动时若保留“图标+文字”，9 项 + 站点名 + 搜索 + 模式按钮实测约 1500px，
+// 在 720–1535 视口下整行会溢出视口右侧；图标化后总宽约 800px，任意中间宽度互不遮挡。
+@media screen and (min-width: 720px) and (max-width: 1535px) {
   .vp-navbar:not(.navbar-scrolled) {
     .vp-site-name {
       max-width: 0;
@@ -411,6 +472,7 @@
       margin-inline-end: 0;
     }
 
+    // 仅切换“图标格尺寸 + 隐藏文字”，盒子高度/对齐由基础规则统一承担
     .vp-navbar-item {
       margin-inline-start: 0.4rem;
 
@@ -418,22 +480,15 @@
         display: none;
       }
 
-      > .auto-link,
-      > .vp-navbar-dropdown-wrapper > .vp-navbar-dropdown-title {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 36px;
-        height: 36px;
-        padding: 0;
-        line-height: 1;
-        border-radius: 10px;
-      }
-
       .nav-icon {
         width: 28px;
         height: 28px;
         margin-inline-end: 0;
+
+        svg {
+          width: 17px;
+          height: 17px;
+        }
       }
     }
 
@@ -446,11 +501,10 @@
     }
   }
 
-  // 中间宽度 Dock 态：强制导航项为统一图标格，消除主题残余宽度撑爆 wrapper
+  // 中间宽度 Dock 态：只收紧间距，不再改写素材宽度（避免与基础盒子打架）
   .vp-navbar.navbar-scrolled {
     .vp-navbar-item {
-      margin-inline-start: 0.3rem !important;
-      width: 34px;
+      margin-inline-start: 0.3rem;
     }
 
     .vp-navbar-items-wrapper {
@@ -601,7 +655,7 @@
 
 // Dock 态侧边栏按钮的按压缩放需要保留垂直居中
 .vp-navbar.navbar-scrolled .vp-toggle-sidebar-button:active {
-  transform: translateY(-50%) scale(0.92);
+  transform: scale(0.92);
 }
 
 // ---------- 移动端抽屉 ----------
@@ -714,12 +768,30 @@
 }
 
 // ============================================================
-// 窄屏品牌区让位：三横线按钮固定在最左侧，品牌 logo 右移避免叠压
-// （≤719px 与主题 MQMobile 断点一致，三横线此时才 display:block）
+// 手机导航栏：三横线按钮由绝对定位改为 flex 流布局，
+// 与 logo、模式/搜索按钮共用同一条垂直中线（绝对定位 + translateY(-50%)
+// 在部分引擎下百分比位移不生效，会导致按钮整体下沉半个高度）
 // ============================================================
 @media screen and (max-width: 719px) {
+  // 左右留白对称（右侧按钮组为 0.55rem 贴边，左侧同步收紧）
+  .vp-navbar {
+    padding-inline: 0.6rem;
+  }
+
+  .vp-navbar .vp-toggle-sidebar-button {
+    position: static;
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    top: auto;
+    inset-inline-start: auto;
+    padding: 0.55rem 0.5rem;
+    margin-inline-end: 0.35rem;
+    transform: none;
+  }
+
   .vp-navbar a.route-link[href="/"] {
-    margin-inline-start: 2.5rem;
+    margin-inline-start: 0;
   }
 
   // 移动态导航项强制隐藏（主题靠 vp-hide-mobile 在 resize 时序下偶发滞后，
@@ -731,29 +803,173 @@
   // 折叠态 Dock 胶囊整体调小（原 3.2rem → 2.8rem），贴近“最小状态”观感
   .vp-navbar.navbar-scrolled {
     height: 2.8rem;
-    padding: 0.24rem 0.55rem 0.24rem 2.9rem;
+    padding: 0.24rem 0.55rem;
 
-    // Dock 态胶囊内三横线已由 padding-inline-start 让位，
-    // logo 无需再叠加 2.5rem 让位，避免与右侧模式/搜索按钮重叠
+    // 三横线已进入常规流，无需再用 padding 让位
     a.route-link[href="/"] {
-      margin-inline-start: 0.3rem;
+      margin-inline-start: 0;
     }
   }
 
-  // 模式切换 + 搜索按钮组：右对齐贴缘（原 absolute 左侧固定宽 130px，
-  // 极窄视口下搜索框会被推出胶囊右缘），内容自适应宽度、任意宽度不溢出
+  // 模式切换 + 搜索按钮组：常规流内右对齐（Dock 宽度按内容收缩，
+  // 绝对定位会脱离胶囊宽度计算，导致胶囊只包住 logo、按钮溢出）
   .vp-navbar .vp-navbar-items-wrapper {
-    position: absolute !important;
-    left: auto !important;
-    right: 0.55rem !important;
-    width: auto !important;
-    display: flex !important;
-    justify-content: flex-end !important;
+    position: static;
+    margin-inline-start: auto;
+    left: auto;
+    right: auto;
+    width: auto;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  // ============================================================
+  // 手机抽屉（.vp-sidebar）内的导航列表：图标 + 文字整行对齐
+  // 主题在 ≤719px 才把侧边栏里的 .vp-navbar-items 显示为块级列表，
+  // 桌面态仍由顶部导航承担，故此处只在移动断点内生效。
+  // ============================================================
+  .vp-sidebar .vp-navbar-items {
+    display: block;
+    padding: 0.4rem 0.75rem 0.75rem;
+  }
+
+  .vp-sidebar .vp-navbar-item {
+    display: block;
+    // 抽屉里的导航项按内容自然高度（顶部导航的 36px 固定高会裁掉展开的下拉子项）
+    height: auto;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  // 下拉父项容器撑满行宽（否则 title 的 100% 只有内容宽度，整行呈居中缩进）
+  .vp-sidebar .vp-navbar-item > .vp-navbar-dropdown-wrapper {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  // 抽屉里只保留移动端标题（主题的 .mobile 标记依赖 resize 时序，这里
+  // 用断点直接兜底；选择器层级需压过顶部态的基础盒子规则）
+  .vp-sidebar
+    .vp-navbar-item
+    > .vp-navbar-dropdown-wrapper
+    > .vp-navbar-dropdown-title {
+    display: none;
+  }
+
+  .vp-sidebar
+    .vp-navbar-item
+    > .vp-navbar-dropdown-wrapper
+    > .vp-navbar-dropdown-title-mobile {
+    display: flex;
+  }
+
+  // 标题内的「图标 + 文字」：同一 flex 轴线与 10px 间距
+  .vp-sidebar .vp-navbar-item .title {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.2;
+  }
+
+  // 行容器：图标格固定 28px，图标与文字共用同一条 flex 中线
+  .vp-sidebar .vp-navbar-item > .auto-link,
+  .vp-sidebar
+    .vp-navbar-item
+    > .vp-navbar-dropdown-wrapper
+    > .vp-navbar-dropdown-title-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--vp-c-text);
+    text-align: start;
+    text-decoration: none;
+    transition:
+      background-color var(--vp-t-color),
+      color var(--vp-t-color);
+  }
+
+  .vp-sidebar
+    .vp-navbar-item
+    > .vp-navbar-dropdown-wrapper
+    > .vp-navbar-dropdown-title-mobile {
+    justify-content: flex-start;
+
+    // 展开箭头贴右缘，避免与图标一起挤在文字后
+    .arrow {
+      margin-inline-start: auto;
+    }
+  }
+
+  .vp-sidebar .vp-navbar-item > .auto-link:hover,
+  .vp-sidebar .vp-navbar-item > .auto-link.route-link-active,
+  .vp-sidebar
+    .vp-navbar-item
+    > .vp-navbar-dropdown-wrapper
+    > .vp-navbar-dropdown-title-mobile:hover {
+    background-color: var(--vp-c-control);
+    color: var(--vp-c-accent);
+  }
+
+  // 抽屉内图标：统一 28px 玻璃格（与顶部 Dock 同源），保证任意宽度不塌陷
+  .vp-sidebar .vp-navbar-item .nav-icon {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    margin-inline-end: 0;
+    border-radius: 8px;
+    color: var(--vp-c-text-mute);
+
+    svg {
+      display: block;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .vp-sidebar .vp-navbar-item .nav-label {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1.2;
+  }
+
+  // 下拉子项：与父行文字（图标右侧）对齐缩进，右侧留出内边距
+  .vp-sidebar .vp-navbar-dropdown-item .auto-link {
+    padding: 6px 10px 6px 3rem;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+
+  .vp-sidebar .vp-navbar-dropdown-item .auto-link:hover,
+  .vp-sidebar .vp-navbar-dropdown-item .auto-link.route-link-active {
+    background-color: var(--vp-c-control);
+    color: var(--vp-c-accent);
+  }
+
+  // 当前文档标记（主题的小三角）应贴在缩进后的文字左侧，而不是行首
+  .vp-sidebar .vp-navbar-dropdown-item .auto-link.route-link-active::after {
+    inset-inline-start: 34px;
   }
 }
 
 // ============================================================
-// 左侧文章目录浮层（Note 按钮切换，仅桌面宽屏显示；窄屏由主题侧边栏承担）
+// 文章目录浮层（导航栏首页图标 / 品牌书签切换）
+//   宽屏 ≥1280：左侧留白区常驻浮层，无遮罩
+//   窄屏 <1280：带遮罩的抽屉浮层，点遮罩 / ✕ / Esc 关闭
 // ============================================================
 .article-toc-rail {
   position: fixed;
@@ -813,6 +1029,30 @@
       height: 18px;
       color: var(--vp-c-accent);
     }
+
+    // 关闭按钮只在抽屉形态出现（宽屏点 logo 即可收起）
+    .article-toc-close {
+      display: none;
+      margin-inline-start: auto;
+      width: 26px;
+      height: 26px;
+      padding: 0;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--vp-c-text-mute);
+      font-size: 0.8rem;
+      line-height: 1;
+      cursor: pointer;
+      transition:
+        background-color var(--vp-t-color),
+        color var(--vp-t-color);
+
+      &:hover {
+        background-color: var(--vp-c-control);
+        color: var(--vp-c-accent);
+      }
+    }
   }
 
   .article-toc-list {
@@ -857,11 +1097,57 @@
     }
   }
 
-  // 仅桌面宽屏（≥1280px，左侧留白区可容纳目录）显示；更窄由主题侧边栏承担，
-  // 避免固定浮层压住居中正文
+  // 窄屏：左侧留白不足，改为悬浮抽屉（加高一层，压在正文之上）
   @media screen and (max-width: 1279px) {
-    display: none;
+    top: calc(var(--navbar-height) + 12px);
+    inset-inline-start: 12px;
+    z-index: 95;
+    width: min(320px, calc(100vw - 24px));
+    max-height: calc(100vh - var(--navbar-height) - 100px);
+    box-shadow:
+      var(--glass-shadow-strong),
+      0 18px 40px rgb(2 15 25 / 32%);
+
+    .article-toc-head {
+      padding: 12px 12px 8px 14px;
+
+      .article-toc-close {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .article-toc-item {
+      padding: 9px 10px;
+      font-size: 0.88rem;
+    }
   }
+}
+
+// 抽屉形态的遮罩：只覆盖正文区，导航栏保持可点（可再次点 logo 收起）
+.article-toc-backdrop {
+  display: none;
+  position: fixed;
+  inset: var(--navbar-height) 0 0;
+  z-index: 90;
+  background-color: rgb(2 15 25 / 42%);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s;
+
+  @media screen and (max-width: 1279px) {
+    display: block;
+  }
+}
+
+body.toc-open .article-toc-backdrop {
+  opacity: 1;
+  visibility: visible;
 }
 
 // ============================================================
