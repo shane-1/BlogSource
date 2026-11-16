@@ -60,8 +60,10 @@ function onScroll() {
     if (navbar)
       navbar.classList.toggle('navbar-scrolled', scrollTop > DOCK_THRESHOLD)
     // 目录开着时同步“当前章节”高亮（滚动越快越依赖主动计算）
-    if (tocOpen)
+    if (tocOpen) {
       syncTocActive()
+      positionToc()
+    }
     ticking = false
   })
 }
@@ -254,6 +256,8 @@ function updateNavActive() {
 // ============================================================
 let tocRail = null
 let tocBackdrop = null
+let tocStem = null
+let tocNavObserver = null
 let tocOpen = false
 let tocObserver = null
 let tocScrollSpy = null
@@ -289,8 +293,72 @@ function closeToc() {
   tocOpen = false
   if (tocRail)
     tocRail.classList.remove('is-open')
-  if (typeof document !== 'undefined')
+  if (tocStem)
+    tocStem.classList.remove('is-open')
+  if (typeof document !== 'undefined') {
     document.body.classList.remove('toc-open')
+    // 图标回到常态（导航栏提示“目录已收起”）
+    document
+      .querySelectorAll('.vp-navbar a.route-link[href="/"]')
+      .forEach((link) => link.classList.remove('is-toc-on'))
+  }
+}
+
+// 导航栏里的首页图标（品牌书签）：目录动效的起点
+function tocBrand() {
+  return document.querySelector('.vp-navbar a.route-link[href="/"]')
+}
+
+function tocBrandIconRect() {
+  const anchor = tocBrand()
+  if (!anchor)
+    return null
+  const icon = anchor.querySelector('img, svg')
+  return (icon || anchor).getBoundingClientRect()
+}
+
+// 图标 → 菜单的连接脊线：打开时从书签下沿纵向生长到菜单顶部
+function ensureTocStem() {
+  if (tocStem && tocStem.isConnected)
+    return tocStem
+  document.querySelectorAll('.article-toc-stem').forEach((node) => node.remove())
+  tocStem = document.createElement('div')
+  tocStem.className = 'article-toc-stem'
+  tocStem.setAttribute('aria-hidden', 'true')
+  document.body.appendChild(tocStem)
+  return tocStem
+}
+
+// 导航栏尺寸变化（Dock 形变）时逐帧跟随，脊线不会滞后于图标
+function watchNavbarBox() {
+  if (tocNavObserver || typeof ResizeObserver === 'undefined')
+    return
+  const navbar = document.querySelector('.vp-navbar')
+  if (!navbar)
+    return
+  tocNavObserver = new ResizeObserver(() => {
+    if (tocOpen)
+      positionToc()
+  })
+  tocNavObserver.observe(navbar)
+}
+
+// 菜单挂点跟随图标：顶部对齐图标下沿，左侧对齐图标中心
+// （Dock 形变、滚动引起导航栏位移时都要重算，保证脊线始终连着图标）
+function positionToc() {
+  const rect = tocBrandIconRect()
+  if (!rect || !tocRail)
+    return
+  const cx = rect.left + rect.width / 2
+  // 留出 22px 空隙：脊线在图标与菜单之间清晰可见地“生长”
+  const top = Math.round(rect.bottom + 22)
+  tocRail.style.setProperty('--toc-top', `${top}px`)
+  tocRail.style.setProperty('--toc-left', `${Math.max(8, Math.round(cx - 22))}px`)
+  if (tocStem) {
+    tocStem.style.setProperty('--stem-x', `${Math.round(cx)}px`)
+    tocStem.style.setProperty('--stem-top', `${Math.round(rect.bottom)}px`)
+    tocStem.style.setProperty('--stem-h', `${Math.round(top - rect.bottom) + 14}px`)
+  }
 }
 
 function ensureTocBackdrop() {
@@ -314,12 +382,14 @@ function ensureTocRail() {
   tocRail.className = 'article-toc-rail'
   tocRail.setAttribute('aria-label', '当前文章目录')
   tocRail.innerHTML = `
-    <div class="article-toc-head">
-      <span class="article-toc-head-icon">${TOC_HEAD_ICON}</span>
-      <span>目录</span>
-      <button class="article-toc-close" type="button" aria-label="关闭目录">✕</button>
-    </div>
-    <nav class="article-toc-list" aria-label="章节"></nav>`
+    <div class="article-toc-shell">
+      <div class="article-toc-head">
+        <span class="article-toc-head-icon">${TOC_HEAD_ICON}</span>
+        <span class="article-toc-title">目录</span>
+        <button class="article-toc-close" type="button" aria-label="关闭目录">✕</button>
+      </div>
+      <nav class="article-toc-list" aria-label="章节"></nav>
+    </div>`
   tocRail
     .querySelector('.article-toc-close')
     .addEventListener('click', closeToc)
@@ -416,10 +486,18 @@ function openToc() {
     closeThemeSidebar()
   ensureTocRail()
   ensureTocBackdrop()
+  ensureTocStem()
   populateToc()
+  watchNavbarBox()
+  positionToc()
   tocOpen = true
   tocRail.classList.add('is-open')
+  tocStem.classList.add('is-open')
   document.body.classList.add('toc-open')
+  // 图标进入激活态（书签变亮 + 微微下沉，提示“目录已展开”）
+  document
+    .querySelectorAll('.vp-navbar a.route-link[href="/"]')
+    .forEach((link) => link.classList.add('is-toc-on'))
   bindTocScrollSpy()
   syncTocActive()
   revealActiveTocItem()
@@ -489,6 +567,18 @@ function onTocKeydown(e) {
     closeToc()
 }
 
+// 视口变化时菜单挂点跟随图标重新对齐（形变由 CSS 过渡承担）
+function onTocResize() {
+  if (tocOpen)
+    positionToc()
+}
+
+// Dock 胶囊形变（top/height 过渡 0.55s）结束后再对一次，避免脊线滞后于图标
+function onNavbarTransitionEnd() {
+  if (tocOpen)
+    positionToc()
+}
+
 // ============================================================
 // 4. 丝滑页面过渡
 // ============================================================
@@ -524,14 +614,22 @@ function init() {
   bindLogoTocToggle()
   watchThemeSidebar()
   window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('resize', onTocResize, { passive: true })
   document.addEventListener('keydown', onTocKeydown)
+  const navbar = document.querySelector('.vp-navbar')
+  if (navbar)
+    navbar.addEventListener('transitionend', onNavbarTransitionEnd)
   if (sheenFinePointer && !prefersReducedMotion())
     document.addEventListener('pointermove', onGlassPointer, { passive: true })
 }
 
 function cleanup() {
   window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('resize', onTocResize)
   document.removeEventListener('keydown', onTocKeydown)
+  const navbar = document.querySelector('.vp-navbar')
+  if (navbar)
+    navbar.removeEventListener('transitionend', onNavbarTransitionEnd)
   document.removeEventListener('pointermove', onGlassPointer)
   if (tocObserver) {
     tocObserver.disconnect()

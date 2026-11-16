@@ -968,25 +968,73 @@
 
 // ============================================================
 // 文章目录浮层（导航栏首页图标 / 品牌书签切换）
-//   宽屏 ≥1280：左侧留白区常驻浮层，无遮罩
-//   窄屏 <1280：带遮罩的抽屉浮层，点遮罩 / ✕ / Esc 关闭
+// 形态：从书签图标向下生长出的“压缩菜单竖条”，材质与 Dock 胶囊同源
+//   宽屏 ≥1280：常驻竖条，无遮罩
+//   窄屏 <1280：带遮罩抽屉，点遮罩 / ✕ / Esc 关闭
 // ============================================================
+
+// 书签图标 → 菜单的连接脊线：打开时纵向生长，收起时缩回图标
+.article-toc-stem {
+  position: fixed;
+  top: var(--stem-top, 46px);
+  left: calc(var(--stem-x, 37px) - 1.5px);
+  width: 3px;
+  height: var(--stem-h, 22px);
+  border-radius: 3px;
+  z-index: 94;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    var(--vp-c-accent) 0%,
+    var(--vp-c-accent-soft) 60%,
+    transparent 100%
+  );
+  box-shadow: 0 0 10px var(--vp-c-accent-soft);
+  opacity: 0.9;
+  transform: scaleY(0);
+  transform-origin: top center;
+  will-change: transform;
+  transition:
+    transform 0.5s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1)),
+    opacity 0.3s ease;
+
+  &.is-open {
+    transform: scaleY(1);
+  }
+}
+
+// 图标本体的按压反馈：微微下沉 + 光晕
+.vp-navbar a.route-link[href='/'] {
+  transition:
+    transform 0.4s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1)),
+    filter 0.3s ease;
+
+  &.is-toc-on {
+    transform: translateY(1.5px) scale(1.03);
+    filter: drop-shadow(0 2px 8px var(--vp-c-accent-soft));
+  }
+}
+
 .article-toc-rail {
   position: fixed;
-  top: calc(var(--navbar-height) + 14px);
-  inset-inline-start: 16px;
-  z-index: 60;
-  width: 196px;
-  max-height: calc(100vh - var(--navbar-height) - 120px);
+  top: var(--toc-top, calc(var(--navbar-height) + 12px));
+  inset-inline-start: var(--toc-left, 12px);
+  z-index: 95;
+  box-sizing: border-box;
+  width: 236px;
+  max-height: min(56vh, calc(100vh - var(--navbar-height) - 120px));
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  padding: 6px;
 
-  border-radius: 20px;
+  border-radius: 18px;
   border: 1px solid var(--glass-outline);
-  background-color: var(--glass-tint-strong);
+  // 比导航栏更通透：菜单悬在正文上方，需要看到底下的模糊透光与色彩渗色
+  background-color: var(--glass-tint);
+  background-color: color-mix(in srgb, var(--vp-c-bg) 62%, transparent);
   background-image:
-    linear-gradient(180deg, var(--glass-highlight) 0%, transparent 52%);
+    linear-gradient(180deg, var(--glass-highlight) 0%, transparent 46%);
   backdrop-filter:
     blur(var(--glass-blur)) saturate(var(--glass-saturate))
     brightness(var(--glass-brightness));
@@ -995,62 +1043,102 @@
     brightness(var(--glass-brightness));
   box-shadow:
     var(--glass-shadow-strong),
-    inset 0 1px 0 var(--glass-top-rim);
+    inset 0 1px 0 var(--glass-top-rim),
+    inset 0 -1px 0 var(--glass-bottom-rim);
 
-  // 关闭态：向左滑出并收敛透明度
-  transform: translate3d(-110%, 0, 0);
+  // 关闭态：从图标下方“长出来”（缩放 + 位移，纯合成层动画，避免裁切层掉帧）
   opacity: 0;
   visibility: hidden;
+  transform: translate3d(0, -10px, 0) scale(0.97);
+  transform-origin: top center;
+  will-change: transform, opacity;
   transition:
-    transform 0.45s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1)),
-    opacity 0.3s ease,
-    visibility 0.45s;
+    transform 0.5s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1)),
+    opacity 0.26s ease,
+    visibility 0.5s;
 
   &.is-open {
-    transform: translate3d(0, 0, 0);
     opacity: 1;
     visibility: visible;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  // 外壳：竖向排布头部与列表，避免裁切动画里内容抖动
+  .article-toc-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    flex: 1 1 auto;
+  }
+
+  // 顶缘镜面高光：与导航栏/Dock 同一套光学语言
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(
+      150px 90px at 16% 0%,
+      var(--glass-specular) 0%,
+      transparent 72%
+    );
+    opacity: 0.85;
+  }
+
+  .article-toc-shell {
+    position: relative;
+    z-index: 1;
   }
 
   .article-toc-head {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 14px 16px 10px;
-    font-size: 0.72rem;
+    flex: 0 0 auto;
+    height: 30px;
+    padding: 0 4px 0 8px;
+    font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--vp-c-text-subtle);
 
+    .article-toc-title {
+      white-space: nowrap;
+    }
+
     .article-toc-head-icon {
       display: inline-flex;
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       color: var(--vp-c-accent);
     }
 
-    // 关闭按钮只在抽屉形态出现（宽屏点 logo 即可收起）
     .article-toc-close {
-      display: none;
       margin-inline-start: auto;
-      width: 26px;
-      height: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
       padding: 0;
       border: none;
-      border-radius: 8px;
+      border-radius: 7px;
       background: transparent;
       color: var(--vp-c-text-mute);
-      font-size: 0.8rem;
+      font-size: 0.72rem;
       line-height: 1;
       cursor: pointer;
       transition:
         background-color var(--vp-t-color),
-        color var(--vp-t-color);
+        color var(--vp-t-color),
+        transform 0.3s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
 
       &:hover {
         background-color: var(--vp-c-control);
         color: var(--vp-c-accent);
+        transform: scale(1.06);
       }
     }
   }
@@ -1058,35 +1146,51 @@
   .article-toc-list {
     overflow-y: auto;
     overscroll-behavior: contain;
-    padding: 0 10px 12px;
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 2px 0;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 1px;
     scrollbar-width: thin;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition:
+      opacity 0.3s ease 0.06s,
+      transform 0.42s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1)) 0.06s;
   }
 
+  &.is-open .article-toc-list {
+    opacity: 1;
+    transform: none;
+  }
+
+  // 压缩行：定宽单行 + 省略号，保持“菜单栏”的紧凑节律
   .article-toc-item {
     display: block;
-    padding: 7px 10px;
-    border-radius: 10px;
-    font-size: 0.84rem;
-    line-height: 1.35;
+    padding: 5px 9px;
+    border-radius: 9px;
+    font-size: 0.78rem;
+    line-height: 1.28;
     color: var(--vp-c-text-mute);
     text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     transition:
       color var(--vp-t-color),
       background-color var(--vp-t-color),
-      padding-inline-start 0.25s ease;
+      transform 0.25s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
 
     &:hover {
       color: var(--vp-c-accent);
       background-color: var(--vp-c-control);
+      transform: translateX(2px);
     }
 
-    // h3 层级：缩进更深、字号更小
     &.level-3 {
-      margin-inline-start: 14px;
-      font-size: 0.78rem;
+      margin-inline-start: 10px;
+      font-size: 0.74rem;
     }
 
     // 当前阅读章节：青色玻璃胶囊 + 左侧亮条
@@ -1097,41 +1201,28 @@
     }
   }
 
-  // 窄屏：左侧留白不足，改为悬浮抽屉（加高一层，压在正文之上）
+  // 窄屏：竖条略放宽，其余材质不变
   @media screen and (max-width: 1279px) {
-    top: calc(var(--navbar-height) + 12px);
-    inset-inline-start: 12px;
-    z-index: 95;
-    width: min(320px, calc(100vw - 24px));
-    max-height: calc(100vh - var(--navbar-height) - 100px);
+    width: min(252px, calc(100vw - 20px));
+    max-height: min(58vh, calc(100vh - var(--navbar-height) - 96px));
     box-shadow:
       var(--glass-shadow-strong),
-      0 18px 40px rgb(2 15 25 / 32%);
-
-    .article-toc-head {
-      padding: 12px 12px 8px 14px;
-
-      .article-toc-close {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-      }
-    }
+      0 18px 40px rgb(2 15 25 / 30%);
 
     .article-toc-item {
-      padding: 9px 10px;
-      font-size: 0.88rem;
+      padding: 7px 9px;
+      font-size: 0.8rem;
     }
   }
 }
 
-// 抽屉形态的遮罩：只覆盖正文区，导航栏保持可点（可再次点 logo 收起）
+// 窄屏遮罩：只覆盖正文区，导航栏保持可点（可再次点图标收起）
 .article-toc-backdrop {
   display: none;
   position: fixed;
   inset: var(--navbar-height) 0 0;
   z-index: 90;
-  background-color: rgb(2 15 25 / 42%);
+  background-color: rgb(2 15 25 / 38%);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   opacity: 0;
@@ -1149,7 +1240,6 @@ body.toc-open .article-toc-backdrop {
   opacity: 1;
   visibility: visible;
 }
-
 // ============================================================
 // 减少透明度：导航栏实体化
 // ============================================================
