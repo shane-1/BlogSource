@@ -69,6 +69,9 @@
     border-right: 1px solid var(--glass-outline);
     box-shadow: var(--glass-panel-shadow);
     isolation: isolate;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
     transition:
       transform var(--dur-move) var(--ease-sheet),
       opacity var(--dur-fade) var(--ease-out);

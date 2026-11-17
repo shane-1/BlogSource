@@ -1025,6 +1025,11 @@
     brightness(var(--glass-brightness));
   box-shadow: var(--glass-panel-shadow);
   isolation: isolate;
+  // 玻璃面板是导航层，不参与文本选择：避免指针在标题/条目间
+  // 变成 I 形文本光标（观感上像"光标乱显示"）
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
 
   // 收起态：整条退回到左边缘外侧（弹簧曲线，与 Dock / 抽屉同一套时序）
   opacity: 0;
