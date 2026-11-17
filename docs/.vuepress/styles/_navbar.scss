@@ -988,35 +988,32 @@
 
 .article-toc-rail {
   position: fixed;
-  top: var(--navbar-height);
+  // 与三横线菜单抽屉完全同构：从屏幕顶到底的通高弹窗，直角、右侧发丝描边
+  top: 0;
   bottom: 0;
-  height: auto;
+  height: 100vh;
+  height: 100dvh;
   inset-inline-start: 0;
   z-index: 95;
   box-sizing: border-box;
-  width: min(328px, 86vw);
+  width: 16.4rem;
+  max-width: 84vw;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 18px 10px 14px;
+  padding: calc(var(--navbar-height) + 12px) 8px 14px;
 
-  border-radius: 0 20px 20px 0;
-  border: 1px solid var(--glass-outline);
-  border-inline-start: none;
+  border: none;
+  border-inline-end: 1px solid var(--glass-outline);
+  border-radius: 0;
   background-color: var(--glass-tint-strong);
-  background-color: color-mix(in srgb, var(--vp-c-bg) 66%, transparent);
-  background-image:
-    linear-gradient(180deg, var(--glass-highlight) 0%, transparent 40%);
   backdrop-filter:
     blur(var(--glass-blur)) saturate(var(--glass-saturate))
     brightness(var(--glass-brightness));
   -webkit-backdrop-filter:
     blur(var(--glass-blur)) saturate(var(--glass-saturate))
     brightness(var(--glass-brightness));
-  box-shadow:
-    12px 0 40px rgb(2 15 25 / 24%),
-    inset 0 1px 0 var(--glass-top-rim),
-    inset 1px 0 0 var(--glass-top-rim);
+  box-shadow: none;
 
   // 收起态：整条退回到左边缘外侧
   opacity: 0;
@@ -1034,21 +1031,6 @@
     transform: translate3d(0, 0, 0);
   }
 
-  // 顶缘镜面高光：与导航栏 / Dock 同一套光学语言
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background: radial-gradient(
-      180px 110px at 14% 0%,
-      var(--glass-specular) 0%,
-      transparent 72%
-    );
-    opacity: 0.85;
-  }
-
   .article-toc-shell {
     position: relative;
     z-index: 1;
@@ -1064,8 +1046,8 @@
     gap: 8px;
     flex: 0 0 auto;
     height: 34px;
-    padding: 0 4px 0 8px;
-    font-size: 0.68rem;
+    padding: 0 4px 0 10px;
+    font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -1143,7 +1125,7 @@
     border-radius: 9px;
     font-size: 0.8rem;
     line-height: 1.3;
-    color: var(--vp-c-text-mute);
+    color: var(--vp-c-text);
     text-decoration: none;
     white-space: nowrap;
     overflow: hidden;
@@ -1156,7 +1138,6 @@
     &:hover {
       color: var(--vp-c-accent);
       background-color: var(--vp-c-control);
-      transform: translateX(2px);
     }
 
     &.level-3 {
@@ -1164,13 +1145,25 @@
       font-size: 0.76rem;
     }
 
-    // 当前阅读章节：青色玻璃胶囊 + 左侧亮条（与侧边栏 active 同款）
+    // 当前阅读章节：与侧边栏 .vp-sidebar-item.active 完全一致
+    // （浅青底 + 左侧 2px 亮条 + 光晕）
     &.is-active {
+      position: relative;
       color: var(--vp-c-accent);
       background-color: var(--vp-c-accent-soft);
-      box-shadow:
-        inset 2px 0 0 var(--vp-c-accent),
-        0 0 12px rgb(34 211 238 / 16%);
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 2px;
+        height: 60%;
+        border-radius: 2px;
+        background-color: var(--vp-c-accent);
+        box-shadow: 0 0 8px rgb(34 211 238 / 55%);
+      }
     }
   }
 }
@@ -1227,10 +1220,8 @@ body.toc-open .article-toc-backdrop {
   }
 
   .article-toc-rail {
-    box-shadow:
-      12px 0 40px rgb(0 0 0 / 48%),
-      inset 0 1px 0 rgb(255 255 255 / 12%),
-      inset 1px 0 0 rgb(255 255 255 / 8%);
+    // 与抽屉同材质：无投影，只保留右侧发丝描边（描边由 token 提供）
+    box-shadow: none;
 
     .article-toc-head {
       color: rgb(228 236 248 / 78%);
@@ -1271,18 +1262,19 @@ body.toc-open .article-toc-backdrop {
 // ============================================================
 @media screen and (max-width: 719px) {
   .article-toc-rail {
-    width: min(300px, 84vw);
+    width: min(16.4rem, 84vw);
     padding-bottom: calc(14px + env(safe-area-inset-bottom));
     // iOS Safari 动态工具栏：用 dvh 兜底，避免底边被浏览器 UI 吃掉
-    height: calc(100vh - var(--navbar-height));
-    height: calc(100dvh - var(--navbar-height));
+    height: 100vh;
+    height: 100dvh;
     bottom: auto;
     transform: translate3d(-100%, 0, 0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 
-    backdrop-filter: blur(12px) saturate(1.6);
-    -webkit-backdrop-filter: blur(12px) saturate(1.6);
+    // 与手机端菜单抽屉完全同一档模糊（省算力、观感统一）
+    backdrop-filter: blur(15px) saturate(1.85);
+    -webkit-backdrop-filter: blur(15px) saturate(1.85);
 
     .article-toc-list {
       -webkit-overflow-scrolling: touch;

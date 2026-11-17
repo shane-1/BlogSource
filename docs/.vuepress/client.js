@@ -306,7 +306,10 @@ function ensureTocBackdrop() {
   tocBackdrop.className = 'article-toc-backdrop'
   tocBackdrop.setAttribute('aria-hidden', 'true')
   tocBackdrop.addEventListener('click', closeToc)
-  document.body.appendChild(tocBackdrop)
+  // 与目录面板同挂主题容器，保证「面板 > 遮罩 > 正文」的层级
+  const mount =
+    document.querySelector('.vp-theme-container') || document.body
+  mount.appendChild(tocBackdrop)
   return tocBackdrop
 }
 
@@ -330,7 +333,12 @@ function ensureTocRail() {
   tocRail
     .querySelector('.article-toc-close')
     .addEventListener('click', closeToc)
-  document.body.appendChild(tocRail)
+  // 挂进主题容器而不是 body：容器带 z-index 形成层叠上下文，
+  // 这样导航栏（z-index 100）才能压在目录面板（95）之上，
+  // 与三横线菜单抽屉的层级关系完全一致（logo / ✕ 始终可见可点）
+  const mount =
+    document.querySelector('.vp-theme-container') || document.body
+  mount.appendChild(tocRail)
   return tocRail
 }
 
