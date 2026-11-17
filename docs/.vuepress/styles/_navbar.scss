@@ -39,19 +39,19 @@
     brightness(var(--glass-brightness));
 
   transition:
-    top 0.55s var(--ease-spring),
-    left 0.55s var(--ease-spring),
-    right 0.55s var(--ease-spring),
-    height 0.55s var(--ease-spring),
-    width 0.55s var(--ease-spring),
-    padding 0.55s var(--ease-spring),
-    margin 0.55s var(--ease-spring),
-    transform 0.55s var(--ease-spring),
-    border-radius 0.55s var(--ease-spring),
-    border-color 0.45s var(--ease-spring),
-    background-color 0.45s var(--ease-spring),
-    background-image 0.45s var(--ease-spring),
-    box-shadow 0.55s var(--ease-spring);
+    top var(--dur-dock) var(--ease-spring),
+    left var(--dur-dock) var(--ease-spring),
+    right var(--dur-dock) var(--ease-spring),
+    height var(--dur-dock) var(--ease-spring),
+    width var(--dur-dock) var(--ease-spring),
+    padding var(--dur-dock) var(--ease-spring),
+    margin var(--dur-dock) var(--ease-spring),
+    transform var(--dur-dock) var(--ease-spring),
+    border-radius var(--dur-dock) var(--ease-spring),
+    border-color var(--dur-move) var(--ease-spring),
+    background-color var(--dur-move) var(--ease-spring),
+    background-image var(--dur-move) var(--ease-spring),
+    box-shadow var(--dur-dock) var(--ease-spring);
 
   // 光标跟随的镜面高光（client.js 写入 --mx / --my）
   &::before {
@@ -65,7 +65,7 @@
       transparent 62%
     );
     opacity: 0;
-    transition: opacity 0.35s ease;
+    transition: opacity var(--dur-fade) var(--ease-out);
     pointer-events: none;
     z-index: 0;
   }
@@ -80,7 +80,7 @@
     box-shadow:
       inset 0 1px 0 var(--glass-top-rim),
       inset 0 -1px 0 var(--glass-bottom-rim);
-    transition: box-shadow 0.45s var(--ease-spring);
+    transition: box-shadow var(--dur-move) var(--ease-spring);
   }
 
   // 内容层位于光学层之上（不改变默认主题的定位方式）
@@ -216,12 +216,12 @@
   white-space: nowrap;
   vertical-align: top;
   transition:
-    max-width 0.5s var(--ease-spring),
-    opacity 0.3s ease;
+    max-width var(--dur-move) var(--ease-spring),
+    opacity var(--dur-fade) var(--ease-out);
 }
 
 .vp-navbar .vp-site-logo {
-  transition: margin 0.5s var(--ease-spring);
+  transition: margin var(--dur-move) var(--ease-spring);
 }
 
 // 品牌 Logo：蓝色液态玻璃书签闭合图标（favicon.svg 自带玻璃样式：
@@ -233,9 +233,9 @@
   object-fit: contain;
   filter: drop-shadow(0 2px 5px rgb(2 30 45 / 28%));
   transition:
-    width 0.45s var(--ease-spring),
-    height 0.45s var(--ease-spring),
-    filter 0.3s ease;
+    width var(--dur-move) var(--ease-spring),
+    height var(--dur-move) var(--ease-spring),
+    filter var(--dur-fade) var(--ease-out);
 }
 
 // Dock 态：书签与图标格同高，视觉平衡
@@ -254,8 +254,8 @@
   font-weight: 600;
   letter-spacing: 0.01em;
   transition:
-    max-width 0.5s var(--ease-spring),
-    opacity 0.3s ease,
+    max-width var(--dur-move) var(--ease-spring),
+    opacity var(--dur-fade) var(--ease-out),
     color var(--vp-t-color),
     text-shadow var(--vp-t-color);
 }
@@ -344,7 +344,7 @@
     transition:
       color var(--vp-t-color),
       background-color var(--vp-t-color),
-      transform 0.45s var(--ease-spring);
+      transform var(--dur-move) var(--ease-spring);
 
     svg {
       display: block;
@@ -638,9 +638,12 @@
 .vp-toggle-color-mode-button,
 .vp-toggle-sidebar-button {
   border-radius: 10px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
   transition:
     background-color var(--vp-t-color),
-    transform var(--vp-t-transform),
     color var(--vp-t-color);
 
   &:hover {
@@ -648,14 +651,19 @@
     color: var(--vp-c-accent);
   }
 
-  &:active {
-    transform: scale(0.92);
+  // 按压缩放只作用在内部图形上：按钮命中区恒定，
+  // 指针停在边缘时不会因为按钮缩小而反复丢失 hover，
+  // 从而避免光标在 pointer/default 之间来回闪烁
+  &:active .icon {
+    transform: scale(0.9);
+    transition-duration: var(--dur-tap);
+    transition-timing-function: var(--ease-press);
   }
-}
 
-// Dock 态侧边栏按钮的按压缩放需要保留垂直居中
-.vp-navbar.navbar-scrolled .vp-toggle-sidebar-button:active {
-  transform: scale(0.92);
+  .icon {
+    transition:
+      transform var(--dur-move) var(--ease-spring);
+  }
 }
 
 // ---------- 移动端抽屉 ----------
@@ -730,7 +738,7 @@
       transparent 62%
     );
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--dur-fade) var(--ease-out);
     pointer-events: none;
     z-index: 0;
   }
@@ -978,7 +986,7 @@
   transform-origin: top center;
   transition:
     transform 0.5s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1)),
-    filter 0.3s ease;
+    filter var(--dur-fade) var(--ease-out);
 }
 
 .vp-navbar a.route-link[href='/'].is-toc-on .vp-site-logo {
@@ -1022,10 +1030,11 @@
   opacity: 0;
   visibility: hidden;
   transform: translate3d(-100%, 0, 0);
-  will-change: transform, opacity;
+  // 不常驻 will-change：大面积 backdrop-filter 层长期提层会让
+  // 光标在面板上出现重影/闪烁（Chromium 已知问题）
   transition:
-    transform 0.52s var(--ease-sheet),
-    opacity 0.26s cubic-bezier(0.33, 0, 0.2, 1),
+    transform var(--dur-move) var(--ease-sheet),
+    opacity var(--dur-fade) var(--ease-out),
     visibility 0.52s;
 
   &.is-open {
@@ -1139,12 +1148,17 @@
     overflow: hidden;
     text-overflow: ellipsis;
     transition:
-      color 0.22s cubic-bezier(0.33, 0, 0.2, 1),
-      background-color 0.22s cubic-bezier(0.33, 0, 0.2, 1);
+      color var(--vp-t-color),
+      background-color var(--vp-t-color);
 
     &:hover {
       color: var(--vp-c-accent);
       background-color: var(--vp-c-control);
+    }
+
+    // 液态玻璃按压：底色加深、无位移（列表内不做缩放，避免行高抖动）
+    &:active {
+      background-color: var(--vp-c-control-hover, var(--vp-c-control));
     }
 
     &.level-3 {
@@ -1200,8 +1214,8 @@
   opacity: 0;
   visibility: hidden;
   transition:
-    opacity 0.3s ease,
-    visibility 0.3s;
+    opacity var(--dur-fade) var(--ease-out),
+    visibility var(--dur-fade) var(--ease-out);
 
   @media screen and (max-width: 1279px) {
     display: block;

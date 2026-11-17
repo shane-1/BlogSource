@@ -65,7 +65,7 @@
   // 悬停态：玻璃"亮起"而非实体"浮起"——外投影收敛、inset 亮缘增强
   // 左侧全高玻璃面板（目录 / 菜单抽屉）专用光学层
   // 面板底透：比工具栏更透一档，让正文在毛玻璃后面"可感知但不干扰阅读"
-  --glass-panel-tint: rgb(255 255 255 / 74%);
+  --glass-panel-tint: rgb(255 255 255 / 68%);
   --glass-panel-shadow:
     12px 0 32px rgb(2 20 32 / 14%),
     inset 0 1px 0 var(--glass-top-rim),
@@ -120,13 +120,24 @@
     ui-monospace, 'SF Mono', 'JetBrains Mono', Consolas, Monaco,
     'Liberation Mono', monospace;
 
-  // ---------- 动效（Apple 式缓动） ----------
-  --vp-t-color: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  --vp-t-transform: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  // ---------- 动效（Liquid Glass：一套统一的时长 + 缓动标尺） ----------
+  // 缓动：位移用弹簧（有回弹感），颜色/淡入用 ease-out（干脆不拖沓）
   --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.33, 0, 0.2, 1);
   --ease-press: cubic-bezier(0.34, 1.45, 0.48, 1);
-  // 侧边玻璃面板 / 抽屉的"落到位"曲线：前段快、尾段缓，接近 iOS sheet
+  // iOS sheet 落位曲线：前段快、尾段缓，用于侧边面板 / 抽屉
   --ease-sheet: cubic-bezier(0.32, 0.72, 0, 1);
+
+  // 时长标尺：按压 < 颜色 < 淡入 < 位移 < Dock 变形
+  --dur-tap: 0.14s;
+  --dur-quick: 0.22s;
+  --dur-fade: 0.26s;
+  --dur-move: 0.5s;
+  --dur-dock: 0.55s;
+
+  // 复合简写：旧样式引用这两个变量即自动收敛到统一标尺
+  --vp-t-color: var(--dur-quick) var(--ease-out);
+  --vp-t-transform: var(--dur-move) var(--ease-spring);
 }
 
 // ============================================================
@@ -181,7 +192,7 @@
   --glass-top-rim: rgb(208 236 255 / 18%);
   --glass-bottom-rim: rgb(56 130 214 / 14%);
   --glass-specular: rgb(190 235 255 / 0.22);
-  --glass-panel-tint: rgb(15 24 42 / 58%);
+  --glass-panel-tint: rgb(15 24 42 / 52%);
   --glass-panel-shadow:
     12px 0 36px rgb(0 0 0 / 34%),
     inset 0 1px 0 var(--glass-top-rim),
