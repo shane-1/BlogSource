@@ -1012,24 +1012,36 @@
   padding: calc(var(--navbar-height) + 12px) 8px 14px;
 
   border: none;
-  border-inline-end: 1px solid var(--glass-outline);
   border-radius: 0;
-  // 液态玻璃材质：底色 tint + 毛玻璃 + 顶/底光学边 + 朝正文侧柔和投影
-  background-color: var(--glass-panel-tint, var(--glass-tint-strong));
-  background-image: var(--glass-panel-highlight);
-  backdrop-filter:
-    blur(var(--glass-blur)) saturate(var(--glass-saturate))
-    brightness(var(--glass-brightness));
-  -webkit-backdrop-filter:
-    blur(var(--glass-blur)) saturate(var(--glass-saturate))
-    brightness(var(--glass-brightness));
-  box-shadow: var(--glass-panel-shadow);
+  // 材质全部画在 ::before 上（不在面板本体上写 backdrop-filter）：
+  // iOS Safari 对「本体带 -webkit-backdrop-filter 的 fixed 容器」存在
+  // 命中测试缺陷，子元素（目录条目）会点不动；拆到伪元素后恢复正常
+  background: transparent;
   isolation: isolate;
   // 玻璃面板是导航层，不参与文本选择：避免指针在标题/条目间
   // 变成 I 形文本光标（观感上像"光标乱显示"）
   -webkit-user-select: none;
   user-select: none;
   cursor: default;
+
+  // 液态玻璃材质层：底色 tint + 顶部高光 + 毛玻璃 + 光学边/投影
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-color: var(--glass-panel-tint, var(--glass-tint-strong));
+    background-image: var(--glass-panel-highlight);
+    backdrop-filter:
+      blur(var(--glass-blur)) saturate(var(--glass-saturate))
+      brightness(var(--glass-brightness));
+    -webkit-backdrop-filter:
+      blur(var(--glass-blur)) saturate(var(--glass-saturate))
+      brightness(var(--glass-brightness));
+    box-shadow: var(--glass-panel-shadow);
+    border-inline-end: 1px solid var(--glass-outline);
+  }
 
   // 收起态：整条退回到左边缘外侧（弹簧曲线，与 Dock / 抽屉同一套时序）
   opacity: 0;
@@ -1040,7 +1052,7 @@
   transition:
     transform var(--dur-move) var(--ease-sheet),
     opacity var(--dur-fade) var(--ease-out),
-    visibility 0.52s;
+    visibility var(--dur-move) var(--ease-sheet);
 
   &.is-open {
     opacity: 1;
@@ -1161,6 +1173,11 @@
       background-color: var(--vp-c-control);
     }
 
+    // iOS：显式恢复可点，避免祖先层（fixed + 滤镜）把命中测试吞掉
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+
     // 液态玻璃按压：底色加深、无位移（列表内不做缩放，避免行高抖动）
     &:active {
       background-color: var(--vp-c-control-hover, var(--vp-c-control));
@@ -1259,8 +1276,10 @@ body.toc-open .article-toc-backdrop {
   }
 
   .article-toc-rail {
-    // 与抽屉同材质：同一套面板光学阴影（由 --glass-panel-shadow 深色档提供）
-    box-shadow: var(--glass-panel-shadow);
+    // 材质在伪元素上，深色档阴影同样落在这里（本体保持透明）
+    &::before {
+      box-shadow: var(--glass-panel-shadow);
+    }
 
     .article-toc-head {
       color: rgb(228 236 248 / 78%);

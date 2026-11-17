@@ -35,12 +35,13 @@
   --vp-c-control-disabled: #eef2f6;
 
   // ---------- 液态玻璃材质（浅色） ----------
-  --glass-blur: 18px;
-  --glass-saturate: 190%;
-  --glass-brightness: 1.06;
+  // iOS 26 观感：更透 + 更深模糊（靠 blur 保清晰，而不是靠厚底）
+  --glass-blur: 26px;
+  --glass-saturate: 200%;
+  --glass-brightness: 1.05;
   // tint 不透明度足：玻璃"清晰"（材质可感知、文字对比好），而非全透雾感
-  --glass-tint: rgb(255 255 255 / 72%);
-  --glass-tint-strong: rgb(255 255 255 / 84%);
+  --glass-tint: rgb(255 255 255 / 60%);
+  --glass-tint-strong: rgb(255 255 255 / 72%);
   --glass-border: rgb(255 255 255 / 72%);
   --glass-outline: rgb(15 50 80 / 9%);
   --glass-highlight: rgb(255 255 255 / 80%);
@@ -49,7 +50,7 @@
   --glass-sheen: rgb(255 255 255 / 0.9);
   --glass-sheen-strength: 0.55;
   // 导航栏/Dock 专用：顶部亮缘、底部暗缘、大面积镜面光斑
-  --glass-top-rim: rgb(255 255 255 / 75%);
+  --glass-top-rim: rgb(255 255 255 / 88%);
   --glass-bottom-rim: rgb(100 130 170 / 10%);
   --glass-specular: rgb(255 255 255 / 0.38);
   --glass-shadow:
@@ -65,17 +66,16 @@
   // 悬停态：玻璃"亮起"而非实体"浮起"——外投影收敛、inset 亮缘增强
   // 左侧全高玻璃面板（目录 / 菜单抽屉）专用光学层
   // 面板底透：比工具栏更透一档，让正文在毛玻璃后面"可感知但不干扰阅读"
-  --glass-panel-tint: rgb(255 255 255 / 68%);
+  --glass-panel-tint: rgb(255 255 255 / 56%);
   --glass-panel-shadow:
-    12px 0 32px rgb(2 20 32 / 14%),
+    12px 0 34px rgb(2 20 32 / 12%),
+    0 2px 6px rgb(2 20 32 / 6%),
     inset 0 1px 0 var(--glass-top-rim),
-    inset 0 -1px 0 var(--glass-bottom-rim);
-  --glass-panel-highlight: linear-gradient(
-    180deg,
-    rgb(255 255 255 / 10%) 0%,
-    rgb(255 255 255 / 3%) 26%,
-    transparent 52%
-  );
+    inset 0 -1px 0 var(--glass-bottom-rim),
+    inset 0 0 0 1px rgb(255 255 255 / 5%);
+  --glass-panel-highlight:
+    linear-gradient(180deg, rgb(255 255 255 / 16%) 0%, rgb(255 255 255 / 4%) 28%, transparent 54%),
+    linear-gradient(0deg, rgb(2 20 32 / 5%) 0%, transparent 22%);
   --glass-shadow-hover:
     0 0.5px 1px rgb(255 255 255 / 92%) inset,
     0 -1px 3px rgb(120 150 190 / 18%) inset,
@@ -175,12 +175,12 @@
   --vp-c-control-disabled: #16202f;
 
   // ---------- 液态玻璃材质（深色） ----------
-  --glass-blur: 20px;
-  --glass-saturate: 185%;
-  --glass-brightness: 1.1;
+  --glass-blur: 30px;
+  --glass-saturate: 195%;
+  --glass-brightness: 1.08;
   // 深色玻璃 tint 提实：半透明深蓝黑基底，磨砂清晰（此前 7%/12% 近全透）
-  --glass-tint: rgb(13 22 40 / 55%);
-  --glass-tint-strong: rgb(20 32 54 / 68%);
+  --glass-tint: rgb(13 22 40 / 44%);
+  --glass-tint-strong: rgb(20 32 54 / 56%);
   --glass-border: rgb(170 210 255 / 18%);
   --glass-outline: rgb(140 195 255 / 16%);
   --glass-highlight: rgb(196 228 255 / 30%);
@@ -192,17 +192,16 @@
   --glass-top-rim: rgb(208 236 255 / 18%);
   --glass-bottom-rim: rgb(56 130 214 / 14%);
   --glass-specular: rgb(190 235 255 / 0.22);
-  --glass-panel-tint: rgb(15 24 42 / 52%);
+  --glass-panel-tint: rgb(15 24 42 / 42%);
   --glass-panel-shadow:
-    12px 0 36px rgb(0 0 0 / 34%),
+    12px 0 38px rgb(0 0 0 / 30%),
+    0 1px 3px rgb(0 0 0 / 22%),
     inset 0 1px 0 var(--glass-top-rim),
-    inset 0 -1px 0 var(--glass-bottom-rim);
-  --glass-panel-highlight: linear-gradient(
-    180deg,
-    rgb(255 255 255 / 8%) 0%,
-    rgb(255 255 255 / 2%) 24%,
-    transparent 50%
-  );
+    inset 0 -1px 0 var(--glass-bottom-rim),
+    inset 0 0 0 1px rgb(255 255 255 / 4%);
+  --glass-panel-highlight:
+    linear-gradient(180deg, rgb(255 255 255 / 13%) 0%, rgb(255 255 255 / 3%) 26%, transparent 52%),
+    linear-gradient(0deg, rgb(0 0 0 / 18%) 0%, transparent 24%);
   --glass-shadow:
     0 0.5px 1px rgb(208 236 255 / 16%) inset,
     0 -2px 5px rgb(56 130 214 / 14%) inset,
