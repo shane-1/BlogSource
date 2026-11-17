@@ -456,8 +456,11 @@ function toggleToc() {
 // 避免误伤侧边栏/抽屉里的 Home 菜单项。
 function bindLogoTocToggle(root) {
   root = root || document
+  // 只绑品牌区的 Logo 链接（不含 .auto-link）：
+  // 导航项里的「首页」同样是 href="/"，之前会被一起劫持成打开目录，
+  // 表现为首页按钮与目录按钮互相冲突
   root
-    .querySelectorAll('.vp-navbar a.route-link[href="/"]')
+    .querySelectorAll('.vp-navbar a.route-link[href="/"]:not(.auto-link)')
     .forEach((link) => {
       if (link.dataset.tocBound)
         return
