@@ -541,6 +541,10 @@ function init() {
   updateNavActive()
   markGlassLive()
   bindLogoTocToggle()
+  // 预建目录面板（保持收起态）：这样首次点击也能走位移+淡入过渡，
+  // 而不是"元素刚插入就加 is-open"导致的瞬开
+  ensureTocRail()
+  ensureTocBackdrop()
   watchThemeSidebar()
   window.addEventListener('scroll', onScroll, { passive: true })
   document.addEventListener('keydown', onTocKeydown)

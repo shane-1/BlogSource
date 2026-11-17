@@ -57,12 +57,22 @@
 
 @media (max-width: 719px) {
   .vp-sidebar {
-    background-color: var(--glass-tint-strong);
+    // 与目录面板同一套液态玻璃材质与光学层
+    background-color: var(--glass-panel-tint, var(--glass-tint-strong));
+    background-image: var(--glass-panel-highlight);
     backdrop-filter:
-      blur(var(--glass-blur)) saturate(var(--glass-saturate));
+      blur(var(--glass-blur)) saturate(var(--glass-saturate))
+      brightness(var(--glass-brightness));
     -webkit-backdrop-filter:
-      blur(var(--glass-blur)) saturate(var(--glass-saturate));
+      blur(var(--glass-blur)) saturate(var(--glass-saturate))
+      brightness(var(--glass-brightness));
     border-right: 1px solid var(--glass-outline);
+    box-shadow: var(--glass-panel-shadow);
+    isolation: isolate;
+    transition:
+      transform 0.52s var(--ease-sheet),
+      opacity 0.26s cubic-bezier(0.33, 0, 0.2, 1);
+    will-change: transform;
   }
 }
 

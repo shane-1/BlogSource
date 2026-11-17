@@ -1006,24 +1006,27 @@
   border: none;
   border-inline-end: 1px solid var(--glass-outline);
   border-radius: 0;
-  background-color: var(--glass-tint-strong);
+  // 液态玻璃材质：底色 tint + 毛玻璃 + 顶/底光学边 + 朝正文侧柔和投影
+  background-color: var(--glass-panel-tint, var(--glass-tint-strong));
+  background-image: var(--glass-panel-highlight);
   backdrop-filter:
     blur(var(--glass-blur)) saturate(var(--glass-saturate))
     brightness(var(--glass-brightness));
   -webkit-backdrop-filter:
     blur(var(--glass-blur)) saturate(var(--glass-saturate))
     brightness(var(--glass-brightness));
-  box-shadow: none;
+  box-shadow: var(--glass-panel-shadow);
+  isolation: isolate;
 
-  // 收起态：整条退回到左边缘外侧
+  // 收起态：整条退回到左边缘外侧（弹簧曲线，与 Dock / 抽屉同一套时序）
   opacity: 0;
   visibility: hidden;
   transform: translate3d(-100%, 0, 0);
   will-change: transform, opacity;
   transition:
-    transform 0.45s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1)),
-    opacity 0.28s ease,
-    visibility 0.45s;
+    transform 0.52s var(--ease-sheet),
+    opacity 0.26s cubic-bezier(0.33, 0, 0.2, 1),
+    visibility 0.52s;
 
   &.is-open {
     opacity: 1;
@@ -1085,9 +1088,14 @@
         transform 0.3s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
 
       &:hover {
-        background-color: var(--vp-c-control);
+        background-color: var(--vp-c-control-hover, var(--vp-c-control));
         color: var(--vp-c-accent);
         transform: scale(1.06);
+      }
+
+      &:active {
+        transform: scale(0.94);
+        transition-duration: 0.14s;
       }
     }
   }
@@ -1103,10 +1111,10 @@
     gap: 1px;
     scrollbar-width: thin;
     opacity: 0;
-    transform: translateX(-6px);
+    transform: translateX(-10px);
     transition:
-      opacity 0.3s ease 0.08s,
-      transform 0.45s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1)) 0.08s;
+      opacity 0.28s cubic-bezier(0.33, 0, 0.2, 1) 0.08s,
+      transform 0.54s var(--ease-sheet) 0.06s;
   }
 
   &.is-open .article-toc-list {
@@ -1131,9 +1139,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     transition:
-      color var(--vp-t-color),
-      background-color var(--vp-t-color),
-      transform 0.25s var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
+      color 0.22s cubic-bezier(0.33, 0, 0.2, 1),
+      background-color 0.22s cubic-bezier(0.33, 0, 0.2, 1);
 
     &:hover {
       color: var(--vp-c-accent);
@@ -1157,14 +1164,27 @@
         position: absolute;
         left: 0;
         top: 50%;
-        transform: translateY(-50%);
         width: 2px;
         height: 60%;
         border-radius: 2px;
         background-color: var(--vp-c-accent);
         box-shadow: 0 0 8px rgb(34 211 238 / 55%);
+        transform: translateY(-50%);
+        animation: toc-bar-in 0.34s var(--ease-spring) both;
       }
     }
+  }
+}
+
+// 当前章节左侧竖条：轻微生长，呼应液态玻璃的弹性反馈
+@keyframes toc-bar-in {
+  from {
+    transform: translateY(-50%) scaleY(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-50%) scaleY(1);
+    opacity: 1;
   }
 }
 
@@ -1220,8 +1240,8 @@ body.toc-open .article-toc-backdrop {
   }
 
   .article-toc-rail {
-    // 与抽屉同材质：无投影，只保留右侧发丝描边（描边由 token 提供）
-    box-shadow: none;
+    // 与抽屉同材质：同一套面板光学阴影（由 --glass-panel-shadow 深色档提供）
+    box-shadow: var(--glass-panel-shadow);
 
     .article-toc-head {
       color: rgb(228 236 248 / 78%);
@@ -1308,8 +1328,10 @@ body.toc-open .article-toc-backdrop {
   .search-box-results,
   .vp-navbar-screen-full,
   .pwa-popup,
-  .vp-back-to-top-button {
+  .vp-back-to-top-button,
+  .article-toc-rail {
     background-color: var(--vp-c-bg-elv);
+    background-image: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
@@ -1320,9 +1342,18 @@ body.toc-open .article-toc-backdrop {
 // ============================================================
 @media (prefers-reduced-motion: reduce) {
   .vp-navbar,
-  .vp-back-to-top-button {
+  .vp-back-to-top-button,
+  .article-toc-rail {
     transition:
       background-color 0.01ms,
-      box-shadow 0.01ms;
+      box-shadow 0.01ms,
+      transform 0.01ms,
+      opacity 0.01ms;
+  }
+
+  .article-toc-rail .article-toc-list,
+  .article-toc-item.is-active::before {
+    transition: none;
+    animation: none;
   }
 }

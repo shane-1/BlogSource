@@ -63,6 +63,19 @@
     0 22px 56px rgb(8 100 130 / 18%),
     0 6px 16px rgb(2 30 45 / 8%);
   // 悬停态：玻璃"亮起"而非实体"浮起"——外投影收敛、inset 亮缘增强
+  // 左侧全高玻璃面板（目录 / 菜单抽屉）专用光学层
+  // 面板底透：比工具栏更透一档，让正文在毛玻璃后面"可感知但不干扰阅读"
+  --glass-panel-tint: rgb(255 255 255 / 74%);
+  --glass-panel-shadow:
+    12px 0 32px rgb(2 20 32 / 14%),
+    inset 0 1px 0 var(--glass-top-rim),
+    inset 0 -1px 0 var(--glass-bottom-rim);
+  --glass-panel-highlight: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 10%) 0%,
+    rgb(255 255 255 / 3%) 26%,
+    transparent 52%
+  );
   --glass-shadow-hover:
     0 0.5px 1px rgb(255 255 255 / 92%) inset,
     0 -1px 3px rgb(120 150 190 / 18%) inset,
@@ -112,6 +125,8 @@
   --vp-t-transform: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-press: cubic-bezier(0.34, 1.45, 0.48, 1);
+  // 侧边玻璃面板 / 抽屉的"落到位"曲线：前段快、尾段缓，接近 iOS sheet
+  --ease-sheet: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 // ============================================================
@@ -166,6 +181,17 @@
   --glass-top-rim: rgb(208 236 255 / 18%);
   --glass-bottom-rim: rgb(56 130 214 / 14%);
   --glass-specular: rgb(190 235 255 / 0.22);
+  --glass-panel-tint: rgb(15 24 42 / 58%);
+  --glass-panel-shadow:
+    12px 0 36px rgb(0 0 0 / 34%),
+    inset 0 1px 0 var(--glass-top-rim),
+    inset 0 -1px 0 var(--glass-bottom-rim);
+  --glass-panel-highlight: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 8%) 0%,
+    rgb(255 255 255 / 2%) 24%,
+    transparent 50%
+  );
   --glass-shadow:
     0 0.5px 1px rgb(208 236 255 / 16%) inset,
     0 -2px 5px rgb(56 130 214 / 14%) inset,
