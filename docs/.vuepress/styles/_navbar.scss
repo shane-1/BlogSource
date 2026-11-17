@@ -990,6 +990,7 @@
   position: fixed;
   top: var(--navbar-height);
   bottom: 0;
+  height: auto;
   inset-inline-start: 0;
   z-index: 95;
   box-sizing: border-box;
@@ -1089,9 +1090,9 @@
       width: 24px;
       height: 24px;
       padding: 0;
-      border: none;
+      border: 1px solid var(--glass-outline);
       border-radius: 8px;
-      background: transparent;
+      background-color: var(--vp-c-control);
       color: var(--vp-c-text-mute);
       font-size: 0.74rem;
       line-height: 1;
@@ -1134,6 +1135,10 @@
   // 压缩行：单行定宽 + 省略号，节律与菜单栏 / 侧边栏一致
   .article-toc-item {
     display: block;
+    // 关键：列表是 flex 纵向，默认会在大目录/矮视口下把行压扁导致文字互相遮挡
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    min-height: 28px;
     padding: 6px 10px;
     border-radius: 9px;
     font-size: 0.8rem;
@@ -1194,6 +1199,114 @@ body.toc-open .article-toc-backdrop {
   opacity: 1;
   visibility: visible;
 }// ============================================================
+// 暗黑模式：目录玻璃偏暗，文字与按钮统一提亮，保证可读
+// ============================================================
+[data-theme='dark'] {
+  // 导航栏文字/图标对比：深色玻璃上 40% 白的下拉标题几乎看不见
+  .vp-navbar {
+    .vp-navbar-dropdown-title {
+      color: rgb(228 236 248 / 82%);
+    }
+
+    .vp-navbar-item > .auto-link {
+      color: rgb(228 236 248 / 82%);
+    }
+
+    .nav-icon {
+      color: rgb(214 228 246 / 82%);
+    }
+
+    .vp-navbar-item:hover .nav-icon,
+    .vp-navbar-dropdown-title:hover .nav-icon {
+      color: var(--vp-c-accent);
+    }
+
+    .vp-site-name {
+      color: rgb(236 242 252 / 94%);
+    }
+  }
+
+  .article-toc-rail {
+    box-shadow:
+      12px 0 40px rgb(0 0 0 / 48%),
+      inset 0 1px 0 rgb(255 255 255 / 12%),
+      inset 1px 0 0 rgb(255 255 255 / 8%);
+
+    .article-toc-head {
+      color: rgb(228 236 248 / 78%);
+    }
+
+    .article-toc-close {
+      background-color: rgb(255 255 255 / 10%);
+      border-color: rgb(255 255 255 / 20%);
+      color: rgb(240 246 255 / 92%);
+
+      &:hover {
+        background-color: rgb(255 255 255 / 18%);
+        color: #fff;
+      }
+    }
+
+    .article-toc-item {
+      color: rgb(228 236 248 / 86%);
+
+      &:hover {
+        color: var(--vp-c-accent);
+      }
+
+      &.is-active {
+        color: var(--vp-c-accent);
+        background-color: rgb(34 211 238 / 16%);
+        box-shadow:
+          inset 2px 0 0 var(--vp-c-accent),
+          0 0 14px rgb(34 211 238 / 22%);
+      }
+    }
+  }
+}
+
+// ============================================================
+// 手机 / 移动浏览器：降低玻璃算力、补安全区、无 backdrop-filter 时兜底
+// （Safari 需要 blur 更小才不掉帧，Edge / iOS 同此路径）
+// ============================================================
+@media screen and (max-width: 719px) {
+  .article-toc-rail {
+    width: min(300px, 84vw);
+    padding-bottom: calc(14px + env(safe-area-inset-bottom));
+    // iOS Safari 动态工具栏：用 dvh 兜底，避免底边被浏览器 UI 吃掉
+    height: calc(100vh - var(--navbar-height));
+    height: calc(100dvh - var(--navbar-height));
+    bottom: auto;
+    transform: translate3d(-100%, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    backdrop-filter: blur(12px) saturate(1.6);
+    -webkit-backdrop-filter: blur(12px) saturate(1.6);
+
+    .article-toc-list {
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .article-toc-item {
+      padding: 8px 10px;
+      min-height: 34px;
+    }
+
+    &.is-open {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+// 浏览器不支持毛玻璃（旧 Safari / 部分安卓 WebView）时改为高不透底，避免文字糊在正文上
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .article-toc-rail {
+    background-color: var(--vp-c-bg-elv, var(--vp-c-bg));
+  }
+}
+
+// ============================================================
 // 减少透明度：导航栏实体化
 // ============================================================
 @media (prefers-reduced-transparency: reduce) {
